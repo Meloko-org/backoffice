@@ -1,0 +1,6 @@
+category_name,category_type,category_description,category_image,family_name,family_products_types,family_description,family_image,product_name,product_description,product_image,product_vat_rate,product_weight_unit,product_weight_measurement
+Fruits,Fruits & Légumes,Fruis frais,,Pomme,bulk,,,granny smith,,,5.5,gr,100
+Légumes,Fruits & Légumes,Légumes frais,,Carotte,bulk,,,Fane,,,5.5,gr,100
+Légumes,Fruits & Légumes,Légumes frais,,Tomate,bulk,,,Ronde,,,5.5,gr,100
+Légumes,Fruits & Légumes,Légumes frais,,Tomate,bulk,,,Rondes,,,5.5,gr,100
+Légumes,Fruits et Légumes,Légumes frais,,Pomme de terre,bulk,,,Nouvelles,,,5.5,gr,100

@@ -1,0 +1,25 @@
+import { createBrowserRouter } from "react-router-dom";
+import Home from "./pages/public/HomePage";
+import Login from "./pages/public/LoginPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminLayout from "./layouts/AdminLayout";
+import PostLoginRedirect from "./pages/PostLoginRedirect";
+import ProductsImportPage from "./features/products/pages/ProductsImportPage";
+import ProductsListPage from "./features/products/pages/ProductsListPage";
+
+export const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/login", element: <Login /> },
+  { path: "/post-login", element: <PostLoginRedirect /> },
+
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "products", element: <ProductsListPage /> },
+      { path: "products/import", element: <ProductsImportPage /> },
+      { path: "support", element: <div>Support</div> },
+    ],
+  },
+]);

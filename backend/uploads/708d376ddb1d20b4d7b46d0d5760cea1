@@ -1,0 +1,16 @@
+category_name,category_type,category_description,category_image,family_name,family_products_types,family_description,family_image,product_name,product_description,product_image,product_vat_rate,product_weight_unit,product_weight_measurement
+légumes,fruits legumes,Légumes frais,,tomate,bulk,,,rondes,,,5.5,gr,100
+légumes,fruits legumes,Légumes frais,,tomate,bulk,,,cerise,,,5.5,gr,100
+légumes,fruits legumes,Légumes frais,,salade,bulk,,,laitue,,,5.5,piece,1
+légumes,fruits legumes,Légumes frais,,pomme de terre,bulk,,,rates,,,5.5,gr,100
+légumes,fruits legumes,Légumes frais,,pomme de terre,bulk,,,Rates,,,5.5,gr,100
+fromages,fromages,,,fromage de chèvre,classic,,,buche de chèvre,,,5.5,piece,1
+viandes,viande,Viandes locales,,boeuf,classic,,,Entrecôte,,,5.5,piece,1
+viandes,viande,Viandes locales,,boeuf,classic,,,entrecôte,,,5.5,piece,1
+oeufs,oeufs,Oeufs fermiers,,oeufs,classic,,,Boîte de 6 oeufs,,,5.5,piece,1
+miel,miel,,,miel d'acacia,classic,,,Pôt de 200gr,,,5.5,piece,1
+miel,miel,,,miel d'acacia,classic,,,Pôt de 500gr,,,5.5,piece,1
+Huiles,huile,Huiles artisannales,,Huile d'olive,classic,,,Huile d'olive vierge,,,5.5,piece,1
+vins,vin,,,vin rouge,classic,,,bordeaux AOC,,,5.5,piece,1
+lait,lait,Lait fermier,,lait cru,classic,,,Lait entier,,,5.5,piece,1
+fromages,fromages,,,fromage de chèvre,enum_invalid,,,crottin,,,5.5,piece,1
