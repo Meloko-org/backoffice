@@ -1,6 +1,8 @@
 # node
 node_modules
 
+backend/uploads/
+
 # env
 .env
 .env.local

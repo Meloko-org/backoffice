@@ -5,6 +5,7 @@ const app = express();
 
 const { productsRoutes } = require("./src/routes");
 const { adminProductsRoutes } = require("./src/routes");
+const { adminMarketsRoutes } = require("./src/routes");
 
 
 
@@ -18,7 +19,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/products", productsRoutes);
-app.use("/admin/products", adminProductsRoutes)
+app.use("/admin/products", adminProductsRoutes);
+app.use("/admin/markets", adminMarketsRoutes);
 
 /**
  * Route de test
