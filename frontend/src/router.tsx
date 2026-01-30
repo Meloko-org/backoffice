@@ -6,6 +6,8 @@ import AdminLayout from "./layouts/AdminLayout";
 import PostLoginRedirect from "./pages/PostLoginRedirect";
 import ProductsImportPage from "./features/products/pages/ProductsImportPage";
 import ProductsListPage from "./features/products/pages/ProductsListPage";
+import MarketsImportPage from "./features/markets/pages/MarketsImportPage";
+import MarketsListPage from "./features/markets/pages/MarketsListPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -19,6 +21,8 @@ export const router = createBrowserRouter([
       { index: true, element: <AdminDashboard /> },
       { path: "products", element: <ProductsListPage /> },
       { path: "products/import", element: <ProductsImportPage /> },
+      { path: "markets", element: <MarketsListPage /> },
+      { path: "markets/import", element: <MarketsImportPage /> },
       { path: "support", element: <div>Support</div> },
     ],
   },
