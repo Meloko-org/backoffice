@@ -26,6 +26,17 @@ function validateCsvRow(row) {
 			continue;
 		}
 
+		const trimmedValue = value.trim();
+
+		// 🔎 validation par pattern (ex: code postal)
+		if (config.pattern && !config.pattern.test(trimmedValue)) {
+			pushIssue(
+				config.patternMessage || `${field} invalide (${trimmedValue})`,
+				true
+			);
+			continue;
+		}
+
 		/* inutile pour les markets (pour l'instant) */
 		// if (config.enum && !config.enum.includes(value)) {
 		// 	pushIssue(`${field} invalide (${value})`, true);
@@ -44,8 +55,6 @@ function validateCsvRow(row) {
 		}
 	}
 
-	// console.log("CsvValidator errors :", errors)
-	// console.log("CsvValidator warnings :", warnings)
 
 	return {
 		data,

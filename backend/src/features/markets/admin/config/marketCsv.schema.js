@@ -26,6 +26,8 @@ module.exports = {
 	postalCode: {
 		column: "market_postalCode",
 		required: true,
+    pattern: /^\d{5}$/,
+    patternMessage: "Code postal invalide (5 chiffres attendus)",
 	},
 	country: {
 		column: "market_country",
