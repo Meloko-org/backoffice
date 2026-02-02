@@ -6,7 +6,8 @@ const { UPDATE_WHITELIST } = require("../domain/product.rules");
  * Crée ou met à jour un produit à partir de données normalisées
  */
 async function upsertProduct(productData) {
-  const { name, vatRate, weightUnit, weightMeasurement, family, slug } = productData;
+	
+  const { name, description, image, vatRate, weightUnit, weightMeasurement, family, slug } = productData;
 
   if (!slug) {
     throw new Error("Slug manquant pour le produit");
@@ -44,7 +45,11 @@ async function upsertProduct(productData) {
   }
 
   const createdProduct = await Product.create({
-		...productData,
+		name,
+		slug,
+		family,
+		description: description || "",
+		image: image || null,
 		weight: {
 			unit: weightUnit,
 			measurement: weightMeasurement,

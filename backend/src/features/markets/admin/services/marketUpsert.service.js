@@ -3,7 +3,8 @@ const { UPDATE_WHITELIST } = require("../domain/market.rules");
 const { getCoordinates } = require("../../../../services/coordinates.service");
 
 
-async function upsertMarket(marketData) {
+async function upsertMarket(marketData, {geoRateLimit}) {
+
   const { 
 		name, 
 		description,
@@ -56,12 +57,19 @@ async function upsertMarket(marketData) {
 		city,
 		postalCode,
 	}
-	const { latitude, longitude } = await getCoordinates(address)
 
-	// gérer si les coordonnées ne sont pas trouvées
+	if (geoRateLimit) {
+    await geoRateLimit();
+  }
+
+	const { latitude, longitude } = await getCoordinates({name, address, type: "poi"})
+
 
 	const createdMarket = await Market.create({
-		...marketData,
+		name,
+		description: description || "",
+		image: image || null,
+		slug,
 		address: {
 			address1,
 			address2,
@@ -72,6 +80,7 @@ async function upsertMarket(marketData) {
 			longitude,
 		}
 	})
+
 
 	return {
 		status: "created",

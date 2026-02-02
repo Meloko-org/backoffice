@@ -4,6 +4,10 @@ const { buildSlugs } = require("./buildSlugs.service");
 const { upsertMarket } = require("./marketUpsert.service");
 const { normalizeName } = require("../../../../utils/normalize");
 const { resolveMarketAction } = require('../../../../utils/marketAction');
+const { createRateLimiter } = require('../../../../utils/rateLimiter');
+
+const intervalMs = Math.ceil(1000 / process.env.LOCATIONIQ_RPS);  
+const geoRateLimit = createRateLimiter({intervalMs});
 
 
 module.exports = async function importMarkets(rows, options = {}) {
@@ -36,6 +40,8 @@ module.exports = async function importMarkets(rows, options = {}) {
 		market: new Map(),
 	}
 
+	console.log("dryRun :", dryRun)
+
 	for (const [index, row] of rows.entries()) {
 		const lineNumber = index + 2;
 
@@ -44,7 +50,14 @@ module.exports = async function importMarkets(rows, options = {}) {
 			const { data, errors, warnings, isValid } = validateCsvRow(row);
 
 			if (!isValid) {
-				report.errors.push({ line: lineNumber, errors });
+				for (const error of errors) {
+					report.errors.push({
+						line: lineNumber,
+						message: error.message,
+						details: error.details,
+					})
+				}
+				report.preview.ignoredRows++;
 				continue;
 			}
 
@@ -56,13 +69,8 @@ module.exports = async function importMarkets(rows, options = {}) {
 			data.name = normalizeName(data.name);
 			data.city = normalizeName(data.city);
 
-			console.log("name ", data.name);
-			console.log("city ", data.city);
-
 			// 3. Génération des slugs
 			const dataWithSlugs = buildSlugs(data);
-
-			console.log("datawithslugs :", dataWithSlugs);
 
 			// 4. détection des doublons
 			const marketSlug = dataWithSlugs.slug;
@@ -82,11 +90,11 @@ module.exports = async function importMarkets(rows, options = {}) {
 				seenSlugs.market.set(marketSlug, index + 2)
 
 				previewEntry = {
-					market: dataWithSlugs,
+					market: dataWithSlugs.name,
 					action: "create",
 				}
 
-				const action = await resolveMarketAction(dataWithSlugs)
+				const action = await resolveMarketAction(dataWithSlugs.slug)
 				previewEntry.action = action;
 			}
 
@@ -106,7 +114,7 @@ module.exports = async function importMarkets(rows, options = {}) {
 
 
 			// 6. UPSERT Market
-			const marketResult = await upsertMarket(dataWithSlugs);
+			const marketResult = await upsertMarket({...dataWithSlugs}, {geoRateLimit});
 			report.markets[marketResult.status]++;
 
 
@@ -116,6 +124,7 @@ module.exports = async function importMarkets(rows, options = {}) {
         message: error.message,
         details: error.details || null,
       });
+			report.preview.ignoredRows++;
 		}
 	}
 

@@ -15,19 +15,23 @@ function normalizeSlug(str, { prefix } = {}) {
   return prefix ? `${prefix}-${slug}` : slug;
 }
 
-function normalizeName(str) {
+function normalizeName(str, {
+  removeAccents = false,
+} = {}) {
   if (!str || typeof str !== "string") return str;
 
-  // 1️⃣ normalisation de base
-  let normalized = str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/'/g, "’"); // apostrophe typographique
+  let normalized = str.toLowerCase();
 
-  // 2️⃣ reconstruire les élisions mal tapées : "d olive" → "d’olive"
+  if (removeAccents) {
+    normalized = normalized
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  normalized = normalized.replace(/'/g, "’");
+
   normalized = normalized.replace(
-    /\b(d|l|qu)\s+([a-z])/g,
+    /\b(d|l|qu)\s+([a-zàâçéèêëîïôûùüÿñæœ])/gi,
     "$1’$2"
   );
 
@@ -35,34 +39,36 @@ function normalizeName(str) {
 
   return words
     .map((word, index) => {
-      // 3️⃣ élision → ex: d’olive
-      const elisionMatch = word.match(/^([a-z]+)’([a-z].*)$/);
+      const elisionMatch = word.match(/^([a-z]+)’([a-zàâçéèêëîïôûùüÿñæœ].*)$/i);
       if (elisionMatch && ELISIONS.has(elisionMatch[1])) {
         return `${elisionMatch[1]}’${capitalize(elisionMatch[2])}`;
       }
 
-      // 4️⃣ premier mot → majuscule
-      if (index === 0) {
-        return capitalize(word);
-      }
+      if (index === 0) return capitalize(word);
+      if (LOWERCASE_WORDS.has(word)) return word;
 
-      // 5️⃣ mot faible
-      if (LOWERCASE_WORDS.has(word)) {
-        return word;
-      }
-
-      // 6️⃣ normal
       return capitalize(word);
     })
     .join(" ");
 }
+
 
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 
+function normalizeStreet(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, "")
+    .trim();
+}
+
 module.exports = { 
   normalizeSlug,
   normalizeName, 
+  normalizeStreet,
 };

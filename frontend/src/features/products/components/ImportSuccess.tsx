@@ -1,4 +1,5 @@
 import type { ProductsImportReport } from "../types/productsImport.types";
+import { ImportErrors } from "./ImportErrors";
 
 interface ImportSuccessProps {
   report: ProductsImportReport;
@@ -12,24 +13,52 @@ export function ImportSuccess({
   onReset,
   onGoToProducts,
 }: ImportSuccessProps) {
-  const { meta, categories, families, products, warnings } = report;
+  const { meta, categories, families, products, warnings, errors } = report;
+
+  const importFailed = categories.created === 0 &&
+    categories.updated === 0 &&
+    families.created === 0 &&
+    families.updated === 0 &&
+    products.created === 0 &&
+    products.updated === 0;
+  const hasErrors = errors.length > 0; 
 
   return (
-    <section className="space-y-6 rounded-xl border border-green-200 bg-green-50 p-8">
+    <section className={`
+      space-y-6 rounded-xl border  p-8
+      ${importFailed ? "border-danger/40 bg-danger/5" : "border-green-200 bg-green-50"}
+    `}>
       {/* Header */}
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white">
-          ✓
-        </div>
-        <div>
-          <h2 className="text-lg font-semibold text-green-900">
-            Import terminé avec succès
-          </h2>
-          <p className="text-sm text-green-800">
-            Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
-          </p>
-        </div>
-      </div>
+      
+        {importFailed ? (
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-danger/60">
+              X
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-red-900">
+                Import terminé avec échec
+              </h2>
+              <p className="text-sm text-red-800">
+                Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-green-600">
+              ✓
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-green-900">
+                Import terminé avec succès
+              </h2>
+              <p className="text-sm text-green-800">
+                Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
+              </p>
+            </div>
+          </div>
+        )}
 
       {/* Résumé chiffres */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -49,6 +78,13 @@ export function ImportSuccess({
           updated={products.updated}
         />
       </div>
+
+      {hasErrors && (
+        <ImportErrors
+          errors={errors}
+          mode={meta.mode}
+        />
+      )}
 
       {/* Warnings */}
       {warnings.length > 0 && (

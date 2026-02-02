@@ -47,19 +47,18 @@ async function upsertCategory(categoryData) {
     throw new Error(`Données catégorie incomplètes pour "${slug}"`);
   }
 
-	// console.log("types collection :", await Type.find().lean());
 
 	const typeSlug = normalizeSlug(type);
-	// console.log("typeSlug :", typeSlug)
+	
 	const typeDoc = await Type.findOne({ slug: typeSlug})
 
 	if (!typeDoc) {
-		throw new Error(`Type de catégorie inconnu "${type}"`);
+		const error = new Error("Catégorie non créée.");
+		error.details = `Type de catégorie inconnu "${type}"`;
+		throw Error();
 	}
 
 	const typeDocId = typeDoc._id;
-
-	console.log("type détecté :", typeDocId)
 
   const createdCategory = await ProductCategory.create({
     slug,

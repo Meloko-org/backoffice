@@ -46,7 +46,7 @@ export interface MarketsImportReport {
 
 export interface ImportMarketPreview {
   market: string;
-  action: "create" | "update" | "ignore";
+  action: "create" | "update" | "ignore" | "existing";
 } 
 
 export interface MarketsImportState {

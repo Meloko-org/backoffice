@@ -20,7 +20,7 @@ const addressSchema = mongoose.Schema(
     },
     country: {
       type: String,
-      required: true,
+      required: false,
     },
     latitude: {
       type: mongoose.Decimal128,

@@ -6,11 +6,14 @@ function validateCsvRow(row) {
 
 	const data = {};
 
-	function pushIssue(message, required) {
+	function pushIssue(detail, required) {
 		if (required) {
-			errors.push(message)
+			errors.push({
+        details: [detail],
+        message: "Problème de données",
+      });
 		} else {
-			warnings.push(message)
+			warnings.push(detail)
 		}
  	}
 
@@ -41,14 +44,14 @@ function validateCsvRow(row) {
 		}
 	}
 
-	console.log("errors :", errors)
-	console.log("warnings :", warnings)
+	// console.log("CsvValidator errors :", errors)
+	// console.log("CsvValidator warnings :", warnings)
 
 	return {
 		data,
 		errors,
 		warnings,
-		isvalid: errors.length === 0,
+		isValid: errors.length === 0,
 	}
  }
 

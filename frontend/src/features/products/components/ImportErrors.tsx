@@ -49,6 +49,8 @@ interface IssueRowProps {
 function IssueRow({ issue, isBlocking }: IssueRowProps) {
   // const isError = issue.message === "error";
 
+  console.log("issue :", issue)
+
   return (
     <li
       className={`flex items-start gap-4 rounded-lg border p-4 border-danger/40 bg-danger/5`}

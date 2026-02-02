@@ -13,7 +13,7 @@ const marketSchema = mongoose.Schema({
 	},
   description: { 
 		type: String, 
-		required: true 
+		required: false, 
 	},
   image: {
 		 type: String 
@@ -34,8 +34,8 @@ function createMarketModel(collectionName) {
  * Sélection automatique via .env
  */
 const Market = process.env.USE_FAKE_DB === "true"
-	? createMarketModel("fakeproducts")
-	: createMarketModel("products");
+	? createMarketModel("fakemarkets")
+	: createMarketModel("markets");
 
 module.exports = {
 	Market,

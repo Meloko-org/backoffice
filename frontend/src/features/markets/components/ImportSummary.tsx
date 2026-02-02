@@ -11,10 +11,12 @@ export function ImportSummary({ report }: ImportSummaryProps) {
   const summary: ImportSummaryUI = {
     totalRows: report.meta.totalRows,
     marketsCreated: report.markets.created,
-    ignoredRows:
-      report.meta.totalRows -
+    ignoredRows: report.meta.dryRun && report.preview
+      ? report.preview.ignoredRows
+      : report.meta.totalRows -
       report.markets.created -
-      report.markets.updated,
+      report.markets.updated
+      ,
     errorsCount: report.errors.length,
   };
 

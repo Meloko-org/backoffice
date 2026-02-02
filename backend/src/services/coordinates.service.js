@@ -1,25 +1,47 @@
-const getCoordinates = async (address) => {
-  const query = (
-    address.address1 +
-    "%20" +
-    address.postalCode +
-    "%20" +
-    address.city
-  ).replaceAll(" ", "%20");
-	
-  const response = await fetch(
-    `https://api-adresse.data.gouv.fr/search/?q=${query}`,
-  );
+const { normalizeStreet } = require("../utils/normalize");
+const { locationIqCoordinates } = require("./locationIq.service");
 
-  const data = await response.json();
 
-  const coordinates = {
-    latitude: data.features[0].geometry.coordinates[1],
-    longitude: data.features[0].geometry.coordinates[0],
-  };
+const getCoordinates = async ({ name, address, type }) => {
 
-  return coordinates;
+  if (!type) {
+    throw geoError("Type de géolocalisation non défini.", `type:${type}`)
+  }
+
+  let query;
+
+  if (type === "poi") {
+    if (!name || !address) {
+      throw geoError(
+        "Informations insuffisantes pour géolocaliser un POI",
+        `name:${name}, city:${address?.city}`
+      );
+    }
+
+    query = [name, address.postalCode, address.city]
+      .filter(Boolean)
+      .join(" ");
+  }
+
+  if (type === "address") {
+    const { address1, postalCode, city } = address || {};
+    if (!address1 ||!city) {
+      throw geoError(
+        "Adresse incomplète pour géolocalisation",
+        `address1:${address1}, city:${city}`
+      )
+    }
+
+    query = [ address1, postalCode, city]
+      .filter(Boolean)
+      .join(" ");
+  }
+
+
+  return locationIqCoordinates(query);
+
 };
+
 
 
 module.exports = {

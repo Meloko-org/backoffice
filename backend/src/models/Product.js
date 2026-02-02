@@ -60,40 +60,5 @@ module.exports = {
 };
 
 
-/**
- * le choix de travailler sur les fake collections se fait par 
- * l'interrupteur USE_FAKE_DB du fichier .env
- * 
- * Dans un controller, rien ne change pour faire un find():
- * const { Product } = require("../models/Product");
- * puis
- * const products = await Product.find();
- * 
- * Mais si on veut forcer, alors on peut faire :
- * const { createProductModel } = require("../models/Product");
- * puis
- * const FakeProduct = createProductModel("fakeproducts");
- * const RealProduct = createProductModel("products");
- * et
- * await FakeProduct.find();
- * await RealProduct.find();
- */
 
 
-
-/* Pour éviter les doublons lors d'une importation de masse, on crée une version
-normalisée du nom du produit: le slug
-
-function normalizeName(name) {
-	return name
-		.toLowerCase()
-		.normalize("NFD")
-		.replace(/[\u0300-\u036f]/g, "") // accents
-		.replace(/s\b/g, "")             // pluriel simple
-		.replace(/[^a-z0-9 ]/g, "")
-		.trim()
-		.replace(/\s+/g, "-");
-}
-
-
-*/

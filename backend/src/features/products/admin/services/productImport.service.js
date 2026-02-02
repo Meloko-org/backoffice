@@ -27,9 +27,9 @@ module.exports = async function importProducts(rows, options = {}) {
     products: { created: 0, updated: 0, existing: 0 },
 
     preview: {
-		productsCount: 0,
-      	products: [],
-		ignoredRows: 0,
+			productsCount: 0,
+      products: [],
+			ignoredRows: 0,
     },
 
     warnings: [],
@@ -50,7 +50,14 @@ module.exports = async function importProducts(rows, options = {}) {
       const { data, warnings, errors, isValid } = validateCsvRow(row);
 
 			if (!isValid) {
-				report.errors.push({ line: lineNumber, errors });
+				for (const error of errors) {
+					report.errors.push({
+						line: lineNumber,
+						message: error.message,
+						details: error.details,
+					})
+				}
+				// report.errors.push({ ...errors, line: lineNumber });
 				report.preview.ignoredRows++;
 				continue;
 			}
@@ -83,7 +90,6 @@ module.exports = async function importProducts(rows, options = {}) {
 					],
 				});
 				report.preview.ignoredRows++;
-				// continue;
 			} else {
 				seenSlugs.product.set(productSlug, index + 2);
 
@@ -146,6 +152,7 @@ module.exports = async function importProducts(rows, options = {}) {
         message: error.message,
         details: error.details || null,
       });
+			report.preview.ignoredRows++;
     }
   }
 

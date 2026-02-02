@@ -26,7 +26,7 @@ export default function ProductsImportPage() {
       )}
 
       <h1 className="text-2xl font-semibold">
-        Import des produits
+        Import des Points de vente
       </h1>
 
       <ImportDropzone 
@@ -91,17 +91,12 @@ export default function ProductsImportPage() {
           <ImportWarnings warnings={state.report.warnings} />
 
           {state.status === "preview" && state.report?.preview && state.report?.preview.markets && (
-            <>
-            {state.report.preview.ignoredRows > 0 && (
-              <p className="text-sm text-gray-600">
-                {state.report.preview.ignoredRows} lignes ignorées
-              </p>
-            )}
-              <ImportPreview
-                marketsCount={state.report.preview.marketsCount}
-                markets={state.report.preview.markets}
-              />
-            </>
+            <ImportPreview
+              marketsCount={state.report.preview.marketsCount}
+              markets={state.report.preview.markets}
+              ignoredRows={state.report.preview.ignoredRows}
+              totalRows={state.report.meta.totalRows}
+            />
           )}
 
           <div className="flex justify-end gap-3">

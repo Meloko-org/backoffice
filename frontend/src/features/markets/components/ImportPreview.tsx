@@ -4,17 +4,22 @@ import type { ImportMarketPreview } from "../types/marketsImport.types";
 interface ImportPreviewProps {
   marketsCount: number;
   markets: ImportMarketPreview[];
+  ignoredRows: number;
+  totalRows: number;
 }
 
 const ACTION_STYLES: Record<ImportMarketPreview["action"], string> = {
   create: "text-green-600",
   update: "text-blue-600",
   ignore: "text-gray-400",
+  existing: "text-gray-400",
 };
 
 export function ImportPreview({
   marketsCount,
   markets,
+  ignoredRows,
+  totalRows,
 }: ImportPreviewProps) {
   if (markets.length === 0) return null;
 
@@ -48,6 +53,10 @@ export function ImportPreview({
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="rounded text-sm bg-gray-300 w-48 p-2">
+        {`${ignoredRows} ligne(s) ignorée(s) sur ${totalRows}`}
       </div>
     </div>
   );
