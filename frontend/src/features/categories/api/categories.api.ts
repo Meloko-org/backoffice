@@ -2,7 +2,7 @@ import type { ApiResponse } from "../../../types/global.types";
 import type {
   ProductCategory,
   CategoryListResponse,
-  CreateCategoryPayload,
+  CategoryPayload,
   UpdateCategoryPayload,
 } from "../types/category";
 
@@ -25,7 +25,7 @@ export const getCategories = async (params: {
 };
 
 export const createCategory = async (
-  payload: CreateCategoryPayload
+  payload: CategoryPayload
 ) => {
 
   const response = await fetch(`${BASE_URL}/`, {
@@ -62,3 +62,13 @@ export const deleteCategory = async (id: string) => {
 
   return data;
 };
+
+export const getCategoryById = async (id: string): Promise<ApiResponse<ProductCategory>> => {
+  const response = await fetch(`${BASE_URL}/${id}`);
+
+	const data = await response.json()
+
+  console.log("data in getCategoryById :", data)
+
+  return data;
+}

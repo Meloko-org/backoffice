@@ -5,9 +5,11 @@ const {
   listCategories,
   createCategoryHandler,
   updateCategoryHandler,
-  deleteCategoryHandler
+  deleteCategoryHandler,
+  getCategory,
 } = require("../controllers/categories.controller");
 
+router.get("/:id", getCategory);
 router.get("/", listCategories);
 router.post("/", createCategoryHandler);
 router.put("/:id", updateCategoryHandler);

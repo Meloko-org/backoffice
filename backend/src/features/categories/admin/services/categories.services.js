@@ -50,6 +50,20 @@ async function createCategory(data) {
   });
 }
 
+async function getCategoryById(categoryId) {
+  const category = await ProductCategory.findById(categoryId)
+    .populate({
+      path: "type",
+      select: "name"
+    });
+
+  if (!category) {
+    throw new Error("Catégorie introuvable");
+  }
+
+  return category;
+}
+
 async function updateCategory(categoryId, payload) {
   const category = await ProductCategory.findById(categoryId);
 
@@ -113,4 +127,5 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
+  getCategoryById,
 };

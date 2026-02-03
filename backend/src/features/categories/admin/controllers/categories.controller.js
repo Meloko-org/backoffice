@@ -4,6 +4,7 @@ const {
   createCategory,
   updateCategory,
   deleteCategory,
+  getCategoryById,
 } = require("../services/categories.services");
 
 const listCategories = async (req, res, next) => {
@@ -61,7 +62,7 @@ const updateCategoryHandler = async (req, res, next) => {
   try {
     const errors = validateCategoryPayload(req.body);
 
-    if (errors.lagnth > 0) {
+    if (errors.length > 0) {
       return res.status(400).json({
         success: false, 
         errors,
@@ -94,9 +95,28 @@ const deleteCategoryHandler = async (req, res, next) => {
   }
 };
 
+const getCategory = async (req, res, next) => {
+  try {
+    console.log(req.params.id)
+    const categoryId = req.params.id;
+
+    const category = await getCategoryById(categoryId);
+
+    console.log("category :", category)
+
+    res.json({
+      success: true,
+      data: category,
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   listCategories,
   createCategoryHandler,
   updateCategoryHandler,
   deleteCategoryHandler,
+  getCategory,
 };

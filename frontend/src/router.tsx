@@ -9,6 +9,8 @@ import ProductsListPage from "./features/products/pages/ProductsListPage";
 import MarketsImportPage from "./features/markets/pages/MarketsImportPage";
 import MarketsListPage from "./features/markets/pages/MarketsListPage";
 import AdminCategoriesPage from "./features/categories/pages/AdminCategoriesPage";
+import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
+import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -22,6 +24,8 @@ export const router = createBrowserRouter([
       { index: true, element: <AdminDashboard /> },
       { path: "products", element: <ProductsListPage /> },
       { path: "categories", element: <AdminCategoriesPage /> },
+      { path: "categories/create", element: <CreateCategoryPage />},
+      { path: "categories/:id/edit", element: <EditCategoryPage />},
       { path: "products/import", element: <ProductsImportPage /> },
       { path: "markets", element: <MarketsListPage /> },
       { path: "markets/import", element: <MarketsImportPage /> },

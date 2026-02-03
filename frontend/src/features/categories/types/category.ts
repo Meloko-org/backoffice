@@ -22,11 +22,11 @@ export interface CategoryListResponse {
   }
 }
 
-export interface CreateCategoryPayload {
+export interface CategoryPayload {
   name: string;
   description?: string;
   image?: string | null;
   type: string;
 }
 
-export interface UpdateCategoryPayload extends CreateCategoryPayload {}
+export interface UpdateCategoryPayload extends CategoryPayload {}

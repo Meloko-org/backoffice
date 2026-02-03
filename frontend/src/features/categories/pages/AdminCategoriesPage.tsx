@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getCategories } from "../api/categories.api";
 import { CategoryTable } from "../components/CategoryTable";
 import { Pagination } from "../../../components/global/Pagination";
 import type { CategoryListResponse } from "../types/category";
 
 export default function AdminCategoriesPage() {
+  const navigate = useNavigate()
   const [page, setPage] = useState(1);
   const [data, setData] = useState<CategoryListResponse>();
   const [loading, setLoading] = useState(false);
@@ -29,7 +31,10 @@ export default function AdminCategoriesPage() {
       <CategoryTable
         categories={data?.items ?? []}
         loading={loading}
-        onEdit={(cat) => console.log("edit", cat)}
+        onEdit={(cat) => {
+          console.log("cat id :", cat._id)
+          navigate(`/admin/categories/${cat._id}/edit`)
+        }}
         onDelete={(cat) => console.log("delete", cat)}
       />
 
