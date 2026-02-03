@@ -21,7 +21,11 @@ export default function AdminSidebar({ role }: Props) {
             </NavLink>
             <NavLink to="/admin/products/import" className="block ml-4 text-sm hover:text-blue-600">
               Import CSV
-            </NavLink><NavLink to="/admin/markets" className="block hover:text-blue-600">
+            </NavLink>
+            <NavLink to="/admin/categories" className="block hover:text-blue-600">
+              Catégories
+            </NavLink>
+            <NavLink to="/admin/markets" className="block hover:text-blue-600">
               Markets
             </NavLink>
             <NavLink to="/admin/markets/import" className="block ml-4 text-sm hover:text-blue-600">

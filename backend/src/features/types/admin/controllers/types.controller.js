@@ -1,0 +1,19 @@
+const { getTypesNames } = require("../services/types.services")
+
+const typeNames = async (req, res, next) => {
+	try {
+		const types = await getTypesNames();
+
+		res.json({
+			success: true,
+			types,
+		})
+
+	} catch (error) {
+		next(error);
+	}
+}
+
+module.exports = {
+	typeNames,
+}

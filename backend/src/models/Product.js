@@ -10,6 +10,7 @@ const productSchema = mongoose.Schema(
 		slug: {
 			type: String,
 			required: true,
+			unique: true,
 			index: true,
 		},
 		description: {

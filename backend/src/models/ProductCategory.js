@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const productCategorySchema = mongoose.Schema(
 	{
 		name: {
@@ -9,6 +10,7 @@ const productCategorySchema = mongoose.Schema(
 		slug: {
 			type: String,
 			required: true,
+			unique: true,
 			index: true,
 		},
 		description: {
@@ -22,7 +24,7 @@ const productCategorySchema = mongoose.Schema(
 		},
 		type: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "types",
+			ref: "Type",
 			required: true,
 		},
 	},

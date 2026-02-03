@@ -9,6 +9,7 @@ const productFamilySchema = mongoose.Schema(
 		slug: {
 			type: String,
 			required: true,
+			unique: true,
 			index: true,
 		},
 		description: {

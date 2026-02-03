@@ -8,6 +8,7 @@ import ProductsImportPage from "./features/products/pages/ProductsImportPage";
 import ProductsListPage from "./features/products/pages/ProductsListPage";
 import MarketsImportPage from "./features/markets/pages/MarketsImportPage";
 import MarketsListPage from "./features/markets/pages/MarketsListPage";
+import AdminCategoriesPage from "./features/categories/pages/AdminCategoriesPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: "products", element: <ProductsListPage /> },
+      { path: "categories", element: <AdminCategoriesPage /> },
       { path: "products/import", element: <ProductsImportPage /> },
       { path: "markets", element: <MarketsListPage /> },
       { path: "markets/import", element: <MarketsImportPage /> },

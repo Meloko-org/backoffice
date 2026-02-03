@@ -6,7 +6,9 @@ const app = express();
 const { productsRoutes } = require("./src/routes");
 const { adminProductsRoutes } = require("./src/routes");
 const { adminMarketsRoutes } = require("./src/routes");
-
+const { adminCategoriesRoutes } = require("./src/routes");
+const { adminFamiliesRoutes } = require("./src/routes");
+const { adminTypesRoutes } = require("./src/routes");
 
 
 /**
@@ -21,6 +23,9 @@ app.use(express.json());
 app.use("/api/products", productsRoutes);
 app.use("/admin/products", adminProductsRoutes);
 app.use("/admin/markets", adminMarketsRoutes);
+app.use("/admin/categories", adminCategoriesRoutes);
+app.use("/admin/families", adminFamiliesRoutes);
+app.use("/admin/types", adminTypesRoutes);
 
 /**
  * Route de test
