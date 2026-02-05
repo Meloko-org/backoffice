@@ -4,9 +4,11 @@ const typeNames = async (req, res, next) => {
 	try {
 		const types = await getTypesNames();
 
+		console.log(types)
+
 		res.json({
 			success: true,
-			types,
+			data: types,
 		})
 
 	} catch (error) {

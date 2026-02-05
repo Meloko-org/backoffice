@@ -1,5 +1,7 @@
+const ApiError = require("../../../../utils/ApiError");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const { ProductCategory } = require("../../../../models/ProductCategory");
+
 
 async function getCategories({
   page = 1,
@@ -36,39 +38,29 @@ async function getCategories({
   };
 }
 
+
 async function createCategory(data) {
   const slug = normalizeSlug(data.name);
 
   const existing = await ProductCategory.findOne({ slug });
   if (existing) {
-    throw new Error("Une catégorie avec ce nom existe déjà");
+    throw new ApiError("Une catégorie avec ce nom existe déjà", 409);
   }
 
-  return ProductCategory.create({
+  const newCategory = await ProductCategory.create({
     ...data,
     slug,
   });
+
+  return newCategory;
 }
 
-async function getCategoryById(categoryId) {
-  const category = await ProductCategory.findById(categoryId)
-    .populate({
-      path: "type",
-      select: "name"
-    });
-
-  if (!category) {
-    throw new Error("Catégorie introuvable");
-  }
-
-  return category;
-}
 
 async function updateCategory(categoryId, payload) {
   const category = await ProductCategory.findById(categoryId);
 
   if (!category) {
-    throw new Error("Catégorie introuvable");
+    throw new ApiError("Catégorie introuvable.", 404);
   }
 
   // 1️⃣ Si le nom change → vérifier dépendances
@@ -78,8 +70,8 @@ async function updateCategory(categoryId, payload) {
     });
 
     if (familiesCount > 0) {
-      throw new Error(
-        "Impossible de renommer une catégorie contenant des familles"
+      throw new ApiError(
+        "Impossible de renommer une catégorie contenant des familles", 409
       );
     }
 
@@ -96,15 +88,23 @@ async function updateCategory(categoryId, payload) {
     category.image = payload.image;
   }
 
+  if (
+    payload.type &&
+    payload.type.toString() !== category.type.toString()
+  ) {
+    throw new ApiError("Le type d’une catégorie ne peut pas être modifié", 409);
+  }
+
   await category.save();
   return category;
 }
+
 
 async function deleteCategory(categoryId) {
   const category = await ProductCategory.findById(categoryId);
 
   if (!category) {
-    throw new Error("Catégorie introuvable");
+    throw new ApiError("Catégorie introuvable", 404);
   }
 
   const familiesCount = await ProductFamily.countDocuments({
@@ -112,14 +112,33 @@ async function deleteCategory(categoryId) {
   });
 
   if (familiesCount > 0) {
-    throw new Error(
-      "Impossible de supprimer une catégorie contenant des familles"
+    throw new ApiError(
+      "Impossible de supprimer une catégorie contenant des familles", 409
     );
   }
 
   await category.deleteOne();
 }
 
+
+async function getCategoryById(categoryId) {
+
+  if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+    throw new ApiError("Id de catégorie invalide", 400);
+  }
+
+  const category = await ProductCategory.findById(categoryId)
+    .populate({
+      path: "type",
+      select: "name"
+    });
+
+  if (!category) {
+    throw new ApiError("Catégorie introuvable.", 409);
+  }
+
+  return category;
+}
 
 
 module.exports = {

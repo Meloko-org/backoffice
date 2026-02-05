@@ -3,6 +3,8 @@ const cors = require("cors");
 
 const app = express();
 
+const ApiError = require("./src/utils/ApiError");
+
 const { productsRoutes } = require("./src/routes");
 const { adminProductsRoutes } = require("./src/routes");
 const { adminMarketsRoutes } = require("./src/routes");
@@ -37,5 +39,26 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+/* Gestion des erreurs */
+app.use((err, req, res, next) => {
+  console.error(err); // utile en dev
+
+  // Erreur métier connue
+  if (err instanceof ApiError) {
+    return res.status(err.status).json({
+      success: false,
+      message: err.message,
+      errors: err.errors ?? undefined,
+    });
+  }
+
+  // Erreur inconnue / bug / crash
+  return res.status(500).json({
+    success: false,
+    message: "Internal server error",
+  });
+});
+
 
 module.exports = app;

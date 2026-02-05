@@ -30,3 +30,13 @@ export interface CategoryPayload {
 }
 
 export interface UpdateCategoryPayload extends CategoryPayload {}
+
+export interface CategoryFormValues {
+  values: {
+    name: string;
+    description: string;
+    image: string;
+    type: string;
+  } | undefined;
+  
+}

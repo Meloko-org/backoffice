@@ -1,3 +1,4 @@
+import { apiFetch } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type {
   ProductCategory,
@@ -24,19 +25,37 @@ export const getCategories = async (params: {
   return data;
 };
 
-export const createCategory = async (
-  payload: CategoryPayload
-) => {
+// export const createCategory = async (
+//   payload: CategoryPayload
+// ) => {
 
-  const response = await fetch(`${BASE_URL}/`, {
-		method: 'POST',
-		body: JSON.stringify(payload)
-	});
+//   console.log("payload envoyé :", payload)
 
-	const data = await response.json()
+//   const response = await fetch(`${BASE_URL}/`, {
+// 		method: 'POST',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+// 		body: JSON.stringify(payload)
+// 	});
 
-  return data;
-};
+// 	const data = await response.json()
+
+//   return data;
+// };
+
+
+export const createCategory = async (payload: CategoryPayload) => {
+
+  return apiFetch<ApiResponse<ProductCategory>>(
+    `${BASE_URL}/`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }
+  )
+}
+
+
 
 export const updateCategory = async (
   id: string,

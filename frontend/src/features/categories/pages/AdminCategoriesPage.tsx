@@ -14,7 +14,9 @@ export default function AdminCategoriesPage() {
   const fetchCategories = async () => {
     setLoading(true);
     const res = await getCategories({ page, limit: 5 });
-    setData(res.data);
+    if (res.success) {
+      setData(res.data);
+    }
     setLoading(false);
   };
 
@@ -43,6 +45,12 @@ export default function AdminCategoriesPage() {
         totalPages={data?.pagination.totalPages ?? 0}
         onChange={setPage}
       />
+
+      <button
+        onClick={() => navigate("/admin/categories/create")}
+      >
+        Créer une catégorie
+      </button>
 
     </>
   );

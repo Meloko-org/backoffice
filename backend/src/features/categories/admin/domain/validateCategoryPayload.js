@@ -1,6 +1,6 @@
 const Type = require("../../../../models/Type");
 
-function validateCategoryPayload(payload) {
+async function validateCategoryPayload(payload) {
 	const errors = [];
 
 	if (payload.name !== undefined) {
@@ -9,20 +9,19 @@ function validateCategoryPayload(payload) {
     }
   }
 
-	if (payload.type === undefined) {
+	if (!payload.type) {
 		errors.push("type manquant.")
 	} else {
-		const type = Type.findById(type);
+		const existingType = await Type.findById(payload.type);
 
-		if (!type) {
+		if (!existingType) {
 			errors.push("Ce type n'existe pas.")
 		}
 	}
 
-
-
 	return errors;
 }
+
 
 module.exports = {
 	validateCategoryPayload,
