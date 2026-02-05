@@ -3,6 +3,7 @@ class ApiError extends Error {
     super(message);        // appelle le constructeur de Error
 
     this.status = status;  // code HTTP
+    this.errors = errors;
     this.isApiError = true;
 
     // Important pour que instanceof fonctionne correctement

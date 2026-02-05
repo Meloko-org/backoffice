@@ -93,7 +93,6 @@ const deleteCategoryHandler = async (req, res, next) => {
 
     res.json({
       success: true,
-      message: "Catégorie supprimée",
     });
 
   } catch (error) {

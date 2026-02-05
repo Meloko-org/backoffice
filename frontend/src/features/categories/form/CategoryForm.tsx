@@ -4,6 +4,7 @@ import FormSection from "../../../components/form/FormSection";
 import { Input } from "../../../components/form/input";
 import { Select } from "../../../components/form/select";
 import type { FormField } from "../../../types/form/fieldConfig.type";
+import type { ApiError } from "../../../types/global.types";
 
 
 type CategoryFormProps<TValues> = {
@@ -13,7 +14,7 @@ type CategoryFormProps<TValues> = {
   onSubmit: (values: TValues) => void;
   submitLabel: string;
 	errors?: Record<string, string>;
-  globalError?: string;
+  globalError?: ApiError;
 };
 
 
@@ -101,12 +102,6 @@ export function CategoryForm<TValues extends Record<string, any>>({
           return null;
         })}
       </FormSection>
-
-      {/* {globalError && (
-				<div className="mb-4 rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-700">
-					{globalError}
-				</div>
-			)} */}
 
       <div className="flex justify-end">
         <button

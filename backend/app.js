@@ -53,7 +53,19 @@ app.use((err, req, res, next) => {
     });
   }
 
-  // Erreur inconnue / bug / crash
+  // Mode DEV ou routes admin
+  const isDev = process.env.NODE_ENV !== "production";
+  const isAdminRoute = req.originalUrl.startsWith("/admin");
+
+  if (isDev || isAdminRoute) {
+    return res.status(500).json({
+      success: false,
+      message: `Erreur backend >>  ${err.message}`,      // 👈 message réel
+      stack: err.stack,          // 👈 optionnel
+    });
+  }
+
+  // Prod public : Erreur inconnue / bug / crash
   return res.status(500).json({
     success: false,
     message: "Internal server error",

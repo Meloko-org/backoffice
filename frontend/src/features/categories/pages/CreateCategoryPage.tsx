@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 import type { Type } from "../../types/types/type";
 import { getTypeNames } from "../../types/api/types.api";
 import type { FormField } from "../../../types/form/fieldConfig.type";
+import type { ApiError } from "../../../types/global.types";
 
 export default function CreateCategoryPage() {
   const navigate = useNavigate();
-	const [globalError, setGlobalError] = useState<string | undefined>();
+	const [globalError, setGlobalError] = useState<ApiError | undefined>();
 	const [types, setTypes] = useState<Type[]>([]);
 	
 
@@ -83,20 +84,16 @@ export default function CreateCategoryPage() {
 		try {
 			await createCategory(payload);
     	navigate("/admin/categories");
-		} catch (error: any) {
-			setGlobalError(error.message)
+		} catch (error) {
+
+			const apiError = error as ApiError;
+			setGlobalError(apiError)
 		}
   };
 
   return (
     <>
       <h1>Créer une catégorie</h1>
-
-			{/* {globalError && (
-				<div className="mb-4 rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-700">
-					{globalError}
-				</div>
-			)} */}
 
       <CategoryForm<CategoryPayload>
 				fields={fields}

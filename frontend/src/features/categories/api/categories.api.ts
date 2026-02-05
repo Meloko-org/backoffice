@@ -1,5 +1,4 @@
 import { apiFetch } from "../../../lib/apiFetch";
-import type { ApiResponse } from "../../../types/global.types";
 import type {
   ProductCategory,
   CategoryListResponse,
@@ -9,46 +8,25 @@ import type {
 
 const BASE_URL = "http://localhost:4000/admin/categories"
 
-export const getCategories = async (params: {
+
+export const getCategories = async(params: {
   page?: number;
   limit?: number;
-}): Promise<ApiResponse<CategoryListResponse>> => {
+}): Promise<CategoryListResponse> => {
 
-	console.log("get categories called")
+  return apiFetch<CategoryListResponse>(
+    `${BASE_URL}/?page=${params.page}&limit=${params.limit}`, 
+    {
+      method: "GET"
+    }
+  )
+}
 
-	const response = await fetch(`${BASE_URL}/?page=${params.page}&limit=${params.limit}`, {
-		method: 'GET',
-	});
+export const createCategory = async (payload: CategoryPayload): Promise<ProductCategory> => {
 
-	const data = await response.json()
-
-  return data;
-};
-
-// export const createCategory = async (
-//   payload: CategoryPayload
-// ) => {
-
-//   console.log("payload envoyé :", payload)
-
-//   const response = await fetch(`${BASE_URL}/`, {
-// 		method: 'POST',
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-// 		body: JSON.stringify(payload)
-// 	});
-
-// 	const data = await response.json()
-
-//   return data;
-// };
-
-
-export const createCategory = async (payload: CategoryPayload) => {
-
-  return apiFetch<ApiResponse<ProductCategory>>(
-    `${BASE_URL}/`, {
+  return apiFetch<ProductCategory>(
+    `${BASE_URL}/`, 
+    {
       method: "POST",
       body: JSON.stringify(payload),
     }
@@ -56,38 +34,71 @@ export const createCategory = async (payload: CategoryPayload) => {
 }
 
 
-
 export const updateCategory = async (
   id: string,
-  payload: UpdateCategoryPayload
-) => {
-  const response = await fetch(`${BASE_URL}/${id}`, {
-		method: 'POST',
-		body: JSON.stringify(payload)
-	});
+  payload: UpdateCategoryPayload,
+): Promise<ProductCategory> => {
 
-	const data = await response.json()
-
-  return data;
-};
-
-export const deleteCategory = async (id: string) => {
-
-  const response = await fetch(`${BASE_URL}/${id}`, {
-		method: 'DELETE'
-	});
-
-	const data = await response.json()
-
-  return data;
-};
-
-export const getCategoryById = async (id: string): Promise<ApiResponse<ProductCategory>> => {
-  const response = await fetch(`${BASE_URL}/${id}`);
-
-	const data = await response.json()
-
-  console.log("data in getCategoryById :", data)
-
-  return data;
+  return apiFetch<ProductCategory>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }
+  )
 }
+
+
+export const getCategoryById = async (id: string): Promise<ProductCategory> => {
+
+  return apiFetch<ProductCategory>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+
+export const deleteCategory = async (id: string): Promise<void> => {
+
+  return apiFetch<void>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'DELETE'
+    }
+  )
+}
+
+
+
+
+
+
+
+/*
+Règle d’or à retenir (et à appliquer partout)
+
+🔒 Les fichiers *.api.ts ne retournent jamais ApiResponse<T>
+
+👉 ils retournent le vrai type métier (ProductCategory, CategoryList, etc.)
+
+Le type ApiResponse<T> :
+
+existe pour décrire le contrat backend
+
+vit uniquement dans apiFetch / normalisation
+
+ne remonte jamais jusqu’aux composants
+
+
+
+Règle d’or DELETE / PUT / POST
+Action	Retour frontend
+GET list	ListResponse
+GET by id	Entity
+POST create	Entity
+PUT/PATCH update	Entity
+DELETE	void
+
+*/
