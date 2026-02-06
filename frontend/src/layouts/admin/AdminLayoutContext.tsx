@@ -1,0 +1,22 @@
+import { createContext, useContext } from "react";
+
+type AdminLayoutContextType = {
+  isLeftOpen: boolean;
+  isRightOpen: boolean;
+  toggleLeft: () => void;
+  toggleRight: () => void;
+};
+
+export const AdminLayoutContext = createContext<AdminLayoutContextType | null>(
+  null
+);
+
+export function useAdminLayout() {
+  const ctx = useContext(AdminLayoutContext);
+
+  if (!ctx) {
+    throw new Error("useAdminLayout must be used inside AdminLayoutProvider");
+  }
+
+  return ctx;
+}

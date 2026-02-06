@@ -13,10 +13,8 @@ export default function AdminCategoriesPage() {
 
   const fetchCategories = async () => {
     setLoading(true);
-    const res = await getCategories({ page, limit: 5 });
-    if (res.success) {
-      setData(res.data);
-    }
+    const categories = await getCategories({ page, limit: 5 });
+    setData(categories)
     setLoading(false);
   };
 

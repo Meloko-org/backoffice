@@ -1,21 +1,66 @@
-import { SignOutButton, useUser } from "@clerk/clerk-react";
-import { useUserRole } from "../../hooks/useUserRole";
+import SwapIconButton from "./buttons/SwapIconButton";
+import { SidebarLeftIco } from "./icons/sideBarLeft";
+import { SidebarLeftCollapseIco } from "./icons/sideBarLeftCollapse";
+import { SidebarRightIco } from "./icons/sideBarRight";
+import { SidebarRightCollapseIco } from "./icons/sideBarRightCollapse";
+import DarkModeToggle from "../global/DarkModeToggle";
+
+import { useAdminLayout } from "../../layouts/admin/AdminLayoutContext";
+
 
 export default function AdminHeader() {
-  const { user } = useUser();
-	const { role } = useUserRole();
+
+  const { 
+    isLeftOpen,
+    isRightOpen,
+    toggleLeft,
+    toggleRight
+  } = useAdminLayout();
+
+console.log("HEADER left:", isLeftOpen);
 
   return (
-    <header className="h-16 bg-white border-b flex items-center justify-between px-6">
-      <span className="text-sm text-gray-600">
-        {user?.primaryEmailAddress?.emailAddress} ({role})
-      </span>
+    <header className="w-full flex justify-center items-center p-3">
 
-      <SignOutButton>
-        <button className="text-sm text-red-600 hover:underline">
-          Se déconnecter
-        </button>
-      </SignOutButton>
+      <div className="absolute top-0 left-0 pl-4 flex items-center h-15">
+        <SwapIconButton
+          iconOn={<SidebarLeftIco className="w-6 h-6" />}
+          iconOff={<SidebarLeftCollapseIco className="w-6 h-6" />}
+          isOn={isLeftOpen}
+          onClick={toggleLeft}
+          ariaLabel="Toggle History Panel"
+          className="bg-gray-200 dark:bg-neutral-900 hover:bg-gray-300 dark:hover:bg-neutral-500"
+        />
+      </div>
+
+      <div className="absolute top-0 right-0 pr-4 flex items-center h-15">
+        <SwapIconButton
+          iconOn={<SidebarRightIco className="w-6 h-6" />}
+          iconOff={<SidebarRightCollapseIco className="w-6 h-6" />}
+          isOn={isRightOpen}
+          onClick={toggleRight}
+          ariaLabel="Toggle tools Panel"
+          className="bg-gray-200 dark:bg-neutral-900 hover:bg-gray-300 dark:hover:bg-neutral-500 ml-2"
+        />
+      </div>
+
+      <div className="flex w-[95%]">
+
+        <div className="flex grow justify-center">
+          <div className="flex">
+            
+            <h1 className="ml-2 text-xl font-bold text-gray-800 dark:text-white">Meloko Admin Dashboard</h1>
+          </div>
+        </div>
+          <div className="mr-5">
+            <DarkModeToggle />
+          </div>
+      </div>
+      
     </header>
   );
-}
+};
+
+
+
+

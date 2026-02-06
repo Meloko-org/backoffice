@@ -1,8 +1,6 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 @import "tailwindcss";
+
+
 
 @theme {
   --color-primary: #98B66E;
@@ -26,90 +24,96 @@
   --color-canceled: #EA2B1F;
 }
 
-
-@keyframes progress {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(300%);
-  }
-}
-
-.animate-progress {
-  animation: progress 1.2s ease-in-out infinite;
-}
-
-
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  color: #000;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: #000;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  color: #fff;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --color-lightbg: #FCFFF0;
+    --color-darkbg: #262E20;
+
+    --color-primary: #98B66E;
+    --color-danger: #942911;
+    --color-warning: #D16014;
+
+    --color-text-light: #262E20;
+    --color-text-dark: #FCFFF0;
+
+    --radius: 0.5rem;
+    --border-color: rgba(0, 0, 0, 0.08);
   }
-  a:hover {
-    color: #747bff;
+
+  html {
+    background-color: var(--color-lightbg);
+    color: var(--color-text-light);
   }
+
+  html.dark {
+    background-color: var(--color-darkbg);
+    color: var(--color-text-dark);
+  }
+
+  h1 {
+    @apply text-2xl font-semibold mb-4;
+  }
+
+  h2 {
+    @apply text-xl font-semibold mb-3;
+  }
+
+  h3 {
+    @apply text-lg font-medium mb-2;
+  }
+
+  p {
+    @apply leading-relaxed mb-2;
+  }
+
+  a {
+    @apply text-[var(--color-primary)] hover:underline;
+  }
+
   button {
-    background-color: #f9f9f9;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium transition;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
   }
+
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  th {
+    @apply text-left font-semibold p-3 border-b;
+  }
+
+  td {
+    @apply p-3 border-b;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply px-3 py-2 rounded-md border outline-none;
+    background-color: transparent;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--color-primary);
+  }
+
 }
+
+
+/* html {
+  background-color: var(--color-lightbg);
+  color: var(--color-tertiary);
+}
+
+html.dark {
+  background-color: var(--color-darkbg);
+  color: var(--color-lightbg);
+} */

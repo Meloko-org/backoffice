@@ -1,10 +1,13 @@
+
+/* premier layout créé */ 
+
 import { Outlet, Navigate } from "react-router-dom";
 import  { useAuth } from "@clerk/clerk-react";
 import { useUserRole } from "../hooks/useUserRole";
 import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminHeader from "../components/admin/AdminHeader";
 
-export default function AdminLayout() {
+export default function AdminLayoutTest() {
   const { role, isLoaded } = useUserRole();
 	const  { isSignedIn } = useAuth();
 
@@ -21,15 +24,23 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="flex h-screen w-screen">
-      <AdminSidebar role={role} />
+    <AdminLayoutProvider>
+      <div className="relative h-screen w-full overflow-hidden">
+        <AdminSidebarLeft />
+        <AdminSidebarRight />
 
-      <div className="flex flex-col flex-1">
-        <AdminHeader />
-        <main className="flex-1 p-6 bg-gray-50 overflow-y-auto">
-          <Outlet />
-        </main>
+        <AdminMain />
       </div>
-    </div>
+    </AdminLayoutProvider>
+    // <div className="flex h-screen w-screen">
+    //   <AdminSidebar role={role} />
+
+    //   <div className="flex flex-col flex-1">
+    //     <AdminHeader />
+    //     <main className="flex-1 p-6 overflow-y-auto">
+    //       <Outlet />
+    //     </main>
+    //   </div>
+    // </div>
   );
 }

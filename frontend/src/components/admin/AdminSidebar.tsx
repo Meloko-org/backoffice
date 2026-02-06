@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import DarkModeToggle from "../global/DarkModeToggle";
 
 type Props = {
   role: string;
@@ -6,8 +7,12 @@ type Props = {
 
 export default function AdminSidebar({ role }: Props) {
   return (
-    <aside className="w-64 bg-white border-r p-4 space-y-4">
+    <aside className="w-64 border-r p-4 space-y-4">
       <h2 className="text-xl font-bold mb-6">Meloko Admin</h2>
+
+      <div className="mr-5">
+        <DarkModeToggle />
+      </div>
 
       <nav className="space-y-2">
         <NavLink to="/admin" className="block hover:text-blue-600">
