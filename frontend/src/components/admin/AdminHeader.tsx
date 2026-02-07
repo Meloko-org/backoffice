@@ -29,7 +29,7 @@ console.log("HEADER left:", isLeftOpen);
           isOn={isLeftOpen}
           onClick={toggleLeft}
           ariaLabel="Toggle History Panel"
-          className="bg-gray-200 dark:bg-neutral-900 hover:bg-gray-300 dark:hover:bg-neutral-500"
+          className="btn-sidebar"
         />
       </div>
 
@@ -40,7 +40,7 @@ console.log("HEADER left:", isLeftOpen);
           isOn={isRightOpen}
           onClick={toggleRight}
           ariaLabel="Toggle tools Panel"
-          className="bg-gray-200 dark:bg-neutral-900 hover:bg-gray-300 dark:hover:bg-neutral-500 ml-2"
+          className="btn-sidebar ml-2"
         />
       </div>
 

@@ -22,7 +22,7 @@ export default function SwapIconButton({ iconOff, iconOn, onClick, ariaLabel, cl
 				<span className={`absolute transition-opacity transform duration-300 ${isOn ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`} >
 					{iconOn}
 				</span>
-				<span className={`absolute transition-opacity transform duration-300 ${isOn ? 'opacity-1000 scale-1000' : 'opacity-0 scale-0'}`} >
+				<span className={`absolute transition-opacity transform duration-300 ${isOn ? 'opacity-1000 scale-100' : 'opacity-0 scale-0'}`} >
 					{iconOff}
 				</span>
 			</div>

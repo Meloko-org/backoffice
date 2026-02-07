@@ -1,53 +1,81 @@
 @import "tailwindcss";
 
-
-
+/* =========================
+   THEME TOKENS (Tailwind)
+========================= */
 @theme {
+  --color-bg-light: var(--color-neutral-100);
+  --color-sidebar-bg-light: var(--color-neutral-200);
+  --color-bg-dark: #212121;
+  --color-sidebar-bg-dark: #181818;
+
+  --color-text-light: #262E20;
+  --color-text-dark: #FCFFF0;
+
   --color-primary: #98B66E;
   --color-secondary: #262E20;
-  --color-lightbg: #FCFFF0;
-  --color-darkbg: #262E20;
-  --color-tertiary: #444C3D;
   --color-danger: #942911;
   --color-warning: #D16014;
   --color-success: #0081A7;
-  --color-night: #0A090B;
-  --color-premium: #FAA200;
-  --color-premiumbg: #686B65;
-  --color-greener: #006045;
-  --color-pending: #0C0A09;
-  --color-partialValidated: #51344d;
-  --color-validated: #6F5060;
-  --color-partialWithdrawn: #488286;
-  --color-withdrawn: #60A4A9;
-  --color-partialCanceled: #BA2D0B;
-  --color-canceled: #EA2B1F;
+
 }
 
+/* =========================
+   BASE STYLES
+========================= */
 @layer base {
-  :root {
-    --color-lightbg: #FCFFF0;
-    --color-darkbg: #262E20;
-
-    --color-primary: #98B66E;
-    --color-danger: #942911;
-    --color-warning: #D16014;
-
-    --color-text-light: #262E20;
-    --color-text-dark: #FCFFF0;
-
-    --radius: 0.5rem;
-    --border-color: rgba(0, 0, 0, 0.08);
-  }
-
   html {
-    background-color: var(--color-lightbg);
+    background-color: var(--color-bg-light);
     color: var(--color-text-light);
+    --app-surface-bg: var(--color-bg-light);
+    --app-sidebar-bg: var(--color-sidebar-bg-light);
+
+    /* ---- bouton invariant selon le mode ---- */
+    /* Bouton principal */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-text: var(--color-text-light);
+
+    /* Danger */
+    --btn-danger-bg: var(--color-danger);
+    --btn-danger-text: #ffffff;
+
+
+    /* ---- bouton variants selon le mode --- */ 
+    /* Bouton formulaire */
+    --btn-form-bg: #e5e7eb;
+    --btn-form-text: #111827;
+
+    /* Bouton sidebar */
+    --btn-sidebar-bg: var(--color-sidebar-bg-light);
+    --btn-sidebar-text: var(--color-neutral-500);
+    --btn-sidebar-bg-hover: var(--color-neutral-500);
+    --btn-sidebar-text-hover: var(--color-text-dark);
+
+
+
+
   }
 
   html.dark {
-    background-color: var(--color-darkbg);
+    background-color: var(--color-bg-dark);
     color: var(--color-text-dark);
+    --app-surface-bg: var(--color-bg-dark);
+    --app-sidebar-bg: var(--color-sidebar-bg-dark);
+
+
+     /* Bouton formulaire */
+    --btn-form-bg: #e5e7eb;
+    --btn-form-text: #111827;
+
+    /* Bouton sidebar */
+    --btn-sidebar-bg: var(--color-neutral-900);
+    --btn-sidebar-text: var(--color-neutral-500);
+    --btn-sidebar-bg-hover: var(--color-neutral-500);
+    --btn-sidebar-text-hover: var(--color-neutral-900);
+  }
+
+  body {
+    @apply antialiased;
   }
 
   h1 {
@@ -67,17 +95,7 @@
   }
 
   a {
-    @apply text-[var(--color-primary)] hover:underline;
-  }
-
-  button {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium transition;
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-  }
-
-  button:disabled {
-    @apply opacity-50 cursor-not-allowed;
+    @apply text-primary hover:underline;
   }
 
   table {
@@ -85,18 +103,18 @@
   }
 
   th {
-    @apply text-left font-semibold p-3 border-b;
+    @apply text-left font-semibold p-3 border-b border-black/10 dark:border-white/10;
   }
 
   td {
-    @apply p-3 border-b;
+    @apply p-3 border-b border-black/5 dark:border-white/5;
   }
 
   input,
   select,
   textarea {
-    @apply px-3 py-2 rounded-md border outline-none;
-    background-color: transparent;
+    @apply px-3 py-2 rounded-md border border-black/10 dark:border-white/10
+           bg-transparent outline-none;
   }
 
   input:focus,
@@ -104,16 +122,40 @@
   textarea:focus {
     border-color: var(--color-primary);
   }
-
 }
 
 
-/* html {
-  background-color: var(--color-lightbg);
-  color: var(--color-tertiary);
-}
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
+           transition
+           hover:opacity-90;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
 
-html.dark {
-  background-color: var(--color-darkbg);
-  color: var(--color-lightbg);
-} */
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
+           transition
+           hover:opacity-90;
+    background-color: var(--btn-danger-bg);
+    color: var(--btn-danger-text);
+  }
+
+  .btn-form {
+    background-color: var(--btn-form-bg);
+    color: var(--btn-form-text);
+  }
+
+  .btn-sidebar {
+    background-color: var(--btn-sidebar-bg);
+    color: var(--btn-sidebar-text);
+  }
+
+  .btn-sidebar:hover {
+    background-color: var(--btn-sidebar-bg-hover);
+    color: var(--btn-sidebar-text-hover);
+  }
+
+
+}
