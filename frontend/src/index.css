@@ -51,6 +51,9 @@
     --btn-sidebar-bg-hover: var(--color-neutral-500);
     --btn-sidebar-text-hover: var(--color-text-dark);
 
+    --sidebar-item-color: var(--color-text-light);
+    --sidebar-item-active: var(--color-primary);
+
 
 
 
@@ -72,6 +75,9 @@
     --btn-sidebar-text: var(--color-neutral-500);
     --btn-sidebar-bg-hover: var(--color-neutral-500);
     --btn-sidebar-text-hover: var(--color-neutral-900);
+
+    --sidebar-item-color: var(--color-text-dark);
+    --sidebar-item-active: var(--color-primary);
   }
 
   body {
@@ -96,6 +102,16 @@
 
   a {
     @apply text-primary hover:underline;
+  }
+
+  /* Neutralise les styles des liens DANS la sidebar admin */
+  aside a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  aside a:hover {
+    text-decoration: none;
   }
 
   table {

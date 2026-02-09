@@ -15,7 +15,7 @@ export default function SwapIconButton({ iconOff, iconOn, onClick, ariaLabel, cl
 	return (
 		<button
 			onClick={onClick}
-			className={`flex items-center justify-center rounded-full p-2 focus:outline-none ${className || ''}`}
+			className={`flex items-center justify-center rounded-full p-2 focus:outline-none cursor-pointer ${className || ''}`}
 			aria-label={ariaLabel}
 		>
 			<div className="relative flex items-center justify-center h-6 w-6">

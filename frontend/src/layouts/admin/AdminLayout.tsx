@@ -3,6 +3,7 @@ import AdminHeader from "../../components/admin/AdminHeader";
 import { useAdminLayout } from "./AdminLayoutContext";
 import AdminSidebarLeft from "../../components/admin/AdminSidebarLeft";
 import AdminSidebarRight from "../../components/admin/AdminSidebarRight";
+import AdminSidebar from "./AdminSidebar";
 
 
 function AdminLayoutContent() {
@@ -15,7 +16,7 @@ function AdminLayoutContent() {
     <div className="relative h-screen w-screen overflow-hidden">
 
       {/* Sidebar gauche (fixe, derrière) */}
-      <AdminSidebarLeft />
+      <AdminSidebar />
 
       {/* Sidebar droite (fixe, derrière) */}
       <AdminSidebarRight />
@@ -27,7 +28,7 @@ function AdminLayoutContent() {
           relative z-20 flex h-full flex-col
           transition-all duration-300 ease-in-out
           isolate
-          ${isLeftOpen ? "ml-64" : "ml-0"}
+          ${isLeftOpen ? "ml-64" : "ml-16"}
           ${isRightOpen ? "mr-64" : "mr-0"}
         `}
         
