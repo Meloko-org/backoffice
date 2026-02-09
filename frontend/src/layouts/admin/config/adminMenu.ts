@@ -5,12 +5,12 @@ import {
   Users,
 	Bug,
 	FileUp,
-	Apple,
 	Citrus,
 	Panda,
 	TableProperties,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { AdminRole } from "../../../types/admin";
 
 
 type AdminMenuItem =
@@ -20,18 +20,21 @@ type AdminMenuItem =
       label: string;
       icon: LucideIcon;
       path: string;
+      roles: AdminRole[];
     }
   | {
       type: "group";
       key: string;
       label: string;
       icon: LucideIcon;
+      roles: AdminRole[];
       children: {
         type: "sublink";
         key: string;
         label: string;
         icon: LucideIcon;
         path: string;
+        roles: AdminRole[];
       }[];
     };
 
@@ -44,17 +47,19 @@ export const adminMenu: AdminMenuItem[] = [
     label: "Dashboard",
     icon: Bug,
     path: "/admin",
+    roles: ["admin", "support", "dev", "super-admin"],
   },
   {
 		type:"group",
     key: "products",
     label: "Produits",
     icon: Package,
+    roles: ["admin", "super-admin"],
     children: [
-      { type: "sublink", key: "products", icon: TableProperties, label: "Produits", path: "/admin/products" },
-      { type: "sublink", key: "families", icon: Citrus, label: "Familles", path: "/admin/product-families" },
-      { type: "sublink", key: "categories", icon: Panda, label: "Catégories", path: "/admin/categories" },
-      { type: "sublink", key: "product-import", icon: FileUp, label: "Import", path: "/admin/products/import" },
+      { type: "sublink", key: "products", icon: TableProperties, label: "Produits", path: "/admin/products", roles: ["admin", "super-admin"], },
+      { type: "sublink", key: "families", icon: Citrus, label: "Familles", path: "/admin/product-families", roles: ["admin", "super-admin"],  },
+      { type: "sublink", key: "categories", icon: Panda, label: "Catégories", path: "/admin/categories", roles: ["admin", "super-admin"],  },
+      { type: "sublink", key: "product-import", icon: FileUp, label: "Import", path: "/admin/products/import", roles: ["admin", "super-admin"],  },
     ],
   },
   {
@@ -62,9 +67,10 @@ export const adminMenu: AdminMenuItem[] = [
     key: "markets",
     label: "Markets",
     icon: Store,
+    roles: ["admin", "super-admin"],
     children: [
-      { type: "sublink", key: "markets", icon: TableProperties, label: "Liste", path: "/admin/markets" },
-      { type: "sublink", key: "market-import", icon: FileUp, label: "Import", path: "/admin/markets/import" },
+      { type: "sublink", key: "markets", icon: TableProperties, label: "Liste", path: "/admin/markets", roles: ["admin", "super-admin"],  },
+      { type: "sublink", key: "market-import", icon: FileUp, label: "Import", path: "/admin/markets/import", roles: ["admin", "super-admin"],  },
     ],
   },
   {
@@ -73,6 +79,7 @@ export const adminMenu: AdminMenuItem[] = [
     label: "Utilisateurs",
     icon: Users,
     path: "/admin/users",
+    roles: ["admin", "support", "dev", "super-admin"],
   },
   {
 		type: "link",
@@ -80,5 +87,6 @@ export const adminMenu: AdminMenuItem[] = [
     label: "Support",
     icon: LifeBuoy,
     path: "/admin/support",
+    roles: ["admin", "support", "super-admin"],
   },
 ];

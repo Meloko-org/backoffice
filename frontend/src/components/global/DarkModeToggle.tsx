@@ -74,7 +74,7 @@ const DarkModeToggle: React.FC = () => {
       </svg>
       <span
         className={`absolute top-0.5 left-0.5 bg-white w-8 h-8 rounded-full flex items-center justify-center transition duration-500 transform ${
-          isDarkMode ? 'translate-x-[2.625rem]' : 'translate-x-0'
+          isDarkMode ? 'translate-x-10.5' : 'translate-x-0'
         }`}
       >
         

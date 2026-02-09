@@ -1,4 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
+import type { AdminRole } from "../types/admin";
 
 export function useUserRole() {
   const { user, isLoaded } = useUser();
@@ -7,7 +8,7 @@ export function useUserRole() {
     return { role: null, isLoaded };
   }
 
-  const role = user.publicMetadata?.role as string | undefined;
+  const role = user.publicMetadata?.role as AdminRole | undefined;
 
   return {
     role: role ?? null,

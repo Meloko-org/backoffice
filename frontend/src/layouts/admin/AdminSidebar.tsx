@@ -1,11 +1,28 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAdminLayout } from "./AdminLayoutContext";
+import { useUserRole } from "../../hooks/useUserRole";
 import SidebarIconButton from "./components/SidebarIconButton";
 import { adminMenu } from "./config/adminMenu";
 
 export default function AdminSidebar() {
   const { isLeftOpen, toggleLeft } = useAdminLayout();
   const navigate = useNavigate();
+
+  const { role, isLoaded } = useUserRole();
+
+  if (!isLoaded || !role) return null;
+
+  const filteredMenu = adminMenu
+		.filter(item => item.roles.includes(role))
+		.map(item => {
+			if (item.type === "group") {
+				return {
+					...item,
+					children: item.children.filter(child => child.roles.includes(role)),
+				}
+			}
+			return item;
+		})
 
 	console.log("SIDEBAR isLeftOpen :", isLeftOpen)
 
@@ -49,7 +66,7 @@ export default function AdminSidebar() {
 					</div>
 
 					<div>
-						{adminMenu.map((item) => {
+						{filteredMenu.map((item) => {
 							const Icon = item.icon;
 
 							const handleClick = () => {
@@ -97,7 +114,7 @@ export default function AdminSidebar() {
 					</div>
 
 					<div>
-						{adminMenu.map((item) => {
+						{filteredMenu.map((item) => {
 							const Icon = item.icon;
 
 							// -------- LINK --------
