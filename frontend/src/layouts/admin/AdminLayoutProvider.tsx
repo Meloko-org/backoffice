@@ -9,6 +9,7 @@ export default function AdminLayoutProvider({ children }: Props) {
 
   const [isLeftOpen, setIsLeftOpen] = useState(false);
   const [isRightOpen, setIsRightOpen] = useState(false);
+  const [pageTitle, setPageTitle ] = useState<string | null>(null);
 
   const toggleLeft = () => {setIsLeftOpen((prev) => !prev)};
   const toggleRight = () => setIsRightOpen((prev) => !prev);
@@ -19,8 +20,10 @@ export default function AdminLayoutProvider({ children }: Props) {
       isRightOpen,
       toggleLeft,
       toggleRight,
+      pageTitle,
+      setPageTitle,
     }),
-    [isLeftOpen, isRightOpen]
+    [isLeftOpen, isRightOpen, pageTitle]
   );
 
   console.log("PROVIDER left :", isLeftOpen)

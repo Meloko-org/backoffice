@@ -4,9 +4,12 @@ import { getCategories } from "../api/categories.api";
 import { CategoryTable } from "../components/CategoryTable";
 import { Pagination } from "../../../components/global/Pagination";
 import type { CategoryListResponse } from "../types/category";
+import { useAdminPage } from "../../../hooks/useAdminPage";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
+  useAdminPage("Liste des catégories")
+
   const [page, setPage] = useState(1);
   const [data, setData] = useState<CategoryListResponse>();
   const [loading, setLoading] = useState(false);
@@ -26,7 +29,6 @@ export default function AdminCategoriesPage() {
 
   return (
     <>
-      <h1>Catégories</h1>
 
       <CategoryTable
         categories={data?.items ?? []}

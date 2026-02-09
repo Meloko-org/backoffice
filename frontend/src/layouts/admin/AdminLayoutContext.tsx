@@ -5,6 +5,8 @@ type AdminLayoutContextType = {
   isRightOpen: boolean;
   toggleLeft: () => void;
   toggleRight: () => void;
+  pageTitle: string | null;
+  setPageTitle: (title: string | null) => void;
 };
 
 export const AdminLayoutContext = createContext<AdminLayoutContextType | null>(

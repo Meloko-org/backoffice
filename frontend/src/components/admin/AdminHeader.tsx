@@ -14,7 +14,8 @@ export default function AdminHeader() {
     isLeftOpen,
     isRightOpen,
     toggleLeft,
-    toggleRight
+    toggleRight,
+    pageTitle,
   } = useAdminLayout();
 
 console.log("HEADER left:", isLeftOpen);
@@ -49,7 +50,7 @@ console.log("HEADER left:", isLeftOpen);
         <div className="flex grow justify-center">
           <div className="flex">
             
-            <h1 className="ml-2 text-xl font-bold text-gray-800 dark:text-white">Meloko Admin Dashboard</h1>
+            <h1 className="ml-2 text-xl font-bold text-gray-800 dark:text-white">{pageTitle}</h1>
           </div>
         </div>
           <div className="mr-5">
