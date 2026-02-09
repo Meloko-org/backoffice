@@ -13,6 +13,7 @@ import AdminCategoriesPage from "./features/categories/pages/AdminCategoriesPage
 import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
 import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 import AdminLayoutProvider from "../src/layouts/admin/AdminLayoutProvider";
+import AdminRouteGuard from "./guards/AdminRouteGuard";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -29,15 +30,68 @@ export const router = createBrowserRouter([
       </AdminGuard>
     ),
     children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: "products", element: <ProductsListPage /> },
-      { path: "categories", element: <AdminCategoriesPage /> },
-      { path: "categories/create", element: <CreateCategoryPage />},
-      { path: "categories/:id/edit", element: <EditCategoryPage />},
-      { path: "products/import", element: <ProductsImportPage /> },
-      { path: "markets", element: <MarketsListPage /> },
-      { path: "markets/import", element: <MarketsImportPage /> },
-      { path: "support", element: <div>Support</div> },
+      { 
+        index: true, 
+        element: (
+          <AdminRouteGuard permission="dashboard:read">
+            <AdminDashboard />
+          </AdminRouteGuard>
+        ) 
+      },
+      { 
+        path: "products", 
+        element: (
+          <AdminRouteGuard permission="products:read">
+            <ProductsListPage />
+          </AdminRouteGuard>
+        )
+      },
+      { 
+        path: "categories", 
+        element: (
+          <AdminRouteGuard permission="categories:manage">
+            <AdminCategoriesPage />
+          </AdminRouteGuard> )
+      },
+      { 
+        path: "categories/create", 
+        element: (
+          <AdminRouteGuard permission="categories:manage">
+            <CreateCategoryPage />
+          </AdminRouteGuard>)
+      },
+      { 
+        path: "categories/:id/edit", 
+        element: (
+          <AdminRouteGuard permission="categories:manage">
+            <EditCategoryPage />
+          </AdminRouteGuard>)
+      },
+      { 
+        path: "products/import", 
+        element: (
+          <AdminRouteGuard permission="products:import">
+            <ProductsImportPage />
+          </AdminRouteGuard>) 
+      },
+      { 
+        path: "markets", 
+        element: (
+          <AdminRouteGuard permission="markets:read">
+            <MarketsListPage />
+          </AdminRouteGuard>) 
+      },
+      { 
+        path: "markets/import", 
+        element: (
+          <AdminRouteGuard permission="markets:import">
+            <MarketsImportPage />
+          </AdminRouteGuard> )
+      },
+      { 
+        path: "support", 
+        element: <div>Support</div> 
+      },
     ],
   }
 

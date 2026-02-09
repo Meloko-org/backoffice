@@ -1,28 +1,55 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAdminLayout } from "./AdminLayoutContext";
-import { useUserRole } from "../../hooks/useUserRole";
 import SidebarIconButton from "./components/SidebarIconButton";
+import type { AdminMenuItem } from "./config/adminMenu"
 import { adminMenu } from "./config/adminMenu";
+import { useHasPermission } from "../../hooks/useHasPermission";
+
+
+/* détermine les éléments autorisés du menu en fonction des permissions par rôle */
+function useFilteredAdminMenu() {
+	const hasPermission = useHasPermission;
+
+	return adminMenu
+		.map((item) => {
+			if (item.type === "link") {
+				return item.permission && hasPermission(item.permission)
+					? item
+					: null;
+			}
+
+			if (item.type === "group") {
+				const children = item.children.filter(
+					(child) => 
+						child.type !== "sublink" ||
+						!child.permission ||
+						hasPermission(child.permission)
+				)
+
+				if (children.length === 0) return null;
+
+				return {
+					...item,
+					children,
+				}
+			}
+
+			return null;
+		})
+		.filter((item): item is AdminMenuItem => item !== null);		
+}
+
+/*
+- le filter permet de supprimer tous les éléments falsy. 
+- (item): item is AdminMenuItem => item !== null : permet de garantir que useFilteredAdminMenu
+ 	retourne des éléments de type AdminMenuItem. C'est type guard.
+*/
 
 export default function AdminSidebar() {
   const { isLeftOpen, toggleLeft } = useAdminLayout();
   const navigate = useNavigate();
 
-  const { role, isLoaded } = useUserRole();
-
-  if (!isLoaded || !role) return null;
-
-  const filteredMenu = adminMenu
-		.filter(item => item.roles.includes(role))
-		.map(item => {
-			if (item.type === "group") {
-				return {
-					...item,
-					children: item.children.filter(child => child.roles.includes(role)),
-				}
-			}
-			return item;
-		})
+	const menu = useFilteredAdminMenu();
 
 	console.log("SIDEBAR isLeftOpen :", isLeftOpen)
 
@@ -66,7 +93,7 @@ export default function AdminSidebar() {
 					</div>
 
 					<div>
-						{filteredMenu.map((item) => {
+						{menu.map((item) => {
 							const Icon = item.icon;
 
 							const handleClick = () => {
@@ -114,7 +141,7 @@ export default function AdminSidebar() {
 					</div>
 
 					<div>
-						{filteredMenu.map((item) => {
+						{menu.map((item) => {
 							const Icon = item.icon;
 
 							// -------- LINK --------
