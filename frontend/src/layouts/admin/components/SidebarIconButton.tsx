@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 
+/* bouton du menu sidebar */
+
 type Props = {
   icon: ReactNode;
   label?: string;
@@ -20,9 +22,6 @@ export default function SidebarIconButton({
 }: Props) {
 
 	const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
-
-	console.log("coords :", coords)
-	console.log(" BUTTON tooltip :", showTooltip)
 
   return (
 		<div className="relative group" >

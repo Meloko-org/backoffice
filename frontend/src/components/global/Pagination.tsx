@@ -14,19 +14,21 @@ export const Pagination = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div style={{ marginTop: 16 }}>
+    <div className="table-pagination">
       <button
+        className="table-pagination-btn"
         disabled={page === 1}
         onClick={() => onChange(page - 1)}
       >
         Précédent
       </button>
 
-      <span style={{ margin: "0 8px" }} className="text-black">
+      <div className="table-pagination-info ">
         Page {page} / {totalPages}
-      </span>
+      </div>
 
       <button
+        className="table-pagination-btn"
         disabled={page === totalPages}
         onClick={() => onChange(page + 1)}
       >

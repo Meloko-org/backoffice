@@ -1,18 +1,28 @@
 import { useState,  useMemo, type ReactNode } from "react";
 import { AdminLayoutContext } from "./AdminLayoutContext";
 
+// import type { SidebarRightContext } from "../../types/admin";
+
 type Props = {
   children: ReactNode;
 };
 
 export default function AdminLayoutProvider({ children }: Props) {
 
+  /* AdminLayoutcontext */
   const [isLeftOpen, setIsLeftOpen] = useState(false);
   const [isRightOpen, setIsRightOpen] = useState(false);
   const [pageTitle, setPageTitle ] = useState<string | null>(null);
+  // const [ sidebarRightContext, setSidebarRightContext ] = useState<SidebarRightContext>(null);
 
-  const toggleLeft = () => {setIsLeftOpen((prev) => !prev)};
-  const toggleRight = () => setIsRightOpen((prev) => !prev);
+  const toggleLeft = () => setIsLeftOpen((prev) => !prev);
+  const toggleRight = () => {
+    console.log("toggleRight");
+    setIsRightOpen((prev) => !prev)
+  };
+  const openRight = () => setIsRightOpen(true);
+  const closeRight = () => setIsRightOpen(false);
+
 
   const value = useMemo(
     () => ({
@@ -20,13 +30,17 @@ export default function AdminLayoutProvider({ children }: Props) {
       isRightOpen,
       toggleLeft,
       toggleRight,
+      openRight,
+      closeRight,
       pageTitle,
       setPageTitle,
+      // sidebarRightContext,
+      // setSidebarRightContext,
     }),
-    [isLeftOpen, isRightOpen, pageTitle]
+    [isLeftOpen, isRightOpen, pageTitle ]
   );
 
-  console.log("PROVIDER left :", isLeftOpen)
+  // console.log("PROVIDER :", value)
 
   return (
     <AdminLayoutContext.Provider value={value} >

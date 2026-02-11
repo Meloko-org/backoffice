@@ -18,7 +18,7 @@ export default function AdminHeader() {
     pageTitle,
   } = useAdminLayout();
 
-console.log("HEADER left:", isLeftOpen);
+// console.log("HEADER");
 
   return (
     <header className="w-full flex justify-center items-center p-3">
@@ -39,7 +39,10 @@ console.log("HEADER left:", isLeftOpen);
           iconOn={<SidebarRightIco className="w-6 h-6" />}
           iconOff={<SidebarRightCollapseIco className="w-6 h-6" />}
           isOn={isRightOpen}
-          onClick={toggleRight}
+          onClick={() => {
+            console.log("SIDEBAR RIGHT BUTTON :", isRightOpen)
+            toggleRight();
+          }}
           ariaLabel="Toggle tools Panel"
           className="btn-sidebar ml-2"
         />

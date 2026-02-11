@@ -51,7 +51,7 @@ export default function AdminSidebar() {
 
 	const menu = useFilteredAdminMenu();
 
-	console.log("SIDEBAR isLeftOpen :", isLeftOpen)
+	// console.log("SIDEBAR")
 
   return (
     <aside

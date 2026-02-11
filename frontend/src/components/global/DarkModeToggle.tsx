@@ -24,8 +24,8 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className={`relative inline-flex items-center py-1.5 px-2 rounded-full transition-colors duration-300 focus:outline-none ${
-        isDarkMode ? 'bg-neutral-900 text-slate-400 focus-visible:ring-slate-500' : 'bg-gray-200 text-gray-700 focus-visible:ring-gray-300'
+      className={`relative inline-flex items-center py-1.5 px-2 rounded-full transition-colors duration-300 focus:outline-none cursor-pointer
+        ${ isDarkMode ? 'bg-neutral-900 text-slate-400 focus-visible:ring-slate-500' : 'bg-gray-200 text-gray-700 focus-visible:ring-gray-300'
       }`}
       role="switch"
       aria-checked={isDarkMode}

@@ -5,6 +5,9 @@ type AdminLayoutContextType = {
   isRightOpen: boolean;
   toggleLeft: () => void;
   toggleRight: () => void;
+  openRight: () => void;
+  closeRight: () => void;
+
   pageTitle: string | null;
   setPageTitle: (title: string | null) => void;
 };

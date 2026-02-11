@@ -54,6 +54,23 @@
     --sidebar-item-color: var(--color-text-light);
     --sidebar-item-active: var(--color-primary);
 
+    /* tableaux */
+    --table-bg: #ffffff;
+    --table-border: rgba(0, 0, 0, 0.08);
+
+    --table-head-bg: rgba(152, 182, 110, 0.5); /* primary dilué */
+    --table-head-text: #262E20;
+
+    --table-row-alt: rgba(0, 0, 0, 0.02);
+    --table-row-hover: rgba(0, 0, 0, 0.05);
+
+    --table-action-muted: rgba(0, 0, 0, 0.4);
+
+    --pagination-bg: rgba(152, 182, 110, 0.5);
+    --pagination-text: #262E20;
+    --pagination-bg-disabled: color-mix(in srgb, var(--pagination-bg) 60%, transparent);
+    --pagination-border: rgba(152, 182, 110, 0.5);
+
   }
 
   html.dark {
@@ -75,6 +92,23 @@
 
     --sidebar-item-color: var(--color-text-dark);
     --sidebar-item-active: var(--color-primary);
+
+    /* tableaux */ 
+    --table-bg: #1e1e1e;
+    --table-border: rgba(255, 255, 255, 0.08);
+
+    --table-head-bg: rgba(152, 182, 110, 0.3);
+    --table-head-text: #FCFFF0;
+
+    --table-row-alt: rgba(255, 255, 255, 0.03);
+    --table-row-hover: rgba(255, 255, 255, 0.07);
+
+    --table-action-muted: rgba(255, 255, 255, 0.5);
+
+    --pagination-bg: rgba(152, 182, 110, 0.3);
+    --pagination-text: #FCFFF0;
+    --pagination-bg-disabled: color-mix(in srgb, var(--pagination-bg) 60%, transparent);
+    --pagination-border: rgba(152, 182, 110, 0.3);
   }
 
   body {
@@ -138,6 +172,11 @@
 }
 
 
+
+
+
+
+
 @layer components {
   .btn-primary {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
@@ -169,6 +208,105 @@
     background-color: var(--btn-sidebar-bg-hover);
     color: var(--btn-sidebar-text-hover);
   }
+
+  .admin-table {
+    background-color: var(--table-bg);
+    border: 1px solid var(--table-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .admin-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .admin-table thead {
+    background-color: var(--table-head-bg);
+  }
+
+  .admin-table th {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--table-head-text);
+    border-bottom: 1px solid var(--table-border);
+  }
+
+  .admin-table tbody tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+  }
+
+  .admin-table tbody tr:hover {
+    background-color: var(--table-row-hover);
+  }
+
+  .admin-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--table-border);
+    vertical-align: middle;
+  }
+
+  .table-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .table-action-btn {
+    padding: 0.375rem;
+    border-radius: 0.375rem;
+    color: var(--table-action-muted);
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .table-action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  html.dark .table-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .table-action-btn.edit:hover {
+    color: var(--color-primary);
+  }
+
+  .table-action-btn.delete:hover {
+    color: var(--color-danger);
+  }
+
+  .table-pagination {
+    @apply flex items-center gap-2 mt-4;
+  }
+
+  .table-pagination-btn {
+    @apply px-3 h-9 rounded-md text-sm font-medium
+          flex items-center justify-center
+          transition disabled:cursor-not-allowed;
+    background-color: var(--pagination-bg);
+    color: var(--pagination-text);
+  }
+
+  .table-pagination-btn:hover:not(:disabled) {
+    opacity: 0.7;
+  }
+
+  .table-pagination-btn:disabled {
+    background-color: var(--pagination-bg-disabled);
+  }
+
+  .table-pagination-info {
+    @apply px-4 h-9 rounded-md text-sm font-medium
+          flex items-center justify-center;
+    background-color: var(--surface-bg);
+    color: var(--pagination-text);
+    border: 1px solid  var(--pagination-border);
+  }
+
 
 
 }

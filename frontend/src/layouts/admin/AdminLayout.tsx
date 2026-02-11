@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import AdminHeader from "../../components/admin/AdminHeader";
 import { useAdminLayout } from "./AdminLayoutContext";
-import AdminSidebarLeft from "../../components/admin/AdminSidebarLeft";
-import AdminSidebarRight from "../../components/admin/AdminSidebarRight";
+// import AdminSidebarRight from "../../../src/components/admin/AdminSidebarRight";
+import AdminSidebarRight from "./AdminSidebarRight";
 import AdminSidebar from "./AdminSidebar";
 
 
@@ -10,7 +10,7 @@ function AdminLayoutContent() {
 
   const { isLeftOpen, isRightOpen } = useAdminLayout() ;
 
-  console.log("LAYOUT left et right :", isLeftOpen, isRightOpen)
+  // console.log("ADMIN_LAYOUT")
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
