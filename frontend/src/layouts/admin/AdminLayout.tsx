@@ -29,7 +29,7 @@ function AdminLayoutContent() {
           transition-all duration-300 ease-in-out
           isolate
           ${isLeftOpen ? "ml-64" : "ml-16"}
-          ${isRightOpen ? "mr-64" : "mr-0"}
+          ${isRightOpen ? "mr-96" : "mr-0"}
         `}
         
         /**

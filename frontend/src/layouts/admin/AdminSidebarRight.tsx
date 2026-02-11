@@ -27,7 +27,7 @@ export default function AdminSidebarRight() {
   return (
     <aside
       className={`
-        fixed inset-y-0 right-0 z-10 w-64
+        fixed inset-y-0 right-0 z-10 w-96
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
       >
@@ -36,7 +36,7 @@ export default function AdminSidebarRight() {
 			</div>
 
 			<div>
-				<div>{infoContext && infoContext.title}</div>
+				<div className="text-center">{infoContext && infoContext.title}</div>
 				<div>
 					{content}
 				</div>

@@ -1,3 +1,5 @@
+import type { PaginationMeta } from "../../../types/global.types";
+
 export interface ProductCategory {
   _id: string;
   name: string;
@@ -14,12 +16,7 @@ export interface ProductCategory {
 
 export interface CategoryListResponse {
   items: ProductCategory[];
-  pagination: {
-    page: number;
-    limit: number;
-    totalItems: number;
-    totalPages: number;
-  }
+  pagination: PaginationMeta
 }
 
 export interface CategoryPayload {

@@ -1,8 +1,6 @@
 import { useState,  useMemo, type ReactNode } from "react";
 import { AdminLayoutContext } from "./AdminLayoutContext";
 
-// import type { SidebarRightContext } from "../../types/admin";
-
 type Props = {
   children: ReactNode;
 };
@@ -16,10 +14,7 @@ export default function AdminLayoutProvider({ children }: Props) {
   // const [ sidebarRightContext, setSidebarRightContext ] = useState<SidebarRightContext>(null);
 
   const toggleLeft = () => setIsLeftOpen((prev) => !prev);
-  const toggleRight = () => {
-    console.log("toggleRight");
-    setIsRightOpen((prev) => !prev)
-  };
+  const toggleRight = () => setIsRightOpen((prev) => !prev);
   const openRight = () => setIsRightOpen(true);
   const closeRight = () => setIsRightOpen(false);
 
@@ -34,8 +29,6 @@ export default function AdminLayoutProvider({ children }: Props) {
       closeRight,
       pageTitle,
       setPageTitle,
-      // sidebarRightContext,
-      // setSidebarRightContext,
     }),
     [isLeftOpen, isRightOpen, pageTitle ]
   );

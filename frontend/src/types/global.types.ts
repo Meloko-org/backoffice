@@ -1,3 +1,4 @@
+/* Reponse API */
 export type ApiResponse<T> =
   | ApiSuccessResponse<T>
   | ApiErrorResponse;
@@ -19,3 +20,12 @@ export type ApiError = {
   fieldErrors?: Record<string, string>;
   status?: number;
 };
+
+
+/* pagination */
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+}

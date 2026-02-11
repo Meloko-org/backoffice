@@ -24,7 +24,7 @@ export default function CategoryDetails({
   return (
     <div className="p-4 space-y-4 text-sm">
       {/* IMAGE */}
-      <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center">
+      <div className="w-full aspect-4/3 rounded-lg overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center">
         {hasImage ? (
           <img
             src={imageUrl!}

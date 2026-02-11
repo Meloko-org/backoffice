@@ -1,40 +1,47 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../api/categories.api";
-import { CategoryTable } from "../components/CategoryTable";
-import { Pagination } from "../../../components/global/Pagination";
-import type { CategoryListResponse, ProductCategory } from "../types/category";
+import type { ProductCategory } from "../types/category";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import type { ModelContext } from "../../../types/admin";
 import { useAdminLayout } from "../../../layouts/admin/AdminLayoutContext";
+import { DataListLayout } from "../../../components/data-table/DataListLayout";
+import { Pencil, Trash2 } from "lucide-react";
+import { useAdminList } from "../../../hooks/useAdminList";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
   useAdminPage("Liste des catégories")
   const { openRight, closeRight } = useAdminLayout()
 
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState<CategoryListResponse>();
-  const [loading, setLoading] = useState(false);
 
-  const fetchCategories = async () => {
-    setLoading(true);
-    const categories = await getCategories({ page, limit: 5 });
-    setData(categories)
-    setLoading(false);
-  };
+  /*
+    "Donne-moi une fonction qui retourne items + pagination,
+    je m’occupe du reste : page, search, sort, loading."
+  */
+  const {
+    items,
+    pagination,
+    loading,
+    page,
+    setPage,
+    search,
+    setSearch,
+    sortKey,
+    sortDirection,
+    handleSort,
+  } = useAdminList(getCategories);
 
-  useEffect(() => {
-    fetchCategories();
-  }, [page]);
+
+
 
 
   /* gère l'affichage de la cat dans la sidebarRight */ 
   const [ selectedCategory, setSelectedCategory ] = useState<ProductCategory | null>(null);
 
 
-  const infoContext = useMemo(() => {
+  const infoContext: ModelContext = useMemo(() => {
     if (!selectedCategory) return null;
 
     return {
@@ -62,6 +69,14 @@ export default function AdminCategoriesPage() {
 
   }
 
+
+  const handleSearch = (value: string) => {
+    setPage(1);
+    setSearch(value);
+  };
+
+
+
   useEffect(() => {
     return () => {
       closeRight();
@@ -72,32 +87,81 @@ export default function AdminCategoriesPage() {
 
   return (
     <>
-      <div className="p-8">
-        <div className="mx-auto max-w-4xl space-y-6">
-          <CategoryTable
-            categories={data?.items ?? []}
-            loading={loading}
-            onEdit={handleEditCategory}
-            onDelete={(cat) => console.log("delete", cat)}
-            onSelect={handleSelectCategory}
-          />
-        
-          <div className="flex flex-row justify-center">
-            <Pagination
-              page={page}
-              totalPages={data?.pagination.totalPages ?? 0}
-              onChange={setPage}
+
+      {items && (
+        <div className="p-8">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <DataListLayout
+              data={items}
+              pagination={pagination!}
+              paginationAlign="end"
+              loading={loading}
+
+              search={search}
+              onSearchChange={handleSearch}
+
+              sortKey={sortKey}
+              sortDirection={sortDirection}
+              onSort={handleSort}
+
+              getRowId={(cat) => cat._id}
+              onRowClick={handleSelectCategory}
+              onPageChange={setPage}
+              columns={[
+                { key: "name", label: "Nom", sortable: true },
+                { key: "slug", label: "Slug", sortable: true },
+                {
+                  key: "type",
+                  label: "Type",
+                  render: (cat) => cat.type?.name,
+                },
+                {
+                  key: "createdAt",
+                  label: "Créée le",
+                  sortable: true,
+                  render: (cat) =>
+                    new Date(cat.createdAt).toLocaleDateString(),
+                },
+                {
+                  key: "actions",
+                  label: "",
+                  render: (cat) => (
+                    <div className="table-actions">
+                      <button 
+                        className="table-action-btn edit" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log(cat)
+                          handleEditCategory(cat)
+                        }}
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button 
+                        className="table-action-btn delete" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteCategory(cat)
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ),
+                },
+              ]}
+              actions={
+                <button
+                  className="btn-primary"
+                  onClick={() => navigate("/admin/categories/create")}
+                >
+                  Créer une catégorie
+                </button>
+              }
             />
           </div>
         </div>
-      </div>
-
-      <button
-        className="btn-primary"
-        onClick={() => navigate("/admin/categories/create")}
-      >
-        Créer une catégorie
-      </button>
+      )}
 
     </>
   );

@@ -9,18 +9,29 @@ import type {
 const BASE_URL = "http://localhost:4000/admin/categories"
 
 
-export const getCategories = async(params: {
+export const getCategories = async (params: {
   page?: number;
   limit?: number;
+  search?: string;
+  sortKey?: string;
+  sortDirection?: "asc" | "desc";
 }): Promise<CategoryListResponse> => {
 
+  const query = new URLSearchParams({
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 10),
+    ...(params.search ? { search: params.search } : {}),
+    ...(params.sortKey ? { sortKey: params.sortKey } : {}),
+    ...(params.sortDirection ? { sortDirection: params.sortDirection } : {}),
+  });
+
   return apiFetch<CategoryListResponse>(
-    `${BASE_URL}/?page=${params.page}&limit=${params.limit}`, 
+    `${BASE_URL}/?${query.toString()}`,
     {
-      method: "GET"
+      method: "GET",
     }
-  )
-}
+  );
+};
 
 export const createCategory = async (payload: CategoryPayload): Promise<ProductCategory> => {
 
