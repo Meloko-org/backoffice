@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { DataTable, type Column, type SortDirection } from "./DataTable";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { DataTablePagination, type Align } from "./DataTablePagination";
-import type { PaginationMeta } from "../../types/global.types";
+import type { PaginationMeta } from "../../types/list.types";
 
 interface DataListLayoutProps<T> {
   data: T[];
@@ -18,6 +18,9 @@ interface DataListLayoutProps<T> {
   sortKey?: string;
   sortDirection?: SortDirection;
   onSort?: (key: string) => void;
+
+  limit: number;
+  onLimitChange: (limit: number) => void;
 
   showToolbar?: boolean;
   showPagination?: boolean;
@@ -44,6 +47,9 @@ export function DataListLayout<T>({
   sortDirection,
   onSort,
 
+  limit,
+  onLimitChange,
+
   showToolbar = true,
   showPagination = true,
   onPageChange,
@@ -51,6 +57,7 @@ export function DataListLayout<T>({
   onRowClick,
   actions,
 }: DataListLayoutProps<T>) {
+
   return (
     <div className="space-y-1">
       {showToolbar && (
@@ -58,6 +65,8 @@ export function DataListLayout<T>({
           search={search}
           onSearchChange={onSearchChange}
           actions={actions}
+          limit={limit}
+          onLimitChange={onLimitChange}
         />
       )}
 
@@ -75,7 +84,7 @@ export function DataListLayout<T>({
       {showPagination && pagination && onPageChange && (
         <DataTablePagination
           page={pagination.page}
-          totalPages={pagination.totalPages}
+          totalPages={pagination.pages}
           onChange={onPageChange}
           align={paginationAlign}
         />

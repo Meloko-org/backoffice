@@ -1,8 +1,8 @@
-const { getTypesNames } = require("../services/types.services")
+const { getTypeNames } = require("../services/types.services")
 
 const typeNames = async (req, res, next) => {
 	try {
-		const types = await getTypesNames();
+		const types = await getTypeNames();
 
 		console.log(types)
 

@@ -1,4 +1,5 @@
 import { apiFetch } from "../../../lib/apiFetch";
+import type { ListParams, ListResult } from "../../../types/list.types";
 import type {
   ProductCategory,
   CategoryListResponse,
@@ -6,24 +7,38 @@ import type {
   UpdateCategoryPayload,
 } from "../types/category";
 
-const BASE_URL = "http://localhost:4000/admin/categories"
+const BASE_URL = "http://localhost:4000/admin/categories";
 
 
+/* getCategories travaille avec les types backend purs */
 export const getCategories = async (params: {
   page?: number;
   limit?: number;
   search?: string;
   sortKey?: string;
   sortDirection?: "asc" | "desc";
+  filters?: Record<string, any>;
 }): Promise<CategoryListResponse> => {
 
-  const query = new URLSearchParams({
+  const queryObject: Record<string, string> = {
     page: String(params.page ?? 1),
     limit: String(params.limit ?? 10),
-    ...(params.search ? { search: params.search } : {}),
-    ...(params.sortKey ? { sortKey: params.sortKey } : {}),
-    ...(params.sortDirection ? { sortDirection: params.sortDirection } : {}),
-  });
+  };
+
+  if (params.search) queryObject.search = params.search;
+  if (params.sortKey) queryObject.sortKey = params.sortKey;
+  if (params.sortDirection) queryObject.sortDirection = params.sortDirection;
+
+  // 🔥 Ici on injecte les filtres dynamiques
+  if (params.filters) {
+    Object.entries(params.filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryObject[key] = String(value);
+      }
+    });
+  }
+
+  const query = new URLSearchParams(queryObject);
 
   return apiFetch<CategoryListResponse>(
     `${BASE_URL}/?${query.toString()}`,
@@ -32,6 +47,27 @@ export const getCategories = async (params: {
     }
   );
 };
+
+/* getCategoriesList est l'adaptateur qui fait le lien entre getCategories et useAdminList */
+/* elle transforme les types backend en types interne standard */
+export const getCategoriesList = async (
+  params: ListParams
+): Promise<ListResult<ProductCategory>> => {
+
+  const res = await getCategories(params);
+
+  return {
+    items: res.items,
+    pagination: {
+      page: res.pagination.page,
+      limit: res.pagination.limit,
+      total: res.pagination.totalItems,
+      pages: res.pagination.totalPages,
+    },
+  };
+};
+
+
 
 export const createCategory = async (payload: CategoryPayload): Promise<ProductCategory> => {
 

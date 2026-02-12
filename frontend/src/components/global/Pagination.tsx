@@ -1,3 +1,5 @@
+/* composant remplacé par DataTablePagination */ 
+
 interface Props {
   page: number;
   totalPages: number;

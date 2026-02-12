@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCategories } from "../api/categories.api";
+import { getCategoriesList } from "../api/categories.api";
 import type { ProductCategory } from "../types/category";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
@@ -9,11 +9,22 @@ import { useAdminLayout } from "../../../layouts/admin/AdminLayoutContext";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { Pencil, Trash2 } from "lucide-react";
 import { useAdminList } from "../../../hooks/useAdminList";
+import { getTypeNames } from "../../types/api/types.api";
+import type { TypeForSelect } from "../../types/types/type";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
   useAdminPage("Liste des catégories")
   const { openRight, closeRight } = useAdminLayout()
+
+
+  const [types, setTypes] = useState<TypeForSelect[]>([]);
+
+  useEffect(() => {
+    getTypeNames().then(setTypes)
+  }, [])
+
+  console.log("les types :", types)
 
 
   /*
@@ -30,8 +41,12 @@ export default function AdminCategoriesPage() {
     setSearch,
     sortKey,
     sortDirection,
+    filters,
+    setFilters,
+    limit,
+    setLimit,
     handleSort,
-  } = useAdminList(getCategories);
+  } = useAdminList(getCategoriesList);
 
 
 
@@ -39,7 +54,6 @@ export default function AdminCategoriesPage() {
 
   /* gère l'affichage de la cat dans la sidebarRight */ 
   const [ selectedCategory, setSelectedCategory ] = useState<ProductCategory | null>(null);
-
 
   const infoContext: ModelContext = useMemo(() => {
     if (!selectedCategory) return null;
@@ -84,6 +98,7 @@ export default function AdminCategoriesPage() {
   }, []);
 
 	// console.log("ADMIN_CATEGORIES_PAGE")
+  console.log("PAGE FILTERS:", filters);
 
   return (
     <>
@@ -103,6 +118,9 @@ export default function AdminCategoriesPage() {
               sortKey={sortKey}
               sortDirection={sortDirection}
               onSort={handleSort}
+
+              limit={limit}
+              onLimitChange={setLimit}
 
               getRowId={(cat) => cat._id}
               onRowClick={handleSelectCategory}
@@ -151,12 +169,35 @@ export default function AdminCategoriesPage() {
                 },
               ]}
               actions={
-                <button
-                  className="btn-primary"
-                  onClick={() => navigate("/admin/categories/create")}
-                >
-                  Créer une catégorie
-                </button>
+                <>
+                  <select
+                    value={filters.type || ""}
+                    onChange={(e) => {
+                      console.log("SELECT VALUE:", e.target.value);
+                      const value = e.target.value;
+
+                      setFilters((prev) => ({
+                        ...prev,
+                        type: value || undefined,
+                      }));
+                    }}
+                    className="admin-input w-48"
+                  >
+                    <option value="">Tous les types</option>
+
+                    {types?.map((type) => (
+                      <option key={type._id} value={type._id}>
+                        {type.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    className="btn-primary"
+                    onClick={() => navigate("/admin/categories/create")}
+                  >
+                    Créer une catégorie
+                  </button>
+                </>
               }
             />
           </div>

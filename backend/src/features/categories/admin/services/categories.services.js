@@ -7,24 +7,46 @@ const mongoose = require("mongoose");
 async function getCategories({
   page = 1,
   limit = 20,
-  sort = "createdAt",
-  order = "desc",
+  search,
+  sortKey = "createdAt",
+  sortDirection = "desc",
+  type,
 }) {
+
   const skip = (page - 1) * limit;
-  const sortOrder = order === "asc" ? 1 : -1;
+
+  const filter = {};
+
+  // 🔎 SEARCH
+  if (search) {
+    filter.name = {
+      $regex: search,
+      $options: "i", // insensible à la casse
+    };
+  }
+
+  if (type) {
+    filter.type = type;
+  }
+
+  // 🔀 SORT
+  const sort = {
+    [sortKey]: sortDirection === "asc" ? 1 : -1,
+  };
+
 
   const [items, totalItems] = await Promise.all([
-    ProductCategory.find()
+    ProductCategory.find(filter)
       .populate({
         path: "type",
         select: "name"
       })
-      .sort({ [sort]: sortOrder })
+      .sort(sort)
       .skip(skip)
       .limit(limit)
       .lean(),
 
-    ProductCategory.countDocuments(),
+    ProductCategory.countDocuments(filter),
   ]);
 
 

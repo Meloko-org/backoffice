@@ -14,8 +14,10 @@ const listCategories = async (req, res, next) => {
     const {
       page = 1,
       limit = 20,
-      sort,
-      order,
+      search,
+      sortKey = "createdAt",
+      sortDirection = "desc",
+      type,
     } = req.query;
 
     /* garantir que page et limit sont bien des number */
@@ -25,8 +27,10 @@ const listCategories = async (req, res, next) => {
     const result = await getCategories({
       page: Number(pageNumber),
       limit: Number(limitNumber),
-      sort,
-      order,
+      search,
+      type,
+      sortKey,
+      sortDirection,
     });
 
     res.json({

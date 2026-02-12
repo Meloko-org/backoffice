@@ -1,3 +1,5 @@
+/* composant remplacé par DataTable */ 
+
 import { Pencil, Trash2 } from "lucide-react";
 import type { ProductCategory } from "../types/category";
 
