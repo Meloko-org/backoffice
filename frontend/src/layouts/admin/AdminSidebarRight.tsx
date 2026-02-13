@@ -1,6 +1,5 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
 import { useInfoLayout } from "./AdminInfoContext";
-// import { useAdminLayout } from "./AdminLayoutContext";
 
 
 export default function AdminSidebarRight() {

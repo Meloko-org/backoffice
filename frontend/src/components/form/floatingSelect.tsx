@@ -26,12 +26,10 @@ export function FloatingSelect({
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         className={`
-          peer w-full rounded-md border bg-white px-3 pt-5 pb-2 text-sm
-          focus:outline-none focus:ring-2
-          ${error
-            ? "border-red-500 focus:ring-red-500"
-            : "border-gray-300 focus:ring-indigo-500"}
-          ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""}
+          peer w-full px-3 pt-5 pb-2 text-sm
+          focus:outline-none focus:ring-0
+          ${error && "border-red-500 focus:ring-red-500"}
+          ${disabled ? "cursor-not-allowed" : ""}
         `}
       >
         <option value="" />
@@ -44,7 +42,7 @@ export function FloatingSelect({
 
       <label
         className={`
-          absolute left-3 transition-all pointer-events-none text-gray-500
+          absolute left-3 transition-all pointer-events-none text-neutral-500
           ${
             hasValue
               ? "top-1 text-sm"
@@ -52,7 +50,7 @@ export function FloatingSelect({
           }
           peer-focus:top-1
           peer-focus:text-sm
-          peer-focus:text-indigo-600
+          peer-focus:text-primary
         `}
       >
         {label}{required && <span className="text-red-500 ml-1">*</span>}

@@ -19,7 +19,7 @@ export function Select({
 }: SelectProps) {
   return (
     <div className="space-y-1">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-neutral-500">
         {label}{required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
@@ -28,12 +28,10 @@ export function Select({
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         className={`
-          w-full rounded-md border px-3 py-2 text-sm bg-white
-          focus:outline-none focus:ring-2
-          ${error
-            ? "border-red-500 focus:ring-red-500"
-            : "border-gray-300 focus:ring-indigo-500"}
-          ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""}
+          w-full px-3 py-2 text-sm 
+          focus:outline-none focus:ring-0
+          ${error && "border-red-500 focus:ring-red-500"}
+          ${disabled ? "cursor-not-allowed" : ""}
         `}
       >
         <option value="">— Sélectionner —</option>

@@ -5,18 +5,21 @@
 ========================= */
 @theme {
   --color-bg-light: var(--color-neutral-100);
+  --color-sub-bg-light: var(--color-neutral-200);
   --color-sidebar-bg-light: var(--color-neutral-200);
+
   --color-bg-dark: #212121;
+  --color-sub-bg-dark: #181818;
   --color-sidebar-bg-dark: #181818;
 
-  --color-text-light: #262E20;
-  --color-text-dark: #FCFFF0;
+  --color-text-light: #262E20;    /* rgb(38, 46, 32) */
+  --color-text-dark: #FCFFF0;     /* rgb(255, 255, 240) */
 
-  --color-primary: #98B66E;
-  --color-secondary: #262E20;
-  --color-danger: #942911;
-  --color-warning: #D16014;
-  --color-success: #0081A7;
+  --color-primary: #98B66E;     /* rgb(152, 182, 110) */
+  --color-secondary: #262E20;   /* rgb(38, 46, 32) */
+  --color-danger: #942911;      /* rgb(148, 41, 17) */
+  --color-warning: #D16014;     /* rgb(209, 96, 20) */
+  --color-success: #0081A7;     /* rgb(0, 129, 167) */
 
 }
 
@@ -29,6 +32,9 @@
     color: var(--color-text-light);
     --app-surface-bg: var(--color-bg-light);
     --app-sidebar-bg: var(--color-sidebar-bg-light);
+
+    --p-label-color: rgb(38, 46, 32, 0.5);
+    --p-info-color: var(--color-text-light);
 
     /* ---- bouton invariant selon le mode ---- */
     /* Bouton principal */
@@ -43,7 +49,11 @@
     /* ---- bouton variants selon le mode --- */ 
     /* Bouton formulaire */
     --btn-form-bg: #e5e7eb;
-    --btn-form-text: #111827;
+    --form-text: var( --color-text-light);
+    --form-section-bg: var(--color-sub-bg-light);
+    --form-section-border: rgba(0, 0, 0, 0.08);
+    --form-input-bg: var(--color-bg-light);
+    
 
     /* Bouton sidebar */
     --btn-sidebar-bg: var(--color-sidebar-bg-light);
@@ -71,18 +81,28 @@
     --pagination-bg-disabled: color-mix(in srgb, var(--pagination-bg) 60%, transparent);
     --pagination-border: rgba(152, 182, 110, 0.5);
 
+    --input-border: rgb(38, 46, 32, 0.2);
+    --input-border-focus: var(--color-primary;);
+
   }
 
   html.dark {
     background-color: var(--color-bg-dark);
     color: var(--color-text-dark);
+
     --app-surface-bg: var(--color-bg-dark);
     --app-sidebar-bg: var(--color-sidebar-bg-dark);
+
+    --p-label-color: rgb(255, 255, 240, 0.5);
+    --p-info-color: var(--color-text-dark);
 
 
      /* Bouton formulaire */
     --btn-form-bg: #e5e7eb;
-    --btn-form-text: #111827;
+    --form-text: var( --color-text-dark);
+    --form-section-bg: var(--color-sub-bg-dark);
+    --form-section-border: rgba(255, 255, 255, 0.08); 
+    --form-input-bg: var(--color-bg-dark);
 
     /* Bouton sidebar */
     --btn-sidebar-bg: var(--color-neutral-900);
@@ -107,8 +127,16 @@
 
     --pagination-bg: rgba(152, 182, 110, 0.3);
     --pagination-text: #FCFFF0;
-    --pagination-bg-disabled: color-mix(in srgb, var(--pagination-bg) 60%, transparent);
+    --pagination-bg-disabled: color-mix(in srgb, var(--pagination-bg) 30%, transparent);
     --pagination-border: rgba(152, 182, 110, 0.3);
+
+    --input-border: rgb(255, 255, 255, 0.2);
+    --input-border-focus: var(--color-primary;);
+  }
+
+  html.dark select option {
+    background-color: #1e1e1e;
+    color: #FCFFF0;
   }
 
   body {
@@ -160,15 +188,83 @@
   input,
   select,
   textarea {
-    @apply px-3 py-2 rounded-md border border-black/10 dark:border-white/10
-           bg-transparent outline-none;
+    @apply px-3 py-2 rounded-md border bg-transparent outline-none;
   }
 
-  input:focus,
-  select:focus,
-  textarea:focus {
+  /*  ----------- H1, H2, H3, H4, H5, H6 -------------------------- */
+  /* Light mode */
+  html:not(.dark) h1, h2, h3, h4, h5, h6 {
+    color: rgb(38, 46, 32, 0.7)
+  }
+  /* Dark mode */  
+  html.dark h1, h2, h3, h4, h5, h6 {
+    color: rgb(152, 182, 110, 0.5)
+  }
+
+
+  /*  ----------- INPUT, SELECT, TEXTAREA -------------------------- */
+  /* communs */
+  html.dark input:focus,
+  html.dark select:focus,
+  html.dark textarea:focus {
     border-color: var(--color-primary);
   }
+
+  /* Light mode */
+  html:not(.dark) input,
+  html:not(.dark) select,
+  html:not(.dark) textarea {
+    border-color: var(--table-border);
+  }
+
+
+  
+  /* Dark mode */  
+  html.dark input,
+  html.dark select,
+  html.dark textarea {
+    border-color: var(--table-border);
+  }
+
+  
+
+  /*  -----------  FORM : INPUT, SELECT, TEXTAREA -------------------------- */
+  /* communs */
+  html.dark form input:focus,
+  html.dark form select:focus,
+  html.dark form textarea:focus {
+    border-color: var(--color-primary);
+  } 
+
+  /* Light mode */
+  html:not(.dark) form input,
+  html:not(.dark) form select,
+  html:not(.dark) form textarea {
+    background-color: var(--form-input-bg);
+    border-color: var(--table-border);
+  }
+
+  html:not(.dark) form input:disabled,
+  html:not(.dark) form select:disabled,
+  html:not(.dark) form textarea:disabled {
+    background-color: transparent;
+  }
+
+  /* Dark mode */ 
+  html.dark form input,
+  html.dark form select,
+  html.dark form textarea {
+    background-color: var(--form-input-bg);
+    border-color: var(--table-border);
+  }
+
+  html.dark form input:disabled,
+  html.dark form select:disabled,
+  html.dark form textarea:disabled {
+    background-color: transparent;
+  }
+
+  
 }
 
 
@@ -178,6 +274,29 @@
 
 
 @layer components {
+
+  .no-pict {
+    background-color: var(--app-surface-bg);
+  }
+
+  .slug {
+    background-color: var(--app-surface-bg);
+  }
+
+  .detail-label {
+    color: var(--p-label-color);
+  }
+
+  .detail-info {
+    color: var(--p-info-color);
+  }
+
+  .form-section { @apply border rounded-lg shadow-sm p-1;
+    background-color: var(--form-section-bg);
+    border-color: var(--form-section-border);
+    color: var(--form-text);
+  } 
+
   .btn-primary {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
            transition
@@ -185,6 +304,10 @@
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
   }
+
+  /* .btn-primary:hover {
+    background-color: var(--btn-primary-bg/50);
+  } */
 
   .btn-danger {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
@@ -302,7 +425,7 @@
   .table-pagination-info {
     @apply px-4 h-9 rounded-md text-sm font-medium
           flex items-center justify-center;
-    background-color: var(--surface-bg);
+    background-color: var(--app-surface-bg);
     color: var(--pagination-text);
     border: 1px solid  var(--pagination-border);
   }

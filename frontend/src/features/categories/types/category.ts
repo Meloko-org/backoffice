@@ -4,12 +4,12 @@ export interface ProductCategory {
   _id: string;
   name: string;
   slug: string;
-  description?: string;
-  image?: string | null;
+  description: string | null;
+  image: string | null;
   type: {
     _id: string;
     name: string;
-  } // ObjectId
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -21,19 +21,16 @@ export interface CategoryListResponse {
 
 export interface CategoryPayload {
   name: string;
-  description?: string;
-  image?: string | null;
+  description: string;
+  image: string | null;
   type: string;
 }
 
 export interface UpdateCategoryPayload extends CategoryPayload {}
 
 export interface CategoryFormValues {
-  values: {
-    name: string;
-    description: string;
-    image: string;
-    type: string;
-  } | undefined;
-  
+  name: string;
+  description: string;
+  image: string | null;
+  type: string;
 }

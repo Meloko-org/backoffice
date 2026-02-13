@@ -7,8 +7,8 @@ import type {
   UpdateCategoryPayload,
 } from "../types/category";
 
-const BASE_URL = "http://localhost:4000/admin/categories";
-
+const API_ROOT = import.meta.env.VITE_API_ROOT;
+const BASE_URL = `${API_ROOT}/admin/categories`;
 
 /* getCategories travaille avec les types backend purs */
 export const getCategories = async (params: {
@@ -66,6 +66,8 @@ export const getCategoriesList = async (
     },
   };
 };
+
+
 
 
 

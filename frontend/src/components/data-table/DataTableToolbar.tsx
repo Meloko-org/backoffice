@@ -24,26 +24,35 @@ export const DataTableToolbar = ({
           placeholder="Rechercher..."
           value={search ?? ""}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="admin-input w-64"
+          className="w-64"
         />
       ) : (
         <div />
       )}
 
-      <label htmlFor="selector" >nombre</label>
-      <select
-        id="selector"
-        value={limit}
-        onChange={(e) => onLimitChange?.(Number(e.target.value))}
-        className="admin-input w-24"
-      >
-        <option value={5}>5</option>
-        <option value={10}>10</option>
-        <option value={20}>20</option>
-        <option value={50}>50</option>
-      </select>
+      <div className="flex gap-1">
+        <label htmlFor="selector" className="leading-3 text-sm text-right flex flex-col justify-center">
+          <span className="block">nombre</span>
+          <span className="block">par page</span>
+        </label>
+        <select
+          id="selector"
+          value={limit}
+          onChange={(e) => onLimitChange?.(Number(e.target.value))}
+          className=" w-20"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+        </select>
+      </div>
 
-      {actions}
+      <div className="grow flex justify-between">
+        {actions}
+      </div>
+
+      
     </div>
   );
 };

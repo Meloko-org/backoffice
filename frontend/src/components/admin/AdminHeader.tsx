@@ -53,7 +53,7 @@ export default function AdminHeader() {
         <div className="flex grow justify-center">
           <div className="flex">
             
-            <h1 className="ml-2 text-xl font-bold text-gray-800 dark:text-white">{pageTitle}</h1>
+            <h1>{pageTitle}</h1>
           </div>
         </div>
           <div className="mr-5">

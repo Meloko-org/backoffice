@@ -3,31 +3,18 @@ import type { TypeForSelect } from "../types/type";
 
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
-const BASE_URL = `${API_ROOT}/admin/types/names`;
-// const BASE_URL = "http://localhost:4000/admin/types";
-
-// export async function getTypeNames(): Promise<ApiResponse<Type[]>> {
-//   const res = await fetch(`${BASE_URL}/names`);
-//   return res.json();
-// }
+const BASE_URL = `${API_ROOT}/admin/types`;
 
 
 export const getTypeNames = async (): Promise<TypeForSelect[]> => {
 
   return apiFetch<TypeForSelect[]>(
-    `${BASE_URL}`, 
+    `${BASE_URL}/names`, 
     {
       method: 'GET'
     }
   )
 }
 
-// export const getTypeNamesList = async (): Promise<TypeForSelect> => {
 
-//   const res = await getTypeNames();
-
-//   return {
-//     items: res.items,
-//   }
-// }
 

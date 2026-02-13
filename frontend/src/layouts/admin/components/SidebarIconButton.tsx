@@ -64,8 +64,7 @@ export default function SidebarIconButton({
 						fixed z-1000
 						whitespace-nowrap
 						rounded-md px-2 py-1 text-sm
-						dark:bg-black dark:text-white
-						bg-white text-black
+						bg-black text-white
 						shadow-lg
 					"
 					style={{ 

@@ -14,7 +14,10 @@ import type { TypeForSelect } from "../../types/types/type";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
+
+  // définit le titre de la page pour AdminHeader
   useAdminPage("Liste des catégories")
+  
   const { openRight, closeRight } = useAdminLayout()
 
 
@@ -71,11 +74,13 @@ export default function AdminCategoriesPage() {
 
 
   const handleSelectCategory = (category: ProductCategory) => {
+    console.log("selectedCat :", selectedCategory)
     setSelectedCategory(category)
     openRight();
   }
 
   const handleEditCategory = (category: ProductCategory) => {
+    console.log("edit cat :", category)
     navigate(`/admin/categories/${category._id}/edit`)
   }
 
@@ -98,7 +103,6 @@ export default function AdminCategoriesPage() {
   }, []);
 
 	// console.log("ADMIN_CATEGORIES_PAGE")
-  console.log("PAGE FILTERS:", filters);
 
   return (
     <>
@@ -109,7 +113,7 @@ export default function AdminCategoriesPage() {
             <DataListLayout
               data={items}
               pagination={pagination!}
-              paginationAlign="end"
+              paginationAlign="center"
               loading={loading}
 
               search={search}
@@ -173,7 +177,6 @@ export default function AdminCategoriesPage() {
                   <select
                     value={filters.type || ""}
                     onChange={(e) => {
-                      console.log("SELECT VALUE:", e.target.value);
                       const value = e.target.value;
 
                       setFilters((prev) => ({
@@ -181,7 +184,7 @@ export default function AdminCategoriesPage() {
                         type: value || undefined,
                       }));
                     }}
-                    className="admin-input w-48"
+                    className="w-48"
                   >
                     <option value="">Tous les types</option>
 

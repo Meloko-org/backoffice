@@ -8,15 +8,7 @@ export type AdminRole =
   | "dev";
 
 
-// export type SidebarRightContext =
-//   | { 
-//       type: "category"; 
-//       title: string;
-//       data: ProductCategory;
-//       onEdit?: (category: ProductCategory) => void;
-//       onDelete?: (category: ProductCategory) => void;
-//     }
-//   | null;
+
 
 export type ModelContext =
   | { 

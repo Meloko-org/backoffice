@@ -24,7 +24,7 @@ export default function CategoryDetails({
   return (
     <div className="p-4 space-y-4 text-sm">
       {/* IMAGE */}
-      <div className="w-full aspect-4/3 rounded-lg overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center">
+      <div className="no-pict w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
         {hasImage ? (
           <img
             src={imageUrl!}
@@ -42,36 +42,36 @@ export default function CategoryDetails({
       {/* INFOS */}
       <div className="space-y-2">
         <div>
-          <p className="text-xs uppercase tracking-wide text-neutral-400">
+          <p className="detail-label text-xs uppercase tracking-wide">
             Nom
           </p>
-          <p className="font-medium">{category.name}</p>
+          <p className="detail-info font-medium">{category.name}</p>
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-wide text-neutral-400">
+          <p className="detail-label text-xs uppercase tracking-wide ">
             Slug
           </p>
-          <p className="font-mono text-xs bg-black/5 dark:bg-white/5 px-2 py-1 rounded inline-block">
+          <p className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
             {category.slug}
           </p>
         </div>
 
         {category.type?.name && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-neutral-400">
+            <p className="detail-label text-xs uppercase tracking-wide">
               Type
             </p>
-            <p>{category.type.name}</p>
+            <p className="detail-info ">{category.type.name}</p>
           </div>
         )}
 
         {category.description && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-neutral-400">
+            <p className="detail-label text-xs uppercase tracking-wide">
               Description
             </p>
-            <p className="leading-relaxed text-neutral-700 dark:text-neutral-300">
+            <p className="detail-info leading-relaxed">
               {category.description}
             </p>
           </div>

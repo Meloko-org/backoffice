@@ -14,12 +14,12 @@ export default function FormSection({
 	
   return (
     <div className={`
-      bg-white rounded-lg shadow-sm border p-1
+      form-section  
       ${globalError ? "border-red-400" : ""}
     `}>
 
       <div className="p-5 space-y-4">
-        <h2 className="text-lg font-semibold text-gray-800">
+        <h2>
           {title}
         </h2>
         {children}
