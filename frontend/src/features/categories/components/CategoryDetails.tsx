@@ -1,3 +1,5 @@
+import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import { deleteCategory } from "../api/categories.api";
 import type { ProductCategory } from "../types/category";
 import { Pencil, Trash2, ImageOff } from "lucide-react";
 
@@ -17,9 +19,21 @@ export default function CategoryDetails({
 
 	if (!category) return null;
 
+  const { confirm } = useConfirm();
+
 
 	const imageUrl = category.image; 
   const hasImage = Boolean(imageUrl);
+
+  const handleDelete = () => {
+    confirm({
+      title: "Supprimer la catégorie",
+      description: "Cette action est irréversible.",
+      onConfirm: async () => {
+        await deleteCategory(category._id);
+      },
+    });
+  };
 
   return (
     <div className="p-4 space-y-4 text-sm">
@@ -93,7 +107,7 @@ export default function CategoryDetails({
 
           {onDelete && (
             <button
-              onClick={() => onDelete(category)}
+              onClick={handleDelete}
               className="flex-1 btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
             >
               <Trash2 className="w-4 h-4" />

@@ -275,6 +275,10 @@
 
 @layer components {
 
+  .confirm-panel {
+    background-color: var(--app-surface-bg);
+  }
+
   .no-pict {
     background-color: var(--app-surface-bg);
   }

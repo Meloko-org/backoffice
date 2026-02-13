@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCategoriesList } from "../api/categories.api";
+import { deleteCategory, getCategoriesList } from "../api/categories.api";
 import type { ProductCategory } from "../types/category";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
@@ -11,6 +11,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useAdminList } from "../../../hooks/useAdminList";
 import { getTypeNames } from "../../types/api/types.api";
 import type { TypeForSelect } from "../../types/types/type";
+import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export default function AdminCategoriesPage() {
   useAdminPage("Liste des catégories")
   
   const { openRight, closeRight } = useAdminLayout()
+  const { confirm } = useConfirm();
 
 
   const [types, setTypes] = useState<TypeForSelect[]>([]);
@@ -85,7 +87,15 @@ export default function AdminCategoriesPage() {
   }
 
   const handleDeleteCategory = (category: ProductCategory) => {
-
+    setSelectedCategory(category)
+    openRight();
+    confirm({
+      title: "Supprimer la catégorie",
+      description: "Cette action est irréversible.",
+      onConfirm: async () => {
+        await deleteCategory(category._id);
+      },
+    });
   }
 
 

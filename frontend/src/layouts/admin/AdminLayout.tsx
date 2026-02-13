@@ -4,11 +4,14 @@ import { useAdminLayout } from "./AdminLayoutContext";
 // import AdminSidebarRight from "../../../src/components/admin/AdminSidebarRight";
 import AdminSidebarRight from "./AdminSidebarRight";
 import AdminSidebar from "./AdminSidebar";
+import { ConfirmProvider } from "./providers/ConfirmProvider";
+import { useConfirm } from "./contexts/ConfirmContext";
 
 
 function AdminLayoutContent() {
 
-  const { isLeftOpen, isRightOpen } = useAdminLayout() ;
+  const { isLeftOpen, isRightOpen } = useAdminLayout();
+  const { isOpen } = useConfirm();
 
   // console.log("ADMIN_LAYOUT")
 
@@ -45,12 +48,19 @@ function AdminLayoutContent() {
         </main>
       </div>
 
+      {/* on rajoute un overlay sur tout l'écran pour empécher d'interagir quand confirmPanel est ouvert */}
+      {isOpen && (
+        <div className="fixed inset-0 z-40 bg-black/50" />
+      )}
+
     </div>
   );
 }
 
 export default function AdminLayout() {
   return (
-    <AdminLayoutContent />
+    <ConfirmProvider>
+      <AdminLayoutContent />
+    </ConfirmProvider>
   );
 }
