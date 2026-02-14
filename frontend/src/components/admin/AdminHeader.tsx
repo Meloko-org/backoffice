@@ -5,7 +5,7 @@ import { SidebarRightIco } from "./icons/sideBarRight";
 import { SidebarRightCollapseIco } from "./icons/sideBarRightCollapse";
 import DarkModeToggle from "../global/DarkModeToggle";
 
-import { useAdminLayout } from "../../layouts/admin/AdminLayoutContext";
+import { useAdminLayout } from "../../layouts/admin/contexts/AdminLayoutContext";
 
 
 export default function AdminHeader() {

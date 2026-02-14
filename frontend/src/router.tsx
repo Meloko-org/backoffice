@@ -12,7 +12,7 @@ import MarketsListPage from "./features/markets/pages/MarketsListPage";
 import AdminCategoriesPage from "./features/categories/pages/AdminCategoriesPage";
 import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
 import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
-import AdminLayoutProvider from "../src/layouts/admin/AdminLayoutProvider";
+import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
 import AdminInfoProvider from "./layouts/admin/AdminInfoProvider";
 

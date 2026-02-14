@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAdminLayout } from "./AdminLayoutContext";
+import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import SidebarIconButton from "./components/SidebarIconButton";
 import type { AdminMenuItem } from "./config/adminMenu"
 import { adminMenu } from "./config/adminMenu";

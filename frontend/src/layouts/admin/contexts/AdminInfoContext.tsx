@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { ModelContext } from "../../types/admin";
+import type { ModelContext } from "../../../types/admin";
 
 type AdminInfoContextType = {
 	infoContext: ModelContext;

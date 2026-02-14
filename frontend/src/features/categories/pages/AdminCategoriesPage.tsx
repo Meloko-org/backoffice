@@ -5,7 +5,7 @@ import type { ProductCategory } from "../types/category";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import type { ModelContext } from "../../../types/admin";
-import { useAdminLayout } from "../../../layouts/admin/AdminLayoutContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { Pencil, Trash2 } from "lucide-react";
 import { useAdminList } from "../../../hooks/useAdminList";

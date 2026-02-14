@@ -1,5 +1,5 @@
 import { useState,  useMemo, type ReactNode } from "react";
-import { AdminLayoutContext } from "./AdminLayoutContext";
+import { AdminLayoutContext } from "../contexts/AdminLayoutContext";
 
 type Props = {
   children: ReactNode;

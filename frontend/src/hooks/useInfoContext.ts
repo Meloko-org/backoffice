@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useInfoLayout } from "../layouts/admin/AdminInfoContext";
+import { useInfoLayout } from "../layouts/admin/contexts/AdminInfoContext";
 import type { ModelContext } from "../types/admin";
 
 

@@ -1,5 +1,5 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
-import { useInfoLayout } from "./AdminInfoContext";
+import { useInfoLayout } from "./contexts/AdminInfoContext";
 import { useConfirm } from "./contexts/ConfirmContext";
 
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAdminLayout } from "../layouts/admin/AdminLayoutContext";
+import { useAdminLayout } from "../layouts/admin/contexts/AdminLayoutContext";
 
 export function useAdminPage(title: string) {
 	const { setPageTitle } = useAdminLayout();
