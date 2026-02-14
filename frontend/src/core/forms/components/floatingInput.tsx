@@ -5,6 +5,7 @@ type FloatingInputProps = {
   required?: boolean;
   disabled?: boolean;
   error?: string;
+  onBlur?: () => void;
 }
 
 export default function FloatingInput({
@@ -14,6 +15,7 @@ export default function FloatingInput({
   required,
   disabled,
   error,
+  onBlur,
 }: FloatingInputProps) {
 
   return (
@@ -23,6 +25,7 @@ export default function FloatingInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder=" "
         disabled={disabled}
+        onBlur={onBlur}
         className={`
             peer w-full pr-3 pt-5 pb-2 text-sm pl-4
             focus:outline-none focus:ring-0 

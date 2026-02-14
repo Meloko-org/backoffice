@@ -1,8 +1,8 @@
-import FloatingInput from "../../../components/form/floatingInput";
-import { FloatingSelect } from "../../../components/form/floatingSelect";
-import FormSection from "../../../components/form/FormSection";
-import { Input } from "../../../components/form/input";
-import { Select } from "../../../components/form/select";
+import FloatingInput from "../../../core/forms/components/floatingInput";
+import { FloatingSelect } from "../../../core/forms/components/floatingSelect";
+import FormSection from "../../../core/forms/layout/FormSection";
+import Input  from "../../../core/forms/components/input";
+import { Select } from "../../../core/forms/components/select";
 import type { FormField } from "../../../types/form/fieldConfig.type";
 import type { ApiError } from "../../../types/global.types";
 

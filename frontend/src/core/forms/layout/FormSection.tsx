@@ -1,4 +1,4 @@
-import type { ApiError } from "../../types/global.types";
+import type { ApiError } from "../../../types/global.types";
 
 type FormSectionProps = {
 	title: string;
@@ -26,10 +26,10 @@ export default function FormSection({
       </div>
 
       {globalError && (
-				<div className="bg-red-50 rounded-b-lg border border-red-200/0 border-t-red-200 p-3 text-sm text-red-700">
+				<div className="bg-danger rounded-b-lg border border-danger/0 border-t-danger p-3 text-sm text-white">
 					{globalError.message}
           {globalError.fieldErrors && (
-            <ul className="list-disc list-inside text-xs text-red-600">
+            <ul className="list-disc list-inside text-xs text-white">
               {Object.entries(globalError.fieldErrors).map(([field, message]) => (
                 <li key={field}>
                   <span className="font-medium">{field}</span> : {message}

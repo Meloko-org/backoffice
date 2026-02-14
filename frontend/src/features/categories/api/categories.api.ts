@@ -10,6 +10,8 @@ import type {
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/categories`;
 
+
+
 /* getCategories travaille avec les types backend purs */
 export const getCategories = async (params: {
   page?: number;
@@ -81,6 +83,29 @@ export const createCategory = async (payload: CategoryPayload): Promise<ProductC
     }
   )
 }
+
+// export async function createCategory(
+//   values: CategoryFormValues
+// ) {
+//   const res = await fetch("/admin/categories", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(values),
+//   });
+
+//   const data = await res.json();
+
+//   if (!data.success) {
+//     throw {
+//       message: data.message,
+//       fieldErrors: data.fieldErrors,
+//     };
+//   }
+
+//   return data.data;
+// }
 
 
 export const updateCategory = async (

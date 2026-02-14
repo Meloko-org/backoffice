@@ -1,130 +1,84 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { TypeForSelect } from "../../types/types/type";
-import type { CategoryFormValues, CategoryPayload } from "../types/category";
-import type { FormField } from "../../../types/form/fieldConfig.type";
+import type { CategoryFormValues } from "../types/category";
 import { useAdminPage } from "../../../hooks/useAdminPage";
-import { getTypeNames } from "../../types/api/types.api";
 import { createCategory, getCategoryById, updateCategory } from "../api/categories.api";
 import { mapCategoryToFormValues, mapFormValuesToPayload } from "../mappers/category.mapper";
-import { CategoryForm } from "../form/CategoryForm";
-import { useCrudForm } from "../../../hooks/useCrudForm";
+import { AdminForm } from "../../../core/forms/FormRenderer";
+import { categorySchema } from "../schema/category.schema";
+import { useEffect, useState } from "react";
 
 type CategoryFormPageProps = {
   mode: "create" | "edit";
   categoryId?: string;
 };
 
-
 export default function CategoryFormPage({
   mode,
   categoryId,
 }: CategoryFormPageProps) {
   const navigate = useNavigate();
+  const isEdit = mode === "edit";
 
-  const [types, setTypes] = useState<TypeForSelect[]>([]);
+  const [initialValues, setInitialValues] =
+    useState<Partial<CategoryFormValues>>();
 
-	useEffect(() => {
-    getTypeNames().then(setTypes);
-  }, []);
+  const [loading, setLoading] = useState(isEdit);
 
-
-	/* fonction de validation des champs required à passer au hook useCrudform */
-  const validateCategory = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!values.name) newErrors.name = "Le nom est obligatoire";
-    if (!values.type) newErrors.type = "Le type est obligatoire";
-
-		return newErrors;
-  };
-
-
-	/* appel du hook useCrudForm avec injection des données nécessaires */
-	const {
-		values,
-		setValues,
-		globalError,
-		loading,
-		handleSubmit,
-		isEdit,
-		errors,
-	} = useCrudForm<CategoryFormValues, CategoryPayload>({
-		mode,
-		id: categoryId,
-
-		defaultValues: {
-			name: "",
-			description: "",
-			image: "",
-			type: "",
-		},
-
-		fetchById: getCategoryById,
-		mapToFormValues: mapCategoryToFormValues,
-		mapToPayload: mapFormValuesToPayload,
-
-		validate: validateCategory,
-
-		createAction: createCategory,
-		updateAction: updateCategory,
-
-		onSuccess: () => navigate("/admin/categories"),
-
-		resetOnSuccess: mode === "create",
-	});
-
-	// titre de la page
-	useAdminPage(
-    isEdit ? "Modifier la catégorie" : "Créer une catégorie"
+  useAdminPage(
+    isEdit ? "Modifier la catégorie" : "Créer la catégorie"
   );
 
+  useEffect(() => {
+    if (!isEdit || !categoryId) return;
 
-  const fields: FormField[] = [
-    {
-      name: "name",
-      label: "Nom",
-      type: "floating-input",
-      required: true,
-    },
-    {
-      name: "description",
-      label: "Description",
-      type: "floating-input",
-    },
-    {
-      name: "image",
-      label: "Image",
-      type: "floating-input",
-    },
-    {
-      name: "type",
-      label: "Type",
-      type: "floating-select",
-      options: types.map((t) => ({
-        value: t._id,
-        label: t.name,
-      })),
-      required: true,
-      disabled: isEdit, // 🔥 seule différence
-    },
-  ];
+    const loadCategory = async () => {
+      try {
+        const category =
+          await getCategoryById(categoryId);
+
+        setInitialValues(
+          mapCategoryToFormValues(category)
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCategory();
+  }, [isEdit, categoryId]);
+
+  const handleSubmit = async (
+    values: CategoryFormValues
+  ) => {
+    const payload =
+      mapFormValuesToPayload(values);
+
+    if (isEdit && categoryId) {
+      await updateCategory(categoryId, payload);
+    } else {
+      await createCategory(payload);
+    }
+
+    navigate("/admin/categories");
+  };
+
+  if (loading) {
+    return <div className="p-8">Chargement...</div>;
+  }
 
   return (
     <div className="p-8">
       <div className="mx-auto max-w-4xl space-y-6">
-        <CategoryForm
-          fields={fields}
-          values={values}
-          onChange={(name, value) =>
-            setValues((prev) => ({ ...prev, [name]: value }))
+        <AdminForm<CategoryFormValues>
+          schema={categorySchema}
+          initialValues={initialValues}
+          mode={mode}
+          submitLabel={
+            isEdit
+              ? "Mettre à jour"
+              : "Créer la catégorie"
           }
           onSubmit={handleSubmit}
-          submitLabel={
-            isEdit ? "Mettre à jour" : "Créer la catégorie"
-          }
-          errors={errors}
-          globalError={globalError}
         />
       </div>
     </div>
