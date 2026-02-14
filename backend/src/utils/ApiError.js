@@ -1,9 +1,9 @@
 class ApiError extends Error {
-  constructor(message, status = 500, errors = null) {
+  constructor(message, status = 500, fieldErrors = null) {
     super(message);        // appelle le constructeur de Error
 
     this.status = status;  // code HTTP
-    this.errors = errors;
+    this.fieldErrors = errors;
     this.isApiError = true;
 
     // Important pour que instanceof fonctionne correctement

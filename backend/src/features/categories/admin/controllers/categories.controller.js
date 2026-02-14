@@ -48,7 +48,7 @@ const createCategoryHandler = async (req, res, next) => {
   try {
     const errors = await validateCategoryPayload(req.body);
 
-    if (errors.length > 0) {
+    if (Object.keys(errors).length > 0) {
       throw new ApiError("Validation échouée.", 400, errors);
     }
 

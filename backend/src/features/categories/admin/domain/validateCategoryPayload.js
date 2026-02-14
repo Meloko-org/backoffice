@@ -1,21 +1,21 @@
 const Type = require("../../../../models/Type");
 
 async function validateCategoryPayload(payload) {
-	const errors = [];
+	const errors = {};
 
 	if (payload.name !== undefined) {
     if (typeof payload.name !== "string" || payload.name.trim().length < 2) {
-      errors.push("name invalide");
+      errors.name = "name invalide";
     }
   }
 
 	if (!payload.type) {
-		errors.push("type manquant.")
+		errors.type= "type manquant.";
 	} else {
 		const existingType = await Type.findById(payload.type);
 
 		if (!existingType) {
-			errors.push("Ce type n'existe pas.")
+			errors.type = "Ce type n'existe pas.";
 		}
 	}
 

@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
     return res.status(err.status).json({
       success: false,
       message: err.message,
-      errors: err.errors ?? undefined,
+      fieldErrors: err.fieldErrors ?? undefined,
     });
   }
 
