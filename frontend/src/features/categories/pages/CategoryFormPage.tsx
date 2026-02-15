@@ -6,6 +6,7 @@ import { mapCategoryToFormValues, mapFormValuesToPayload } from "../mappers/cate
 import { AdminForm } from "../../../core/forms/FormRenderer";
 import { categorySchema } from "../schema/category.schema";
 import { useEffect, useState } from "react";
+import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 
 type CategoryFormPageProps = {
   mode: "create" | "edit";
@@ -28,6 +29,7 @@ export default function CategoryFormPage({
     isEdit ? "Modifier la catégorie" : "Créer la catégorie"
   );
 
+
   useEffect(() => {
     if (!isEdit || !categoryId) return;
 
@@ -46,6 +48,7 @@ export default function CategoryFormPage({
 
     loadCategory();
   }, [isEdit, categoryId]);
+
 
   const handleSubmit = async (
     values: CategoryFormValues
@@ -79,6 +82,7 @@ export default function CategoryFormPage({
               : "Créer la catégorie"
           }
           onSubmit={handleSubmit}
+          renderers={adminFormRenderers}
         />
       </div>
     </div>

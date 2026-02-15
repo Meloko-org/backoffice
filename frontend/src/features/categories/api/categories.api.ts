@@ -116,7 +116,7 @@ export const updateCategory = async (
   return apiFetch<ProductCategory>(
     `${BASE_URL}/${id}`, 
     {
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify(payload)
     }
   )

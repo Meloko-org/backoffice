@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   FormSchema,
   FieldOption,
@@ -17,11 +17,11 @@ type FieldErrors<TValues> = Partial<Record<keyof TValues, string>>;
 
 
 /* type guard: confirme qu'on est bien sur un field de type select ou floatingSelect */ 
-function isSelectField<TValues>(
-  field: FormFieldSchema<TValues>
-): field is Extract<FormFieldSchema<TValues>, { type: "select" | "floating-select" }> {
-  return field.type === "select" || field.type === "floating-select";
-}
+// function isSelectField<TValues>(
+//   field: FormFieldSchema<TValues>
+// ): field is Extract<FormFieldSchema<TValues>, { type: "select" | "floating-select" }> {
+//   return field.type === "select" || field.type === "floating-select";
+// }
 
 
 export function useFormEngine<TValues extends Record<string, any>>({
@@ -30,8 +30,8 @@ export function useFormEngine<TValues extends Record<string, any>>({
   mode = "create",
   onSubmit,
 }: UseFormEngineProps<TValues>) {
-  /* ---------------- STATE ---------------- */
 
+  /* ---------------- STATE ---------------- */
   const [values, setValues] = useState<TValues>(() => {
     const defaults: any = {};
 
@@ -63,8 +63,8 @@ export function useFormEngine<TValues extends Record<string, any>>({
     Partial<Record<keyof TValues, boolean>>
   >({});
 
-  /* ---------------- HELPERS ---------------- */
 
+  /* ---------------- HELPERS ---------------- */
   const getFieldSchema = (
     name: keyof TValues
   ): FormFieldSchema<TValues> | undefined => {
@@ -76,24 +76,33 @@ export function useFormEngine<TValues extends Record<string, any>>({
     return undefined;
   };
 
-  /* ---------------- CONDITION ---------------- */
 
+  /* ---------------- CONDITION ---------------- */
   const isFieldVisible = (name: keyof TValues) => {
     const field = getFieldSchema(name);
     if (!field?.condition) return true;
-    return field.condition(values);
+
+    return field.condition({
+      values,
+      mode,
+    });
   };
+
 
   const isFieldDisabled = (name: keyof TValues) => {
     const field = getFieldSchema(name);
     if (!field?.disabled) return false;
 
     if (typeof field.disabled === "boolean") return field.disabled;
-    return field.disabled(values);
+
+    return field.disabled({
+      values,
+      mode,
+    });
   };
 
-    /* ---------------- VALIDATION ---------------- */
 
+  /* ---------------- VALIDATION ---------------- */
   const validateField = (
     name: keyof TValues,
     value: any
@@ -129,8 +138,8 @@ export function useFormEngine<TValues extends Record<string, any>>({
     return Object.keys(newErrors).length === 0;
   };
 
-    /* ---------------- CHANGE ---------------- */
 
+  /* ---------------- CHANGE ---------------- */
   const setValue = (name: keyof TValues, value: any) => {
     setValues((prev) => ({
       ...prev,
@@ -159,14 +168,89 @@ export function useFormEngine<TValues extends Record<string, any>>({
     }));
   };
 
-    /* ---------------- ASYNC OPTIONS ---------------- */
 
+  /* ---------------- COMPUTED FIELDS ---------------- */
   useEffect(() => {
     schema.sections.forEach((section) => {
       Object.entries(section.fields).forEach(([key, field]) => {
-        
-        if (isSelectField(field) && typeof field.options === "function") {
+        if (!field.compute || !field.computeDeps) return;
+
+        const name = key as keyof TValues;
+
+        const newValue = field.compute({
+          values,
+          mode,
+        });
+
+        if (values[name] !== newValue) {
+          setValues((prev) => ({
+            ...prev,
+            [name]: newValue,
+          }));
+        }
+      });
+    });
+  }, [
+    // 👇 dépendances dynamiques
+    ...schema.sections.flatMap((section) =>
+      Object.values(section.fields)
+        .filter((field) => field.computeDeps)
+        .flatMap((field) => field.computeDeps!)
+    ).map((dep) => values[dep]),
+    mode,
+  ]);
+
+
+  /* ---------------- RESET INVISIBLE FIELDS ---------------- */
+  useEffect(() => {
+    schema.sections.forEach((section) => {
+      Object.entries(section.fields).forEach(([key, field]) => {
+        const name = key as keyof TValues;
+
+        const visible = field.condition
+          ? field.condition({ values, mode })
+          : true;
+
+        if (!visible && values[name] !== undefined && values[name] !== "") {
+          setValues((prev) => ({
+            ...prev,
+            [name]: field.defaultValue ?? "",
+          }));
+
+          setErrors((prev) => ({
+            ...prev,
+            [name]: undefined,
+          }));
+
+          setTouched((prev) => ({
+            ...prev,
+            [name]: false,
+          }));
+        }
+      });
+    });
+  }, [values, mode, schema]);
+
+
+
+
+  /* ---------------- ASYNC OPTIONS ---------------- */
+  useEffect(() => {
+    schema.sections.forEach((section) => {
+      Object.entries(section.fields).forEach(([key, field]) => {
+        if (
+          field.type === "select" &&
+          typeof field.options === "function"
+        ) {
           const name = key as keyof TValues;
+
+          const shouldReload =
+            !field.optionsDeps ||
+            field.optionsDeps.some((dep) =>
+              Object.keys(touched).includes(dep as string)
+            );
+
+          if (!shouldReload && asyncOptions[name]) return;
 
           setAsyncLoading((prev) => ({
             ...prev,
@@ -192,9 +276,11 @@ export function useFormEngine<TValues extends Record<string, any>>({
     });
   }, [schema, values]);
 
-    /* ---------------- SUBMIT ---------------- */
 
+  /* ---------------- SUBMIT ---------------- */
   const submit = async () => {
+    if (loading) return;
+
     setGlobalError(null);
 
     const isValid = validateForm();
@@ -216,7 +302,8 @@ export function useFormEngine<TValues extends Record<string, any>>({
     }
   };
 
-    return {
+
+  return {
     values,
     errors,
     globalError,

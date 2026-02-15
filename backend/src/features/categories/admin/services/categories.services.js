@@ -1,6 +1,7 @@
 const ApiError = require("../../../../utils/ApiError");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const { ProductCategory } = require("../../../../models/ProductCategory");
+const { ProductFamily } = require("../../../../models/ProductFamily");
 const mongoose = require("mongoose");
 
 

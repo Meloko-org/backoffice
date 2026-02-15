@@ -14,7 +14,7 @@ import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
 import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
-import AdminInfoProvider from "./layouts/admin/AdminInfoProvider";
+import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },

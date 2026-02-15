@@ -1,12 +1,15 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
+import { useAdminList } from "../../hooks/useAdminList";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
+import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import { useConfirm } from "./contexts/ConfirmContext";
 
 
 export default function AdminSidebarRight() {
 
-	const { infoContext } = useInfoLayout();
+	const { infoContext, setInfoContext } = useInfoLayout();
 	const { options, close, isOpen } = useConfirm();
+	const { closeRight } = useAdminLayout();
 
 	let content = null;
 
@@ -66,8 +69,10 @@ export default function AdminSidebarRight() {
 
 								<button
 									onClick={async () => {
-										await options.onConfirm();
-										close();
+										await options.onConfirm();		// exécute la suppression
+										close();											// ferme la popup de confirmation
+										setInfoContext(null);					// vide infoContext
+										closeRight();									// ferme la sidebar droite
 									}}
 									className="btn-danger"
 								>

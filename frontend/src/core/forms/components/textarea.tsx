@@ -1,46 +1,46 @@
-type SelectProps = {
+type TextareaProps = {
   label: string;
   value: string;
-  options: { value: string; label: string }[];
   onChange: (v: string) => void;
-  disabled?: boolean;
   required?: boolean;
+  disabled?: boolean;
   error?: string;
-}
+  onBlur?: () => void;
+  rows?: number;
+};
 
-export default function Select({
+export default function Textarea({
   label,
   value,
-  options,
   onChange,
-  disabled = false,
   required,
+  disabled,
   error,
-}: SelectProps) {
+  onBlur,
+  rows = 4,
+}: TextareaProps) {
   return (
     <div className="space-y-1">
       <label className="block text-sm font-medium text-neutral-500">
-        {label}{required && <span className="text-red-500 ml-1">*</span>}
+        {label}
+        {required && (
+          <span className="text-red-500 ml-1">*</span>
+        )}
       </label>
 
-      <select
+      <textarea
         value={value}
         disabled={disabled}
+        rows={rows}
         onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur}
         className={`
-          w-full px-3 py-2 text-sm 
+          w-full px-3 py-2 text-sm resize-none
           focus:outline-none focus:ring-0
           ${error && "border-red-500 focus:ring-red-500"}
           ${disabled ? "cursor-not-allowed" : ""}
         `}
-      >
-        <option value="">— Sélectionner —</option>
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+      />
 
       {error && (
         <p className="mt-1 text-xs text-red-600">

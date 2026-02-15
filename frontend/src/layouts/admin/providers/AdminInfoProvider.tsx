@@ -1,6 +1,6 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { AdminInfoContext } from "./contexts/AdminInfoContext";
-import type { ModelContext } from "../../types/admin";
+import { AdminInfoContext } from "../contexts/AdminInfoContext";
+import type { ModelContext } from "../../../types/admin";
 
 type Props = {
   children: ReactNode;

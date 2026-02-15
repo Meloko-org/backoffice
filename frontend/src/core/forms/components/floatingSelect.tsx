@@ -8,7 +8,7 @@ type FloatingSelectProps = {
   error?: string;
 }
 
-export function FloatingSelect({
+export default function FloatingSelect({
   label,
   value,
   options,

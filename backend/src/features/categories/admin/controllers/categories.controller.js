@@ -69,6 +69,7 @@ const createCategoryHandler = async (req, res, next) => {
 
 const updateCategoryHandler = async (req, res, next) => {
   try {
+    console.log("edit")
     const errors = await validateCategoryPayload(req.body);
 
     if (errors.length > 0) {

@@ -2,6 +2,7 @@ import type {
   FormSchema,
   InputFieldSchema,
   SelectFieldSchema,
+  TextareaFieldSchema,
 } from "./types";
 
 export const field = {
@@ -12,11 +13,11 @@ export const field = {
     type: "input",
   }),
 
-  floatingInput: <TValues>(
-    config: Omit<InputFieldSchema<TValues>, "type">
-  ): InputFieldSchema<TValues> => ({
+  textarea: <TValues>(
+    config: Omit<TextareaFieldSchema<TValues>, "type">
+  ): TextareaFieldSchema<TValues> => ({
     ...config,
-    type: "floating-input",
+    type: "textarea",
   }),
 
   select: <TValues>(
@@ -24,13 +25,6 @@ export const field = {
   ): SelectFieldSchema<TValues> => ({
     ...config,
     type: "select",
-  }),
-
-  floatingSelect: <TValues>(
-    config: Omit<SelectFieldSchema<TValues>, "type">
-  ): SelectFieldSchema<TValues> => ({
-    ...config,
-    type: "floating-select",
   }),
 };
 
