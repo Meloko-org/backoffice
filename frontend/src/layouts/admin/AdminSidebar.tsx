@@ -1,13 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import SidebarIconButton from "./components/SidebarIconButton";
 import type { AdminMenuItem } from "./config/adminMenu"
 import { adminMenu } from "./config/adminMenu";
 import { useHasPermission } from "../../hooks/useHasPermission";
+import SignoutButton from "../../components/admin/buttons/SignoutButton";
 
 
 /* détermine les éléments autorisés du menu en fonction des permissions par rôle */
 function useFilteredAdminMenu() {
+	
 	const hasPermission = useHasPermission;
 
 	return adminMenu
@@ -45,13 +48,18 @@ function useFilteredAdminMenu() {
  	retourne des éléments de type AdminMenuItem. C'est type guard.
 */
 
+
+
 export default function AdminSidebar() {
   const { isLeftOpen, toggleLeft } = useAdminLayout();
   const navigate = useNavigate();
 
+	const { user } = useUser();
+
 	const menu = useFilteredAdminMenu();
 
 	// console.log("SIDEBAR")
+	console.log("first :", user)
 
   return (
     <aside
@@ -82,8 +90,8 @@ export default function AdminSidebar() {
 						overflow-visible
           `}
         >
-					<div className="h-20 flex items-center justify-start px-2 mb-5">
-						<div className="h-8 w-8">
+					<div className="h-20 flex items-center justify-start mb-5">
+						<div className="h-16 w-16 -m-2.5">
 							<img
 								src="/images/icone_la_charrue.png"
 								alt="Meloko"
@@ -114,6 +122,33 @@ export default function AdminSidebar() {
 								/>
 							);
 						})}
+					</div>
+
+					<div className="grow"></div>
+
+					{/* zone utilisateur */}
+					<div className="h-37">
+						<div className=" mb-5">
+							<div className="h-11 w-11 user" onClick={toggleLeft}>
+								{user?.hasImage ? (
+									<div className="h-11 w-11">
+										<img
+											src={user?.imageUrl}
+											alt="Meloko"
+											className="h-full w-full object-fill rounded-md"
+										/>
+									</div>
+								) : (
+									<div className="h-11 w-11">
+										<img
+											src="images/avatar.svg"
+											alt="Meloko"
+											className="h-full w-full object-fill rounded-md"
+										/>
+									</div>
+								)}
+							</div>
+						</div>
 					</div>
         </div>
 
@@ -194,6 +229,47 @@ export default function AdminSidebar() {
 							);
 						})}
 					</div>
+
+					<div className="grow"></div>
+
+					{/* zone utilisateur */}
+					<div className="h-40 ">
+
+						<div className="">
+							<div className="flex justify-center items-center p-1 user">
+								{user?.hasImage ? (
+									<div className="h-11 w-11">
+										<img
+											src={user?.imageUrl}
+											alt="Meloko"
+											className="h-full w-full object-fill rounded-md"
+										/>
+									</div>
+								) : (
+									<div className="h-11 w-11">
+										<img
+											src="images/avatar.svg"
+											alt="Meloko"
+											className="h-full w-full object-fill rounded-md"
+										/>
+									</div>
+								)}
+								
+								<div className="ml-4 ">
+									<div>username</div>
+									<div className="text-xs text-neutral-400 capitalize">{user?.publicMetadata?.role ?? "user"}</div>
+								</div>
+							</div>
+							
+							<div className="w-full flex justify-center mt-5">
+								<SignoutButton />
+							</div>
+						</div>
+
+					</div>
+
+
+
         </div>
 
       </div>

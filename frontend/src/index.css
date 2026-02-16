@@ -4,12 +4,12 @@
    THEME TOKENS (Tailwind)
 ========================= */
 @theme {
-  --color-bg-light: var(--color-neutral-100);
-  --color-sub-bg-light: var(--color-neutral-200);
+  --color-bg-light: var(--color-neutral-100);         /* rgb(245,245,245) */
+  --color-sub-bg-light: var(--color-neutral-200);     /* rgb(229,229,229) */
   --color-sidebar-bg-light: var(--color-neutral-200);
 
-  --color-bg-dark: #212121;
-  --color-sub-bg-dark: #181818;
+  --color-bg-dark: #212121;       /* rgb(33, 33, 33) */
+  --color-sub-bg-dark: #181818;   /* rgb(24, 24, 24) */
   --color-sidebar-bg-dark: #181818;
 
   --color-text-light: #262E20;    /* rgb(38, 46, 32) */
@@ -35,6 +35,9 @@
 
     --p-label-color: rgb(38, 46, 32, 0.5);
     --p-info-color: var(--color-text-light);
+
+    --btn-signout-bg: var(--color-bg-light);
+    --btn-signout-hover: rgb(152, 182, 110, 0.5); 
 
     /* ---- bouton invariant selon le mode ---- */
     /* Bouton principal */
@@ -97,6 +100,9 @@
 
     --p-label-color: rgb(255, 255, 240, 0.5);
     --p-info-color: var(--color-text-dark);
+
+    --btn-signout-bg: var(--color-bg-dark);
+    --btn-signout-hover: rgb(152, 182, 110, 0.5);
 
 
      /* Bouton formulaire */
@@ -280,6 +286,24 @@
 
 
 @layer components {
+
+  .user:hover {
+    @apply rounded-lg cursor-pointer;
+    background-color: var(--app-surface-bg);
+  }
+
+  .btn-signout {
+    @apply px-4 py-2 rounded-full font-medium;
+    background-color: var(--btn-signout-bg);
+    color: var(--btn-outline-text);
+  }
+
+  .btn-signout:hover {
+    @apply px-4 py-2 rounded-full;
+    background-color: var(--btn-signout-hover);
+    color: var(--btn-outline-text);
+  }
+
 
   .confirm-panel {
     background-color: var(--app-surface-bg);
