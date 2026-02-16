@@ -16,13 +16,6 @@ type UseFormEngineProps<TValues> = {
 type FieldErrors<TValues> = Partial<Record<keyof TValues, string>>;
 
 
-/* type guard: confirme qu'on est bien sur un field de type select ou floatingSelect */ 
-// function isSelectField<TValues>(
-//   field: FormFieldSchema<TValues>
-// ): field is Extract<FormFieldSchema<TValues>, { type: "select" | "floating-select" }> {
-//   return field.type === "select" || field.type === "floating-select";
-// }
-
 
 export function useFormEngine<TValues extends Record<string, any>>({
   schema,

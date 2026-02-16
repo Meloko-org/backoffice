@@ -1,34 +1,33 @@
 type FloatingTextareaProps = {
   label: string;
-  value: string;
-  onChange: (v: string) => void;
   required?: boolean;
   disabled?: boolean;
   error?: string;
-  onBlur?: () => void;
   rows?: number;
-};
+} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+}; 
 
 export default function FloatingTextarea({
   label,
-  value,
-  onChange,
   required,
   disabled,
   error,
-  onBlur,
+  value,
+  onChange,
   rows = 4,
+  ...rest
 }: FloatingTextareaProps) {
-  
+
   return (
     <div className="relative">
-      <textarea
+      <textarea {...rest}
         value={value}
         rows={rows}
         onChange={(e) => onChange(e.target.value)}
         placeholder=" "
         disabled={disabled}
-        onBlur={onBlur}
         className={`
           peer w-full pr-3 pt-5 pb-2 text-sm pl-4 resize-none
           focus:outline-none focus:ring-0

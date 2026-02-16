@@ -1,21 +1,27 @@
+/**
+ * Ici on définit clairement label, error, required et disabled car on en a besoin dans le return.
+ * Pour toutes les autres props possibles d'un HTMLInputElement, on fait hériter le composant Input
+ * des attributs classiques d'un HTMLInputElement, sauf value et onChange, pour pouvoir les
+ * customizer comme on veut. 
+ */
 type InputProps = {
   label: string;
-  value: string;
-  onChange: (v: string) => void;
-  required?: boolean;
-	disabled?: boolean;
 	error?: string;
-  onBlur?: () => void;
-};
+  required?: boolean;
+  disabled?: boolean;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+};  
 
 export default function Input({
   label,
-  value,
-  onChange,
-  required,
-	disabled,
 	error,
-  onBlur,
+  required,
+  disabled,
+  value, 
+  onChange,
+  ...rest
 }: InputProps) {
   return (
     <div className="space-y-1">
@@ -24,11 +30,9 @@ export default function Input({
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      <input
+      <input {...rest}
         value={value}
-        disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur}
         className={`
 					w-full px-3 py-2 text-sm
           focus:outline-none focus:ring-0 

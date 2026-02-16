@@ -1,21 +1,23 @@
 type SelectProps = {
   label: string;
-  value: string;
-  options: { value: string; label: string }[];
-  onChange: (v: string) => void;
   disabled?: boolean;
-  required?: boolean;
+	required?: boolean;
   error?: string;
-}
+  options: { value: string; label: string }[];
+} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+};
 
 export default function Select({
   label,
-  value,
-  options,
-  onChange,
   disabled = false,
-  required,
+	required,
   error,
+  options,
+  value,
+  onChange,
+  ...rest
 }: SelectProps) {
   return (
     <div className="space-y-1">
@@ -23,7 +25,7 @@ export default function Select({
         {label}{required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      <select
+      <select {...rest}
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}

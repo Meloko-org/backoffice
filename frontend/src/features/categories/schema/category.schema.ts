@@ -46,10 +46,9 @@ export const categorySchema =
             floating: true,
           }),
           
-          image: field.input({
+          image: field.file({
             label: "Image",
             required: false,
-            floating: true,
           }),
         },
       },

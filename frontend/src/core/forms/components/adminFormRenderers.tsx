@@ -5,24 +5,34 @@ import FloatingTextarea from "./floatingTextarea";
 import Select from "./select";
 import FloatingSelect from "./floatingSelect";
 import type { FieldRenderer } from "../FormRenderer";
+import Checkbox from "./checkbox";
+import FileUpload from "./fileUpload";
 
 
 
 export const adminFormRenderers = {
-  input: ({
-    field,
-    name,
-    value,
-    error,
-    disabled,
-    setValue,
-    setFieldTouched,
-  }) =>
-    field.floating ? (
+  input: (context) => {
+    const {
+      field,
+      name,
+      value,
+      error,
+      disabled,
+      setValue,
+      setFieldTouched,
+    } = context;
+
+    if (field.type !== "input") return;
+
+    return field.floating ? (
       <FloatingInput
         key={String(name)}
         label={field.label}
         value={value}
+        type={field.inputType ?? "text"}
+        min={field.min}
+        max={field.max}
+        step={field.step}
         required={field.required}
         disabled={disabled}
         error={error}
@@ -33,15 +43,21 @@ export const adminFormRenderers = {
         key={String(name)}
         label={field.label}
         value={value}
+        type={field.inputType ?? "text"}
+        min={field.min}
+        max={field.max}
+        step={field.step}
         required={field.required}
         disabled={disabled}
         error={error}
         onChange={(v) => setValue(name, v)}
         onBlur={() => setFieldTouched(name)}
       />
-    ),
+    )
+  },
+    
 
-  textarea: (context) => {    // utilisation du narrowing ici pour TS comprenne que field est bien un TextareaFieldSchema
+  textarea: (context) => {    // utilisation du narrowing ici pour que TS comprenne que field est bien un TextareaFieldSchema
     const { field, name, value, error, disabled, setValue, setFieldTouched } = context;
 
     if (field.type !== "textarea") return null;
@@ -116,4 +132,87 @@ export const adminFormRenderers = {
       />
     );
   },
+
+  checkbox: (context) => {
+
+    const {
+      field,
+      name,
+      value,
+      error,
+      disabled,
+      setValue,
+    } = context;
+
+    if (field.type !== "checkbox") return null;
+
+    return (
+      <Checkbox
+        key={String(name)}
+        label={field.label}
+        value={value}
+        checked={Boolean(value)}
+        disabled={disabled}
+        error={error}
+        onChange={(v) => setValue(name, v)}
+      />
+    );
+  },
+
+  file: (context) => {
+    const { field, name, value, error, disabled, setValue } = context;
+
+    if (field.type !== "file") return;
+
+    return (
+      <FileUpload
+        key={String(name)}
+        label={field.label}
+        value={value}
+        accept={field.accept}
+        disabled={disabled}
+        error={error}
+        onChange={(url) => setValue(name, url)}
+      />
+    );
+  },
+
+
+  date: (context) => {
+    const {
+      field,
+      name,
+      value,
+      error,
+      disabled,
+      setValue,
+      setFieldTouched,
+    } = context;
+
+    if (field.type !== "date") return;
+
+    return (
+      <Input
+        key={String(name)}
+        label={field.label}
+        type="date"
+        value={value ?? ""}
+        min={field.min}
+        max={field.max}
+        required={field.required}
+        disabled={disabled}
+        error={error}
+        onChange={(v) => setValue(name, v)}
+        onBlur={() => setFieldTouched(name)}
+      />
+    );
+  },
+
+
+
+
+
+
+
+
 } satisfies Record<string, FieldRenderer<any>>;

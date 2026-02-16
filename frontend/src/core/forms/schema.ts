@@ -1,4 +1,6 @@
 import type {
+  CheckboxFieldSchema,
+  FileFieldSchema,
   FormSchema,
   InputFieldSchema,
   SelectFieldSchema,
@@ -26,7 +28,26 @@ export const field = {
     ...config,
     type: "select",
   }),
+
+  checkbox: <TValues>(
+    config: Omit<CheckboxFieldSchema<TValues>, "type">
+  ): CheckboxFieldSchema<TValues> => ({
+    ...config,
+    type: "checkbox",
+  }),
+
+  file: <TValues>(
+    config: Omit<FileFieldSchema<TValues>, "type">
+  ): FileFieldSchema<TValues> => ({
+    ...config,
+    type: "file"
+  })
+
+
+
 };
+
+
 
 export function defineFormSchema<TValues>(
   schema: FormSchema<TValues>

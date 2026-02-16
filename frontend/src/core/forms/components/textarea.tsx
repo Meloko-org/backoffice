@@ -1,23 +1,23 @@
 type TextareaProps = {
   label: string;
-  value: string;
-  onChange: (v: string) => void;
   required?: boolean;
   disabled?: boolean;
   error?: string;
-  onBlur?: () => void;
   rows?: number;
-};
+} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+}; 
 
 export default function Textarea({
   label,
-  value,
-  onChange,
   required,
   disabled,
   error,
-  onBlur,
+  value,
+  onChange,
   rows = 4,
+  ...rest
 }: TextareaProps) {
   return (
     <div className="space-y-1">
@@ -28,12 +28,11 @@ export default function Textarea({
         )}
       </label>
 
-      <textarea
+      <textarea {...rest}
         value={value}
         disabled={disabled}
         rows={rows}
         onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur}
         className={`
           w-full px-3 py-2 text-sm resize-none
           focus:outline-none focus:ring-0

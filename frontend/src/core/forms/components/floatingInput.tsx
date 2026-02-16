@@ -1,31 +1,28 @@
 type FloatingInputProps = {
   label: string;
-  value: string;
-  onChange: (v: string) => void;
   required?: boolean;
   disabled?: boolean;
   error?: string;
-  onBlur?: () => void;
-}
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+}; 
 
 export default function FloatingInput({
   label,
-  value,
-  onChange,
   required,
   disabled,
   error,
-  onBlur,
+  value,
+  onChange,
+  ...rest
 }: FloatingInputProps) {
 
   return (
     <div className="relative">
-      <input
+      <input {...rest}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder=" "
-        disabled={disabled}
-        onBlur={onBlur}
         className={`
             peer w-full pr-3 pt-5 pb-2 text-sm pl-4
             focus:outline-none focus:ring-0 

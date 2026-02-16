@@ -1,27 +1,29 @@
 type FloatingSelectProps = {
 	label: string;
-  value: string;
-  options: { value: string; label: string }[];
-  onChange: (v: string) => void;
   disabled?: boolean;
 	required?: boolean;
   error?: string;
-}
+  options: { value: string; label: string }[];
+} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value" | "onChange"> & {
+  value: string;
+  onChange: (value: string) => void;
+};
 
 export default function FloatingSelect({
   label,
-  value,
-  options,
-  onChange,
   disabled = false,
 	required,
   error,
+  options,
+  value,
+  onChange,
+  ...rest
 }: FloatingSelectProps) {
   const hasValue = value !== "";
 
   return (
     <div className="relative">
-      <select
+      <select {...rest}
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}

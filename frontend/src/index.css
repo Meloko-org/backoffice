@@ -53,6 +53,8 @@
     --form-section-bg: var(--color-sub-bg-light);
     --form-section-border: rgba(0, 0, 0, 0.08);
     --form-input-bg: var(--color-bg-light);
+
+    --btn-outline-text: var(--color-neutral-600);
     
 
     /* Bouton sidebar */
@@ -103,6 +105,8 @@
     --form-section-bg: var(--color-sub-bg-dark);
     --form-section-border: rgba(255, 255, 255, 0.08); 
     --form-input-bg: var(--color-bg-dark);
+
+    --btn-outline-text: var(--color-neutral-300);
 
     /* Bouton sidebar */
     --btn-sidebar-bg: var(--color-neutral-900);
@@ -204,11 +208,7 @@
 
   /*  ----------- INPUT, SELECT, TEXTAREA -------------------------- */
   /* communs */
-  html.dark input:focus,
-  html.dark select:focus,
-  html.dark textarea:focus {
-    border-color: var(--color-primary);
-  }
+  
 
   /* Light mode */
   html:not(.dark) input,
@@ -216,8 +216,6 @@
   html:not(.dark) textarea {
     border-color: var(--table-border);
   }
-
-
   
   /* Dark mode */  
   html.dark input,
@@ -230,11 +228,7 @@
 
   /*  -----------  FORM : INPUT, SELECT, TEXTAREA -------------------------- */
   /* communs */
-  html.dark form input:focus,
-  html.dark form select:focus,
-  html.dark form textarea:focus {
-    border-color: var(--color-primary);
-  } 
+  
 
   /* Light mode */
   html:not(.dark) form input,
@@ -250,6 +244,12 @@
     background-color: transparent;
   }
 
+  html:not(.dark) form input:focus,
+  html:not(.dark) form select:focus,
+  html:not(.dark) form textarea:focus {
+    border-color: var(--color-primary);
+  }
+
   /* Dark mode */ 
   html.dark form input,
   html.dark form select,
@@ -262,6 +262,12 @@
   html.dark form select:disabled,
   html.dark form textarea:disabled {
     background-color: transparent;
+  }
+
+  html.dark form input:focus,
+  html.dark form select:focus,
+  html.dark form textarea:focus {
+    border-color: var(--color-primary);
   }
 
   
@@ -307,6 +313,23 @@
            hover:opacity-90;
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
+  }
+
+  .btn-outline-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md text-neutral-300
+           transition
+           hover:opacity-90;
+    background-color: var(--form-input-bg);
+    border-color: var(--table-border);
+    color: var(--btn-outline-text);
+  }
+
+  .btn-outline-primary:hover {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md 
+           transition
+           hover:opacity-90;
+    border-color: var(--btn-primary-bg);
+    color: var(--color-primary);
   }
 
   /* .btn-primary:hover {
