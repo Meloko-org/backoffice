@@ -15,6 +15,7 @@ import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
 import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
+import AdminFamiliesPage from "./features/families/pages/AdminFamiliesPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -69,6 +70,13 @@ export const router = createBrowserRouter([
           <AdminRouteGuard permission="categories:manage">
             <EditCategoryPage />
           </AdminRouteGuard>)
+      },
+      { 
+        path: "families", 
+        element: (
+          <AdminRouteGuard permission="families:manage">
+            <AdminFamiliesPage />
+          </AdminRouteGuard> )
       },
       { 
         path: "products/import", 

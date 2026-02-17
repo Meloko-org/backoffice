@@ -7,8 +7,10 @@ const {
   updateCategoryHandler,
   deleteCategoryHandler,
   getCategory,
+  categoryNames,
 } = require("../controllers/categories.controller");
 
+router.get("/names", categoryNames);
 router.get("/:id", getCategory);
 router.get("/", listCategories);
 router.post("/", createCategoryHandler);

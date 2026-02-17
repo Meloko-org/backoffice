@@ -16,7 +16,7 @@ export interface ProductCategory {
 
 export interface CategoryListResponse {
   items: ProductCategory[];
-  pagination: PaginationMeta
+  pagination: PaginationMeta;
 }
 
 export interface CategoryPayload {
@@ -33,4 +33,9 @@ export interface CategoryFormValues {
   description: string;
   image: string | null;
   type: string;
+}
+
+export interface CategoryForSelect {
+  _id: string;
+  name: string;
 }

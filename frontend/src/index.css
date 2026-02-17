@@ -287,6 +287,15 @@
 
 @layer components {
 
+  .toolbar-elt {
+    background-color: var(--form-input-bg);
+    border-color: var(--table-border);
+  }
+
+  .toolbar-elt:focus {
+    border-color: var(--color-primary);
+  }
+
   .user:hover {
     @apply rounded-lg cursor-pointer;
     background-color: var(--app-surface-bg);

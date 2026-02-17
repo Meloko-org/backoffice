@@ -11,14 +11,27 @@ const listFamilies = async (req, res, next) => {
     const {
       page = 1,
       limit = 20,
+      search,
+      sortKey = "createdAt",
+      sortDirection = "desc",
       category,
     } = req.query;
 
+    /* garantir que page et limit sont bien des number */
+    const pageNumber = Math.max(1, Number(page) || 1);
+    const limitNumber = Math.min(100, Math.max(1, Number(limit) || 20));
+
     const result = await getFamilies({
-      page: Number(page),
-      limit: Number(limit),
-      categoryId: category,
+      page: Number(pageNumber),
+      limit: Number(limitNumber),
+      search,
+      sortKey,
+      sortDirection,
+      category,
     });
+
+    
+    // console.log(JSON.stringify(result, null, 2))
 
     res.json({
       success: true,

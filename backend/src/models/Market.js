@@ -21,23 +21,14 @@ const marketSchema = mongoose.Schema({
   address: addressSchema,
 });
 
-function createMarketModel(collectionName) {
-	const modelName = `Market_${collectionName}`;
 
-	return (
-		mongoose.models[modelName] ||
-		mongoose.model(modelName, marketSchema, collectionName)
-	);
-}
+const collectionName = process.env.USE_FAKE_DB === "true"
+	? "fakemarkets"
+	: "markets";
 
-/**
- * Sélection automatique via .env
- */
-const Market = process.env.USE_FAKE_DB === "true"
-	? createMarketModel("fakemarkets")
-	: createMarketModel("markets");
 
-module.exports = {
-	Market,
-	createMarketModel,
-};
+const Market = mongoose.model("Market", marketSchema, collectionName);
+
+module.exports = Market;
+
+

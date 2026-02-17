@@ -3,6 +3,12 @@ export type FieldOption = {
   label: string;
 };
 
+export type FieldCheckbox = {
+  value: string;
+  label: string;
+  param?: Record<string, string>;
+}
+
 export type FormContext<TValues> = {
   values: TValues;
   mode: "create" | "edit";

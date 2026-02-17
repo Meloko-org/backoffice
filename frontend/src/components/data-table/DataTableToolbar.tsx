@@ -24,7 +24,7 @@ export const DataTableToolbar = ({
           placeholder="Rechercher..."
           value={search ?? ""}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-64"
+          className="w-64 toolbar-elt"
         />
       ) : (
         <div />
@@ -39,7 +39,7 @@ export const DataTableToolbar = ({
           id="selector"
           value={limit}
           onChange={(e) => onLimitChange?.(Number(e.target.value))}
-          className=" w-20"
+          className=" w-20 toolbar-elt"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>

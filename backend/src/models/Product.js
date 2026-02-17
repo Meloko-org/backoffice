@@ -36,29 +36,17 @@ const productSchema = mongoose.Schema(
 	{ timestamps: true },
 );
 
-/**
- * Factory – 1 instance = 1 collection
- */
-function createProductModel(collectionName) {
-  const modelName = `Product_${collectionName}`;
 
-  return (
-    mongoose.models[modelName] ||
-    mongoose.model(modelName, productSchema, collectionName)
-  );
-}
 
-/**
- * Sélection automatique via .env
- */
-const Product = process.env.USE_FAKE_DB === "true"
-  ? createProductModel("fakeproducts")
-  : createProductModel("products");
+const collectionName = process.env.USE_FAKE_DB === "true"
+	? "fakeproduct"
+	: "product";
 
-module.exports = {
-	Product,
-	createProductModel,
-};
+
+const Product = mongoose.model("Product", productSchema, collectionName);
+
+module.exports = Product;
+
 
 
 

@@ -29,36 +29,27 @@ const productFamilySchema = mongoose.Schema(
 		},
 		category: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "productcategory",
+			ref: "ProductCategory" || "FakeProductCategory",
 			required: true,
 		},
 		tagCategories: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
-				ref: "tagCategories",
+				ref: "TagCategory",
 			},
 		],
 	},
 	{ timestamps: true },
 );
 
-function createProductFamilyModel(collectionName) {
-	const modelName = `ProductFamily_${collectionName}`;
 
-	return (
-		mongoose.models[modelName] || 
-		mongoose.model(modelName, productFamilySchema, collectionName)
-	);
-}
 
-/**
- * Sélection automatique via .env
- */
-const ProductFamily = process.env.USE_FAKE_DB === "true"
-	? createProductFamilyModel("fakeproductfamilies")
-	: createProductFamilyModel("productfamilies");
+const collectionName = process.env.USE_FAKE_DB === "true"
+	? "fakeproductfamilies"
+	: "productfamilies";
 
-module.exports = {
-	ProductFamily, 
-	createProductFamilyModel
-}
+
+const ProductFamily = mongoose.model("ProductFamily", productFamilySchema, collectionName);
+
+module.exports = ProductFamily;
+

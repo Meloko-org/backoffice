@@ -1,5 +1,5 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
-import { useAdminList } from "../../hooks/useAdminList";
+import FamilyDetails from "../../features/families/components/FamilyDetails";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import { useConfirm } from "./contexts/ConfirmContext";
@@ -21,6 +21,13 @@ export default function AdminSidebarRight() {
 		case "category":
 			content = <CategoryDetails 
 									category={infoContext.data} 
+									onDelete={infoContext.onDelete} 
+									onEdit={infoContext.onEdit}
+								/>;
+			break;
+		case "family":
+			content = <FamilyDetails 
+									family={infoContext.data} 
 									onDelete={infoContext.onDelete} 
 									onEdit={infoContext.onEdit}
 								/>;

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteCategory, getCategoriesList } from "../api/categories.api";
-import type { ProductCategory } from "../types/category";
+import { getFamiliesList } from "../api/families.api";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import type { ModelContext } from "../../../types/admin";
@@ -9,27 +8,28 @@ import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutConte
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { Pencil, Trash2 } from "lucide-react";
 import { useAdminList } from "../../../hooks/useAdminList";
-import { getTypeNames } from "../../types/api/types.api";
-import type { TypeForSelect } from "../../types/types/type";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import type { ProductFamily } from "../types/family";
+import type { CategoryForSelect } from "../../categories/types/category";
+import { getCategoryNames } from "../../categories/api/categories.api";
 
-export default function AdminCategoriesPage() {
+export default function AdminFamiliesPage() {
   const navigate = useNavigate()
 
   // définit le titre de la page pour AdminHeader
-  useAdminPage("Liste des catégories")
+  useAdminPage("Liste des familles")
   
-  const { openRight, closeRight, toggleRight } = useAdminLayout()
+  const { openRight, closeRight, toggleRight, isRightOpen } = useAdminLayout()
   const { confirm } = useConfirm();
 
 
-  const [types, setTypes] = useState<TypeForSelect[]>([]);
+  const [categories, setCategories] = useState<CategoryForSelect[]>([]);
 
   useEffect(() => {
-    getTypeNames().then(setTypes)
+    getCategoryNames().then(setCategories)
   }, [])
 
-  console.log("les types :", types)
+  console.log("les types :", categories)
 
 
   /*
@@ -51,49 +51,50 @@ export default function AdminCategoriesPage() {
     limit,
     setLimit,
     handleSort,
-  } = useAdminList(getCategoriesList);
+  } = useAdminList(getFamiliesList);
 
 
 
 
 
   /* gère l'affichage de la cat dans la sidebarRight */ 
-  const [ selectedCategory, setSelectedCategory ] = useState<ProductCategory | null>(null);
+  const [ selectedFamily, setSelectedFamily ] = useState<ProductFamily | null>(null);
 
   const infoContext: ModelContext = useMemo(() => {
-    if (!selectedCategory) return null;
+    if (!selectedFamily) return null;
 
     return {
-      type: "category",
-      title: "Détail de la catégorie",
-      data: selectedCategory,
-      onEdit: () => handleEditCategory(selectedCategory),
-      onDelete: () => handleDeleteCategory(selectedCategory),
+      type: "family",
+      title: "Détail de la famille",
+      data: selectedFamily,
+      onEdit: () => handleEditFamily(selectedFamily),
+      onDelete: () => handleDeleteFamily(selectedFamily),
     };
-  }, [selectedCategory]);
+  }, [selectedFamily]);
 
   useInfoContext(infoContext)
 
 
-  const handleSelectCategory = (category: ProductCategory) => {
-    console.log("selectedCat :", selectedCategory)
-    setSelectedCategory(category)
+  const handleSelectFamily = (family: ProductFamily) => {
+    console.log("selectedCat :", selectedFamily)
+    setSelectedFamily(family)
+
     openRight();
   }
 
-  const handleEditCategory = (category: ProductCategory) => {
-    console.log("edit cat :", category)
-    navigate(`/admin/categories/${category._id}/edit`)
+  const handleEditFamily = (family: ProductFamily) => {
+    console.log("edit cat :", family)
+    navigate(`/admin/categories/${family._id}/edit`)
   }
 
-  const handleDeleteCategory = (category: ProductCategory) => {
-    setSelectedCategory(category)
+  const handleDeleteFamily = (family: ProductFamily) => {
+    setSelectedFamily(family)
     openRight();
     confirm({
-      title: "Supprimer la catégorie",
+      title: "Supprimer la famille",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        await deleteCategory(category._id);
+        // await deleteFamily(family._id);
       },
     });
   }
@@ -136,35 +137,35 @@ export default function AdminCategoriesPage() {
               limit={limit}
               onLimitChange={setLimit}
 
-              getRowId={(cat) => cat._id}
-              onRowClick={handleSelectCategory}
+              getRowId={(fam) => fam._id}
+              onRowClick={handleSelectFamily}
               onPageChange={setPage}
               columns={[
                 { key: "name", label: "Nom", sortable: true },
                 { key: "slug", label: "Slug", sortable: true },
                 {
-                  key: "type",
-                  label: "Type",
-                  render: (cat) => cat.type?.name,
+                  key: "category",
+                  label: "Catégorie",
+                  render: (fam) => fam.category?.name,
                 },
                 {
                   key: "createdAt",
                   label: "Créée le",
                   sortable: true,
-                  render: (cat) =>
-                    new Date(cat.createdAt).toLocaleDateString(),
+                  render: (fam) =>
+                    new Date(fam.createdAt).toLocaleDateString(),
                 },
                 {
                   key: "actions",
                   label: "",
-                  render: (cat) => (
+                  render: (fam) => (
                     <div className="table-actions">
                       <button 
                         className="table-action-btn edit" 
                         onClick={(e) => {
                           e.stopPropagation();
-                          console.log(cat)
-                          handleEditCategory(cat)
+                          console.log(fam)
+                          handleEditFamily(fam)
                         }}
                       >
                         <Pencil className="w-4 h-4" />
@@ -173,7 +174,7 @@ export default function AdminCategoriesPage() {
                         className="table-action-btn delete" 
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteCategory(cat)
+                          handleDeleteFamily(fam)
                         }}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -185,20 +186,20 @@ export default function AdminCategoriesPage() {
               actions={
                 <>
                   <select
-                    value={filters.type || ""}
+                    value={filters.category || ""}
                     onChange={(e) => {
                       const value = e.target.value;
 
                       setFilters((prev) => ({
                         ...prev,
-                        type: value || undefined,
+                        category: value || undefined,
                       }));
                     }}
                     className="w-48 toolbar-elt"
                   >
-                    <option value="">Tous les types</option>
+                    <option value="">Toutes les catégories</option>
 
-                    {types?.map((type) => (
+                    {categories?.map((type) => (
                       <option key={type._id} value={type._id}>
                         {type.name}
                       </option>
@@ -206,9 +207,9 @@ export default function AdminCategoriesPage() {
                   </select>
                   <button
                     className="btn-primary"
-                    onClick={() => navigate("/admin/categories/create")}
+                    onClick={() => navigate("/admin/families/create")}
                   >
-                    Créer une catégorie
+                    Créer une famille
                   </button>
                 </>
               }

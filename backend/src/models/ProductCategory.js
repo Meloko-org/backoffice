@@ -32,22 +32,13 @@ const productCategorySchema = mongoose.Schema(
 );
 
 
-function createProductCategoryModel(collectionName) {
-	const modelName = `ProductCategory_${collectionName}`;
+const collectionName = process.env.USE_FAKE_DB === "true"
+	? "fakeproductcategories"
+	: "productcategories";
 
-	return (
-		mongoose.models[modelName] || 
-		mongoose.model(modelName, productCategorySchema, collectionName)
-	);
-}
 
-/**
- * Sélection automatique via .env
- */
-const ProductCategory = process.env.USE_FAKE_DB === "true"
-	? createProductCategoryModel("fakeproductcategories")
-	: createProductCategoryModel("productcategories");
+const ProductCategory = mongoose.model("ProductCategory", productCategorySchema, collectionName);
 
-module.exports = {
-	ProductCategory, createProductCategoryModel
-}
+module.exports = ProductCategory;
+
+

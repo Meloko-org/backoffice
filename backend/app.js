@@ -12,6 +12,7 @@ const { adminCategoriesRoutes } = require("./src/routes");
 const { adminFamiliesRoutes } = require("./src/routes");
 const { adminTypesRoutes } = require("./src/routes");
 
+require("./src/models/index");
 
 /**
  * Middlewares globaux

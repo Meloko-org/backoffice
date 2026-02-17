@@ -6,6 +6,7 @@ const {
   updateCategory,
   deleteCategory,
   getCategoryById,
+  getCategoryNames,
 } = require("../services/categories.services");
 
 
@@ -123,6 +124,20 @@ const getCategory = async (req, res, next) => {
   }
 }
 
+const categoryNames = async (req, res, next) => {
+  try {
+    const categories = await getCategoryNames();
+
+    res.json({
+      success: true,
+      data: categories,
+    })
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 
 module.exports = {
   listCategories,
@@ -130,4 +145,5 @@ module.exports = {
   updateCategoryHandler,
   deleteCategoryHandler,
   getCategory,
+  categoryNames,
 };

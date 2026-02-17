@@ -1,7 +1,7 @@
 const ApiError = require("../../../../utils/ApiError");
 const { normalizeSlug } = require("../../../../utils/normalize");
-const { ProductCategory } = require("../../../../models/ProductCategory");
-const { ProductFamily } = require("../../../../models/ProductFamily");
+const ProductCategory = require("../../../../models/ProductCategory");
+const ProductFamily = require("../../../../models/ProductFamily");
 const mongoose = require("mongoose");
 
 
@@ -165,10 +165,15 @@ async function getCategoryById(categoryId) {
 }
 
 
+async function getCategoryNames() {
+  return ProductCategory.find({}, "name").sort({ name: 1}).lean();
+}
+
 module.exports = {
   getCategories,
   createCategory,
   updateCategory,
   deleteCategory,
   getCategoryById,
+  getCategoryNames,
 };

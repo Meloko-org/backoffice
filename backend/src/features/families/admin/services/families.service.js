@@ -1,6 +1,7 @@
-const { ProductFamily } = require("../../../../models/ProductFamily");
-const { ProductCategory } = require("../../../../models/ProductCategory");
+const ProductFamily = require("../../../../models/ProductFamily");
+const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
+const mongoose = require("mongoose")
 
 
 
@@ -10,19 +11,50 @@ const { normalizeSlug } = require("../../../../utils/normalize");
 async function getFamilies({
   page = 1,
   limit = 20,
-  categoryId,
+  search,
+  sortKey = "createdAt",
+  sortDirection = "desc",
+  category,
 }) {
+
+  console.log(mongoose.modelNames());
   const skip = (page - 1) * limit;
 
   const filter = {};
-  if (categoryId) {
-    filter.category = categoryId;
+
+  // 🔎 SEARCH
+  if (search) {
+    filter.name = {
+      $regex: search,
+      $options: "i", // insensible à la casse
+    };
   }
+
+  if (category) {
+    filter.category = category;
+  }
+
+  
+
+  // 🔀 SORT
+  const sort = {
+    [sortKey]: sortDirection === "asc" ? 1 : -1,
+  };
 
   const [items, totalItems] = await Promise.all([
     ProductFamily.find(filter)
-      .populate("category", "name slug")
-      .sort({ createdAt: -1 })
+      .populate([
+        {
+          path: "category",
+          select: "name slug"
+        }, 
+        {
+          path: "tagCategories",
+          model: "TagCategory",
+          select: "name color",
+        },
+      ])
+      .sort(sort)
       .skip(skip)
       .limit(limit)
       .lean(),
