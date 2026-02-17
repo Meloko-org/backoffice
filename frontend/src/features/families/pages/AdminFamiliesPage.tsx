@@ -76,15 +76,15 @@ export default function AdminFamiliesPage() {
 
 
   const handleSelectFamily = (family: ProductFamily) => {
-    console.log("selectedCat :", selectedFamily)
+    console.log("selectedfam :", selectedFamily)
     setSelectedFamily(family)
 
     openRight();
   }
 
   const handleEditFamily = (family: ProductFamily) => {
-    console.log("edit cat :", family)
-    navigate(`/admin/categories/${family._id}/edit`)
+    console.log("edit fam :", family)
+    navigate(`/admin/families/${family._id}/edit`)
   }
 
   const handleDeleteFamily = (family: ProductFamily) => {

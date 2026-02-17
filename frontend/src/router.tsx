@@ -16,6 +16,8 @@ import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
 import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
 import AdminFamiliesPage from "./features/families/pages/AdminFamiliesPage";
+import CreateFamilyPage from "./features/families/pages/CreateFamilyPage";
+import EditFamilyPage from "./features/families/pages/EditFamilyPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -77,6 +79,20 @@ export const router = createBrowserRouter([
           <AdminRouteGuard permission="families:manage">
             <AdminFamiliesPage />
           </AdminRouteGuard> )
+      },
+      { 
+        path: "families/create", 
+        element: (
+          <AdminRouteGuard permission="families:manage">
+            <CreateFamilyPage />
+          </AdminRouteGuard>)
+      },
+      { 
+        path: "families/:id/edit", 
+        element: (
+          <AdminRouteGuard permission="families:manage">
+            <EditFamilyPage />
+          </AdminRouteGuard>)
       },
       { 
         path: "products/import", 

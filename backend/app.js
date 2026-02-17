@@ -11,6 +11,7 @@ const { adminMarketsRoutes } = require("./src/routes");
 const { adminCategoriesRoutes } = require("./src/routes");
 const { adminFamiliesRoutes } = require("./src/routes");
 const { adminTypesRoutes } = require("./src/routes");
+const { adminTagCategoriesRoutes } = require("./src/routes");
 
 require("./src/models/index");
 
@@ -29,6 +30,7 @@ app.use("/admin/markets", adminMarketsRoutes);
 app.use("/admin/categories", adminCategoriesRoutes);
 app.use("/admin/families", adminFamiliesRoutes);
 app.use("/admin/types", adminTypesRoutes);
+app.use("/admin/tagCategories", adminTagCategoriesRoutes);
 
 /**
  * Route de test

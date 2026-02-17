@@ -1,7 +1,8 @@
 const ProductFamily = require("../../../../models/ProductFamily");
 const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
-const mongoose = require("mongoose")
+const { default: mongoose } = require("mongoose");
+const ApiError = require("../../../../utils/ApiError");
 
 
 
@@ -17,7 +18,7 @@ async function getFamilies({
   category,
 }) {
 
-  console.log(mongoose.modelNames());
+  
   const skip = (page - 1) * limit;
 
   const filter = {};
@@ -177,6 +178,35 @@ async function deleteFamily(familyId) {
   await family.deleteOne();
 }
 
+async function getFamilyById(familyId) {
+  if (!mongoose.Types.ObjectId.isValid(familyId)) {
+    throw new ApiError("Id de la famille invalide", 400)
+  }
+
+  const family = await ProductFamily.findById(familyId)
+    .populate([
+      {
+        path: "category",
+        select: "name",
+      },
+      {
+        path: "tagCategories",
+        model: "TagCategory",
+        select: "name color",
+      },
+    ])
+
+    if (!family) {
+      throw new ApiError("Famille introuvable.", 409)
+    }
+
+    return family;
+}
+
+async function getFamilyNames() {
+  return ProductFamily.find({}, "name").sort({ name: 1}).lean();
+}
+
 
 
 module.exports = {
@@ -184,4 +214,6 @@ module.exports = {
   createFamily,
   updateFamily,
   deleteFamily,
+  getFamilyById,
+  getFamilyNames,
 };

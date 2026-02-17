@@ -44,5 +44,11 @@ export interface FamilyFormValues {
   image: string | null;
   category: string;
   tagCategories: string[];
-  productsTypes: string[];
+  productsTypes: string;
+}
+
+
+export interface FamilyForSelect {
+  _id: string;
+  name: string;
 }

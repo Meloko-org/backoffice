@@ -7,6 +7,8 @@ import FloatingSelect from "./floatingSelect";
 import type { FieldRenderer } from "../FormRenderer";
 import Checkbox from "./checkbox";
 import FileUpload from "./fileUpload";
+import RadioGroup from "./radioGroup";
+import CheckboxGroup from "./checkboxGroup";
 
 
 
@@ -208,10 +210,81 @@ export const adminFormRenderers = {
     );
   },
 
+  "radio-group": (context) => {
+    const { 
+      field, 
+      name, 
+      value, 
+      error, 
+      disabled,
+      asyncOptions,
+      asyncLoading, 
+      setValue 
+    } = context;
 
+    if (field.type !== "radio-group") return null;
 
+    const options =
+      typeof field.options === "function"
+        ? asyncOptions[name] || []
+        : field.options || [];
 
+    const isLoading = asyncLoading[name];
 
+    return (
+      <RadioGroup
+        key={String(name)}
+        label={field.label}
+        value={value ?? ""}
+        required={field.required}
+        disabled={disabled || isLoading}
+        error={error}
+        options={options}
+        name={String(name)}
+        onChange={(v) => setValue(name, v)}
+      />
+    );
+  },
+
+  "checkbox-group": (context) => {
+    const { 
+      field, 
+      name, 
+      value, 
+      error, 
+      disabled,
+      asyncOptions,
+      asyncLoading, 
+      setValue 
+    } = context;
+
+    if (field.type !== "checkbox-group") return null;
+
+    console.log("checkbox-group renderer", name, field.options);
+
+    const options =
+      typeof field.options === "function"
+        ? asyncOptions[name] || []
+        : field.options || [];
+
+    
+    console.log("asyncOptions for", name, asyncOptions[name]);
+
+    const isLoading = asyncLoading[name];
+
+    return (
+      <CheckboxGroup
+        key={String(name)}
+        label={field.label}
+        value={value ?? []}
+        required={field.required}
+        disabled={disabled || isLoading}
+        error={error}
+        options={options}
+        onChange={(v) => setValue(name, v)}
+      />
+    );
+  },
 
 
 

@@ -231,10 +231,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
   useEffect(() => {
     schema.sections.forEach((section) => {
       Object.entries(section.fields).forEach(([key, field]) => {
-        if (
-          field.type === "select" &&
-          typeof field.options === "function"
-        ) {
+        if ("options" in field && typeof field.options === "function") {
           const name = key as keyof TValues;
 
           const shouldReload =

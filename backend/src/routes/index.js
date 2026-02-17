@@ -4,6 +4,7 @@ const adminMarketsRoutes = require("../features/markets/admin/routes/AdminMarket
 const adminCategoriesRoutes = require("../features/categories/admin/routes/categories.routes.js");
 const adminFamiliesRoutes = require("../features/families/admin/routes/families.routes.js");
 const adminTypesRoutes = require("../features/types/admin/routes/types.routes.js");
+const adminTagCategoriesRoutes = require("../features/tagCategories/admin/routes/tagCategories.routes.js");
 
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   adminCategoriesRoutes,
   adminFamiliesRoutes,
   adminTypesRoutes,
+  adminTagCategoriesRoutes,
 };

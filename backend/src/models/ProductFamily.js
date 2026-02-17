@@ -29,7 +29,7 @@ const productFamilySchema = mongoose.Schema(
 		},
 		category: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "ProductCategory" || "FakeProductCategory",
+			ref: "ProductCategory",
 			required: true,
 		},
 		tagCategories: [

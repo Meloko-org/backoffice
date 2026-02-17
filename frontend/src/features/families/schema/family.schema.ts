@@ -1,16 +1,28 @@
 import { defineFormSchema, field } from "../../../core/forms/schema";
-import type { FieldCheckbox } from "../../../core/forms/types";
+import type { FieldOption } from "../../../core/forms/types";
+import { getCategoryNames } from "../../categories/api/categories.api";
 import { getTagCategoryNames } from "../../tagCategories/api/tagCategory.api";
 import type { FamilyFormValues } from "../types/family";
 
 
-async function fetchTagCategories(): Promise<FieldCheckbox[]> {
+async function fetchTagCategories(): Promise<FieldOption[]> {
+  console.log("fetchTagCategories called");
   const data = await getTagCategoryNames();
 
   return data.map((t: any) => ({
     value: t._id,
     label: t.name,
-    color: t.param,
+    description: t.description,
+    color: t.color,
+  }))
+}
+
+async function fetchCategories(): Promise<FieldOption[]> {
+  const data = await getCategoryNames();
+
+  return data.map((t: any) => ({
+    value: t._id,
+    label: t.name,
   }))
 }
 
@@ -32,7 +44,7 @@ export const familySchema =
             label: "Catégorie",
             required: true,
             floating: true,
-            options: fetchTagCategories,
+            options: fetchCategories,
             disabled: ({ mode }) => mode === "edit",
           }),
 
@@ -45,17 +57,22 @@ export const familySchema =
           image: field.input({
             label: "Image",
             required: false,
-          }),
-
-          tagCategories: field.select({
-            label: "Tag Catégories",
-            required: false,
             floating: true,
           }),
 
-          productTypes: field.checkbox({
+          tagCategories: field.checkboxGroup({
+            label: "Tag Catégories",
+            required: false,
+            options: fetchTagCategories,
+          }),
+
+          productsTypes: field.radioGroup({
             label: "Product Type",
             required: true,
+            options: [
+              {label: "Classique", value: "classic"},
+              {label: "Vrac", value: "bulk"}
+            ],
           })
         }
       }

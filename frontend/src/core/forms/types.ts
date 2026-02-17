@@ -1,6 +1,8 @@
 export type FieldOption = {
   value: string;
   label: string;
+  description?: string;
+  color?: string;
 };
 
 export type FieldCheckbox = {
@@ -120,6 +122,25 @@ export type DateFieldSchema<TValues> =
     max?: string;
   };
 
+/* Props des radio group */
+export type RadioGroupFieldSchema<TValues> =
+  BaseFieldSchema<TValues> & {
+    type: "radio-group";
+    options: 
+      | FieldOption[]
+      | AsyncOptionsLoader<TValues>;
+    optionsDeps?: (keyof TValues)[];
+  };
+
+/* Props des checkbox group (multiple) */
+export type CheckboxGroupFieldSchema<TValues> =
+  BaseFieldSchema<TValues> & {
+    type: "checkbox-group";
+    options: 
+      | FieldOption[]
+      | AsyncOptionsLoader<TValues>;
+    optionsDeps?: (keyof TValues)[];
+  };
 
 
 
@@ -129,8 +150,11 @@ export type FormFieldSchema<TValues> =
   | SelectFieldSchema<TValues>
   | TextareaFieldSchema<TValues>
   | CheckboxFieldSchema<TValues>
+  | CheckboxGroupFieldSchema<TValues>
+  | RadioGroupFieldSchema<TValues>
   | FileFieldSchema<TValues>
   | DateFieldSchema<TValues>;
+
 
 
 

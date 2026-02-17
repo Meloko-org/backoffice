@@ -4,6 +4,7 @@ const {
   createFamily,
   updateFamily,
   deleteFamily,
+  getFamilyById,
 } = require("../services/families.service");
 
 const listFamilies = async (req, res, next) => {
@@ -102,9 +103,44 @@ const deleteFamilyHandler = async (req, res, next) => {
   }
 };
 
+
+const getFamily = async (req, res, next) => {
+  try {
+    const familyId = req.params.id;
+
+    const family = await getFamilyById(familyId);
+
+    // console.log("FAMILLE :", family)
+
+    res.json({
+      success: true,
+      data: family,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+const familyNames = async (req, res, next) => {
+  try {
+    const families = await getFamilyNames();
+
+    res.json({
+      success: true,
+      data: families,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   listFamilies,
   createFamilyHandler,
   updateFamilyHandler,
   deleteFamilyHandler,
+  getFamily,
+  familyNames,
 };

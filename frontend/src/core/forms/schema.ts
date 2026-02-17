@@ -1,10 +1,12 @@
 import type {
-  CheckboxFieldSchema,
-  FileFieldSchema,
   FormSchema,
   InputFieldSchema,
-  SelectFieldSchema,
   TextareaFieldSchema,
+  SelectFieldSchema,
+  CheckboxFieldSchema,
+  FileFieldSchema,
+  RadioGroupFieldSchema,
+  CheckboxGroupFieldSchema,
 } from "./types";
 
 export const field = {
@@ -41,7 +43,22 @@ export const field = {
   ): FileFieldSchema<TValues> => ({
     ...config,
     type: "file"
-  })
+  }),
+
+  radioGroup: <TValues>(
+    config: Omit<RadioGroupFieldSchema<TValues>, "type">
+  ): RadioGroupFieldSchema<TValues> => ({
+    ...config,
+    type: "radio-group",
+  }),
+
+  checkboxGroup: <TValues>(
+    config: Omit<CheckboxGroupFieldSchema<TValues>, "type">
+  ): CheckboxGroupFieldSchema<TValues> => ({
+    ...config,
+    type: "checkbox-group",
+  }),
+
 
 
 

@@ -4,6 +4,8 @@ const tagCategoryNames = async (req, res, next) => {
   try {
     const tagCategories = await getTagCategoryNames();
 
+    console.log("TAG CATEGORIES NAMES :", tagCategories)
+
     res.json({
       success: true,
       data: tagCategories,

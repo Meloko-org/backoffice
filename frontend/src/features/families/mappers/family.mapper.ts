@@ -7,9 +7,9 @@ export const mapFamilyToFormValues = (
     name: family.name,
     description: family.description ?? "",
     image: family.image ?? "",
-    productTypes: family.productTypes,
+    productsTypes: family.productsTypes?.[0] ?? "",
     category: family.category._id,
-    tagCategories: family.tagCategories
+    tagCategories: family.tagCategories.map((t) => (t._id))
   };
 };
 
@@ -22,7 +22,7 @@ export const mapFormValuesToPayload = (
     description: values.description,
     image: values.image || null,
     category: values.category,
-    productTypes: values.productTypes,
+    productsTypes: [values.productsTypes],
     tagCategories: values.tagCategories
   };
 };

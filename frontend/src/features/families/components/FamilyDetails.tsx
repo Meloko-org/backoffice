@@ -112,7 +112,7 @@ export default function FamilyDetails({
           {family.tagCategories && family.tagCategories.map((tag) => (
             <p 
               key={tag._id} 
-              className="detail-info slug font-mono text-xs px-2 py-1 mr-2 rounded inline-block"
+              className="detail-info text-black slug font-mono text-xs px-2 py-1 mr-2 rounded inline-block"
               style={{ backgroundColor: `${tag.color}`}}
             >
               {tag.name}

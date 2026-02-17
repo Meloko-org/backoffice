@@ -59,6 +59,8 @@ export function AdminForm<TValues extends Record<string, any>>({
     onSubmit,
   });
 
+  console.log("RENDERER :", values)
+
   return (
     <form
       onSubmit={(e) => {
@@ -80,6 +82,8 @@ export function AdminForm<TValues extends Record<string, any>>({
         >
           {Object.entries(section.fields).map(([key, field]) => {
             const name = key as keyof TValues;
+
+            console.log("Checking async fields...");
 
             if (!isFieldVisible(name)) return null;
 
