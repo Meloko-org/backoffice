@@ -45,6 +45,8 @@ const listFamilies = async (req, res, next) => {
 
 const createFamilyHandler = async (req, res, next) => {
   try {
+    
+    console.log("body :", req.body)
     validateFamilyPayload(req.body);
 
     const family = await createFamily(req.body);

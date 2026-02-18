@@ -29,6 +29,13 @@ function validateFamilyPayload(payload) {
 		}
 	}
 
+	if (
+		payload.tagCategories !== undefined &&
+		!Array.isArray(payload.tagCategories)
+	) {
+		throw new ValidationError("tagCategories doit être un tableau");
+	}
+
 }
 
 module.exports = {

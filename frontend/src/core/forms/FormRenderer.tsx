@@ -2,6 +2,7 @@ import type { FieldOption, FormFieldSchema, FormSchema } from "./types";
 import { useFormEngine } from "./useFormEngine";
 
 import FormSection from "./layout/FormSection";
+import { AnimatedButton } from "../../components/global/buttons/AnimatedButton";
 
 
 export type FieldRendererContext<TValues> = {
@@ -105,13 +106,12 @@ export function AdminForm<TValues extends Record<string, any>>({
       ))}
 
       <div className="flex justify-end pr-3">
-        <button
+        <AnimatedButton
           type="submit"
-          disabled={loading}
-          className="btn-primary"
+          loading={loading}
         >
-          {loading ? "Envoi..." : submitLabel}
-        </button>
+          {submitLabel}
+        </AnimatedButton>
       </div>
     </form>
   );

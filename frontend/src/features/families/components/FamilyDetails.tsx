@@ -31,7 +31,6 @@ export default function FamilyDetails({
       title: "Supprimer la famille",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        console.log("deleteFamily")
         await deleteFamily(family._id);
       },
     });

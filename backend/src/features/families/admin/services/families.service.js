@@ -1,5 +1,6 @@
 const ProductFamily = require("../../../../models/ProductFamily");
 const ProductCategory = require("../../../../models/ProductCategory");
+const Product = require("../../../../models/Product");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const { default: mongoose } = require("mongoose");
 const { NotFoundError, ValidationError, ApiError } = require("../../../../utils/ApiError");
@@ -107,7 +108,7 @@ async function createFamily(data) {
     image,
     productsTypes,
     category,
-    tagCategories,
+    tagCategories: cleanTagCategories,
   });
 }
 

@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const app = express();
 
-const ApiError = require("./src/utils/ApiError");
+const { ApiError } = require("./src/utils/ApiError");
 
 const { productsRoutes } = require("./src/routes");
 const { adminProductsRoutes } = require("./src/routes");

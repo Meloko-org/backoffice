@@ -7,6 +7,7 @@ import { AdminForm } from "../../../core/forms/FormRenderer";
 import { categorySchema } from "../schema/category.schema";
 import { useEffect, useState } from "react";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
+import { BallTriangle } from "react-loader-spinner";
 
 type CategoryFormPageProps = {
   mode: "create" | "edit";
@@ -20,8 +21,15 @@ export default function CategoryFormPage({
   const navigate = useNavigate();
   const isEdit = mode === "edit";
 
+  const defaultValues: CategoryFormValues = {
+    name: "",
+    description: "",
+    image: null,
+    type: "",
+  }
+
   const [initialValues, setInitialValues] =
-    useState<Partial<CategoryFormValues>>();
+    useState<Partial<CategoryFormValues>>(defaultValues);
 
   const [loading, setLoading] = useState(isEdit);
 
@@ -66,7 +74,20 @@ export default function CategoryFormPage({
   };
 
   if (loading) {
-    return <div className="p-8">Chargement...</div>;
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#98B66E"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   return (
