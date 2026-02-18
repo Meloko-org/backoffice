@@ -260,15 +260,11 @@ export const adminFormRenderers = {
 
     if (field.type !== "checkbox-group") return null;
 
-    console.log("checkbox-group renderer", name, field.options);
-
     const options =
       typeof field.options === "function"
         ? asyncOptions[name] || []
         : field.options || [];
 
-    
-    console.log("asyncOptions for", name, asyncOptions[name]);
 
     const isLoading = asyncLoading[name];
 

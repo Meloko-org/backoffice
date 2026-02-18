@@ -59,8 +59,6 @@ export function AdminForm<TValues extends Record<string, any>>({
     onSubmit,
   });
 
-  console.log("RENDERER :", values)
-
   return (
     <form
       onSubmit={(e) => {

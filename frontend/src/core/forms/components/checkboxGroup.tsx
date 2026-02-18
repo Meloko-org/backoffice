@@ -41,9 +41,9 @@ export default function CheckboxGroup({
         {required && <span className="text-red-500 ml-1">*</span>}
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 justify-center">
         {options.map((option) => (
-          <label key={option.value} style={{ display: "flex", gap: 8 }} className="text-black font-medium">
+          <label key={option.value} style={{ display: "flex", gap: 8 }} className="flex items-center gap-2 text-black font-medium">
             <input
               type="checkbox"
               checked={value.includes(option.value)}
@@ -60,21 +60,6 @@ export default function CheckboxGroup({
               option.label
             )}
           </label>
-          // <label
-          //   key={option.value}
-          //   className={`flex items-center gap-2 text-sm cursor-pointer ${
-          //     disabled ? "cursor-not-allowed opacity-60" : ""
-          //   }`}
-          // >
-          //   <input
-          //     type="checkbox"
-          //     checked={value.includes(option.value)}
-          //     onChange={() => handleToggle(option.value)}
-          //     disabled={disabled}
-          //     className="accent-black"
-          //   />
-          //   {option.label}
-          // </label>
         ))}
       </div>
 
