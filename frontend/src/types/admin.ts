@@ -1,5 +1,6 @@
 import type { ProductCategory } from "../features/categories/types/category";
 import type { ProductFamily } from "../features/families/types/family";
+import type { Product } from "../features/products/types/product";
 
 
 export type AdminRole =
@@ -25,5 +26,12 @@ export type ModelContext =
       data: ProductFamily;
       onEdit?: (family: ProductFamily) => void;
       onDelete?: (family: ProductFamily) => void;
+    }
+  | { 
+      type: "product"; 
+      title: string;
+      data: Product;
+      onEdit?: (product: Product) => void;
+      onDelete?: (product: Product) => void;
     }
   | null;

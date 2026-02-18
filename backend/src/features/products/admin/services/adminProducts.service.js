@@ -1,30 +1,51 @@
-const { Product } = require("../../../../models/Product");
-const { ProductFamily } = require("../../../../models/ProductFamily");
+const Product = require("../../../../models/Product");
+const ProductFamily = require("../../../../models/ProductFamily");
+const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
 
 async function getProducts({
   page = 1,
   limit = 20,
-  familyId,
+  search,
+  sortKey = "createdAt",
+  sortDirection = "desc",
+  family,
 }) {
+
   const skip = (page - 1) * limit;
 
   const filter = {};
-  if (familyId) {
-    filter.family = familyId;
+
+  // 🔎 SEARCH
+  if (search) {
+    filter.name = {
+      $regex: search,
+      $options: "i", // insensible à la casse
+    };
   }
+
+  if (family) {
+    filter.family = family;
+  }
+
+  // 🔀 SORT
+  const sort = {
+    [sortKey]: sortDirection === "asc" ? 1 : -1,
+  };
 
   const [items, totalItems] = await Promise.all([
     Product.find(filter)
       .populate({
         path: "family",
+        model: "ProductFamily",
         populate: {
           path: "category",
+          model: "ProductCategory",
           select: "name slug",
         },
         select: "name slug",
       })
-      .sort({ createdAt: -1 })
+      .sort(sort)
       .skip(skip)
       .limit(limit)
       .lean(),

@@ -60,7 +60,7 @@ export const adminMenu: AdminMenuItem[] = [
         icon: TableProperties, 
         label: "Produits", 
         path: "/admin/products", 
-        permission: "products:read", 
+        permission: "products:manage", 
       },
       { 
         type: "sublink", 

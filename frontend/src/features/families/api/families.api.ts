@@ -19,27 +19,27 @@ export const getFamilies = async (params: {
       limit: String(params.limit ?? 10),
     };
   
-    if (params.search) queryObject.search = params.search;
-    if (params.sortKey) queryObject.sortKey = params.sortKey;
-    if (params.sortDirection) queryObject.sortDirection = params.sortDirection;
-  
-    // 🔥 Ici on injecte les filtres dynamiques
-    if (params.filters) {
-      Object.entries(params.filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          queryObject[key] = String(value);
-        }
-      });
-    }
-  
-    const query = new URLSearchParams(queryObject);
-  
-    return apiFetch<FamilyListResponse>(
-      `${BASE_URL}/?${query.toString()}`,
-      {
-        method: "GET",
+  if (params.search) queryObject.search = params.search;
+  if (params.sortKey) queryObject.sortKey = params.sortKey;
+  if (params.sortDirection) queryObject.sortDirection = params.sortDirection;
+
+  // 🔥 Ici on injecte les filtres dynamiques
+  if (params.filters) {
+    Object.entries(params.filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryObject[key] = String(value);
       }
-    );
+    });
+  }
+
+  const query = new URLSearchParams(queryObject);
+
+  return apiFetch<FamilyListResponse>(
+    `${BASE_URL}/?${query.toString()}`,
+    {
+      method: "GET",
+    }
+  );
 }
 
 

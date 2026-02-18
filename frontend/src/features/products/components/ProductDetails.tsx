@@ -1,36 +1,34 @@
+import { ImageOff, Pencil, Trash2 } from "lucide-react";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
-import { Pencil, Trash2, ImageOff } from "lucide-react";
-import type { ProductFamily } from "../types/family";
-import { deleteFamily } from "../api/families.api";
-
+import type { Product } from "../types/product";
 
 type Props = {
-	family: ProductFamily;
-	onEdit?: (family: ProductFamily) => void;
-  onDelete?: (family: ProductFamily) => void;
+	product: Product;
+	onEdit?: (family: Product) => void;
+  onDelete?: (family: Product) => void;
 }
 
 
 export default function FamilyDetails({
-	family,
+	product,
 	onEdit,
 	onDelete,
 }: Props) {
 
-	if (!family) return null;
+	if (!product) return null;
 
   const { confirm } = useConfirm();
 
 
-	const imageUrl = family.image; 
+	const imageUrl = product.image; 
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
     confirm({
-      title: "Supprimer la famille",
+      title: "Supprimer le produit",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        await deleteFamily(family._id);
+        // await deleteProduct(product._id);
       },
     });
   };
@@ -42,7 +40,7 @@ export default function FamilyDetails({
         {hasImage ? (
           <img
             src={imageUrl!}
-            alt={family.name}
+            alt={product.name}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -59,7 +57,7 @@ export default function FamilyDetails({
           <p className="detail-label text-xs uppercase tracking-wide">
             Nom
           </p>
-          <p className="detail-info font-medium">{family.name}</p>
+          <p className="detail-info font-medium">{product.name}</p>
         </div>
 
         <div>
@@ -67,56 +65,57 @@ export default function FamilyDetails({
             Slug
           </p>
           <p className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
-            {family.slug}
+            {product.slug}
           </p>
         </div>
 
-        {family.category?.name && (
+        {product.family?.name && (
+          <div>
+            <p className="detail-label text-xs uppercase tracking-wide">
+              Famille
+            </p>
+            <p className="detail-info ">{product.family.name}</p>
+          </div>
+        )}
+
+        {product.family?.category.name && (
           <div>
             <p className="detail-label text-xs uppercase tracking-wide">
               Catégorie
             </p>
-            <p className="detail-info ">{family.category.name}</p>
+            <p className="detail-info ">{product.family.category.name}</p>
           </div>
         )}
 
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide">
-            Type de produits
-          </p>
-          <p className="detail-info leading-relaxed">
-            {family.productsTypes.map((type) => (
-              <span key={type}>{type}</span>
-            ))}
-          </p>
+        <div className="flex justify-between gap-x-4">
+          <div className="flex items-center w-full gap-x-2">
+            <div className="detail-label text-xs uppercase tracking-wide">Unité</div>
+            <div className="detail-info">{product.weight.unit}</div>
+          </div>
+          <div className="flex items-center w-full gap-x-2">
+            <div className="detail-label text-xs uppercase tracking-wide">Mesure</div>
+            <div className="detail-info ">{product.weight.measurement}</div>
+          </div>
+          <div className="flex items-center w-full gap-x-2">
+            <div className="detail-label text-xs uppercase tracking-wide">TAV</div>
+            <div className="detail-info ">{product.vatRate}</div>
+          </div>
         </div>
 
-        {family.description && (
+        
+
+        {product.description && (
           <div>
             <p className="detail-label text-xs uppercase tracking-wide">
               Description
             </p>
             <p className="detail-info leading-relaxed">
-              {family.description}
+              {product.description}
             </p>
           </div>
         )}
 
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide ">
-            Tags
-          </p>
-          {family.tagCategories && family.tagCategories.map((tag) => (
-            <p 
-              key={tag._id} 
-              className="detail-info text-black slug font-mono text-xs px-2 py-1 mr-2 rounded inline-block"
-              style={{ backgroundColor: `${tag.color}`}}
-            >
-              {tag.name}
-            </p>
-          ))}
-          
-        </div>
+        
 
 
       </div>
@@ -126,7 +125,7 @@ export default function FamilyDetails({
         <div className="pt-2 flex gap-2">
           {onEdit && (
             <button
-              onClick={() => onEdit(family)}
+              onClick={() => onEdit(product)}
               className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
             >
               <Pencil className="w-4 h-4" />

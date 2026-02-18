@@ -22,7 +22,7 @@ const productSchema = mongoose.Schema(
 		},
 		family: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "productFamily",
+			ref: "ProductFamily",
 		},
 		weight: {
 			type: weightSchema,
@@ -39,8 +39,8 @@ const productSchema = mongoose.Schema(
 
 
 const collectionName = process.env.USE_FAKE_DB === "true"
-	? "fakeproduct"
-	: "product";
+	? "fakeproducts"
+	: "products";
 
 
 const Product = mongoose.model("Product", productSchema, collectionName);

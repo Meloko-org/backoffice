@@ -1,5 +1,6 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
 import FamilyDetails from "../../features/families/components/FamilyDetails";
+import ProductDetails from "../../features/products/components/ProductDetails";
 import { ConfirmPanel } from "./components/ConfirmPanel";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
@@ -33,6 +34,13 @@ export default function AdminSidebarRight() {
 									onEdit={infoContext.onEdit}
 								/>;
 			break;
+		case "product":
+			content = <ProductDetails 
+									product={infoContext.data} 
+									onDelete={infoContext.onDelete} 
+									onEdit={infoContext.onEdit}
+								/>;
+			break;
 	}
 
 		
@@ -48,7 +56,7 @@ export default function AdminSidebarRight() {
 			</div> */}
 
 			<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
-				<div className="text-center">{infoContext && infoContext.title}</div>
+				<div className="text-center uppercase tracking-wide mt-3">{infoContext && infoContext.title}</div>
 				<div>
 					{content}
 				</div>

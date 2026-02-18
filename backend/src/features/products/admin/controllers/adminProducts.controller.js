@@ -1,5 +1,6 @@
 const parseCsv = require("../services/csvParser.service");
-const { importProducts, getProducts, createProduct, updateProduct, deleteProduct } = require("../services/productImport.service");
+const { importProducts, createProduct, updateProduct, deleteProduct } = require("../services/productImport.service");
+const { getProducts } = require("../services/adminProducts.service");
 const { validateProductPayload } = require("../domain/validateProductPayload");  
 
 const importProductsCsv = async (req, res) => {
@@ -29,23 +30,38 @@ const importProductsCsv = async (req, res) => {
 
 
 const listProducts = async (req, res, next) => {
+  console.log("INSIDE PRODUCTS CONTROLLER");
   try {
     const {
       page = 1,
       limit = 20,
+      search,
+      sortKey = "createdAt",
+      sortDirection = "desc",
       family,
     } = req.query;
 
+    /* garantir que page et limit sont bien des number */
+    const pageNumber = Math.max(1, Number(page) || 1);
+    const limitNumber = Math.min(100, Math.max(1, Number(limit) || 20));
+
+
     const result = await getProducts({
-      page: Number(page),
-      limit: Number(limit),
-      familyId: family,
+      page: Number(pageNumber),
+      limit: Number(limitNumber),
+      search,
+      sortKey,
+      sortDirection,
+      family,
     });
+
+    console.log(result)
 
     res.json({
       success: true,
       data: result,
     });
+    
   } catch (error) {
     next(error);
   }

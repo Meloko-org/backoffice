@@ -5,6 +5,7 @@ const {
   updateFamily,
   deleteFamily,
   getFamilyById,
+  getFamilyNames,
 } = require("../services/families.service");
 
 const listFamilies = async (req, res, next) => {

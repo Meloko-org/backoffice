@@ -1,14 +1,19 @@
 const express = require("express");
 const multer = require("multer");
-const { importProductsCsv, listProducts, createProductHandler, updateProductHandler, deleteProductHandler } = require("../controllers/adminProducts.controller");
+const { 
+	importProductsCsv, 
+	listProducts, 
+	createProductHandler, 
+	updateProductHandler, 
+	deleteProductHandler } = require("../controllers/adminProducts.controller");
 
 const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 
 router.post(
-    "/import-csv", 
-    upload.single("file"),
-    importProductsCsv
+	"/import-csv", 
+	upload.single("file"),
+	importProductsCsv
 )
 
 router.get("/", listProducts);

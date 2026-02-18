@@ -3,6 +3,7 @@ import type { AdminRole } from "../types/admin";
 export type Permission =
   | "dashboard:read"
   | "products:read"
+  | "products:manage"
   | "products:write"
   | "products:import"
   | "categories:manage"
@@ -34,6 +35,7 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "dashboard:read",
     "products:read",
     "products:write",
+    "products:manage",
     "products:import",
     "categories:manage",
 		"families:manage",
@@ -49,6 +51,7 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "dashboard:read",
     "products:read",
     "products:write",
+    "products:manage",
     "products:import",
     "categories:manage",
 		"families:manage",

@@ -35,8 +35,6 @@ async function getFamilies({
     filter.category = category;
   }
 
-  
-
   // 🔀 SORT
   const sort = {
     [sortKey]: sortDirection === "asc" ? 1 : -1,
