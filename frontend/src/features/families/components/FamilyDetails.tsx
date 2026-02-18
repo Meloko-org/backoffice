@@ -2,6 +2,7 @@ import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 // import { deleteFamily } from "../api/families.api";
 import { Pencil, Trash2, ImageOff } from "lucide-react";
 import type { ProductFamily } from "../types/family";
+import { deleteFamily } from "../api/families.api";
 
 
 type Props = {
@@ -16,8 +17,6 @@ export default function FamilyDetails({
 	onEdit,
 	onDelete,
 }: Props) {
-  
-  console.log("family :", family)
 
 	if (!family) return null;
 
@@ -33,7 +32,7 @@ export default function FamilyDetails({
       description: "Cette action est irréversible.",
       onConfirm: async () => {
         console.log("deleteFamily")
-        // await deleteFamily(family._id);
+        await deleteFamily(family._id);
       },
     });
   };

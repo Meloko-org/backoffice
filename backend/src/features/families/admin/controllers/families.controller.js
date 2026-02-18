@@ -45,14 +45,7 @@ const listFamilies = async (req, res, next) => {
 
 const createFamilyHandler = async (req, res, next) => {
   try {
-    const errors = validateFamilyPayload(req.body);
-
-    if (errors.length > 0) {
-      return res.status(400).json({
-        success: false,
-        errors,
-      })
-    }
+    validateFamilyPayload(req.body);
 
     const family = await createFamily(req.body);
 
@@ -60,6 +53,7 @@ const createFamilyHandler = async (req, res, next) => {
       success: true,
       data: family,
     });
+    
   } catch (error) {
     next(error);
   }
@@ -67,14 +61,10 @@ const createFamilyHandler = async (req, res, next) => {
 
 const updateFamilyHandler = async (req, res, next) => {
   try {
-    const errors = validateFamilyPayload(req.body);
+    console.log("id :", req.params.id)
+    console.log("body :", req.body)
 
-    if (errors.length > 0) {
-      return res.status(400).json({
-        success: false,
-        errors,
-      })
-    }
+    validateFamilyPayload(req.body);
 
     const family = await updateFamily(
       req.params.id,
@@ -98,6 +88,7 @@ const deleteFamilyHandler = async (req, res, next) => {
       success: true,
       message: "Famille supprimée",
     });
+
   } catch (error) {
     next(error);
   }

@@ -58,8 +58,6 @@ export default function AdminSidebar() {
 
 	const menu = useFilteredAdminMenu();
 
-	// console.log("SIDEBAR")
-	console.log("first :", user)
 
   return (
     <aside

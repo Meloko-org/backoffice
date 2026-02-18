@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFamiliesList } from "../api/families.api";
+import { deleteFamily, getFamiliesList } from "../api/families.api";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import type { ModelContext } from "../../../types/admin";
@@ -28,8 +28,6 @@ export default function AdminFamiliesPage() {
   useEffect(() => {
     getCategoryNames().then(setCategories)
   }, [])
-
-  console.log("les types :", categories)
 
 
   /*
@@ -76,14 +74,11 @@ export default function AdminFamiliesPage() {
 
 
   const handleSelectFamily = (family: ProductFamily) => {
-    console.log("selectedfam :", selectedFamily)
     setSelectedFamily(family)
-
     openRight();
   }
 
   const handleEditFamily = (family: ProductFamily) => {
-    console.log("edit fam :", family)
     navigate(`/admin/families/${family._id}/edit`)
   }
 
@@ -94,7 +89,7 @@ export default function AdminFamiliesPage() {
       title: "Supprimer la famille",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        // await deleteFamily(family._id);
+        await deleteFamily(family._id);
       },
     });
   }

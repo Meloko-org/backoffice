@@ -1,25 +1,29 @@
 const Type = require("../../../../models/Type");
+const { ValidationError } = require("../../../../utils/ApiError");
 
 async function validateCategoryPayload(payload) {
-	const errors = {};
+
+	if (!payload.name) {
+    throw new ValidationError("Name manquant.");
+  }
 
 	if (payload.name !== undefined) {
     if (typeof payload.name !== "string" || payload.name.trim().length < 2) {
-      errors.name = "name invalide";
+      throw new ValidationError("Name invalide.");
     }
   }
 
 	if (!payload.type) {
-		errors.type= "type manquant.";
+		throw new ValidationError("type manquant.");
+
 	} else {
 		const existingType = await Type.findById(payload.type);
 
 		if (!existingType) {
-			errors.type = "Ce type n'existe pas.";
+			throw new Validation("Ce type n'existe pas.");
 		}
 	}
 
-	return errors;
 }
 
 

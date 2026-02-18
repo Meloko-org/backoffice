@@ -2,8 +2,7 @@ const ProductFamily = require("../../../../models/ProductFamily");
 const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const { default: mongoose } = require("mongoose");
-const ApiError = require("../../../../utils/ApiError");
-
+const { NotFoundError, ValidationError, ApiError } = require("../../../../utils/ApiError");
 
 
 /**
@@ -87,20 +86,18 @@ async function createFamily(data) {
     tagCategories,
   } = data;
 
-  if (!name || !category) {
-    throw new Error("Nom et catégorie sont obligatoires");
-  }
+  
 
   const parentCategory = await ProductCategory.findById(category);
   if (!parentCategory) {
-    throw new Error("Catégorie parente introuvable");
+    throw new NotFoundError("Catégorie parente introuvable");
   }
 
   const slug = normalizeSlug(name, { prefix: parentCategory.slug});
 
   const existing = await ProductFamily.findOne({ slug });
   if (existing) {
-    throw new Error("Une famille avec ce nom existe déjà dans cette catégorie");
+    throw new ValidationError("Une famille avec ce nom existe déjà dans cette catégorie");
   }
 
   return ProductFamily.create({
@@ -118,7 +115,7 @@ async function updateFamily(familyId, payload) {
   const family = await ProductFamily.findById(familyId).populate("category");
 
   if (!family) {
-    throw new Error("Famille introuvable");
+    throw new NotFoundError("Famille introuvable");
   }
 
   // 1️⃣ Rename → vérifier produits
@@ -128,8 +125,9 @@ async function updateFamily(familyId, payload) {
     });
 
     if (productsCount > 0) {
-      throw new Error(
-        "Impossible de renommer une famille contenant des produits"
+      throw new ApiError(
+        "Impossible de renommer une famille contenant des produits",
+        409
       );
     }
 
@@ -162,7 +160,7 @@ async function deleteFamily(familyId) {
   const family = await ProductFamily.findById(familyId);
 
   if (!family) {
-    throw new Error("Famille introuvable");
+    throw new NotFoundError("Famille introuvable");
   }
 
   const productsCount = await Product.countDocuments({
@@ -170,8 +168,9 @@ async function deleteFamily(familyId) {
   });
 
   if (productsCount > 0) {
-    throw new Error(
-      "Impossible de supprimer une famille contenant des produits"
+    throw new ApiError(
+      "Impossible de supprimer une famille contenant des produits", 
+      409
     );
   }
 
@@ -197,7 +196,7 @@ async function getFamilyById(familyId) {
     ])
 
     if (!family) {
-      throw new ApiError("Famille introuvable.", 409)
+      throw new NotFoundError("Famille introuvable.")
     }
 
     return family;

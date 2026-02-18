@@ -6,7 +6,6 @@ import type { FamilyFormValues } from "../types/family";
 
 
 async function fetchTagCategories(): Promise<FieldOption[]> {
-  console.log("fetchTagCategories called");
   const data = await getTagCategoryNames();
 
   return data.map((t: any) => ({

@@ -1,4 +1,4 @@
-const ApiError = require("../../../../utils/ApiError");
+const { ApiError, NotFoundError, ValidationError } = require("../../../../utils/ApiError");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const ProductCategory = require("../../../../models/ProductCategory");
 const ProductFamily = require("../../../../models/ProductFamily");
@@ -84,7 +84,7 @@ async function updateCategory(categoryId, payload) {
   const category = await ProductCategory.findById(categoryId);
 
   if (!category) {
-    throw new ApiError("Catégorie introuvable.", 404);
+    throw new NotFoundError("Catégorie introuvable.", 404);
   }
 
   // 1️⃣ Si le nom change → vérifier dépendances
@@ -128,7 +128,7 @@ async function deleteCategory(categoryId) {
   const category = await ProductCategory.findById(categoryId);
 
   if (!category) {
-    throw new ApiError("Catégorie introuvable", 404);
+    throw new NotFoundError("Catégorie introuvable", 404);
   }
 
   const familiesCount = await ProductFamily.countDocuments({
@@ -148,7 +148,7 @@ async function deleteCategory(categoryId) {
 async function getCategoryById(categoryId) {
 
   if (!mongoose.Types.ObjectId.isValid(categoryId)) {
-    throw new ApiError("Id de catégorie invalide", 400);
+    throw new ValidationError("Id de catégorie invalide", 400);
   }
 
   const category = await ProductCategory.findById(categoryId)
@@ -158,7 +158,7 @@ async function getCategoryById(categoryId) {
     });
 
   if (!category) {
-    throw new ApiError("Catégorie introuvable.", 409);
+    throw new NotFoundError("Catégorie introuvable.", 409);
   }
 
   return category;

@@ -1,19 +1,34 @@
+const { ValidationError } = require("../../../../utils/ApiError");
+
 function validateFamilyPayload(payload) {
-	const errors = [];
+
+	if (!payload.name) {
+    throw new ValidationError("Name manquant.");
+  }
+
+	if (!payload.category) {
+    throw new ValidationError("Category manquant.");
+  }
 
 	if (payload.name !== undefined) {
     if (typeof payload.name !== "string" || payload.name.trim().length < 2) {
-      errors.push("name invalide");
+      throw new ValidationError("Name invalide.")
     }
   }
 
-	if (payload.productsTypes === undefined ||
-		!payload.productsTypes.includes(["classic", "bulk", "both"])
-	) {
-		errors.push("ProductsType invalide.")
+	if (!payload.productsTypes) {
+		throw new ValidationError("productsTypes manquant.")
 	}
 
-	return errors;
+	if (payload.productsTypes !== undefined) {
+
+		const allowed = ["classic", "bulk", "both"];
+
+		if (!Array.isArray(payload.productsTypes) || payload.productsTypes.some((type) => !allowed.includes(type))) {
+			throw new ValidationError("productsTypes invalide.")
+		}
+	}
+
 }
 
 module.exports = {

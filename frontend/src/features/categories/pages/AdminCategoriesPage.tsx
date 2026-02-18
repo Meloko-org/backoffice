@@ -29,8 +29,6 @@ export default function AdminCategoriesPage() {
     getTypeNames().then(setTypes)
   }, [])
 
-  console.log("les types :", types)
-
 
   /*
     "Donne-moi une fonction qui retourne items + pagination,

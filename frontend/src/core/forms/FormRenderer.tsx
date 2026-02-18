@@ -81,8 +81,6 @@ export function AdminForm<TValues extends Record<string, any>>({
           {Object.entries(section.fields).map(([key, field]) => {
             const name = key as keyof TValues;
 
-            console.log("Checking async fields...");
-
             if (!isFieldVisible(name)) return null;
 
             const renderer = renderers[field.type];

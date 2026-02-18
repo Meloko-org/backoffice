@@ -49,8 +49,6 @@ export const getFamiliesList = async (
 
   const res = await getFamilies(params);
 
-  console.log(res)
-
   return {
     items: res.items,
     pagination: {

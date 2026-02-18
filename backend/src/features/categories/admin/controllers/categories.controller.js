@@ -47,14 +47,10 @@ const listCategories = async (req, res, next) => {
 
 const createCategoryHandler = async (req, res, next) => {
   try {
-    const errors = await validateCategoryPayload(req.body);
 
-    if (Object.keys(errors).length > 0) {
-      throw new ApiError("Validation échouée.", 400, errors);
-    }
+    await validateCategoryPayload(req.body);
 
     const category = await createCategory(req.body);
-
 
     res.status(201).json({
       success: true,
@@ -70,12 +66,8 @@ const createCategoryHandler = async (req, res, next) => {
 
 const updateCategoryHandler = async (req, res, next) => {
   try {
-    console.log("edit")
-    const errors = await validateCategoryPayload(req.body);
-
-    if (errors.length > 0) {
-      throw new ApiError("Validation échouée.", 400, errors);
-    }
+    
+    await validateCategoryPayload(req.body);
 
     const category = await updateCategory(
       req.params.id,
