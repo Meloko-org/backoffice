@@ -18,6 +18,8 @@ import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
 import AdminFamiliesPage from "./features/families/pages/AdminFamiliesPage";
 import CreateFamilyPage from "./features/families/pages/CreateFamilyPage";
 import EditFamilyPage from "./features/families/pages/EditFamilyPage";
+import CreateProductPage from "./features/products/pages/CreateProductPage";
+import EditProductPage from "./features/products/pages/EditProductPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -51,6 +53,20 @@ export const router = createBrowserRouter([
             <ProductsListPage />
           </AdminRouteGuard>
         )
+      },
+      { 
+        path: "products/create", 
+        element: (
+          <AdminRouteGuard permission="categories:manage">
+            <CreateProductPage />
+          </AdminRouteGuard>)
+      },
+      { 
+        path: "products/:id/edit", 
+        element: (
+          <AdminRouteGuard permission="categories:manage">
+            <EditProductPage />
+          </AdminRouteGuard>)
       },
       { 
         path: "categories", 

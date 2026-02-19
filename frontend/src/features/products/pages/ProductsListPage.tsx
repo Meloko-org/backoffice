@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { FamilyForSelect } from "../../families/types/family";
 import { getFamilyNames } from "../../families/api/families.api";
 import { useAdminList } from "../../../hooks/useAdminList";
-import { getProductsList } from "../api/products.api";
+import { deleteProduct, getProductsList } from "../api/products.api";
 import type { Product } from "../types/product";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import type { ModelContext } from "../../../types/admin";
@@ -19,14 +19,17 @@ export default function AdminProductsPage() {
 
   useAdminPage("Liste des produits");
 
-  const { openRight, closeRight } = useAdminLayout();
+  const { openRight, closeRight, isRightOpen } = useAdminLayout();
   const { confirm } = useConfirm();
 
+  /**
+   * récupération des familles pour le select de la toolbar
+   */
   const [ families, setFamilies ] = useState<FamilyForSelect[]>([]);
-
   useEffect(() => {
     getFamilyNames().then(setFamilies);
   }, [])
+
 
   const {
     items,
@@ -45,7 +48,7 @@ export default function AdminProductsPage() {
     handleSort,
   } = useAdminList(getProductsList);
 
-  const [ selectedProduct, setSelectedProduct ] = useState<Product>();
+  const [ selectedProduct, setSelectedProduct ] = useState<Product | null>();
 
   const infoContext: ModelContext = useMemo(() => {
     if (!selectedProduct) return null;
@@ -61,24 +64,32 @@ export default function AdminProductsPage() {
 
   useInfoContext(infoContext)
 
+  useEffect(() => {
+    if (selectedProduct) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [selectedProduct])
 
   const handleSelectProduct = (product: Product) => {
-    setSelectedProduct(product)
-    openRight();
+    setSelectedProduct(prev =>
+      prev?._id === product._id ? null : product
+    )
   }
 
   const handleEditProduct = (product: Product) => {
-    navigate(`/admin/families/${product._id}/edit`)
+    navigate(`/admin/products/${product._id}/edit`)
   }
 
   const handleDeleteProduct = (product: Product) => {
     setSelectedProduct(product)
     openRight();
     confirm({
-      title: "Supprimer la famille",
+      title: "Supprimer le produit",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        // await deleteProduct(product._id);
+        await deleteProduct(product._id);
       },
     });
   }
@@ -115,7 +126,6 @@ export default function AdminProductsPage() {
     );
   }
 
-  console.log("ProductsPage mounted");
   
   return (
     <>

@@ -119,3 +119,14 @@ export const getFamilyNames = async (): Promise<FamilyForSelect[]> => {
     }
   )
 }
+
+
+export const getFamilyNamesForCategory = async (categoryId: string): Promise<FamilyForSelect[]> => {
+
+  return apiFetch<FamilyForSelect[]>(
+    `${BASE_URL}/category/${categoryId}`, 
+    {
+      method: 'GET'
+    }
+  )
+}

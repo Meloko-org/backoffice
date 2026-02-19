@@ -1,6 +1,6 @@
 import { apiFetch } from "../../../lib/apiFetch";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Product, ProductListResponse } from "../types/product";
+import type { CreateProductPayload, Product, ProductListResponse, UpdateProductPayload } from "../types/product";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/products`;
@@ -58,4 +58,51 @@ export const getProductsList = async (
       pages: res.pagination.totalPages,
     }
   }
+}
+
+export const createProduct = async (payload: CreateProductPayload): Promise<Product> => {
+
+  return apiFetch<Product>(
+    `${BASE_URL}/`, 
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }
+  )
+}
+
+export const updateProduct = async (
+  id: string, 
+  payload: UpdateProductPayload,
+): Promise<Product> => {
+
+  return apiFetch<Product>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    }
+  )
+}
+
+
+export const deleteProduct = async (id: string): Promise<void> => {
+
+  return apiFetch<void>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'DELETE'
+    }
+  )
+}
+ 
+
+export const getProductById = async (id: string): Promise<Product> => {
+
+  return apiFetch<Product>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'GET'
+    }
+  )
 }

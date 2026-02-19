@@ -23,6 +23,7 @@ const productSchema = mongoose.Schema(
 		family: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "ProductFamily",
+			required: true,
 		},
 		weight: {
 			type: weightSchema,

@@ -1,4 +1,5 @@
-const { validateFamilyPayload } = require("../domain/validateFamilyPayload");
+const validateCreateFamily = require("../domain/validateCreateFamily");
+const validateUpdateFamily = require("../domain/validateUpdateFamily");
 const {
   getFamilies,
   createFamily,
@@ -6,6 +7,7 @@ const {
   deleteFamily,
   getFamilyById,
   getFamilyNames,
+  getFamilyNamesForCategory,
 } = require("../services/families.service");
 
 const listFamilies = async (req, res, next) => {
@@ -47,8 +49,8 @@ const listFamilies = async (req, res, next) => {
 const createFamilyHandler = async (req, res, next) => {
   try {
     
-    console.log("body :", req.body)
-    validateFamilyPayload(req.body);
+    
+    validateCreateFamily(req.body);
 
     const family = await createFamily(req.body);
 
@@ -64,10 +66,8 @@ const createFamilyHandler = async (req, res, next) => {
 
 const updateFamilyHandler = async (req, res, next) => {
   try {
-    console.log("id :", req.params.id)
-    console.log("body :", req.body)
 
-    validateFamilyPayload(req.body);
+    validateUpdateFamily(req.body);
 
     const family = await updateFamily(
       req.params.id,
@@ -130,6 +130,22 @@ const familyNames = async (req, res, next) => {
   }
 }
 
+const familyNamesforCategory = async (req, res, next) => {
+  try {
+    const categoryId = req.params.id;
+
+    const families = await getFamilyNamesForCategory(categoryId)
+
+    res.json({
+      success: true,
+      data: families,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   listFamilies,
   createFamilyHandler,
@@ -137,4 +153,5 @@ module.exports = {
   deleteFamilyHandler,
   getFamily,
   familyNames,
+  familyNamesforCategory,
 };

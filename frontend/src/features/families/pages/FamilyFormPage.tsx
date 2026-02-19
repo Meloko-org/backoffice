@@ -7,7 +7,7 @@ import { AdminForm } from "../../../core/forms/FormRenderer";
 import { familySchema } from "../schema/family.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 import { createFamily, getFamilyById, updateFamily } from "../api/families.api";
-import { BallTriangle, FidgetSpinner } from "react-loader-spinner";
+import { BallTriangle } from "react-loader-spinner";
 
 type FamilyFormPageProps = {
   mode: "create" | "edit";
@@ -47,11 +47,11 @@ export default function FamilyFormPage({
 
     const loadFamily = async () => {
       try {
-        const category =
+        const family =
           await getFamilyById(familyId);
 
         setInitialValues(
-          mapFamilyToFormValues(category)
+          mapFamilyToFormValues(family)
         );
       } finally {
         setLoading(false);

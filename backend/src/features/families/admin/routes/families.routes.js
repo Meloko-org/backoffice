@@ -7,9 +7,11 @@ const {
   updateFamilyHandler,
   deleteFamilyHandler,
   familyNames,
-  getFamily
+  getFamily,
+  familyNamesforCategory,
 } = require("../controllers/families.controller");
 
+router.get("/category/:id", familyNamesforCategory);
 router.get("/names", familyNames);
 router.get("/:id", getFamily);
 router.get("/", listFamilies);

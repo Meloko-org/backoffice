@@ -32,7 +32,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
       Object.entries(section.fields).forEach(([key, field]) => {
         defaults[key] =
           initialValues?.[key as keyof TValues] ??
-          field.defaultValue ??
+          field?.defaultValue ??
           "";
       });
     });
@@ -166,7 +166,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
   useEffect(() => {
     schema.sections.forEach((section) => {
       Object.entries(section.fields).forEach(([key, field]) => {
-        if (!field.compute || !field.computeDeps) return;
+        if (!field?.compute || !field.computeDeps) return;
 
         const name = key as keyof TValues;
 
@@ -187,8 +187,8 @@ export function useFormEngine<TValues extends Record<string, any>>({
     // 👇 dépendances dynamiques
     ...schema.sections.flatMap((section) =>
       Object.values(section.fields)
-        .filter((field) => field.computeDeps)
-        .flatMap((field) => field.computeDeps!)
+        .filter((field) => field?.computeDeps)
+        .flatMap((field) => field?.computeDeps!)
     ).map((dep) => values[dep]),
     mode,
   ]);
@@ -200,14 +200,14 @@ export function useFormEngine<TValues extends Record<string, any>>({
       Object.entries(section.fields).forEach(([key, field]) => {
         const name = key as keyof TValues;
 
-        const visible = field.condition
+        const visible = field?.condition
           ? field.condition({ values, mode })
           : true;
 
         if (!visible && values[name] !== undefined && values[name] !== "") {
           setValues((prev) => ({
             ...prev,
-            [name]: field.defaultValue ?? "",
+            [name]: field?.defaultValue ?? "",
           }));
 
           setErrors((prev) => ({
@@ -231,7 +231,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
   useEffect(() => {
     schema.sections.forEach((section) => {
       Object.entries(section.fields).forEach(([key, field]) => {
-        if ("options" in field && typeof field.options === "function") {
+        if (field && "options" in field && typeof field.options === "function") {
           const name = key as keyof TValues;
 
           const shouldReload =

@@ -5,7 +5,8 @@ const {
 	listProducts, 
 	createProductHandler, 
 	updateProductHandler, 
-	deleteProductHandler } = require("../controllers/adminProducts.controller");
+	deleteProductHandler,
+	getProduct } = require("../controllers/adminProducts.controller");
 
 const upload = multer({ dest: "uploads/" });
 const router = express.Router();
@@ -16,6 +17,7 @@ router.post(
 	importProductsCsv
 )
 
+router.get("/:id", getProduct)
 router.get("/", listProducts);
 router.post("/", createProductHandler);
 router.put("/:id", updateProductHandler);

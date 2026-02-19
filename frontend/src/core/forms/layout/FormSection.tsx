@@ -19,10 +19,15 @@ export default function FormSection({
     `}>
 
       <div className="p-5 space-y-4">
-        <h2>
-          {title}
-        </h2>
-        {children}
+        {title && (
+          <h2 className="text-lg font-semibold">
+            {title}
+          </h2>
+        )}
+
+        <div className="space-y-4">
+          {children}
+        </div>
       </div>
 
       {globalError && (

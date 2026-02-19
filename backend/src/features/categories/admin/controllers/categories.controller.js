@@ -8,6 +8,8 @@ const {
   getCategoryById,
   getCategoryNames,
 } = require("../services/categories.services");
+const validateCreateCategory = require("../domain/validateCreateCategory");
+const validateUpdateCategory = require("../domain/validateUpdateCategory");
 
 
 const listCategories = async (req, res, next) => {
@@ -48,7 +50,7 @@ const listCategories = async (req, res, next) => {
 const createCategoryHandler = async (req, res, next) => {
   try {
 
-    await validateCategoryPayload(req.body);
+    await validateCreateCategory(req.body);
 
     const category = await createCategory(req.body);
 
@@ -67,7 +69,7 @@ const createCategoryHandler = async (req, res, next) => {
 const updateCategoryHandler = async (req, res, next) => {
   try {
     
-    await validateCategoryPayload(req.body);
+    await validateUpdateCategory(req.body);
 
     const category = await updateCategory(
       req.params.id,

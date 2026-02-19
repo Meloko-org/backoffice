@@ -73,10 +73,19 @@ export default function AdminCategoriesPage() {
   useInfoContext(infoContext)
 
 
+  useEffect(() => {
+    if (selectedCategory) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [selectedCategory])
+
+
   const handleSelectCategory = (category: ProductCategory) => {
-    console.log("selectedCat :", selectedCategory)
-    setSelectedCategory(category)
-    openRight();
+    setSelectedCategory(prev =>
+      prev?._id === category._id ? null : category
+    )
   }
 
   const handleEditCategory = (category: ProductCategory) => {

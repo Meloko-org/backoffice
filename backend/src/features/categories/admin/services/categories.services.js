@@ -66,6 +66,11 @@ async function getCategories({
 async function createCategory(data) {
   const slug = normalizeSlug(data.name);
 
+  const existingType = await Type.findById(data.type);
+  if (!existingType) {
+    throw new NotFoundError("Type introuvable");
+  }
+
   const existing = await ProductCategory.findOne({ slug });
   if (existing) {
     throw new ApiError("Une catégorie avec ce nom existe déjà", 409);
@@ -99,8 +104,19 @@ async function updateCategory(categoryId, payload) {
       );
     }
 
+    const newSlug = normalizeSlug(payload.name);
+
+    const existing = await ProductCategory.findOne({
+      slug: newSlug,
+      _id: { $ne: category._id },
+    });
+
+    if (existing) {
+      throw new ApiError("Une catégorie avec ce nom existe déjà", 409);
+    }
+
     category.name = payload.name;
-    category.slug = normalizeSlug(payload.name);
+    category.slug = newSlug;
   }
 
   // 2️⃣ Champs simples

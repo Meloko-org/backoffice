@@ -1,6 +1,7 @@
 import { ImageOff, Pencil, Trash2 } from "lucide-react";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import type { Product } from "../types/product";
+import { deleteProduct } from "../api/products.api";
 
 type Props = {
 	product: Product;
@@ -28,7 +29,7 @@ export default function FamilyDetails({
       title: "Supprimer le produit",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        // await deleteProduct(product._id);
+        await deleteProduct(product._id);
       },
     });
   };

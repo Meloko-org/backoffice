@@ -99,6 +99,10 @@ async function createFamily(data) {
     throw new ValidationError("Une famille avec ce nom existe déjà dans cette catégorie");
   }
 
+  const cleanTagCategories = Array.isArray(tagCategories)
+    ? tagCategories
+    : [];
+
   return ProductFamily.create({
     name,
     slug,
@@ -205,6 +209,10 @@ async function getFamilyNames() {
   return ProductFamily.find({}, "name").sort({ name: 1}).lean();
 }
 
+async function getFamilyNamesForCategory(categoryId) {
+  return ProductFamily.find({ category: categoryId}).sort({ name: 1}).lean()
+}
+
 
 
 module.exports = {
@@ -214,4 +222,5 @@ module.exports = {
   deleteFamily,
   getFamilyById,
   getFamilyNames,
+  getFamilyNamesForCategory,
 };

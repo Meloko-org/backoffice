@@ -161,7 +161,8 @@ export type FormFieldSchema<TValues> =
 
 export type FormSectionSchema<TValues> = {
   title: string;
-  fields: Record<keyof TValues, FormFieldSchema<TValues>>;
+  fields: Partial<Record<keyof TValues, FormFieldSchema<TValues>>>;
+  isEnabled?: (context: FormContext<TValues>) => boolean;
 };
 
 export type FormSchema<TValues> = {

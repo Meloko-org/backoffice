@@ -29,3 +29,36 @@ export interface ProductListResponse {
   items: Product[];
   pagination: PaginationMeta;
 }
+
+
+export interface CreateProductPayload {
+  name: string;
+  description?: string;
+  image?: string;
+  family: string;
+  weight: {
+    unit: "gr" | "piece";
+    measurement: number;
+  };
+  vatRate: number;
+}
+
+
+export interface UpdateProductPayload extends Partial<CreateProductPayload> {};
+
+
+
+export interface ProductFormValues {
+  name: string;
+  description: string;
+  image?: string;
+
+  categoryId: string; 
+  familyId: string;
+
+  weightMeasurement: number;
+  weightUnit: "gr" | "piece";
+
+  vatRate: number;
+}
+

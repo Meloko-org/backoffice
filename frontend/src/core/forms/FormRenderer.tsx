@@ -68,42 +68,60 @@ export function AdminForm<TValues extends Record<string, any>>({
       }}
       className="space-y-6 max-w-2xl"
     >
-      {schema.sections.map((section, sectionIndex) => (
 
-        <FormSection
-          key={sectionIndex}
-          title={section.title}
-          globalError={
-            globalError
-              ? { message: globalError }
-              : undefined
-          }
-        >
-          {Object.entries(section.fields).map(([key, field]) => {
-            const name = key as keyof TValues;
+      {schema.sections.map((section, sectionIndex) => {
 
-            if (!isFieldVisible(name)) return null;
+        const sectionEnabled = section.isEnabled?.({ values, mode }) ?? true;
 
-            const renderer = renderers[field.type];
+        return (
+          <FormSection
+            key={sectionIndex}
+            title={section.title}
+            globalError={
+              globalError
+                ? { message: globalError }
+                : undefined
+            }
+          >
+            <div 
+              className={`
+                  space-y-4
+                  transition-all duration-300 
+                  ${!sectionEnabled
+                    ? "opacity-40 pointer-events-none blur-[1px] scale-[0.99]"
+                    : "opacity-100 scale-100"
+                  }
+                `}
+            >
+              {Object.entries(section.fields).map(([key, field]) => {
+                const name = key as keyof TValues;
 
-            if (!renderer) return null;
+                if (!isFieldVisible(name)) return null;
+                if (!field) return null;
 
-            return renderer({
-              field,
-              name,
-              value: values[name] ?? "",
-              error: errors[name],
-              disabled: loading || isFieldDisabled(name),
-              loading,
-              asyncOptions,
-              asyncLoading,
-              setValue,
-              setFieldTouched,
-            });
+                const renderer = renderers[field.type];
 
-          })}
-        </FormSection>
-      ))}
+                if (!renderer) return null;
+
+                return renderer({
+                  field,
+                  name,
+                  value: values[name] ?? "",
+                  error: errors[name],
+                  disabled: loading || !sectionEnabled || isFieldDisabled(name),
+                  loading,
+                  asyncOptions,
+                  asyncLoading,
+                  setValue,
+                  setFieldTouched,
+                });
+
+              })}
+            </div>
+
+          </FormSection>
+        )  
+      })} 
 
       <div className="flex justify-end pr-3">
         <AnimatedButton
@@ -113,6 +131,7 @@ export function AdminForm<TValues extends Record<string, any>>({
           {submitLabel}
         </AnimatedButton>
       </div>
+
     </form>
   );
 }

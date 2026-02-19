@@ -73,9 +73,19 @@ export default function AdminFamiliesPage() {
   useInfoContext(infoContext)
 
 
+  useEffect(() => {
+    if (selectedFamily) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [selectedFamily])
+
+
   const handleSelectFamily = (family: ProductFamily) => {
-    setSelectedFamily(family)
-    openRight();
+    setSelectedFamily(prev =>
+      prev?._id === family._id ? null : family
+    )
   }
 
   const handleEditFamily = (family: ProductFamily) => {

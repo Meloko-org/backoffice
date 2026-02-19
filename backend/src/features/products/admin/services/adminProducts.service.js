@@ -2,6 +2,8 @@ const Product = require("../../../../models/Product");
 const ProductFamily = require("../../../../models/ProductFamily");
 const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
+const { NotFoundError, ValidationError, ApiError } = require("../../../../utils/ApiError");
+const { default: mongoose } = require("mongoose");
 
 async function getProducts({
   page = 1,
@@ -74,40 +76,21 @@ async function createProduct(data) {
     vatRate,
   } = data;
 
-  if (!name || !family || !weight || vatRate === undefined) {
-    throw new Error("Champs obligatoires manquants");
-  }
-
-  // 1️⃣ Charger la famille
-  const productFamily = await ProductFamily.findById(family)
-    .populate("category", "slug");
+  const productFamily = await ProductFamily.findById(family);
 
   if (!productFamily) {
-    throw new Error("Famille introuvable");
-  }
+  throw new ValidationError({
+    family: "Famille introuvable",
+  });
+}
 
-  if (!productFamily.category) {
-    throw new Error("Catégorie parente introuvable");
-  }
-
-  // 2️⃣ Vérifier compatibilité type produit
-  // if (
-  //   productFamily.productsTypes.length &&
-  //   !productFamily.productsTypes.includes("classic")
-  // ) {
-  //   throw new Error("Cette famille n'autorise pas les produits classic");
-  // }
-
-  // 3️⃣ Générer slug
   const slug = normalizeSlug( name, { prefix: productFamily.slug } );
 
-  // 4️⃣ Unicité
   const existing = await Product.findOne({ slug });
   if (existing) {
-    throw new Error("Un produit avec ce nom existe déjà dans cette famille");
+    throw new ValidationError("Un produit avec ce nom existe déjà dans cette famille");
   }
 
-  // 5️⃣ Création
   return Product.create({
     name,
     slug,
@@ -120,25 +103,58 @@ async function createProduct(data) {
 }
 
 async function updateProduct(productId, payload) {
+
   const product = await Product.findById(productId).populate({
     path: "family",
     populate: { path: "category" },
   });
 
   if (!product) {
-    throw new Error("Produit introuvable");
+    throw new NotFoundError("Produit introuvable");
   }
 
-  // 1️⃣ Rename → recalcul slug
+
+  /**
+   * Si une famille est fournie, il faut être sur d'avoir le bon slug family
+   */
+  let familySlug = product.family.slug;
+
+  if (payload.family) {
+    const productFamily = await ProductFamily.findById(payload.family);
+
+    if (!productFamily) {
+      throw new ValidationError({
+        family: "Famille introuvable",
+      });
+    }
+
+    product.family = payload.family;
+    familySlug = productFamily.slug;
+  }
+
+
+  /**
+   * si le nom du produit change, il faut regénérer le slug en vérifiant
+   * qu'il n'existe pas déjà
+   */
   if (payload.name && payload.name !== product.name) {
+    const newSlug = normalizeSlug(payload.name, { prefix: familySlug });
+
+    const existing = await Product.findOne({
+      slug: newSlug,
+      _id: { $ne: product._id },
+    });
+
+    if (existing) {
+      throw new ValidationError({
+        name: "Un produit avec ce nom existe déjà dans cette famille",
+      });
+    }
+
     product.name = payload.name;
-
-    const familySlug = product.family.slug;
-
-    product.slug = normalizeSlug(payload.name, { prefix: familySlug });
+    product.slug = newSlug;
   }
 
-  // 2️⃣ Champs simples
   if (payload.description !== undefined) {
     product.description = payload.description;
   }
@@ -163,10 +179,34 @@ async function deleteProduct(productId) {
   const product = await Product.findById(productId);
 
   if (!product) {
-    throw new Error("Produit introuvable");
+    throw new NotFoundError("Produit introuvable");
   }
 
   await product.deleteOne();
+}
+
+async function getProductById(productId) {
+  if (!mongoose.Types.ObjectId.isValid(productId)) {
+    throw new ApiError("Id du produit invalide", 400)
+  }
+
+  const product = await Product.findById(productId)
+    .populate({
+      path: "family",
+      model: "ProductFamily",
+      select: "name category",
+      populate: {
+        path: "category",
+        model: "ProductCategory",
+        select: "name"
+      }
+    });
+
+  if (!product) {
+    throw new NotFoundError("Produit introuvable");
+  }
+
+  return product;
 }
 
 
@@ -175,4 +215,5 @@ module.exports = {
 	createProduct,
   updateProduct,
   deleteProduct,
+  getProductById,
 }
