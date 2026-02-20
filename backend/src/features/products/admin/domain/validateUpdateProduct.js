@@ -1,4 +1,5 @@
 const { ValidationError } = require("../../../../utils/ApiError");
+const mongoose = require("mongoose")
 
 function validateUpdateProduct(payload) {
   const fieldErrors = {};
@@ -10,13 +11,18 @@ function validateUpdateProduct(payload) {
     }
   }
 
-
+  const ALLOWED_VAT_RATES = [5.5, 10, 20];
   // ----- vatRate -----
   if (payload.vatRate !== undefined) {
-    if (typeof payload.vatRate !== "number") {
-      fieldErrors.vatRate = "vatRate must be a number";
+    if (
+      typeof payload.vatRate !== "number" ||
+      !ALLOWED_VAT_RATES.includes(payload.vatRate)
+    ) {
+      fieldErrors.vatRate =
+        "vatRate must be one of: 5.5, 10, 20";
     }
   }
+
 
   // ----- weight -----
   if (payload.weight !== undefined) {

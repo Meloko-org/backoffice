@@ -76,7 +76,7 @@ export default function ProductFormPage({
         await createProduct(payload);
       }
   
-      navigate("/admin/families");
+      navigate("/admin/products");
     };
   
 

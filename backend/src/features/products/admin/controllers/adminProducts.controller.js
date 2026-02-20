@@ -1,5 +1,5 @@
 const parseCsv = require("../services/csvParser.service");
-const { importProducts, createProduct, updateProduct, deleteProduct } = require("../services/productImport.service");
+const { importProducts, createProduct, updateProduct, deleteProduct } = require("../services/adminProducts.service");
 const { getProducts, getProductById } = require("../services/adminProducts.service");
 const { ValidationError } = require("../../../../utils/ApiError");
 const validateCreateProduct = require("../domain/validateCreateProduct");
@@ -32,7 +32,6 @@ const importProductsCsv = async (req, res) => {
 
 
 const listProducts = async (req, res, next) => {
-  console.log("INSIDE PRODUCTS CONTROLLER");
   try {
     const {
       page = 1,
@@ -56,8 +55,6 @@ const listProducts = async (req, res, next) => {
       sortDirection,
       family,
     });
-
-    console.log(result)
 
     res.json({
       success: true,

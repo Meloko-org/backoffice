@@ -23,6 +23,9 @@ async function fetchFamiliesForCategory(categoryId: string): Promise<FieldOption
   }))
 }
 
+// const VAT_RATES = import.meta.env.VITE_VAT_RATES;
+const VAT_RATES = [5.5, 10, 20];
+
 export const productSchema =
   defineFormSchema<ProductFormValues>({
     sections: [
@@ -53,6 +56,8 @@ export const productSchema =
               return fetchFamiliesForCategory(values.categoryId)
             },
             disabled: ({ mode }) => mode === "edit",
+            optionsDeps: ["categoryId"],
+            dependsOn: ["categoryId"],
           }),
         }
       },
@@ -84,11 +89,13 @@ export const productSchema =
             ]
           }),
 
-          vatRate: field.input({
+          vatRate: field.radioGroup({
             label: "TVA",
             required: true,
-            inputType: "number",
-            defaultValue: 5.5,
+            options: VAT_RATES.map((rate) => ({
+              label: `${rate} %`,
+              value: rate,
+            })),
           })
         }
       }

@@ -1,5 +1,5 @@
 export type FieldOption = {
-  value: string;
+  value: string | number;
   label: string;
   description?: string;
   color?: string;
@@ -65,6 +65,12 @@ export type BaseFieldSchema<TValues> = {
    * Dépendances déclenchant le recalcul
    */
   computeDeps?: (keyof TValues)[];
+
+  /**
+   * Dépendance déclenchant le reset
+   */
+  dependsOn?: (keyof TValues)[];
+
 
 };
 

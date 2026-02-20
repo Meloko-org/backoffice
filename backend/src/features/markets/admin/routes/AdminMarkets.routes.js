@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const { importMarketsCsv } = require("../controllers/adminMarkets.controller");
+const { importMarketsCsv, listMarkets } = require("../controllers/adminMarkets.controller");
 
 const upload = multer({ dest: "uploads/" });
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post(
     upload.single("file"),
     importMarketsCsv
 )
+
+router.get("/", listMarkets)
 
 module.exports = router;

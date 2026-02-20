@@ -10,13 +10,18 @@ function validateCreateProduct(payload) {
   }
 
 
+  const ALLOWED_VAT_RATES = [5.5, 10, 20];
+
   // ----- vatRate -----
   if (
     payload.vatRate === undefined ||
-    typeof payload.vatRate !== "number"
+    typeof payload.vatRate !== "number" ||
+    !ALLOWED_VAT_RATES.includes(payload.vatRate)
   ) {
-    fieldErrors.vatRate = "vatRate is required and must be a number";
+    fieldErrors.vatRate =
+      "vatRate must be one of: 5.5, 10, 20";
   }
+
 
   // ----- weight -----
   if (!payload.weight || typeof payload.weight !== "object") {

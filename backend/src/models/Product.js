@@ -31,6 +31,7 @@ const productSchema = mongoose.Schema(
 		},
 		vatRate: {
 			type: Number,
+			enum: [5.5, 10, 20],
 			required: true,
 		},
 	},

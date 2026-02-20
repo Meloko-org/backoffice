@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type {
   FormSchema,
   FieldOption,
@@ -39,6 +39,9 @@ export function useFormEngine<TValues extends Record<string, any>>({
 
     return defaults;
   });
+
+  const prevValuesRef = useRef(values);
+
 
   const [errors, setErrors] = useState<FieldErrors<TValues>>({});
   const [touched, setTouched] = useState<
@@ -231,40 +234,93 @@ export function useFormEngine<TValues extends Record<string, any>>({
   useEffect(() => {
     schema.sections.forEach((section) => {
       Object.entries(section.fields).forEach(([key, field]) => {
-        if (field && "options" in field && typeof field.options === "function") {
-          const name = key as keyof TValues;
+        if (!field || !("options" in field)) return;
+        if (typeof field.options !== "function") return;
 
-          const shouldReload =
-            !field.optionsDeps ||
-            field.optionsDeps.some((dep) =>
-              Object.keys(touched).includes(dep as string)
-            );
+        const name = key as keyof TValues;
 
-          if (!shouldReload && asyncOptions[name]) return;
+        const deps = field.optionsDeps;
 
-          setAsyncLoading((prev) => ({
-            ...prev,
-            [name]: true,
-          }));
+        let shouldReload = false;
 
-          field
-            .options(values)
-            .then((opts) => {
-              setAsyncOptions((prev) => ({
-                ...prev,
-                [name]: opts,
-              }));
-            })
-            .finally(() => {
-              setAsyncLoading((prev) => ({
-                ...prev,
-                [name]: false,
-              }));
-            });
+        if (!deps) {
+          // Pas de deps → reload à chaque changement de values
+          shouldReload = true;
+        } else {
+          // Reload uniquement si une dépendance a changé
+          const depChanged = deps.some(
+            (dep) =>
+              prevValuesRef.current?.[dep] !== values[dep]
+          );
+
+          const firstLoad = !asyncOptions[name];
+
+          shouldReload = depChanged || firstLoad;
         }
+
+        if (!shouldReload) return;
+
+        setAsyncLoading((prev) => ({
+          ...prev,
+          [name]: true,
+        }));
+
+        field
+          .options(values)
+          .then((opts) => {
+            setAsyncOptions((prev) => ({
+              ...prev,
+              [name]: opts,
+            }));
+          })
+          .finally(() => {
+            setAsyncLoading((prev) => ({
+              ...prev,
+              [name]: false,
+            }));
+          });
       });
     });
-  }, [schema, values]);
+
+  }, [values, schema]);
+
+
+
+  /* ---------------- RESET ---------------- */
+  useEffect(() => {
+    const prevValues = prevValuesRef.current;
+
+    schema.sections.forEach((section) => {
+      Object.entries(section.fields).forEach(([key, field]) => {
+        if (!field?.dependsOn) return;
+
+        const name = key as keyof TValues;
+
+        const shouldReset = field.dependsOn.some(
+          (dep) => prevValues?.[dep] !== values[dep]
+        );
+
+        if (!shouldReset) return;
+
+        setValues((prev) => ({
+          ...prev,
+          [name]: field.defaultValue ?? "",
+        }));
+
+        setErrors((prev) => ({
+          ...prev,
+          [name]: undefined,
+        }));
+
+        setTouched((prev) => ({
+          ...prev,
+          [name]: false,
+        }));
+      });
+    });
+  }, [values, schema]);
+
+
 
 
   /* ---------------- SUBMIT ---------------- */
@@ -291,6 +347,12 @@ export function useFormEngine<TValues extends Record<string, any>>({
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+    prevValuesRef.current = values;
+  }, [values]);
+
 
 
   return {

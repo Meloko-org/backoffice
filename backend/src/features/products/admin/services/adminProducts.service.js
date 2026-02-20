@@ -3,7 +3,7 @@ const ProductFamily = require("../../../../models/ProductFamily");
 const ProductCategory = require("../../../../models/ProductCategory");
 const { normalizeSlug } = require("../../../../utils/normalize");
 const { NotFoundError, ValidationError, ApiError } = require("../../../../utils/ApiError");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 async function getProducts({
   page = 1,
