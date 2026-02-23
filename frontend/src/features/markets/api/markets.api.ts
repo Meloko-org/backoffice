@@ -1,6 +1,6 @@
 import { apiFetch } from "../../../lib/apiFetch";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Market, MarketListResponse, PostalCodeForSelect } from "../types/markets";
+import type { CreateMarketPayload, Market, MarketListResponse, PostalCodeForSelect, UpdateMarketPayload } from "../types/markets";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/markets`;
@@ -63,10 +63,60 @@ export const getMarketsList = async (
 }
 
 
+export const createMarket = async (
+  payload: CreateMarketPayload
+): Promise<Market> => {
+
+  return apiFetch<Market>(
+    `${BASE_URL}`, 
+    {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }
+  )
+}
+
+export const updateMarket = async (
+  id: string,
+  payload: UpdateMarketPayload,
+): Promise<Market> => {
+
+  return apiFetch<Market>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    }
+  )
+}
+
+
+export const deleteMarket = async (id: string): Promise<void> => {
+
+  return apiFetch<void>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'DELETE'
+    }
+  )
+}
+
+
+
 export const getPostalCodes = async (): Promise<string[]> => {
 
   return apiFetch<string[]>(
     `${BASE_URL}/postal-codes`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+export const getMarketById = async (id: string): Promise<Market> => {
+
+  return apiFetch<Market>(
+    `${BASE_URL}/${id}`, 
     {
       method: 'GET'
     }

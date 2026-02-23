@@ -7,12 +7,16 @@ export interface Market {
   description: string;
   image: string;
   address: {
-    addres1: string;
+    address1: string;
     address2: string;
     postalCode: string;
     city: string;
-    latitude: number;
-    longitude: number;
+    latitude: {
+      $numberDecimal: number;
+    };
+    longitude: {
+      $numberDecimal: number;
+    };
   },
   createdAt: string;
   updatedAt: string;
@@ -26,4 +30,28 @@ export interface MarketListResponse {
 /* inutile dans ce cas */
 export interface PostalCodeForSelect {
   postalCode: string;
+}
+
+export interface CreateMarketPayload {
+  name: string;
+  description?: string;
+  image?: string;
+  address: {
+    address1: string;
+    address2?: string;
+    postalCode: string;
+    city: string;
+  }
+}
+
+export interface UpdateMarketPayload extends Partial<CreateMarketPayload> {}
+
+export interface MarketFormValues {
+  name: string;
+  description: string;
+  image?: string;
+  address1: string;
+  address2?: string;
+  postalCode: string;
+  city: string;
 }

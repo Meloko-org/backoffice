@@ -20,6 +20,8 @@ import CreateFamilyPage from "./features/families/pages/CreateFamilyPage";
 import EditFamilyPage from "./features/families/pages/EditFamilyPage";
 import CreateProductPage from "./features/products/pages/CreateProductPage";
 import EditProductPage from "./features/products/pages/EditProductPage";
+import CreateMarketPage from "./features/markets/pages/CreateMarketPage";
+import EditMarketPage from "./features/markets/pages/EditMarketPage";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -123,6 +125,20 @@ export const router = createBrowserRouter([
           <AdminRouteGuard permission="markets:read">
             <MarketsListPage />
           </AdminRouteGuard>) 
+      },
+      { 
+        path: "markets/create", 
+        element: (
+          <AdminRouteGuard permission="markets:manage">
+            <CreateMarketPage />
+          </AdminRouteGuard>)
+      },
+      { 
+        path: "markets/:id/edit", 
+        element: (
+          <AdminRouteGuard permission="markets:manage">
+            <EditMarketPage />
+          </AdminRouteGuard>)
       },
       { 
         path: "markets/import", 

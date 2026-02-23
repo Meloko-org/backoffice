@@ -1,5 +1,8 @@
 const parseCsv = require('../../../../services/csvParser.service');
-const { getMarkets, getDistinctPostalCodes } = require('../services/adminMarkets.service');
+const { ValidationError } = require('../../../../utils/ApiError');
+const validateCreateMarket = require('../domain/validateCreateMarket');
+const validateUpdateMarket = require('../domain/validateUpdateMarket');
+const { getMarkets, getDistinctPostalCodes, createMarket, updateMarket, deleteMarket, getMarketById } = require('../services/adminMarkets.service');
 const importMarkets = require("../services/marketImport.service");
 
 const importMarketsCsv = async (req, res) => {
@@ -54,7 +57,7 @@ const listMarkets = async (req, res, next) => {
       filters
     });
 
-    console.log(result)
+    console.log(JSON.stringify(result.items[0], null, 2))
 
     res.json({
       success: true,
@@ -65,6 +68,77 @@ const listMarkets = async (req, res, next) => {
     next(error);
   }
 };
+
+
+const createMarketHandler = async (req, res, next) => {
+  try {
+    validateCreateMarket(req.body);
+
+    const market = await createMarket(req.body);
+
+    res.status(201);json({
+      success: true,
+      data: market,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+const updateMarketHandler = async (req, res, next) => {
+  try {
+    validateUpdateMarket(req.body);
+
+    const market = await updateMarket(
+      req.params.id,
+      req.body
+    );
+
+    res.json({
+      success: true,
+      data: market,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+const deleteMarketHandler = async (req, res, next) => {
+  try {
+    if (!req.params.id) {
+      throw new ValidationError("Id manquant.")
+    }
+
+    await deleteMarket(req.params.id);
+
+    res.json({
+      success: true,
+      message: "Market supprimé."
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getMarket = async (req, res, next) => {
+  try {
+    const marketId = req.params.id;
+
+    const market = await getMarketById(marketId);
+
+    console.log(market)
+
+    res.json({
+      success: true,
+      data: market,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
 
 const getPostalCodes = async (req, res, next) => {
   try {
@@ -81,7 +155,11 @@ const getPostalCodes = async (req, res, next) => {
 
 
 module.exports = {
-    importMarketsCsv,
-		listMarkets,
-    getPostalCodes,
+  importMarketsCsv,
+  listMarkets,
+  createMarketHandler,
+  updateMarketHandler,
+  deleteMarketHandler,
+  getMarket,
+  getPostalCodes,
 }

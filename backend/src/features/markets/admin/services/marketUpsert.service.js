@@ -71,7 +71,7 @@ async function upsertMarket(marketData, {geoRateLimit}) {
 		image: image || null,
 		slug,
 		address: {
-			address1,
+			address1: address1 || "Pas d'adresse spécifique.",
 			address2,
 			city,
 			postalCode,

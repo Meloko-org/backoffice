@@ -9,6 +9,7 @@ export type Permission =
   | "categories:manage"
 	| "families:manage"
   | "markets:read"
+  | "markets:manage"
   | "markets:import"
   | "orders:read"
   | "support:read"
@@ -40,6 +41,7 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "categories:manage",
 		"families:manage",
     "markets:read",
+    "markets:manage",
     "markets:import",
     "orders:read",
     "support:read",

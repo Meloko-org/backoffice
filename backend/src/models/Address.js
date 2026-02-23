@@ -34,4 +34,16 @@ const addressSchema = mongoose.Schema(
   { timestamps: true },
 );
 
+// addressSchema.set("toJSON", {
+//   transform: (_, ret) => {
+//     if (ret.latitude) {
+//       ret.latitude = parseFloat(ret.latitude.toString());
+//     }
+//     if (ret.longitude) {
+//       ret.longitude = parseFloat(ret.longitude.toString());
+//     }
+//     return ret;
+//   },
+// });
+
 module.exports = addressSchema;

@@ -182,6 +182,8 @@ async function deleteProduct(productId) {
     throw new NotFoundError("Produit introuvable");
   }
 
+  // vérifier les stocks
+
   await product.deleteOne();
 }
 

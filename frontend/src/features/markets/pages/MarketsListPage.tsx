@@ -3,7 +3,7 @@ import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import { useAdminList } from "../../../hooks/useAdminList";
-import { getMarketsList, getPostalCodes } from "../api/markets.api";
+import { deleteMarket, getMarketsList, getPostalCodes } from "../api/markets.api";
 import { useEffect, useMemo, useState } from "react";
 import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
@@ -62,22 +62,6 @@ export default function MarketsListPage() {
   useInfoContext(infoContext)
 
 
-
-  // const postalCodes = useMemo(() => {
-  //   if (!items) return [];
-
-  //   const unique = new Set(
-  //     items
-  //       .map((market) => market.address?.postalCode)
-  //       .filter(Boolean)
-  //   );
-
-  //   return Array.from(unique).sort();
-  // }, [items]);
-
-  
-
-
   useEffect(() => {
     if (selectedMarket) {
       openRight();
@@ -104,7 +88,7 @@ export default function MarketsListPage() {
       title: "Supprimer le point de vente",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        // await deleteMarket(market._id);
+        await deleteMarket(market._id);
       },
     });
   }

@@ -1,6 +1,7 @@
 import { ImageOff, Pencil, Trash2 } from "lucide-react";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import type { Market } from "../types/markets";
+import { deleteMarket } from "../api/markets.api";
 
 type Props = {
 	market: Market;
@@ -19,6 +20,8 @@ export default function FamilyDetails({
 
   const { confirm } = useConfirm();
 
+  console.log("MARKETDETAILS :", market)
+
 
 	const imageUrl = market.image; 
   const hasImage = Boolean(imageUrl);
@@ -28,7 +31,7 @@ export default function FamilyDetails({
       title: "Supprimer le point de vente",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        // await deleteMarket(market._id);
+        await deleteMarket(market._id);
       },
     });
   };
@@ -75,7 +78,7 @@ export default function FamilyDetails({
               Adresse
             </p>
             <div>
-              <p className="detail-info ">{market.address.addres1}</p>
+              <p className="detail-info ">{market.address.address1}</p>
               <p className="detail-info ">{market.address.address2}</p>
               <div className="space-x-3">
                 <span className="detail-info ">{market.address.postalCode}</span>
@@ -83,14 +86,14 @@ export default function FamilyDetails({
               </div>
             </div>
 
-            <div className="flex justify-between gap-x-4">
+            <div className="flex justify-between gap-x-4 mt-3">
               <div className="flex items-center w-full gap-x-2">
                 <div className="detail-label text-xs uppercase tracking-wide">Latitude</div>
-                <div className="detail-info">{market.address.latitude.toString()}</div>
+                <div className="detail-info">{market.address.latitude.$numberDecimal}</div>
               </div>
               <div className="flex items-center w-full gap-x-2">
                 <div className="detail-label text-xs uppercase tracking-wide">Longitude</div>
-                <div className="detail-info ">{market.address.longitude.toString()}</div>
+                <div className="detail-info ">{market.address.longitude.$numberDecimal}</div>
               </div>
             </div>
 
