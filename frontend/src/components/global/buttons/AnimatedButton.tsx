@@ -20,11 +20,11 @@ export function AnimatedButton({
 
   const variants = {
     primary:
-      "bg-primary text-white hover:bg-primary/70",
+      "btn-primary",
     danger:
-      "bg-danger text-white hover:bg-danger/70",
+      "btn-danger",
     secondary:
-      "bg-secondary text-white hover:bg-secondary/70",
+      "btn-secondary",
   };
 
   return (

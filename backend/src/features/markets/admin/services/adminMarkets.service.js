@@ -6,6 +6,7 @@ async function getMarkets({
   search,
   sortKey = "createdAt",
   sortDirection = "desc",
+  filters = {}
 }) {
 
   const skip = (page - 1) * limit;
@@ -18,6 +19,10 @@ async function getMarkets({
       $regex: search,
       $options: "i", // insensible à la casse
     };
+  }
+
+  if (filters.postalCode) {
+    filter["address.postalCode"] = filters.postalCode;
   }
 
 
@@ -48,6 +53,11 @@ async function getMarkets({
 }
 
 
+async function getDistinctPostalCodes() {
+  return Market.distinct("address.postalCode");
+}
+
 module.exports = {
   getMarkets,
+  getDistinctPostalCodes,
 }

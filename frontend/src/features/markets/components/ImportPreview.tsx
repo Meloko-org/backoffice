@@ -9,10 +9,10 @@ interface ImportPreviewProps {
 }
 
 const ACTION_STYLES: Record<ImportMarketPreview["action"], string> = {
-  create: "text-green-600",
-  update: "text-blue-600",
-  ignore: "text-gray-400",
-  existing: "text-gray-400",
+  create: "text-primary",
+  update: "text-warning",
+  ignore: "text-secondary",
+  existing: "text-success",
 };
 
 export function ImportPreview({
@@ -24,40 +24,42 @@ export function ImportPreview({
   if (markets.length === 0) return null;
 
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg font-semibold">
-        Aperçu des produits ({marketsCount})
-      </h3>
+    <section className="bloc">
+      <h2>
+        Aperçu des points de vente ({marketsCount})
+      </h2>
 
-      <div className="overflow-x-auto border rounded">
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-100 text-black">
-            <tr>
-              <th className="px-3 py-2 text-left">Point de vente</th>
-              <th className="px-3 py-2 text-left">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {markets.map((item, index) => (
-              <tr
-                key={index}
-                className="border-t last:border-b"
-              >
-                <td className="px-3 py-2 text-black">{item.market}</td>
-                <td
-                  className={`px-3 py-2 font-medium ${ACTION_STYLES[item.action]}`}
-                >
-                  {item.action}
-                </td>
+      <div className="mx-auto max-w-xl">
+        <div className="import-table">
+          <table className="">
+            <thead className="">
+              <tr>
+                <th className="">Point de vente</th>
+                <th className="text-center">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {markets.map((item, index) => (
+                <tr
+                  key={index}
+                  className=""
+                >
+                  <td className="">{item.market}</td>
+                  <td
+                    className={`import-table-actions ${ACTION_STYLES[item.action]}`}
+                  >
+                    {item.action}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="rounded text-sm bg-gray-300 w-48 p-2">
+      <div className="preview-msg">
         {`${ignoredRows} ligne(s) ignorée(s) sur ${totalRows}`}
       </div>
-    </div>
+    </section>
   );
 }

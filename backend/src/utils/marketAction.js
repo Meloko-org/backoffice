@@ -1,4 +1,4 @@
-const { Market } = require('../models/Market');
+const Market = require('../models/Market');
 
 async function resolveMarketAction(marketSlug) {
 	const existingMarket = await Market.findOne({

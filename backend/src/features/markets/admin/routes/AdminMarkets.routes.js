@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const { importMarketsCsv, listMarkets } = require("../controllers/adminMarkets.controller");
+const { importMarketsCsv, listMarkets, getPostalCodes } = require("../controllers/adminMarkets.controller");
 
 const upload = multer({ dest: "uploads/" });
 const router = express.Router();
@@ -11,6 +11,7 @@ router.post(
     importMarketsCsv
 )
 
+router.get("/postal-codes", getPostalCodes)
 router.get("/", listMarkets)
 
 module.exports = router;

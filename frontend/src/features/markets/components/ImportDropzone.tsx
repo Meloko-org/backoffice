@@ -81,14 +81,14 @@ export default function ImportDropzone({
         </p>
 
         {fileName && (
-          <p className="mt-2 text-sm text-green-600 font-semibold">
+          <p className="mt-2 text-sm text-primary font-semibold">
             {fileName}
           </p>
         )}
       </div>
 
       {error && (
-        <p className="text-sm text-red-600 font-medium">{error}</p>
+        <p className="text-sm text-danger font-medium">{error}</p>
       )}
     </div>
   );

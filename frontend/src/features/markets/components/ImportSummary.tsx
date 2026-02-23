@@ -21,19 +21,19 @@ export function ImportSummary({ report }: ImportSummaryProps) {
   };
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm space-y-6">
+    <section className="bloc">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2>
           Résumé de l’import
         </h2>
 
         <span
-          className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium
+          className={`inline-flex items-center px-3 py-1
             ${
               isStrict
-                ? "bg-danger/10 text-danger"
-                : "bg-warning/10 text-warning"
+                ? "badge-danger"
+                : "badge-warning"
             }`}
         >
           {isStrict ? "Mode strict" : "Mode permissif"}
@@ -56,7 +56,7 @@ export function ImportSummary({ report }: ImportSummaryProps) {
       {/* Warning strict */}
       {summary.errorsCount > 0 && (
         isStrict ? (
-          <div className="rounded-lg border border-danger/30 bg-danger/5 p-4 text-sm text-danger">
+          <div className="alert">
             En mode strict, la présence d’erreurs bloquera l’import.
           </div>
         ) : (
@@ -78,17 +78,28 @@ interface StatProps {
 
 function Stat({ label, value, highlight }: StatProps) {
 
-  console.log("highlight :", highlight)
   return (
     <div
-      className={`rounded-lg border p-4 text-center ${
+      className={` ${
         highlight
-          ? "border-danger/40 bg-danger/5 text-danger"
-          : "border-gray-200 bg-gray-50 text-gray-900"
+          ? "stat-error"
+          : "stat"
       }`}
     >
-      <div className="text-2xl font-bold">{value}</div>
-      <div className="text-sm text-gray-600">{label}</div>
+      <div className={` ${
+        highlight
+          ? "stat-error-result"
+          : "stat-result"
+      }`}>
+        {value}
+      </div>
+      <div className={` ${
+        highlight
+          ? "stat-error-text"
+          : "stat-text"
+      }`}>
+        {label}
+      </div>
     </div>
   );
 }

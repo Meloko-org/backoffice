@@ -11,13 +11,13 @@ export function ImportErrors({ mode, errors }: ImportErrorsProps) {
   const isStrict = mode === "strict";
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm space-y-4">
+    <section className="bloc">
       <header className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2>
           Problèmes détectés
         </h2>
 
-        <span className="text-sm text-gray-600">
+        <span className="bloc-sub-text text-sm">
           {errors.length} problème{errors.length > 1 ? "s" : ""}
         </span>
       </header>
@@ -53,11 +53,11 @@ function IssueRow({ issue, isBlocking }: IssueRowProps) {
 
   return (
     <li
-      className={`flex items-start gap-4 rounded-lg border p-4 border-danger/40 bg-danger/5`}
+      className={`error-elt flex items-start gap-4`}
     >
       {/* Badge */}
       <span
-        className={`mt-0.5 inline-flex rounded-full px-2 py-0.5 text-xs font-semibold bg-danger/20 text-danger`}
+        className={`mt-0.5 inline-flex error-badge`}
       >
         "Erreur"
         {/* {isBlocking ? "Erreur" : "Warning"} */}
@@ -65,13 +65,13 @@ function IssueRow({ issue, isBlocking }: IssueRowProps) {
 
       {/* Content */}
       <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium text-gray-900">
+        <p className="error-title">
           Ligne {issue.line}
         </p>
-        <p className="text-sm text-gray-700">{issue.message}</p>
-        <div className="text-sm text-gray-700">
+        <p className="error-label">{issue.message}</p>
+        <div className="">
           {issue.details?.map((detail, index) => (
-            <p key={index} className="text-sm text-gray-700">{detail}</p>
+            <p key={index} className="error-detail">{detail}</p>
           ))}
         </div>
       </div>

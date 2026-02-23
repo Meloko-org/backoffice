@@ -4,16 +4,27 @@
    THEME TOKENS (Tailwind)
 ========================= */
 @theme {
+  /* light mode */
   --color-bg-light: var(--color-neutral-100);         /* rgb(245,245,245) */
-  --color-sub-bg-light: var(--color-neutral-200);     /* rgb(229,229,229) */
-  --color-sidebar-bg-light: var(--color-neutral-200);
+  --color-text-light: #262E20;    /* rgb(38, 46, 32) */
 
+  --color-sub-bg-light: rgb(255, 255, 255); 
+  --color-sub-text-light: rgb(38, 46, 32, 0.7); 
+
+  --color-sidebar-bg-light: var(--color-neutral-200); /* rgb(229,229,229) */
+
+
+  /* dark mode */
   --color-bg-dark: #212121;       /* rgb(33, 33, 33) */
-  --color-sub-bg-dark: #181818;   /* rgb(24, 24, 24) */
+  --color-text-dark: rgb(245,245,245);     /* rgb(255, 255, 240) */
+
+  --color-sub-bg-dark: rgb(41, 41, 41);
+  --color-sub-text-dark: rgb(161,161,161); 
+
+  --color-option-text: rgb(82,82,82);
+
   --color-sidebar-bg-dark: #181818;
 
-  --color-text-light: #262E20;    /* rgb(38, 46, 32) */
-  --color-text-dark: #FCFFF0;     /* rgb(255, 255, 240) */
 
   --color-primary: #98B66E;     /* rgb(152, 182, 110) */
   --color-secondary: #262E20;   /* rgb(38, 46, 32) */
@@ -30,8 +41,65 @@
   html {
     background-color: var(--color-bg-light);
     color: var(--color-text-light);
+
+    --first-plan-bg: var(--color-bg-light);
+    --first-text: var(--color-text-light);
+
+    --second-plan-bg: var(--color-sub-bg-light);
+    --second-text: var(--color-sub-text-light);
+
+    --sidebar-bg: var(--color-sidebar-bg-light);
+    --sidebar-text: var(--color-text-light);
+
+    /* bloc */
+    --bloc-bg: var(--second-plan-bg);
+    --bloc-border: rgba(0, 0, 0, 0.08);
+    --bloc-title: rgba(152, 182, 110, 1);
+    --bloc-text: var(--first-text);
+    --bloc-sub-text: var(--second-text);
+
+    /* bloc: stat */
+    --stat-bg: rgb(249,250,251);
+    --stat-border: rgb(229,231,235);
+    --stat-result: var(--color-secondary);
+    --stat-text: var(--color-secondary);  
+    
+    /* bloc: error */
+    --stat-error-bg: rgb(148, 41, 17, 0.05);
+    --stat-error-border: rgb(148, 41, 17, 0.6);
+    --stat-error-result: rgb(148, 41, 17);
+    --stat-error-text: rgb(148, 41, 17); 
+
+    /* bloc: warning */
+    --stat-warning-bg: rgb(209, 96, 20, 0.05);
+    --stat-warning-border: rgb(209, 96, 20, 0.6);
+    --stat-warning-result: rgb(209, 96, 20);
+    --stat-warning-text: rgb(209, 96, 20); 
+
+    /* badge danger */
+    --badge-danger-bg: rgb(148, 41, 17, 0.3);
+    --badge-danger-text: rgb(148, 41, 17);
+
+    /* badge warning */
+    --badge-warning-bg: rgb(209, 96, 20, 0.1);
+    --badge-warning-text: rgb(209, 96, 20);
+
+
+    /* alert */
+    --alert-bg: rgb(148, 41, 17, 0.05);
+    --alert-border: rgb(148, 41, 17, 0.6);
+    --alert-text: rgb(148, 41, 17);
+
+    /* warning */
+    --warning-bg: rgb(209, 96, 20, 0.05);
+    --warning-border: rgb(209, 96, 20, 0.6);
+    --warning-text: rgb(209, 96, 20);
+
+    
     --app-surface-bg: var(--color-bg-light);
+    --app-sub-surface-bg: rgb(255, 255, 255);
     --app-sidebar-bg: var(--color-sidebar-bg-light);
+    --app-second-text: var(--color-text-light);
 
     --p-label-color: rgb(38, 46, 32, 0.5);
     --p-info-color: var(--color-text-light);
@@ -42,11 +110,15 @@
     /* ---- bouton invariant selon le mode ---- */
     /* Bouton principal */
     --btn-primary-bg: var(--color-primary);
-    --btn-primary-text: var(--color-text-light);
+    --btn-primary-text: rgb(255, 255, 255);
 
     /* Danger */
     --btn-danger-bg: var(--color-danger);
     --btn-danger-text: #ffffff;
+
+    /* outline */
+    --btn-outline-border: var(--color-text-light);
+    --btn-outline-text: var(--color-text-light);
 
 
     /* ---- bouton variants selon le mode --- */ 
@@ -95,14 +167,80 @@
     background-color: var(--color-bg-dark);
     color: var(--color-text-dark);
 
+    --first-plan-bg: var(--color-bg-dark);
+    --first-text: var(--color-text-dark);
+
+    --second-plan-bg: var(--color-sub-bg-dark);
+    --second-text: var(--color-sub-text-dark);
+
+    --sidebar-bg: var(--color-sidebar-bg-dark);
+    --sidebar-text: var(--color-text-dark);
+
     --app-surface-bg: var(--color-bg-dark);
+    --app-sub-surface-bg: rgb(41,41,41);
     --app-sidebar-bg: var(--color-sidebar-bg-dark);
+    --app-second-text: var(--color-text-dark);
+
+        /* bloc */
+    --bloc-bg: var(--second-plan-bg);
+    --bloc-border: rgba(255, 255, 255, 0);
+    --bloc-title: rgba(152, 182, 110, 1);
+    --bloc-text: var(--first-text);
+    --bloc-sub-text: var(--second-text);
+
+    /* bloc: stat */
+    --stat-bg: var(--first-plan-bg);
+    --stat-border: rgb(229,231,235, 0.1);
+    --stat-result: var(--color-text-dark);
+    --stat-text: var(--color-text-dark);  
+    
+    /* bloc: error */
+    --stat-error-bg: rgb(148, 41, 17, 0.05);
+    --stat-error-border: rgb(148, 41, 17, 1);
+    --stat-error-result: rgb(148, 41, 17);
+    --stat-error-text: rgb(148, 41, 17); 
+
+    /* bloc: warning */
+    --stat-warning-bg: rgb(209, 96, 20, 0.05);
+    --stat-warning-border: rgb(209, 96, 20, 1);
+    --stat-warning-result: rgb(209, 96, 20);
+    --stat-warning-text: rgb(209, 96, 20); 
+
+    /* badge danger */
+    --badge-danger-bg: rgb(148, 41, 17, 0.2);
+    --badge-danger-text: rgb(148, 41, 17);
+    /* badge warning */
+    --badge-warning-bg: rgb(209, 96, 20, 0.1);
+    --badge-warning-text: rgb(209, 96, 20);
+
+
+    /* alert */
+    --alert-bg: rgb(148, 41, 17, 0.05);
+    --alert-border: rgb(148, 41, 17, 1);
+    --alert-text: rgb(148, 41, 17);
+
+    /* warning */
+    --warning-bg: rgb(209, 96, 20, 0.05);
+    --warning-border: rgb(209, 96, 20);
+    --warning-text: rgb(209, 96, 20);
 
     --p-label-color: rgb(255, 255, 240, 0.5);
     --p-info-color: var(--color-text-dark);
 
     --btn-signout-bg: var(--color-bg-dark);
     --btn-signout-hover: rgb(152, 182, 110, 0.5);
+
+    /* Primary */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-text: rgb(0, 0, 0);
+
+    /* Danger */
+    --btn-danger-bg: var(--color-danger);
+    --btn-danger-text: #000;
+
+    /* outline */
+    --btn-outline-border: var(--color-sub-text-dark);
+    --btn-outline-text: var(--color-sub-text-dark);
 
 
      /* Bouton formulaire */
@@ -163,6 +301,10 @@
 
   h3 {
     @apply text-lg font-medium mb-2;
+  }
+
+  h4 {
+    @apply text-sm font-medium mb-1;
   }
 
   p {
@@ -270,7 +412,7 @@
   /*  ----------- H1, H2, H3, H4, H5, H6 -------------------------- */
   /* Light mode */
   html:not(.dark) h1, h2, h3, h4, h5, h6 {
-    color: rgb(38, 46, 32, 0.7)
+    color: rgb(152, 182, 110, 1)
   }
   /* Dark mode */  
   html.dark h1, h2, h3, h4, h5, h6 {
@@ -368,6 +510,221 @@
 
 @layer components {
 
+  .summary-card {
+    @apply rounded-lg px-4 py-3 text-sm;
+    background-color: var(--first-plan-bg);
+    color: var(--first-text);
+  }
+
+
+  .summary-card p {
+    @apply leading-3;
+    color: var(--second-text);
+  }
+
+   /* badge dans ImportSummary */
+  .badge-danger {
+    @apply rounded-full text-sm font-medium;
+    background-color: var(--badge-danger-bg);
+    color: var(--badge-danger-text);
+  }
+
+  .badge-warning {
+    @apply rounded-full text-sm font-medium;
+    background-color: var(--badge-warning-bg);
+    color: var(--badge-warning-text);
+  }
+
+  .alert {
+    @apply rounded-lg border p-4 text-sm;
+    background-color: var(--alert-bg);
+    border-color: var(--alert-border);
+    color: var(--alert-text);
+  }
+
+  .warning {
+    @apply rounded-lg border p-4 text-sm;
+    background-color: var(--warning-bg);
+    border-color: var(--warning-border);
+    color: var(--warning-text);
+  }
+
+
+  /* blocs généraux */
+  .bloc {
+    @apply rounded-xl border p-6 shadow-sm space-y-6;
+    background-color: var(--bloc-bg);
+    border-color: var(--bloc-border);
+    color: var(--bloc-text);
+  }
+
+  .bloc h2 {
+    color: rgba(152, 182, 110, 0.5);
+  }
+
+  .bloc-sub-text {
+    color: var(--bloc-sub-text);
+  }
+
+  /* stats dans ImportSummary */
+  .stat {
+    @apply rounded-lg border p-4 text-center;
+    background-color: var(--stat-bg);
+    border-color: var(--stat-border);
+  }
+
+  .stat-result {
+    @apply text-2xl font-bold;
+    color: var(--stat-result);
+  }
+
+  .stat-text {
+    @apply text-sm;
+    color: var(--stat-text);
+  }
+
+  .stat-error {
+    @apply rounded-lg border p-4 text-center;
+    background-color: var(--stat-error-bg);
+    border-color: var(--stat-error-border);
+  }
+
+  .stat-error-result {
+    @apply text-2xl font-bold;
+    color: var(--stat-error-result);
+  }
+
+  .stat-error-text {
+    @apply text-sm;
+    color: var(--stat-error-text);
+  }
+
+  /* -----  elements dans les blocs ------- */
+  /* errors */
+  .error-elt {
+    @apply gap-4 rounded-lg border p-4;
+    background-color: var(--stat-error-bg);
+    border-color: var(--stat-error-border);
+  }
+
+  .error-title {
+    @apply text-sm font-medium;
+    color: var(--first-text);
+  }
+
+  .error-label {
+    @apply text-sm font-medium;
+    color: var(--second-text);
+  }
+
+  .error-detail {
+    @apply text-sm;
+    color: var(--second-text);
+  }
+
+  .error-badge {
+    @apply rounded-full px-2 py-0.5 text-xs font-semibold;
+    background-color: var(--badge-danger-bg);
+    color: var(--badge-danger-text);
+  }
+
+  /* warning */
+  .warning-elt {
+    @apply gap-4 rounded-lg border p-4;
+    background-color: var(--stat-warning-bg);
+    border-color: var(--stat-warning-border);
+  }
+
+  .warning-title {
+    @apply text-sm font-medium;
+    color: var(--first-text);
+  }
+
+  .warning-label {
+    @apply text-sm font-medium;
+    color: var(--second-text);
+  }
+
+  .warning-detail {
+    @apply text-sm;
+    color: var(--second-text);
+  }
+
+  .warning-badge {
+    @apply rounded-full px-2 py-0.5 text-xs font-semibold;
+    background-color: var(--badge-warning-bg);
+    color: var(--badge-warning-text);
+  }
+
+
+
+  
+
+  .import-mode {
+    @apply rounded-lg gap-4 p-4;
+    background-color: var(--app-sidebar-bg);
+    color: var(--app-second-text);
+  }
+
+  .switch-import-mode {
+    background-color: var(--app-surface-bg);
+  }
+
+
+  /* import table */
+  .import-table {
+    background-color: var(--table-bg);
+    border: 1px solid var(--table-border);
+    border-radius: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .import-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .import-table thead {
+    background-color: var(--table-head-bg);
+  }
+
+  .import-table th {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--table-head-text);
+    border-bottom: 1px solid var(--table-border);
+  }
+
+  .import-table tbody tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+  }
+
+  .import-table tbody tr:hover {
+    background-color: var(--table-row-hover);
+  }
+
+  .import-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--table-border);
+    vertical-align: middle;
+  }
+
+  .import-table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .preview-msg {
+    @apply text-sm w-full leading-5 text-center;
+    background-color: var(--first-plan-bg);
+    color: var(--second-text);
+  }
+
   /* loading dots */
   .loading-dots {
     display: inline-flex;
@@ -431,15 +788,15 @@
 
 
   .confirm-panel {
-    background-color: var(--app-surface-bg);
+    background-color: var(--first-plan-bg);
   }
 
   .no-pict {
-    background-color: var(--app-surface-bg);
+    background-color: var(--first-plan-bg);
   }
 
   .slug {
-    background-color: var(--app-surface-bg);
+    background-color: var(--first-plan-bg);
   }
 
   .detail-label {
@@ -459,31 +816,45 @@
   .btn-primary {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
            transition
-           hover:opacity-90;
+           hover:opacity-90
+           disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
   }
 
-  .btn-outline-primary {
-    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md text-neutral-300
+  .btn-cancel {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-lg font-medium
            transition
-           hover:opacity-90;
+           hover:opacity-60;
+    background-color: var(--second-plan-bg);
+    border-color: var(--form-section-border);
+    color: var(--first-text);
+  }
+
+
+  
+  .btn-outline-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md
+           transition;
     background-color: var(--form-input-bg);
     border-color: var(--table-border);
     color: var(--btn-outline-text);
   }
 
   .btn-outline-primary:hover {
-    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md 
-           transition
-           hover:opacity-90;
     border-color: var(--btn-primary-bg);
     color: var(--color-primary);
   }
 
-  /* .btn-primary:hover {
-    background-color: var(--btn-primary-bg/50);
-  } */
+  
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md
+           transition
+           hover:opacity-60;
+    border-color: var(--btn-outline-border);
+    color: var(--btn-outline-text);
+  }
+
 
   .btn-danger {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium

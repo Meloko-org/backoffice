@@ -1,4 +1,4 @@
-const { Market } = require('../../../../models/Market');
+const Market = require('../../../../models/Market');
 const { UPDATE_WHITELIST } = require("../domain/market.rules");
 const { getCoordinates } = require("../../../../services/coordinates.service");
 

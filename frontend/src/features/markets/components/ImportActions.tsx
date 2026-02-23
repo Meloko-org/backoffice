@@ -1,3 +1,4 @@
+import { AnimatedButton } from "../../../components/global/buttons/AnimatedButton";
 import type { MarketsImportStatus } from "../types/marketsImport.types";
 
 interface ImportActionsProps {
@@ -26,10 +27,10 @@ export function ImportActions({
     : "Lancer l’import";
 
   return (
-    <section className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <section className="flex items-center justify-between bloc">
       {/* Infos */}
       <div className="space-y-1 mr-3">
-        <p className="text-sm text-gray-700">
+        <p className="bloc-sub-text">
           {isStrict ? (
             <>
               Mode <strong>strict</strong> : aucune erreur autorisée
@@ -59,7 +60,8 @@ export function ImportActions({
         <button
           onClick={onReset}
           disabled={isImporting}
-          className="rounded-lg border px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+          className="btn-cancel"
+          // className="rounded-lg border px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50"
         >
           Annuler
         </button>
@@ -67,14 +69,7 @@ export function ImportActions({
         <button
           disabled={isDisabled}
           onClick={onConfirm}
-          className={`
-            relative rounded-lg px-5 py-2 text-sm font-semibold transition
-            ${
-              isDisabled
-                ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                : "bg-primary text-white hover:bg-primary/90"
-            }
-          `}
+          className="btn-primary"
         >
           {isImporting && (
             <span className="absolute inset-y-0 left-3 flex items-center">

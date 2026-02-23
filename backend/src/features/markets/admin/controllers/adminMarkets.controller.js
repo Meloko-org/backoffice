@@ -1,5 +1,5 @@
 const parseCsv = require('../../../../services/csvParser.service');
-const { getMarkets } = require('../services/adminMarkets.service');
+const { getMarkets, getDistinctPostalCodes } = require('../services/adminMarkets.service');
 const importMarkets = require("../services/marketImport.service");
 
 const importMarketsCsv = async (req, res) => {
@@ -28,7 +28,8 @@ const importMarketsCsv = async (req, res) => {
 
 
 const listMarkets = async (req, res, next) => {
-  console.log("INSIDE PRODUCTS CONTROLLER");
+
+  console.log("query params: ", req.query)
   try {
     const {
       page = 1,
@@ -36,7 +37,7 @@ const listMarkets = async (req, res, next) => {
       search,
       sortKey = "createdAt",
       sortDirection = "desc",
-      family,
+      ...filters
     } = req.query;
 
     /* garantir que page et limit sont bien des number */
@@ -50,6 +51,7 @@ const listMarkets = async (req, res, next) => {
       search,
       sortKey,
       sortDirection,
+      filters
     });
 
     console.log(result)
@@ -64,8 +66,22 @@ const listMarkets = async (req, res, next) => {
   }
 };
 
+const getPostalCodes = async (req, res, next) => {
+  try {
+    const postalCodes = await getDistinctPostalCodes();
+
+    res.json({
+      success: true,
+      data: postalCodes.sort()
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 
 module.exports = {
     importMarketsCsv,
 		listMarkets,
+    getPostalCodes,
 }

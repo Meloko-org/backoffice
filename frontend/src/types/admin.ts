@@ -1,5 +1,6 @@
 import type { ProductCategory } from "../features/categories/types/category";
 import type { ProductFamily } from "../features/families/types/family";
+import type { Market } from "../features/markets/types/markets";
 import type { Product } from "../features/products/types/product";
 
 
@@ -33,5 +34,12 @@ export type ModelContext =
       data: Product;
       onEdit?: (product: Product) => void;
       onDelete?: (product: Product) => void;
+    }
+  | { 
+      type: "market"; 
+      title: string;
+      data: Market;
+      onEdit?: (product: Market) => void;
+      onDelete?: (product: Market) => void;
     }
   | null;

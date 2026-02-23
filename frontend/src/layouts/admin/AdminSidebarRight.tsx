@@ -1,5 +1,6 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
 import FamilyDetails from "../../features/families/components/FamilyDetails";
+import MarketDetails from "../../features/markets/components/MarketDetails";
 import ProductDetails from "../../features/products/components/ProductDetails";
 import { ConfirmPanel } from "./components/ConfirmPanel";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
@@ -37,6 +38,13 @@ export default function AdminSidebarRight() {
 		case "product":
 			content = <ProductDetails 
 									product={infoContext.data} 
+									onDelete={infoContext.onDelete} 
+									onEdit={infoContext.onEdit}
+								/>;
+			break;
+		case "market":
+			content = <MarketDetails 
+									market={infoContext.data} 
 									onDelete={infoContext.onDelete} 
 									onEdit={infoContext.onEdit}
 								/>;

@@ -25,52 +25,56 @@ export function ImportSuccess({
   console.log("importFailed :", importFailed)
 
   return (
-    <section className={`
-      space-y-6 rounded-xl border  p-8
-      ${importFailed ? "border-danger/40 bg-danger/5" : "border-green-200 bg-green-50"}
-    `}>
-      {/* Header */}
-      
-        {importFailed ? (
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-danger/60">
-              X
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-red-900">
-                Import terminé avec échec
-              </h2>
-              <p className="text-sm text-red-800">
-                Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-green-600">
-              ✓
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-green-900">
-                Import terminé avec succès
-              </h2>
-              <p className="text-sm text-green-800">
-                Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
-              </p>
-            </div>
-          </div>
-        )}
-        
-      
+    <section className={`space-y-6`}>
 
-      {/* Résumé chiffres */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <SummaryCard
-          label="Points de vente"
-          created={markets.created}
-          updated={markets.updated}
-        />
+      {/* Header */}
+      <div className={`
+          bloc
+          ${importFailed ? "border-danger" : "border-primary"}
+        `}>
+          
+        <div className="flex flex-row gap-x-5">
+          {importFailed ? (
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-danger/60">
+                X
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-red-900">
+                  Import terminé avec échec
+                </h2>
+                <p className="text-sm text-red-800">
+                  Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="flex grow items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full text-white bg-primary">
+                ✓
+              </div>
+              <div>
+                <h2>
+                  Import terminé avec succès
+                </h2>
+                <p className="text-sm text-primary">
+                  Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Résumé chiffres */}
+          <div className="w-80 text-center pr-25">
+            <SummaryCard
+              label="Points de vente"
+              created={markets.created}
+              updated={markets.updated}
+            />
+          </div>
+        </div>
       </div>
+
 
       {hasErrors && (
         <ImportErrors
@@ -83,8 +87,8 @@ export function ImportSuccess({
 
       {/* Warnings */}
       {warnings.length > 0 && (
-        <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-          <p className="text-sm text-yellow-800">
+        <div className="bloc">
+          <p className="text-md text-yellow-800">
             ⚠️ {warnings.length} avertissement(s) ignoré(s) lors de l’import
           </p>
         </div>
@@ -94,7 +98,7 @@ export function ImportSuccess({
       <div className="flex justify-end gap-3 pt-4">
         <button
           onClick={onReset}
-          className="rounded-lg border px-4 py-2 text-sm hover:bg-white"
+          className="btn-outline"
         >
           Nouvel import
         </button>
@@ -102,12 +106,13 @@ export function ImportSuccess({
         {onGoToMarkets && (
           <button
             onClick={onGoToMarkets}
-            className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+            className="btn-primary"
           >
             Voir les points de vente
           </button>
         )}
       </div>
+
     </section>
   );
 }
@@ -123,12 +128,12 @@ function SummaryCard({
   updated: number;
 }) {
   return (
-    <div className="rounded-lg border bg-white p-4 text-sm">
-      <p className="font-medium text-black">{label}</p>
-      <p className="text-gray-600">
+    <div className="summary-card">
+      <h3 className="">{label}</h3>
+      <p className="">
         Créés : <strong>{created}</strong>
       </p>
-      <p className="text-gray-600">
+      <p className="">
         Mis à jour : <strong>{updated}</strong>
       </p>
     </div>

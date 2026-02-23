@@ -1,35 +1,34 @@
 import { ImageOff, Pencil, Trash2 } from "lucide-react";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
-import type { Product } from "../types/product";
-import { deleteProduct } from "../api/products.api";
+import type { Market } from "../types/markets";
 
 type Props = {
-	product: Product;
-	onEdit?: (product: Product) => void;
-  onDelete?: (product: Product) => void;
+	market: Market;
+	onEdit?: (market: Market) => void;
+  onDelete?: (market: Market) => void;
 }
 
 
 export default function FamilyDetails({
-	product,
+	market,
 	onEdit,
 	onDelete,
 }: Props) {
 
-	if (!product) return null;
+	if (!market) return null;
 
   const { confirm } = useConfirm();
 
 
-	const imageUrl = product.image; 
+	const imageUrl = market.image; 
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
     confirm({
-      title: "Supprimer le produit",
+      title: "Supprimer le point de vente",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
-        await deleteProduct(product._id);
+        // await deleteMarket(market._id);
       },
     });
   };
@@ -41,7 +40,7 @@ export default function FamilyDetails({
         {hasImage ? (
           <img
             src={imageUrl!}
-            alt={product.name}
+            alt={market.name}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -58,7 +57,7 @@ export default function FamilyDetails({
           <p className="detail-label text-xs uppercase tracking-wide">
             Nom
           </p>
-          <p className="detail-info font-medium">{product.name}</p>
+          <p className="detail-info font-medium">{market.name}</p>
         </div>
 
         <div>
@@ -66,52 +65,49 @@ export default function FamilyDetails({
             Slug
           </p>
           <p className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
-            {product.slug}
+            {market.slug}
           </p>
         </div>
 
-        {product.family?.name && (
+        {market.address && (
           <div>
             <p className="detail-label text-xs uppercase tracking-wide">
-              Famille
+              Adresse
             </p>
-            <p className="detail-info ">{product.family.name}</p>
+            <div>
+              <p className="detail-info ">{market.address.addres1}</p>
+              <p className="detail-info ">{market.address.address2}</p>
+              <div className="space-x-3">
+                <span className="detail-info ">{market.address.postalCode}</span>
+                <span className="detail-info ">{market.address.city}</span>
+              </div>
+            </div>
+
+            <div className="flex justify-between gap-x-4">
+              <div className="flex items-center w-full gap-x-2">
+                <div className="detail-label text-xs uppercase tracking-wide">Latitude</div>
+                <div className="detail-info">{market.address.latitude.toString()}</div>
+              </div>
+              <div className="flex items-center w-full gap-x-2">
+                <div className="detail-label text-xs uppercase tracking-wide">Longitude</div>
+                <div className="detail-info ">{market.address.longitude.toString()}</div>
+              </div>
+            </div>
+
           </div>
         )}
 
-        {product.family?.category.name && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Catégorie
-            </p>
-            <p className="detail-info ">{product.family.category.name}</p>
-          </div>
-        )}
 
-        <div className="flex justify-between gap-x-4">
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">Unité</div>
-            <div className="detail-info">{product.weight.unit}</div>
-          </div>
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">Mesure</div>
-            <div className="detail-info ">{product.weight.measurement}</div>
-          </div>
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">TAV</div>
-            <div className="detail-info ">{product.vatRate}</div>
-          </div>
-        </div>
 
-        
+                
 
-        {product.description && (
+        {market.description && (
           <div>
             <p className="detail-label text-xs uppercase tracking-wide">
               Description
             </p>
             <p className="detail-info leading-relaxed">
-              {product.description}
+              {market.description}
             </p>
           </div>
         )}
@@ -126,7 +122,7 @@ export default function FamilyDetails({
         <div className="pt-2 flex gap-2">
           {onEdit && (
             <button
-              onClick={() => onEdit(product)}
+              onClick={() => onEdit(market)}
               className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
             >
               <Pencil className="w-4 h-4" />
