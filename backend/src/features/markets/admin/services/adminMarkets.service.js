@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Market = require("../../../../models/Market");
 const { getCoordinates } = require("../../../../services/coordinates.service");
 const { ValidationError, NotFoundError, ApiError } = require("../../../../utils/ApiError");
-const { normalizeSlug } = require("../../../../utils/normalize");
+const { normalizeSlug, normalizeDecimalFields, normalizeName } = require("../../../../utils/normalize");
 
 async function getMarkets({
   page = 1,
@@ -45,6 +45,11 @@ async function getMarkets({
     Market.countDocuments(filter),
   ]);
 
+
+  items.forEach(normalizeDecimalFields);
+
+  console.log("item0 :", items[0])
+
   return {
     items,
     pagination: {
@@ -80,6 +85,9 @@ async function createMarket(payload) {
 
   address.latitude = latitude;
   address.longitude = longitude;
+
+
+  address.city = normalizeName(address.city)
 
   return Market.create({
     name,

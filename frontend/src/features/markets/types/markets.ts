@@ -11,12 +11,8 @@ export interface Market {
     address2: string;
     postalCode: string;
     city: string;
-    latitude: {
-      $numberDecimal: number;
-    };
-    longitude: {
-      $numberDecimal: number;
-    };
+    latitude: number;
+    longitude: number;
   },
   createdAt: string;
   updatedAt: string;

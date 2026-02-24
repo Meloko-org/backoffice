@@ -15,6 +15,7 @@ function normalizeSlug(str, { prefix } = {}) {
   return prefix ? `${prefix}-${slug}` : slug;
 }
 
+
 function normalizeName(str, {
   removeAccents = false,
 } = {}) {
@@ -67,8 +68,33 @@ function normalizeStreet(str) {
     .trim();
 }
 
+
+
+const mongoose = require("mongoose");
+
+function normalizeDecimalFields(obj) {
+  if (!obj || typeof obj !== "object") return obj;
+
+  for (const key in obj) {
+    const value = obj[key];
+
+    if (value instanceof mongoose.Types.Decimal128) {
+      obj[key] = Number(value.toString());
+    } 
+    else if (value && typeof value === "object") {
+      normalizeDecimalFields(value);
+    }
+  }
+
+  return obj;
+}
+
+
+
+
 module.exports = { 
   normalizeSlug,
   normalizeName, 
   normalizeStreet,
+  normalizeDecimalFields,
 };

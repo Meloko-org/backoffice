@@ -24,9 +24,17 @@ class ValidationError extends ApiError {
 }
 
 
+class GeolocationError extends ApiError {
+  constructor(message, details = null) {
+    super(message, 422, details);
+  }
+}
+
+
 
 module.exports = {
   ApiError,
   NotFoundError,
   ValidationError,
+  GeolocationError,
 };

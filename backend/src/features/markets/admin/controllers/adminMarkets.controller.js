@@ -76,7 +76,7 @@ const createMarketHandler = async (req, res, next) => {
 
     const market = await createMarket(req.body);
 
-    res.status(201);json({
+    res.status(201).json({
       success: true,
       data: market,
     })

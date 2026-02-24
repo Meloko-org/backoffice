@@ -1,20 +1,27 @@
-const { geoError } = require('./error.service');
+const { GeolocationError } = require('../utils/ApiError');
 const token = process.env.LOCATIONIQ_KEY
 
 const locationIqCoordinates = async (query) => {
 	const queryEncoded = encodeURIComponent(query);
 	const url = `https://us1.locationiq.com/v1/search?key=${token}&q=${queryEncoded}&format=json&limit=1`;
 
-	const response = await fetch(url)
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new GeolocationError(
+			"Service de géolocalisation indisponible",
+			{ status: response.status }
+		);
+	}
 
 	const data = await response.json();
 
 	if (data.error) {
-		throw geoError(data.error, query)
+		throw new GeolocationError(data.error, query)
 	}
 
 	if (!Array.isArray(data) || data.length === 0) {
-    throw geoError("Aucune coordonnée trouvée", query);
+    throw new GeolocationError("Aucune coordonnée trouvée", query);
   }
 
 	return {

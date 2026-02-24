@@ -89,11 +89,11 @@ export default function FamilyDetails({
             <div className="flex justify-between gap-x-4 mt-3">
               <div className="flex items-center w-full gap-x-2">
                 <div className="detail-label text-xs uppercase tracking-wide">Latitude</div>
-                <div className="detail-info">{market.address.latitude.$numberDecimal}</div>
+                <div className="detail-info">{market.address.latitude}</div>
               </div>
               <div className="flex items-center w-full gap-x-2">
                 <div className="detail-label text-xs uppercase tracking-wide">Longitude</div>
-                <div className="detail-info ">{market.address.longitude.$numberDecimal}</div>
+                <div className="detail-info ">{market.address.longitude}</div>
               </div>
             </div>
 

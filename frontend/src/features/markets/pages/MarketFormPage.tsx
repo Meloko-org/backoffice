@@ -102,7 +102,7 @@ export default function MarketFormPage({
           submitLabel={
             isEdit
               ? "Mettre à jour"
-              : "Créer le produit"
+              : "Créer le point de vente"
           }
           onSubmit={handleSubmit}
           renderers={adminFormRenderers}
