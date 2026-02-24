@@ -71,12 +71,10 @@ export default function ProductFormPage({
         mapFormToPayload(values);
   
       if (isEdit && productId) {
-        await updateProduct(productId, payload);
+        return await updateProduct(productId, payload);
       } else {
-        await createProduct(payload);
+        return await createProduct(payload);
       }
-  
-      navigate("/admin/products");
     };
   
 
@@ -113,6 +111,9 @@ export default function ProductFormPage({
               : "Créer le produit"
           }
           onSubmit={handleSubmit}
+          onSuccess={() => {
+            navigate("/admin/products");
+          }}
           renderers={adminFormRenderers}
         />
       </div>

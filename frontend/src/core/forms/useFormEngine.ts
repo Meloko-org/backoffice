@@ -4,17 +4,17 @@ import type {
   FieldOption,
   FormFieldSchema,
 } from "./types";
+import type { ApiResponse, ApiSuccessResponse, ApiWarning } from "../../types/global.types";
 
 type UseFormEngineProps<TValues> = {
   schema: FormSchema<TValues>;
   initialValues?: Partial<TValues>;
   mode?: "create" | "edit";
-
-  onSubmit: (values: TValues) => Promise<void>;
+  onSubmit: (values: TValues) => Promise<ApiResponse<any>>;
+  onSuccess?: (response: ApiSuccessResponse<TValues>) => void;
 };
 
 type FieldErrors<TValues> = Partial<Record<keyof TValues, string>>;
-
 
 
 export function useFormEngine<TValues extends Record<string, any>>({
@@ -22,6 +22,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
   initialValues,
   mode = "create",
   onSubmit,
+  onSuccess,
 }: UseFormEngineProps<TValues>) {
 
   /* ---------------- STATE ---------------- */
@@ -49,6 +50,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
   >({});
 
   const [globalError, setGlobalError] = useState<string | null>(null);
+  const [globalWarnings, setGlobalWarnings] = useState<ApiWarning[]>([]); 
   const [loading, setLoading] = useState(false);
 
   const [asyncOptions, setAsyncOptions] = useState<
@@ -328,13 +330,24 @@ export function useFormEngine<TValues extends Record<string, any>>({
     if (loading) return;
 
     setGlobalError(null);
+    setGlobalWarnings([]);
 
     const isValid = validateForm();
     if (!isValid) return;
 
     try {
       setLoading(true);
-      await onSubmit(values);
+      const response = await onSubmit(values);
+
+      if (response.success) {
+        if (response.warnings?.length) {
+          setGlobalWarnings(response.warnings);
+        }
+
+        onSuccess?.(response);
+      }
+      
+
     } catch (error: any) {
       if (error?.fieldErrors) {
         setErrors(error.fieldErrors);
@@ -359,6 +372,7 @@ export function useFormEngine<TValues extends Record<string, any>>({
     values,
     errors,
     globalError,
+    globalWarnings,
     loading,
 
     asyncOptions,

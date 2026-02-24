@@ -12,6 +12,8 @@ export function mapFormToPayload(
       address2: values.address2 || undefined,
       postalCode: values.postalCode,
       city: values.city,
+      latitude: values.latitude,
+      longitude: values.longitude,
     }
   }
 }
@@ -28,6 +30,8 @@ export function mapMarketToFormValues(
     address1: market.address.address1,
     address2: market.address.address2 ?? "",
     postalCode: market.address.postalCode,
-    city: market.address.city
+    city: market.address.city,
+    latitude: market.address.latitude ?? "",
+    longitude: market.address.longitude ?? "",
   }
 }

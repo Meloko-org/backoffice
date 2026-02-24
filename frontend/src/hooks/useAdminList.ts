@@ -57,15 +57,6 @@ export function useAdminList<T>(fetcher: Fetcher<T>) {
 
   useEffect(() => {
 
-    // console.log("FETCH PARAMS:", {
-    //   page,
-    //   limit,
-    //   search: debouncedSearch,
-    //   sortKey,
-    //   sortDirection,
-    //   filters,
-    // });
-
     fetchData();
   }, [page, debouncedSearch, sortKey, sortDirection, filters, limit]);
 

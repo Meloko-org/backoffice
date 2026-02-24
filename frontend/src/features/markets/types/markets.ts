@@ -37,6 +37,8 @@ export interface CreateMarketPayload {
     address2?: string;
     postalCode: string;
     city: string;
+    latitude?: number,
+    longitude?: number,
   }
 }
 
@@ -50,4 +52,6 @@ export interface MarketFormValues {
   address2?: string;
   postalCode: string;
   city: string;
+  latitude?: number;
+  longitude?: number;
 }

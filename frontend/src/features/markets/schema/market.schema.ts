@@ -28,6 +28,7 @@ export const marketSchema =
       },
       {
         title: "Adresse",
+        isAlertContainer: true,
         fields: {
           address1: field.input({
             label: "Adresse 1",
@@ -50,6 +51,26 @@ export const marketSchema =
           city: field.input({
             label: "Ville",
             required: true,
+            floating: true,
+          })
+        }
+      },
+      {
+        title: "Coordonnées GPS",
+        isVisible: ({ mode }) =>
+          mode === "edit",
+        fields: {
+          latitude: field.input({
+            label: "Latitude",
+            inputType: "number",
+            required: false,
+            floating: true,
+          }),
+
+          longitude: field.input({
+            label: "Longitude",
+            inputType: "number",
+            required: false,
             floating: true,
           })
         }

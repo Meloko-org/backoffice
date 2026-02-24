@@ -24,11 +24,18 @@ class ValidationError extends ApiError {
 }
 
 
-class GeolocationError extends ApiError {
-  constructor(message, details = null) {
-    super(message, 422, details);
+class GeolocationNotFoundError extends ApiError {
+  constructor(query) {
+    super("Aucune coordonnée trouvée", 422, { query });
   }
 }
+
+class GeolocationServiceError extends ApiError {
+  constructor(message, details = null) {
+    super(message, 503, details);
+  }
+}
+
 
 
 
@@ -36,5 +43,6 @@ module.exports = {
   ApiError,
   NotFoundError,
   ValidationError,
-  GeolocationError,
+  GeolocationNotFoundError,
+  GeolocationServiceError,
 };

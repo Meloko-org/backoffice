@@ -74,11 +74,14 @@ const createMarketHandler = async (req, res, next) => {
   try {
     validateCreateMarket(req.body);
 
-    const market = await createMarket(req.body);
+    const result = await createMarket(req.body);
+
+    console.log("result :", result)
 
     res.status(201).json({
       success: true,
-      data: market,
+      data: result.market,
+      warnings: result.warnings ?? []
     })
 
   } catch (error) {

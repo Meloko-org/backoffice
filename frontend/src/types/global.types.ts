@@ -10,9 +10,15 @@ export interface ApiErrorResponse {
   errors?: Record<string, string>;
 }
 
+export type ApiWarning = {
+  code: string;
+  message: string;
+}
+
 export interface ApiSuccessResponse<T> {
   success: true;
   data: T;
+  warnings?: ApiWarning[];
 }
 
 export type ApiError = {

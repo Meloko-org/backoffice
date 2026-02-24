@@ -65,13 +65,12 @@ export default function CategoryFormPage({
       mapFormValuesToPayload(values);
 
     if (isEdit && categoryId) {
-      await updateCategory(categoryId, payload);
+      return await updateCategory(categoryId, payload);
     } else {
-      await createCategory(payload);
+      return await createCategory(payload);
     }
-
-    navigate("/admin/categories");
   };
+
 
   if (loading) {
     return (
@@ -103,6 +102,9 @@ export default function CategoryFormPage({
               : "Créer la catégorie"
           }
           onSubmit={handleSubmit}
+          onSuccess={() => {
+            navigate("/admin/categories");
+          }}
           renderers={adminFormRenderers}
         />
       </div>

@@ -43,6 +43,7 @@ export default function MarketsListPage() {
     limit,
     setLimit,
     handleSort,
+    refetch,
   } = useAdminList(getMarketsList);
 
   const [ selectedMarket, setSelectedMarket ] = useState<Market | null>();
@@ -89,6 +90,7 @@ export default function MarketsListPage() {
       description: "Cette action est irréversible.",
       onConfirm: async () => {
         await deleteMarket(market._id);
+        refetch();
       },
     });
   }

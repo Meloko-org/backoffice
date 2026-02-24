@@ -8,6 +8,7 @@ import { familySchema } from "../schema/family.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 import { createFamily, getFamilyById, updateFamily } from "../api/families.api";
 import { BallTriangle } from "react-loader-spinner";
+import type { ApiResponse } from "../../../types/global.types";
 
 type FamilyFormPageProps = {
   mode: "create" | "edit";
@@ -64,17 +65,15 @@ export default function FamilyFormPage({
 
   const handleSubmit = async (
     values: FamilyFormValues
-  ) => {
+  ): Promise<ApiResponse<any>> => {
     const payload =
       mapFormValuesToPayload(values);
 
     if (isEdit && familyId) {
-      await updateFamily(familyId, payload);
+      return updateFamily(familyId, payload);
     } else {
-      await createFamily(payload);
+      return createFamily(payload);
     }
-
-    navigate("/admin/families");
   };
 
   if (loading) {
@@ -107,6 +106,9 @@ export default function FamilyFormPage({
                 : "Créer la catégorie"
             }
             onSubmit={handleSubmit}
+            onSuccess={() => {
+              navigate("/admin/families");
+            }}
             renderers={adminFormRenderers}
           />
         </div>

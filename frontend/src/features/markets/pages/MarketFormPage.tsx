@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import type { MarketFormValues, CreateMarketPayload } from "../types/markets";
+import type { MarketFormValues } from "../types/markets";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { createMarket, getMarketById, updateMarket } from "../api/markets.api";
 import { mapFormToPayload, mapMarketToFormValues } from "../mappers/market.mapper";
@@ -8,6 +8,7 @@ import { BallTriangle } from "react-loader-spinner";
 import { AdminForm } from "../../../core/forms/FormRenderer";
 import { marketSchema } from "../schema/market.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
+import type { ApiResponse } from "../../../types/global.types";
 
 type MarketFormPageProps = {
   mode: "create" | "edit",
@@ -60,20 +61,21 @@ export default function MarketFormPage({
     loadProduct();
   }, [isEdit, marketId]);
 
+
   const handleSubmit = async (
-      values: MarketFormValues
-    ) => {
-      const payload =
-        mapFormToPayload(values);
-  
-      if (isEdit && marketId) {
-        await updateMarket(marketId, payload);
-      } else {
-        await createMarket(payload);
-      }
-  
-      navigate("/admin/markets");
-    }; 
+    values: MarketFormValues
+  ): Promise<ApiResponse<any>> => {
+
+    const payload = mapFormToPayload(values);
+
+    if (isEdit && marketId) {
+      return await updateMarket(marketId, payload);
+    }
+
+    return await createMarket(payload);
+  }; 
+
+  console.log("values :", initialValues)
 
   if (loading) {
     return (
@@ -105,6 +107,15 @@ export default function MarketFormPage({
               : "Créer le point de vente"
           }
           onSubmit={handleSubmit}
+          onSuccess={(response) => {
+            if (response.warnings?.length) {
+              setTimeout(() => {
+                navigate("/admin/markets");
+              }, 4000)
+            } else {
+              navigate("/admin/markets");
+            }
+          }}
           renderers={adminFormRenderers}
         />
       </div>

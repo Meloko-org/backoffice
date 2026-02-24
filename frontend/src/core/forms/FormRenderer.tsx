@@ -3,6 +3,7 @@ import { useFormEngine } from "./useFormEngine";
 
 import FormSection from "./layout/FormSection";
 import { AnimatedButton } from "../../components/global/buttons/AnimatedButton";
+import type { ApiResponse, ApiSuccessResponse } from "../../types/global.types";
 
 
 export type FieldRendererContext<TValues> = {
@@ -28,7 +29,8 @@ type AdminFormProps<TValues extends Record<string, any>> = {
   initialValues?: Partial<TValues>;
   mode?: "create" | "edit";
   submitLabel?: string;
-  onSubmit: (values: TValues) => Promise<void>;
+  onSubmit: (values: TValues) => Promise<ApiResponse<any>>;
+  onSuccess?: (response: ApiSuccessResponse<any>) => void;
   renderers: Record<string, FieldRenderer<TValues>>;
 };
 
@@ -38,6 +40,7 @@ export function AdminForm<TValues extends Record<string, any>>({
   mode = "create",
   submitLabel = "Enregistrer",
   onSubmit,
+  onSuccess,
   renderers,
 }: AdminFormProps<TValues>) {
 
@@ -45,6 +48,7 @@ export function AdminForm<TValues extends Record<string, any>>({
     values,
     errors,
     globalError,
+    globalWarnings,
     loading,
     asyncOptions,
     asyncLoading,
@@ -58,7 +62,11 @@ export function AdminForm<TValues extends Record<string, any>>({
     initialValues,
     mode,
     onSubmit,
+    onSuccess,
   });
+
+  // vérifie s'il y a bien une section définie comme AlertContainer
+  const hasAlertSection = schema.sections.some(s => s.isAlertContainer);
 
   return (
     <form
@@ -71,6 +79,9 @@ export function AdminForm<TValues extends Record<string, any>>({
 
       {schema.sections.map((section, sectionIndex) => {
 
+        const sectionVisible = section.isVisible?.({ values, mode }) ?? true;
+        if (!sectionVisible) return null;
+
         const sectionEnabled = section.isEnabled?.({ values, mode }) ?? true;
 
         return (
@@ -82,6 +93,8 @@ export function AdminForm<TValues extends Record<string, any>>({
                 ? { message: globalError }
                 : undefined
             }
+            globalWarnings={globalWarnings}
+            isAlertContainer={hasAlertSection ? section.isAlertContainer : sectionIndex === 0}
           >
             <div 
               className={`

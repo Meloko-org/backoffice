@@ -1,4 +1,5 @@
 import { apiFetch } from "../../../lib/apiFetch";
+import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
 import type { CreateProductPayload, Product, ProductListResponse, UpdateProductPayload } from "../types/product";
 
@@ -60,9 +61,9 @@ export const getProductsList = async (
   }
 }
 
-export const createProduct = async (payload: CreateProductPayload): Promise<Product> => {
+export const createProduct = async (payload: CreateProductPayload): Promise<ApiResponse<Product>> => {
 
-  return apiFetch<Product>(
+  return apiFetch<ApiResponse<Product>>(
     `${BASE_URL}/`, 
     {
       method: "POST",
@@ -74,9 +75,9 @@ export const createProduct = async (payload: CreateProductPayload): Promise<Prod
 export const updateProduct = async (
   id: string, 
   payload: UpdateProductPayload,
-): Promise<Product> => {
+): Promise<ApiResponse<Product>> => {
 
-  return apiFetch<Product>(
+  return apiFetch<ApiResponse<Product>>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',

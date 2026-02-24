@@ -49,6 +49,7 @@ export default function AdminCategoriesPage() {
     limit,
     setLimit,
     handleSort,
+    refetch,
   } = useAdminList(getCategoriesList);
 
 
@@ -101,6 +102,7 @@ export default function AdminCategoriesPage() {
       description: "Cette action est irréversible.",
       onConfirm: async () => {
         await deleteCategory(category._id);
+        refetch();
       },
     });
   }

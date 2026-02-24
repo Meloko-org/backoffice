@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Market = require("../../../../models/Market");
 const { getCoordinates } = require("../../../../services/coordinates.service");
-const { ValidationError, NotFoundError, ApiError } = require("../../../../utils/ApiError");
+const { ValidationError, NotFoundError, ApiError, GeolocationNotFoundError } = require("../../../../utils/ApiError");
 const { normalizeSlug, normalizeDecimalFields, normalizeName } = require("../../../../utils/normalize");
 
 async function getMarkets({
@@ -61,6 +61,7 @@ async function getMarkets({
   };
 }
 
+
 async function createMarket(payload) {
   const {
     name,
@@ -77,26 +78,55 @@ async function createMarket(payload) {
   }
 
   if (!address.address1) {
-    address.address1 = "Pas d'adresse spécifique"
+    address.address1 = "Pas d'adresse spécifique";
   }
 
-  // créer les coordonnés et les ajouter à l'address
-  const { latitude, longitude } = await getCoordinates({name, address, type: "poi"})
+  let latitude = null;
+  let longitude = null;
+
+
+  let warnings = [];
+
+  try {
+    const coords = await getCoordinates({
+      name,
+      address,
+      type: "poi"
+    });
+
+    latitude = coords.latitude;
+    longitude = coords.longitude;
+
+  } catch (error) {
+
+    if (error instanceof GeolocationNotFoundError) {
+      warnings.push({
+        code: "GEOLOCATION_NOT_FOUND",
+        message: "Les coordonnées GPS n'ont pas été trouvées automatiquement."
+      });
+    } else {
+      // 🔥 Cas critique (service down, réseau, quota…)
+      throw error;
+    }
+  }
 
   address.latitude = latitude;
   address.longitude = longitude;
 
+  const normalizedName = normalizeName(name);
+  address.city = normalizeName(address.city);
 
-  address.city = normalizeName(address.city)
-
-  return Market.create({
-    name,
+  const market =  Market.create({
+    name: normalizedName,
     slug,
     description: description || "",
     image: image || null,
     address
-  })
+  });
+
+  return { market, warnings }
 }
+
 
 
 async function updateMarket(marketId, payload) {
@@ -122,7 +152,7 @@ async function updateMarket(marketId, payload) {
       });
     }
 
-    market.name = payload.name;
+    market.name = normalizeName(payload.name);
     market.slug = newSlug;
     shouldGetCoordinates++;
   }
@@ -148,15 +178,31 @@ async function updateMarket(marketId, payload) {
     shouldGetCoordinates++;
   }
   if (payload.address.city !== undefined) {
-    market.address.city = payload.address.city;
+    market.address.city = normalizeName(payload.address.city);
     shouldGetCoordinates++;
   }
 
+  let warnings = [];
   if (shouldGetCoordinates > 1) {
-    const { latitude, longitude } = await getCoordinates({name: market.name, address: market.address, type: "poi"});
 
-    market.address.latitude = latitude;
-    market.address.longitude = longitude;
+    try {
+      const coords = await getCoordinates({name: market.name, address: market.address, type: "poi"});
+
+      market.address.latitude = coords.latitude;
+      market.address.longitude = coords.longitude;
+
+    } catch (error) {
+
+      if (error instanceof GeolocationNotFoundError) {
+        warnings.push({
+          code: "GEOLOCATION_NOT_FOUND",
+          message: "Les coordonnées GPS n'ont pas été trouvées automatiquement."
+        });
+      } else {
+        // 🔥 Cas critique (service down, réseau, quota…)
+        throw error;
+      }
+    }
   }
 
   await market.save();
@@ -183,11 +229,17 @@ async function getMarketById(marketId) {
     throw new ApiError("Id du market invalide.", 400)
   }
 
-  const market = await Market.findById(marketId);
+  /**
+   * utilisation de lean() pour pouvoir utiliser normalizeDecimalFields qui 
+   * agit sur les objet JS brut, ce que produit lean().
+   */
+  const market = await Market.findById(marketId).lean();
 
   if (!market) {
     throw new NotFoundError("Point de vente introuvable.")
   }
+
+  normalizeDecimalFields(market)
 
   return market;
 }

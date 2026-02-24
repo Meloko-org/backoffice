@@ -59,9 +59,6 @@ export const field = {
     type: "checkbox-group",
   }),
 
-
-
-
 };
 
 

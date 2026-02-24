@@ -46,6 +46,7 @@ export default function AdminProductsPage() {
     limit,
     setLimit,
     handleSort,
+    refetch,
   } = useAdminList(getProductsList);
 
   const [ selectedProduct, setSelectedProduct ] = useState<Product | null>();
@@ -90,6 +91,7 @@ export default function AdminProductsPage() {
       description: "Cette action est irréversible.",
       onConfirm: async () => {
         await deleteProduct(product._id);
+        refetch();
       },
     });
   }

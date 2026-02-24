@@ -1,21 +1,28 @@
-import type { ApiError } from "../../../types/global.types";
+import type { ApiError, ApiWarning } from "../../../types/global.types";
 
 type FormSectionProps = {
 	title: string;
   children: React.ReactNode;
   globalError?: ApiError;
+  globalWarnings?: ApiWarning[];
+  isAlertContainer?: boolean;
 }
 
 export default function FormSection({
   title,
   children,
   globalError,
+  globalWarnings,
+  isAlertContainer,
 }: FormSectionProps) {
+
+  console.log("warnings :", globalWarnings)
 	
   return (
     <div className={`
       form-section  
-      ${globalError ? "border-red-400" : ""}
+      ${isAlertContainer && globalError ? "border-danger" : ""}
+      ${isAlertContainer && globalWarnings?.length ? "border-warning" : ""}
     `}>
 
       <div className="p-5 space-y-4">
@@ -30,7 +37,7 @@ export default function FormSection({
         </div>
       </div>
 
-      {globalError && (
+      {isAlertContainer && globalError && (
 				<div className="bg-danger rounded-b-lg border border-danger/0 border-t-danger p-3 text-sm text-white">
 					{globalError.message}
           {globalError.fieldErrors && (
@@ -44,6 +51,14 @@ export default function FormSection({
           )}
 				</div>
 			)}
+
+      {isAlertContainer && globalWarnings && globalWarnings?.length > 0 && (
+        <div className="bg-warning rounded-b-lg border border-warning/0 border-t-warning p-3 text-sm text-black">
+          {globalWarnings.map((warning, index) => (
+            <div key={index}>{warning.message}</div>
+          ))}
+        </div>
+      )}
 
     </div>
   );

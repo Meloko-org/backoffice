@@ -49,6 +49,7 @@ export default function AdminFamiliesPage() {
     limit,
     setLimit,
     handleSort,
+    refetch,
   } = useAdminList(getFamiliesList);
 
 
@@ -100,6 +101,7 @@ export default function AdminFamiliesPage() {
       description: "Cette action est irréversible.",
       onConfirm: async () => {
         await deleteFamily(family._id);
+        refetch();
       },
     });
   }

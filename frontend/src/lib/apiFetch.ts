@@ -1,5 +1,13 @@
-import type { ApiError } from "../types/global.types";
+import type { ApiError, ApiResponse } from "../types/global.types";
 
+
+/**
+  Son rôle :
+  - gérer response.ok
+  - normaliser les erreurs backend
+  - retourner directement data
+  - simplifier l’usage côté services
+ */
 export async function apiFetch<T>(
   input: RequestInfo,
   init?: RequestInit
@@ -39,6 +47,46 @@ export async function apiFetch<T>(
   // 🔹 Succès
   return data?.data ?? data;
 }
+
+
+
+
+
+export async function apiFetchFull<T>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<ApiResponse<T>> {
+
+  const response = await fetch(input, {
+    headers: {
+      "Content-Type": "application/json",
+      ...(init?.headers ?? {}),
+    },
+    ...init,
+  });
+
+  let data: any = null;
+
+  try {
+    data = await response.json();
+  } catch {}
+
+  if (!response.ok) {
+    const error: ApiError = {
+      message:
+        data?.message ||
+        response.statusText ||
+        "Une erreur est survenue",
+      fieldErrors: data?.errors,
+      status: response.status,
+    };
+
+    throw error;
+  }
+
+  return data; // 👈 on retourne TOUT
+}
+
 
 
 

@@ -1,6 +1,7 @@
-import { apiFetch } from "../../../lib/apiFetch";
+import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
+import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { CreateMarketPayload, Market, MarketListResponse, PostalCodeForSelect, UpdateMarketPayload } from "../types/markets";
+import type { CreateMarketPayload, Market, MarketListResponse, UpdateMarketPayload } from "../types/markets";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/markets`;
@@ -63,11 +64,18 @@ export const getMarketsList = async (
 }
 
 
+/**
+ * Pour cette feature, on utilise apiFetchFull pour les fonctions create et update
+ * car le backend peut retourner des warnings (quand getCoordinates échoue).
+ * Donc pour éviter de perdre les warnings, on utilise apiFetchFull plutôt que apiFetch,
+ * qui retourne simplement les data, sans les errors et les warnings. 
+ */
+
 export const createMarket = async (
   payload: CreateMarketPayload
-): Promise<Market> => {
+): Promise<ApiResponse<Market>> => {
 
-  return apiFetch<Market>(
+  return apiFetchFull<Market>(
     `${BASE_URL}`, 
     {
       method: 'POST',
@@ -79,9 +87,9 @@ export const createMarket = async (
 export const updateMarket = async (
   id: string,
   payload: UpdateMarketPayload,
-): Promise<Market> => {
+): Promise<ApiResponse<Market>> => {
 
-  return apiFetch<Market>(
+  return apiFetchFull<Market>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',
