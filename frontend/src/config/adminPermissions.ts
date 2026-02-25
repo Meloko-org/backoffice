@@ -47,6 +47,7 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "support:read",
     "support:reply",
     "users:read",
+    "users:manage",
   ],
 
   "super-admin": [

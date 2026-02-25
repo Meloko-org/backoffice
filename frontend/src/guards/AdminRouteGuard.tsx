@@ -4,6 +4,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useUserRole } from "../hooks/useUserRole";
 import { useHasPermission } from "../hooks/useHasPermission";
 import type { Permission } from "../config/adminPermissions";
+import { BallTriangle } from "react-loader-spinner";
 
 type Props = {
   children: ReactNode;
@@ -21,7 +22,20 @@ export default function AdminRouteGuard({
 
   // ⏳ Attente Clerk
   if (!isLoaded) {
-    return <div className="p-8">Chargement…</div>;
+    return (
+      <div className="w-full h-full flex justify-center items-center bg-warning">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#98B66E"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   // 🚫 Pas connecté

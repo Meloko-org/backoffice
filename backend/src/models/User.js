@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { decimalNumberPlugin } = require("../plugins/decimalNumberPlugin");
 
 const addressSchema = require("./Address");
 

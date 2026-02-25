@@ -4,37 +4,39 @@ import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import SidebarIconButton from "./components/SidebarIconButton";
 import type { AdminMenuItem } from "./config/adminMenu"
 import { adminMenu } from "./config/adminMenu";
-import { useHasPermission } from "../../hooks/useHasPermission";
 import SignoutButton from "../../components/admin/buttons/SignoutButton";
+import { useUserRole } from "../../hooks/useUserRole";
+import { useCurrentPermissions } from "../../hooks/useCurrentPermissions";
 
 
 /* détermine les éléments autorisés du menu en fonction des permissions par rôle */
 function useFilteredAdminMenu() {
 	
-	const hasPermission = useHasPermission;
+	const permissions = useCurrentPermissions();
 
 	return adminMenu
 		.map((item) => {
+
 			if (item.type === "link") {
-				return item.permission && hasPermission(item.permission)
+				if (!item.permission) return item;
+
+				return permissions.includes(item.permission)
 					? item
 					: null;
 			}
 
 			if (item.type === "group") {
-				const children = item.children.filter(
-					(child) => 
-						child.type !== "sublink" ||
-						!child.permission ||
-						hasPermission(child.permission)
-				)
+				const children = item.children.filter((child) => {
+					if (!child.permission) return true;
+					return permissions.includes(child.permission);
+				});
 
 				if (children.length === 0) return null;
 
 				return {
 					...item,
 					children,
-				}
+				};
 			}
 
 			return null;
@@ -50,11 +52,15 @@ function useFilteredAdminMenu() {
 
 
 
+
+
+
 export default function AdminSidebar() {
   const { isLeftOpen, toggleLeft } = useAdminLayout();
   const navigate = useNavigate();
 
 	const { user } = useUser();
+	const { role } = useUserRole();
 
 	const menu = useFilteredAdminMenu();
 
@@ -255,7 +261,7 @@ export default function AdminSidebar() {
 								
 								<div className="ml-4 ">
 									<div>username</div>
-									<div className="text-xs text-neutral-400 capitalize">{user?.publicMetadata?.role ?? "user"}</div>
+									<div className="text-xs text-neutral-400 capitalize">{role}</div>
 								</div>
 							</div>
 							
