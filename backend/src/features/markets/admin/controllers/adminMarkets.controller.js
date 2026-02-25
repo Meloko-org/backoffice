@@ -32,7 +32,6 @@ const importMarketsCsv = async (req, res) => {
 
 const listMarkets = async (req, res, next) => {
 
-  console.log("query params: ", req.query)
   try {
     const {
       page = 1,
@@ -56,8 +55,6 @@ const listMarkets = async (req, res, next) => {
       sortDirection,
       filters
     });
-
-    console.log(JSON.stringify(result.items[0], null, 2))
 
     res.json({
       success: true,

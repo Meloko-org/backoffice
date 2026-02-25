@@ -1,0 +1,379 @@
+[{
+  "_id": {
+    "$oid": "66b5bb74535fa09834dc3bd1"
+  },
+  "email": "dev@gsd06.fr",
+  "clerkUUID": "user_2kNMPQzEDXTXwjGBuO4LF0AWgQ9",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    },
+    {
+      "$oid": "66b20fab9f3d13d0b6fad8d6"
+    }
+  ],
+  "firstname": "B",
+  "lastname": "Jeremy",
+  "avatar": null,
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2024-08-06T12:11:03.322Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-15T15:27:07.369Z"
+  },
+  "__v": 3,
+  "bookmarks": [
+    {
+      "$oid": "66be0195da92d57bdba1bcb2"
+    }
+  ],
+  "clerkPasswordEnabled": true
+},
+{
+  "_id": {
+    "$oid": "66ba12495e99a72249a1d72d"
+  },
+  "email": "enformation@gmx.fr",
+  "clerkUUID": "user_2kYqqKeWxa4XxjAR4NkoFbM4DPv",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    },
+    {
+      "$oid": "66b20fab9f3d13d0b6fad8d6"
+    }
+  ],
+  "firstname": "Capsule Corp",
+  "lastname": "Jis",
+  "avatar": null,
+  "bookmarks": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2024-08-12T13:46:49.828Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-18T08:25:31.692Z"
+  },
+  "__v": 23,
+  "clerkPasswordEnabled": true,
+  "addresses": []
+},
+{
+  "_id": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "email": "usertest1@jisdev.com",
+  "clerkUUID": "user_2p1VV5dm9SsXyUyUDoXgJGvNGvu",
+  "clerkPasswordEnabled": "true",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": "Doe",
+  "lastname": "John",
+  "avatar": null,
+  "bookmarks": [
+    {
+      "$oid": "66faa01d838122c17b80bee8"
+    },
+    {
+      "$oid": "66bdfee8da92d57bdba1bcb0"
+    }
+  ],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2024-11-18T12:39:50.905Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:45:28.937Z"
+  },
+  "__v": 16,
+  "addresses": [
+    {
+      "address": {
+        "address1": "8 chemin du devens",
+        "address2": "",
+        "postalCode": "06150",
+        "city": "Cannes la bocca",
+        "country": "France",
+        "_id": {
+          "$oid": "690c75dad61e6f5b5a082287"
+        },
+        "createdAt": {
+          "$date": "2025-11-06T10:18:02.915Z"
+        },
+        "updatedAt": {
+          "$date": "2025-11-06T10:18:02.915Z"
+        }
+      },
+      "name": "Maison",
+      "_id": {
+        "$oid": "690c75dad61e6f5b5a082286"
+      },
+      "createdAt": {
+        "$date": "2025-11-06T10:18:02.915Z"
+      },
+      "updatedAt": {
+        "$date": "2025-12-15T10:38:22.160Z"
+      },
+      "isDefault": false
+    },
+    {
+      "address": {
+        "address1": "11 rue jean jaures",
+        "address2": "",
+        "postalCode": "06400",
+        "city": "Cannes",
+        "country": "France",
+        "_id": {
+          "$oid": "690c7987d249cd8d52c100aa"
+        },
+        "createdAt": {
+          "$date": "2025-11-06T10:33:43.305Z"
+        },
+        "updatedAt": {
+          "$date": "2025-11-06T10:33:43.305Z"
+        }
+      },
+      "name": "Maison 2",
+      "_id": {
+        "$oid": "690c7987d249cd8d52c100a9"
+      },
+      "createdAt": {
+        "$date": "2025-11-06T10:33:43.306Z"
+      },
+      "updatedAt": {
+        "$date": "2025-12-15T10:38:22.160Z"
+      },
+      "isDefault": true
+    }
+  ],
+  "settings": {
+    "helpHints": false
+  },
+  "stripeUUID": "cus_TZdK0mu877Zpkp"
+},
+{
+  "_id": {
+    "$oid": "6747619b353bf7adcbca5b75"
+  },
+  "email": "usertest3@jisdev.com",
+  "clerkUUID": "user_2pRaMGjPqR67HRMuZmPvkWd2Vah",
+  "clerkPasswordEnabled": "true",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": "Dupond",
+  "lastname": "Bernard",
+  "avatar": null,
+  "bookmarks": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2024-11-27T18:14:51.953Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-12T08:53:50.884Z"
+  },
+  "__v": 2,
+  "addresses": [
+    {
+      "address": {
+        "address1": "2 rue des petits pois",
+        "address2": "",
+        "postalCode": "06110",
+        "city": "Le cannet",
+        "country": "France",
+        "_id": {
+          "$oid": "693bd7c188f578af32fb6a73"
+        },
+        "createdAt": {
+          "$date": "2025-12-12T08:52:17.561Z"
+        },
+        "updatedAt": {
+          "$date": "2025-12-12T08:52:17.561Z"
+        }
+      },
+      "name": "Maison",
+      "isDefault": true,
+      "_id": {
+        "$oid": "693bd7c188f578af32fb6a72"
+      },
+      "createdAt": {
+        "$date": "2025-12-12T08:52:17.561Z"
+      },
+      "updatedAt": {
+        "$date": "2025-12-12T08:52:17.561Z"
+      }
+    }
+  ],
+  "settings": {
+    "helpHints": false
+  },
+  "stripeUUID": "cus_TadNBMgbTzfkBN"
+},
+{
+  "_id": {
+    "$oid": "674ed0b7dff4df94302254b6"
+  },
+  "email": "usertest2@jisdev.com",
+  "clerkUUID": "user_2phVqc9P8EQ89wh6amtJHw1ZdDn",
+  "clerkPasswordEnabled": "true",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": "Doe",
+  "lastname": "Jane",
+  "avatar": null,
+  "bookmarks": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2024-12-03T09:34:47.612Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-27T11:38:30.947Z"
+  },
+  "__v": 8,
+  "addresses": [
+    {
+      "address": {
+        "address1": "2 avenue Francis tonner",
+        "address2": "",
+        "postalCode": "06150",
+        "city": "Cannes la bocca",
+        "country": "France",
+        "_id": {
+          "$oid": "690dcc94f99fd756b3c8cf9c"
+        },
+        "createdAt": {
+          "$date": "2025-11-07T10:40:20.409Z"
+        },
+        "updatedAt": {
+          "$date": "2025-11-07T10:40:20.409Z"
+        }
+      },
+      "name": "Maison",
+      "isDefault": true,
+      "_id": {
+        "$oid": "690dcc94f99fd756b3c8cf9b"
+      },
+      "createdAt": {
+        "$date": "2025-11-07T10:40:20.409Z"
+      },
+      "updatedAt": {
+        "$date": "2025-11-27T11:38:30.947Z"
+      }
+    },
+    {
+      "address": {
+        "address1": "5 rue d'antibes",
+        "address2": "",
+        "postalCode": "06400",
+        "city": "Cannes",
+        "country": "France",
+        "_id": {
+          "$oid": "690dd2baf99fd756b3c8cfe1"
+        },
+        "createdAt": {
+          "$date": "2025-11-07T11:06:34.074Z"
+        },
+        "updatedAt": {
+          "$date": "2025-11-07T11:06:34.074Z"
+        }
+      },
+      "name": "Job",
+      "isDefault": false,
+      "_id": {
+        "$oid": "690dd2baf99fd756b3c8cfe0"
+      },
+      "createdAt": {
+        "$date": "2025-11-07T11:06:34.074Z"
+      },
+      "updatedAt": {
+        "$date": "2025-11-27T11:38:30.947Z"
+      }
+    }
+  ],
+  "stripeUUID": "cus_TRipuedM0gT3xl"
+},
+{
+  "_id": {
+    "$oid": "67ef9f54e2ac321b5eb58136"
+  },
+  "email": "maxime.atton@gmail.com",
+  "clerkUUID": "user_2vG2YjoJLz7B5raKVqZiTLfhS7q",
+  "clerkPasswordEnabled": "false",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": "Max",
+  "lastname": "Max",
+  "avatar": null,
+  "bookmarks": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2025-04-04T08:59:00.436Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T08:24:06.514Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67efa009e2ac321b5eb5813c"
+  },
+  "email": "maxime@auresources.io",
+  "clerkUUID": "user_2vG2vfd1uSU5820LGycRwJFq1i5",
+  "clerkPasswordEnabled": "false",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": null,
+  "lastname": null,
+  "avatar": null,
+  "bookmarks": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2025-04-04T09:02:01.711Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-04T09:02:01.711Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68da4db94000d624d24389de"
+  },
+  "email": "spiroutecnikal@hotmail.com",
+  "clerkUUID": "user_33MqIIE1Igr1puyHnHucghtYf2T",
+  "clerkPasswordEnabled": "false",
+  "roles": [
+    {
+      "$oid": "66b20fa19f3d13d0b6fad8d4"
+    }
+  ],
+  "firstname": "Jisgoogle",
+  "lastname": "Jis",
+  "avatar": null,
+  "bookmarks": [],
+  "addresses": [],
+  "favSearch": [],
+  "createdAt": {
+    "$date": "2025-09-29T09:13:29.005Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-29T09:14:57.025Z"
+  },
+  "__v": 0
+}]

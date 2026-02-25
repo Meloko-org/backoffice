@@ -1,0 +1,685 @@
+[{
+  "_id": {
+    "$oid": "696a6fd62787fc9d5f9b8ba7"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c32"
+          },
+          "quantity": 1,
+          "unit": "piece",
+          "unitPriceTTC": 300,
+          "unitPriceHT": 284,
+          "vatRate": 5.5,
+          "vatAmount": 16,
+          "totalPriceTTC": 300,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696a6fd62787fc9d5f9b8ba9"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 284,
+      "shopTotalVAT": 16,
+      "shopTotalTTC": 300,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696a70012787fc9d5f9b8d15"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696a6fd62787fc9d5f9b8ba8"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqGSfPxfEAHF65H0QFVd70d",
+  "totalHT": 284,
+  "totalVAT": 16,
+  "totalTTC": 300,
+  "orderNumber": "C-2026-000049",
+  "createdAt": {
+    "$date": "2026-01-16T17:05:26.112Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-16T17:06:09.197Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-16T17:05:32.647Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696a74fb251c1fb20235fab6"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c35"
+          },
+          "quantity": 300,
+          "unit": "gr",
+          "unitPriceTTC": 500,
+          "unitPriceHT": 474,
+          "vatRate": 5.5,
+          "vatAmount": 26,
+          "totalPriceTTC": 150,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696a74fb251c1fb20235fab8"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 142,
+      "shopTotalVAT": 8,
+      "shopTotalTTC": 150,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696a7521251c1fb20235fc24"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696a74fb251c1fb20235fab7"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqGnvPxfEAHF65H2moLJgih",
+  "totalHT": 142,
+  "totalVAT": 8,
+  "totalTTC": 150,
+  "orderNumber": "C-2026-000050",
+  "createdAt": {
+    "$date": "2026-01-16T17:27:23.822Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-16T17:28:01.258Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-16T17:27:32.367Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696a766d6f01165af8cfcdca"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c32"
+          },
+          "quantity": 2,
+          "unit": "piece",
+          "unitPriceTTC": 300,
+          "unitPriceHT": 284,
+          "vatRate": 5.5,
+          "vatAmount": 16,
+          "totalPriceTTC": 600,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696a766d6f01165af8cfcdcc"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 568,
+      "shopTotalVAT": 32,
+      "shopTotalTTC": 600,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696a76a36f01165af8cfcf3c"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696a766d6f01165af8cfcdcb"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqGtsPxfEAHF65H2nvgN36J",
+  "totalHT": 568,
+  "totalVAT": 32,
+  "totalTTC": 600,
+  "orderNumber": "C-2026-000051",
+  "createdAt": {
+    "$date": "2026-01-16T17:33:33.020Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-16T17:34:27.859Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-16T17:33:39.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696b9f9a40e938b7ab154526"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c32"
+          },
+          "quantity": 2,
+          "unit": "piece",
+          "unitPriceTTC": 300,
+          "unitPriceHT": 284,
+          "vatRate": 5.5,
+          "vatAmount": 16,
+          "totalPriceTTC": 600,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696b9f9a40e938b7ab154528"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 568,
+      "shopTotalVAT": 32,
+      "shopTotalTTC": 600,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696ba00040e938b7ab15469a"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696b9f9a40e938b7ab154527"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqagwPxfEAHF65H0LkfgyCU",
+  "totalHT": 568,
+  "totalVAT": 32,
+  "totalTTC": 600,
+  "orderNumber": "C-2026-000052",
+  "createdAt": {
+    "$date": "2026-01-17T14:41:30.732Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T14:43:13.064Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-17T14:41:37.995Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696ba05f772bf258f21aa691"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "672e0888e265b5f20a6f73e1"
+          },
+          "quantity": 200,
+          "unit": "gr",
+          "unitPriceTTC": 800,
+          "unitPriceHT": 758,
+          "vatRate": 5.5,
+          "vatAmount": 42,
+          "totalPriceTTC": 160,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696ba05f772bf258f21aa693"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 152,
+      "shopTotalVAT": 8,
+      "shopTotalTTC": 160,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696ba0e5772bf258f21aa8d1"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696ba05f772bf258f21aa692"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3Sqak6PxfEAHF65H1wS7GJTK",
+  "totalHT": 152,
+  "totalVAT": 8,
+  "totalTTC": 160,
+  "orderNumber": "C-2026-000053",
+  "createdAt": {
+    "$date": "2026-01-17T14:44:47.529Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T14:47:01.999Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-17T14:44:54.664Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696ba088772bf258f21aa6e9"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c36"
+          },
+          "quantity": 200,
+          "unit": "gr",
+          "unitPriceTTC": 500,
+          "unitPriceHT": 474,
+          "vatRate": 5.5,
+          "vatAmount": 26,
+          "totalPriceTTC": 100,
+          "productStatus": "pending",
+          "refunded": false,
+          "_id": {
+            "$oid": "696ba088772bf258f21aa6eb"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 95,
+      "shopTotalVAT": 5,
+      "shopTotalTTC": 100,
+      "status": "pending",
+      "invoice": null,
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696ba088772bf258f21aa6ea"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqakmPxfEAHF65H1IovoMW0",
+  "totalHT": 95,
+  "totalVAT": 5,
+  "totalTTC": 100,
+  "orderNumber": "C-2026-000054",
+  "createdAt": {
+    "$date": "2026-01-17T14:45:28.602Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T14:45:34.044Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-17T14:45:34.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696ba0bf772bf258f21aa742"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c35"
+          },
+          "quantity": 200,
+          "unit": "gr",
+          "unitPriceTTC": 500,
+          "unitPriceHT": 474,
+          "vatRate": 5.5,
+          "vatAmount": 26,
+          "totalPriceTTC": 100,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696ba0bf772bf258f21aa744"
+          }
+        },
+        {
+          "product": {
+            "$oid": "67f7c00ce99ab99b905cfd11"
+          },
+          "quantity": 1,
+          "unit": "piece",
+          "unitPriceTTC": 1500,
+          "unitPriceHT": 1422,
+          "vatRate": 5.5,
+          "vatAmount": 78,
+          "totalPriceTTC": 1500,
+          "productStatus": "cancelled",
+          "refunded": true,
+          "_id": {
+            "$oid": "696ba0bf772bf258f21aa745"
+          },
+          "refundReason": "Annulation partielle de commande",
+          "refundedAt": {
+            "$date": "2026-01-17T22:55:00.548Z"
+          },
+          "refundCreditNote": {
+            "$oid": "696c13411e63f2475e22aa4d"
+          }
+        },
+        {
+          "product": {
+            "$oid": "6801676349d5524a47c539a5"
+          },
+          "quantity": 200,
+          "unit": "gr",
+          "unitPriceTTC": 1300,
+          "unitPriceHT": 1232,
+          "vatRate": 5.5,
+          "vatAmount": 68,
+          "totalPriceTTC": 260,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696ba0bf772bf258f21aa746"
+          }
+        }
+      ],
+      "withdrawMode": "clickCollect",
+      "withdrawMarket": null,
+      "withdrawDay": null,
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 341,
+      "shopTotalVAT": 19,
+      "shopTotalTTC": 360,
+      "status": "partially_prepared",
+      "invoice": {
+        "$oid": "696c13411e63f2475e22aa48"
+      },
+      "creditNotes": [
+        {
+          "$oid": "696c13411e63f2475e22aa4d"
+        }
+      ],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696ba0bf772bf258f21aa743"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqalePxfEAHF65H1NAYRzfN",
+  "totalHT": 341,
+  "totalVAT": 19,
+  "totalTTC": 360,
+  "orderNumber": "C-2026-000055",
+  "createdAt": {
+    "$date": "2026-01-17T14:46:23.085Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:55:00.676Z"
+  },
+  "__v": 2,
+  "paidAt": {
+    "$date": "2026-01-17T14:46:30.191Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696c11a21e63f2475e22a3be"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "billingAddress": {
+    "name": "Maison 2",
+    "address1": "11 rue jean jaures",
+    "address2": "",
+    "postalCode": "06400",
+    "city": "Cannes",
+    "country": "France"
+  },
+  "shippingAddres": null,
+  "details": [
+    {
+      "products": [
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c32"
+          },
+          "quantity": 3,
+          "unit": "piece",
+          "unitPriceTTC": 300,
+          "unitPriceHT": 284,
+          "vatRate": 5.5,
+          "vatAmount": 16,
+          "totalPriceTTC": 900,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696c11a21e63f2475e22a3c0"
+          }
+        },
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c35"
+          },
+          "quantity": 500,
+          "unit": "gr",
+          "unitPriceTTC": 500,
+          "unitPriceHT": 474,
+          "vatRate": 5.5,
+          "vatAmount": 26,
+          "totalPriceTTC": 250,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696c11a21e63f2475e22a3c1"
+          }
+        },
+        {
+          "product": {
+            "$oid": "675c4f9a4f6b9c7f25e32c34"
+          },
+          "quantity": 500,
+          "unit": "gr",
+          "unitPriceTTC": 250,
+          "unitPriceHT": 237,
+          "vatRate": 5.5,
+          "vatAmount": 13,
+          "totalPriceTTC": 125,
+          "productStatus": "confirmed",
+          "refunded": false,
+          "_id": {
+            "$oid": "696c11a21e63f2475e22a3c2"
+          }
+        }
+      ],
+      "withdrawMode": "market",
+      "withdrawMarket": "Marché Gambetta",
+      "withdrawDay": "7",
+      "shop": {
+        "$oid": "66faa01d838122c17b80bee8"
+      },
+      "shopTotalHT": 1208,
+      "shopTotalVAT": 67,
+      "shopTotalTTC": 1275,
+      "status": "prepared",
+      "invoice": {
+        "$oid": "696c13271e63f2475e22a97f"
+      },
+      "creditNotes": [],
+      "stockIssue": false,
+      "_id": {
+        "$oid": "696c11a21e63f2475e22a3bf"
+      }
+    }
+  ],
+  "isWithdrawn": false,
+  "isPaid": true,
+  "paymentMethod": "stripe",
+  "paymentIntentId": "pi_3SqiHlPxfEAHF65H2eDyXpbr",
+  "totalHT": 1208,
+  "totalVAT": 67,
+  "totalTTC": 1275,
+  "orderNumber": "C-2026-000056",
+  "createdAt": {
+    "$date": "2026-01-17T22:48:02.848Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:31.619Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2026-01-17T22:48:11.064Z"
+  }
+}]
