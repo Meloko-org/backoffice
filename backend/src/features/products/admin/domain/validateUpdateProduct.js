@@ -65,6 +65,7 @@ function validateUpdateProduct(payload) {
 
   // ----- image -----
   if (
+    payload.image !== null &&
     payload.image !== undefined &&
     typeof payload.image !== "string"
   ) {

@@ -20,6 +20,7 @@ export const categorySchema =
     sections: [
       {
         title: "Informations générales",
+        isAlertContainer: true,
         fields: {
           name: field.input({
             label: "Nom",

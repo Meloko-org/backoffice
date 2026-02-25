@@ -12,16 +12,16 @@ export function ImportWarnings({ warnings }: Props) {
   if (warnings.length === 0) return null;
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm space-y-4">
+    <div className="bloc space-y-4">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-4 py-3 text-left"
       >
-        <h2 className="text-sm font-semibold text-yellow-800">
+        <h2 className="text-sm font-semibold text-warning">
           Avertissements ({warnings.length})
         </h2>
 
-        <span className="text-yellow-700">
+        <span className="text-warning">
           {open ? "▲" : "▼"}
         </span>
       </button>
@@ -45,22 +45,22 @@ interface WarningRowProps {
 function WarningRow({warning}: WarningRowProps) {
   return (
     <li
-      className={`flex items-start gap-4 rounded-lg border p-4 border-warning/40 bg-warning/5`}
+      className={`flex items-start warning-elt`}
     >
       {/* Badge */}
       <span
-        className={`mt-0.5 inline-flex rounded-full px-2 py-0.5 text-xs font-semibold bg-warning/20 text-warning`}
+        className={`mt-0.5 inline-flex warning-badge`}
       >
         "Warning"
       </span>
 
       {/* Content */}
       <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium text-gray-900">
+        <p className="warning-title">
           Ligne {warning.line}
         </p>
         <div className="text-sm text-gray-700">
-          <ul className="mt-1 list-disc list-inside text-gray-600">
+          <ul className="mt-1 list-disc list-inside warning-label">
             {warning.warnings.map((w, i) => (
               <li key={i}>{w}</li>
             ))}
@@ -74,36 +74,3 @@ function WarningRow({warning}: WarningRowProps) {
 }
 
 
-
-// export function ImportWarnings({ warnings }: Props) {
-//   if (warnings.length === 0) return null;
-
-//   return (
-//     <div className="rounded-lg border border-yellow-300 bg-yellow-50 p-4">
-//       <h2 className="text-lg font-semibold text-yellow-800 mb-3">
-//         Avertissements ({warnings.length})
-//       </h2>
-
-//       <ul className="space-y-2 text-sm">
-//         {warnings.map((warning, index) => (
-//           <li
-//             key={`${warning.line}-${index}`}
-//             className="rounded border border-yellow-200 bg-white p-3"
-//           >
-//             <div className="font-medium text-yellow-800">
-//               Ligne {warning.line}
-//             </div>
-
-//             {warning.warnings && warning.warnings.length > 0 && (
-//               <ul className="mt-1 list-disc list-inside text-gray-600">
-//                 {warning.warnings.map((w, i) => (
-//                   <li key={i}>{w}</li>
-//                 ))}
-//               </ul>
-//             )}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }

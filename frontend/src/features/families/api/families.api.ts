@@ -1,4 +1,4 @@
-import { apiFetch } from "../../../lib/apiFetch";
+import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
 import type { FamilyForSelect, FamilyListResponse, FamilyPayload, ProductFamily } from "../types/family";
@@ -62,9 +62,11 @@ export const getFamiliesList = async (
 }
 
 
-export const createFamily = async (payload: FamilyPayload): Promise<ApiResponse<ProductFamily>> => {
+export const createFamily = async (
+  payload: FamilyPayload
+): Promise<ApiResponse<ProductFamily>> => {
 
-  return apiFetch<ApiResponse<ProductFamily>>(
+  return apiFetchFull<ProductFamily>(
     `${BASE_URL}/`, 
     {
       method: "POST",
@@ -79,7 +81,7 @@ export const updateFamily = async (
   payload: FamilyPayload,
 ): Promise<ApiResponse<ProductFamily>> => {
 
-  return apiFetch<ApiResponse<ProductFamily>>(
+  return apiFetchFull<ProductFamily>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',

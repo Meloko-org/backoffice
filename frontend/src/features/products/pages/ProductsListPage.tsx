@@ -155,13 +155,13 @@ export default function AdminProductsPage() {
               onRowClick={handleSelectProduct}
               onPageChange={setPage}
               columns={[
-                { key: "name", label: "Nom", sortable: true },
-                { key: "slug", label: "Slug", sortable: true },
                 {
                   key: "family",
                   label: "Famille",
                   render: (product) => product.family?.name,
                 },
+                { key: "name", label: "Nom", sortable: true },
+                { key: "slug", label: "Slug", sortable: true },
                 {
                   key: "createdAt",
                   label: "Créée le",

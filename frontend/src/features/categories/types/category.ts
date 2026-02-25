@@ -26,7 +26,7 @@ export interface CategoryPayload {
   type: string;
 }
 
-export interface UpdateCategoryPayload extends CategoryPayload {}
+export interface UpdateCategoryPayload extends Partial<CategoryPayload> {}
 
 export interface CategoryFormValues {
   name: string;

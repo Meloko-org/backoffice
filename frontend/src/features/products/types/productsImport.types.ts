@@ -50,7 +50,7 @@ export interface ImportProductPreview {
   product: string;
   family: string;
   category: string;
-  action: "create" | "update" | "ignore";
+  action: "create" | "update" | "ignore" | "existing";
 } 
 
 export interface ProductsImportState {

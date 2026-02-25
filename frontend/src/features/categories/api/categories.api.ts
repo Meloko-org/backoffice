@@ -1,4 +1,4 @@
-import { apiFetch } from "../../../lib/apiFetch";
+import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
 import type {
@@ -75,9 +75,11 @@ export const getCategoriesList = async (
 
 
 
-export const createCategory = async (payload: CategoryPayload): Promise<ApiResponse<ProductCategory>> => {
+export const createCategory = async (
+  payload: CategoryPayload
+): Promise<ApiResponse<ProductCategory>> => {
 
-  return apiFetch<ApiResponse<ProductCategory>>(
+  return apiFetchFull<ProductCategory>(
     `${BASE_URL}/`, 
     {
       method: "POST",
@@ -92,7 +94,7 @@ export const updateCategory = async (
   payload: UpdateCategoryPayload,
 ): Promise<ApiResponse<ProductCategory>> => {
 
-  return apiFetch<ApiResponse<ProductCategory>>(
+  return apiFetchFull<ProductCategory>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',

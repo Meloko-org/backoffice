@@ -17,11 +17,11 @@ export function ImportWarnings({ warnings }: Props) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-4 py-3 text-left"
       >
-        <h2 className="text-sm font-semibold text-yellow-800">
+        <h2 className="text-sm font-semibold text-warning">
           Avertissements ({warnings.length})
         </h2>
 
-        <span className="text-yellow-700">
+        <span className="text-warning">
           {open ? "▲" : "▼"}
         </span>
       </button>

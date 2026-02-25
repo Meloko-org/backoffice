@@ -1,6 +1,7 @@
 const parseCsv = require("../services/csvParser.service");
-const { importProducts, createProduct, updateProduct, deleteProduct } = require("../services/adminProducts.service");
-const { getProducts, getProductById } = require("../services/adminProducts.service");
+const { createProduct, updateProduct, deleteProduct, getProducts, getProductById } = require("../services/adminProducts.service");
+
+const importProducts = require("../services/productImport.service");
 const { ValidationError } = require("../../../../utils/ApiError");
 const validateCreateProduct = require("../domain/validateCreateProduct");
 const validateUpdateProduct = require("../domain/validateUpdateProduct");

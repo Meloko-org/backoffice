@@ -8,6 +8,7 @@ import { categorySchema } from "../schema/category.schema";
 import { useEffect, useState } from "react";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 import { BallTriangle } from "react-loader-spinner";
+import type { ApiResponse } from "../../../types/global.types";
 
 type CategoryFormPageProps = {
   mode: "create" | "edit";
@@ -60,7 +61,8 @@ export default function CategoryFormPage({
 
   const handleSubmit = async (
     values: CategoryFormValues
-  ) => {
+  ): Promise<ApiResponse<any>> => {
+    
     const payload =
       mapFormValuesToPayload(values);
 
@@ -103,6 +105,7 @@ export default function CategoryFormPage({
           }
           onSubmit={handleSubmit}
           onSuccess={() => {
+            console.log("youpi")
             navigate("/admin/categories");
           }}
           renderers={adminFormRenderers}

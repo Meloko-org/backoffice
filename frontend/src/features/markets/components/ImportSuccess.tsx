@@ -22,8 +22,6 @@ export function ImportSuccess({
   const importFailed = markets.created === 0 && markets.updated === 0;
   const hasErrors = errors.length > 0;
 
-  console.log("importFailed :", importFailed)
-
   return (
     <section className={`space-y-6`}>
 
@@ -40,10 +38,10 @@ export function ImportSuccess({
                 X
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-red-900">
+                <h2 className="text-lg font-semibold text-danger">
                   Import terminé avec échec
                 </h2>
-                <p className="text-sm text-red-800">
+                <p className="text-sm text-danger/80">
                   Mode <strong>{meta.mode}</strong> — {meta.totalRows} lignes analysées
                 </p>
               </div>
@@ -72,6 +70,7 @@ export function ImportSuccess({
               updated={markets.updated}
             />
           </div>
+
         </div>
       </div>
 

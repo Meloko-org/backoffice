@@ -49,7 +49,6 @@ interface IssueRowProps {
 function IssueRow({ issue, isBlocking }: IssueRowProps) {
   // const isError = issue.message === "error";
 
-  console.log("issue :", issue)
 
   return (
     <li
