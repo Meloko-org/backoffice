@@ -24,7 +24,7 @@ export function AnimatedButton({
     danger:
       "btn-danger",
     secondary:
-      "btn-secondary",
+      "btn-outline-secondary",
   };
 
   return (

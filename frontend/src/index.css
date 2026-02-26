@@ -51,6 +51,9 @@
     --sidebar-bg: var(--color-sidebar-bg-light);
     --sidebar-text: var(--color-text-light);
 
+    --layout-borders: rgba(0, 0, 0, 0.2);
+    --layout-borders-hover: rgba(0, 0, 0, 0.5);
+
     /* bloc */
     --bloc-bg: var(--second-plan-bg);
     --bloc-border: rgba(0, 0, 0, 0.08);
@@ -175,6 +178,9 @@
 
     --sidebar-bg: var(--color-sidebar-bg-dark);
     --sidebar-text: var(--color-text-dark);
+
+    --layout-borders: rgba(255, 255, 255, 0.08);
+    --layout-borders-hover: rgba(255, 255, 255, 0.5);
 
     --app-surface-bg: var(--color-bg-dark);
     --app-sub-surface-bg: rgb(41,41,41);
@@ -509,6 +515,81 @@
 
 
 @layer components {
+
+  /* Raw Menu */
+  .row-menu-trigger {
+    @apply py-1 px-3 rounded;
+  }
+  
+  .row-menu-trigger:hover {
+    @apply py-1 px-3 rounded;
+    background-color: var(--first-plan-bg);
+  }
+
+  .row-menu {
+    @apply overflow-hidden;
+    min-width: 160px; /* optionnel */
+    width: max-content;
+    background: var(--menu-bg);
+    border: 1px solid var(--menu-border);
+    border-radius: 0.5rem;
+    padding: 0.05rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateX(-100%) scale(0.95);
+    opacity: 0;
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+  .row-menu.open {
+    transform: translateX(-100%) scale(1);
+    opacity: 1;
+  }
+  .row-menu-ctn {
+    @apply shadow-lg rounded-md border; 
+    background-color: var(--sidebar-bg);
+    border-color: var(--table-border);
+  }
+  .row-menu button {
+    @apply w-full flex items-center gap-2 px-3 py-2 text-sm text-left;
+  }
+  .row-menu-btn-default {
+    color: var(--second-text);
+  }
+  .row-menu-btn-default:hover {
+    background-color: var(--first-plan-bg);
+    color: var(--second-text);
+  }
+
+  .sticker {
+    @apply w-[15px] h-[15px] rounded-full;
+  }
+
+  .sticker-alert {
+    @apply bg-danger;
+  }
+
+  .sticker-warning {
+    @apply bg-warning;
+  }
+
+  .sticker-success {
+    @apply bg-primary;
+  }
+
+  .default-adr-card {
+    @apply rounded-lg border py-1 px-2;
+    border-color: rgb(152, 182, 110);
+    background-color: rgb(152, 182, 110, 0.1);
+  }
+
+  .adr-card {
+    @apply rounded-lg border p-2;
+    border-color: var(--bloc-border);
+    background-color: var(--first-plan-bg);
+  }
+
+  .adr-card-title {
+    color: var(--second-text);
+  }
 
   .summary-card {
     @apply rounded-lg px-4 py-3 text-sm;
@@ -846,6 +927,22 @@
     color: var(--color-primary);
   }
 
+  .btn-outline-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md
+           transition;
+    /* background-color: var(--form-input-bg); */
+    border-color: var(--layout-borders);
+    color: var(--layout-borders);
+  }
+
+  .btn-outline-secondary:hover {
+    @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md
+           transition;
+    /* background-color: var(--form-input-bg); */
+    border-color: var(--layout-borders-hover);
+    color: var(--layout-borders-hover);
+  }
+
   
   .btn-outline {
     @apply inline-flex items-center gap-2 px-4 py-2 border rounded-md
@@ -880,6 +977,7 @@
   }
 
   .admin-table {
+    /* @apply  overflow-visible; */
     background-color: var(--table-bg);
     border: 1px solid var(--table-border);
     border-radius: 0.75rem;
@@ -935,6 +1033,11 @@
 
   .table-action-btn:hover {
     background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .table-status {
+    display: flex;
+    justify-content: center;
   }
 
   html.dark .table-action-btn:hover {

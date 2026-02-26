@@ -2,6 +2,7 @@ import type { ProductCategory } from "../features/categories/types/category";
 import type { ProductFamily } from "../features/families/types/family";
 import type { Market } from "../features/markets/types/markets";
 import type { Product } from "../features/products/types/product";
+import type { User } from "../features/users/types/user";
 
 
 export type AdminRole =
@@ -41,5 +42,12 @@ export type ModelContext =
       data: Market;
       onEdit?: (product: Market) => void;
       onDelete?: (product: Market) => void;
+    }
+  | { 
+      type: "user"; 
+      title: string;
+      data: User;
+      onEdit?: (product: User) => void;
+      onDelete?: (product: User) => void;
     }
   | null;

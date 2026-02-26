@@ -48,6 +48,11 @@ async function getUsers({
   // 1️⃣ récupérer users paginés
   const [items, totalItems] = await Promise.all([
     User.find(filter)
+      .populate({
+        path: "roles",
+        model: "Role",
+        select: "name"
+      })
       .sort(sort)
       .skip(skip)
       .limit(limit)

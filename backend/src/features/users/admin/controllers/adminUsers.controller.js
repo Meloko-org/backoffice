@@ -32,7 +32,7 @@ const listUsers = async (req, res, next) => {
       filters,
     });
 
-    // console.log(JSON.stringify(result.items[0], null ,2))
+    console.log(JSON.stringify(result.items, null ,2))
 
     res.json({
       success: true,

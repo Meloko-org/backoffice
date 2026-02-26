@@ -2,6 +2,7 @@ import CategoryDetails from "../../features/categories/components/CategoryDetail
 import FamilyDetails from "../../features/families/components/FamilyDetails";
 import MarketDetails from "../../features/markets/components/MarketDetails";
 import ProductDetails from "../../features/products/components/ProductDetails";
+import UserDetails from "../../features/users/components/UserDetails";
 import { ConfirmPanel } from "./components/ConfirmPanel";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
@@ -49,6 +50,13 @@ export default function AdminSidebarRight() {
 									onEdit={infoContext.onEdit}
 								/>;
 			break;
+		case "user":
+			content = <UserDetails 
+									user={infoContext.data} 
+									onDelete={infoContext.onDelete} 
+									onEdit={infoContext.onEdit}
+								/>;
+			break;
 	}
 
 		
@@ -59,24 +67,23 @@ export default function AdminSidebarRight() {
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
       >
-      {/* <div className="w-full text-right">
-				<h2 className="p-4 text-lg font-semibold">youpi</h2>
-			</div> */}
-
-			<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
-				<div className="text-center uppercase tracking-wide mt-3">{infoContext && infoContext.title}</div>
-				<div>
-					{content}
+			<div className="h-[82%] overflow-y-auto">
+				<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
+					<div className="text-center uppercase tracking-wide mt-3">{infoContext && infoContext.title}</div>
+					<div>
+						{content}
+					</div>
 				</div>
 			</div>
 
-			{/* confirmPanel */}
-			<div className="p-5">
-				{options && (
-					<ConfirmPanel />
-				)}
+			<div className="h-[18%]">
+				{/* confirmPanel */}
+				<div className="p-1">
+					{options && (
+						<ConfirmPanel />
+					)}
+				</div>
 			</div>
-
     </aside>
   );
 }
