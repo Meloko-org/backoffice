@@ -3,6 +3,7 @@ import { DataTable, type Column, type SortDirection } from "./DataTable";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { DataTablePagination, type Align } from "./DataTablePagination";
 import type { PaginationMeta } from "../../types/list.types";
+import type { FilterConfig } from "./DataFiltersBar";
 
 interface DataListLayoutProps<T> {
   data: T[];
@@ -18,6 +19,11 @@ interface DataListLayoutProps<T> {
   sortKey?: string;
   sortDirection?: SortDirection;
   onSort?: (key: string) => void;
+
+  filters?: Record<string, any>;
+  onFiltersChange?: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+  filtersConfig?: FilterConfig[];
+  filterReset?: boolean;
 
   limit: number;
   onLimitChange: (limit: number) => void;
@@ -47,6 +53,11 @@ export function DataListLayout<T>({
   sortDirection,
   onSort,
 
+  filters,
+  filtersConfig,
+  onFiltersChange,
+  filterReset,
+
   limit,
   onLimitChange,
 
@@ -64,6 +75,10 @@ export function DataListLayout<T>({
         <DataTableToolbar
           search={search}
           onSearchChange={onSearchChange}
+          filters={filters}
+          onFiltersChange={onFiltersChange}
+          filtersConfig={filtersConfig}
+          filterReset={filterReset}
           actions={actions}
           limit={limit}
           onLimitChange={onLimitChange}

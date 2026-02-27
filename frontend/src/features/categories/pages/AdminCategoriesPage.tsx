@@ -12,6 +12,7 @@ import { useAdminList } from "../../../hooks/useAdminList";
 import { getTypeNames } from "../../types/api/types.api";
 import type { TypeForSelect } from "../../types/types/type";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 export default function AdminCategoriesPage() {
   const navigate = useNavigate()
@@ -19,16 +20,8 @@ export default function AdminCategoriesPage() {
   // définit le titre de la page pour AdminHeader
   useAdminPage("Liste des catégories")
   
-  const { openRight, closeRight, toggleRight } = useAdminLayout()
+  const { openRight, closeRight } = useAdminLayout()
   const { confirm } = useConfirm();
-
-
-  const [types, setTypes] = useState<TypeForSelect[]>([]);
-
-  useEffect(() => {
-    getTypeNames().then(setTypes)
-  }, [])
-
 
   /*
     "Donne-moi une fonction qui retourne items + pagination,
@@ -53,7 +46,32 @@ export default function AdminCategoriesPage() {
   } = useAdminList(getCategoriesList);
 
 
+  /* filtres destinés à DataFiltersBar */
 
+  // récupération des données nécessaires aux filtres: ici les types
+  const [types, setTypes] = useState<TypeForSelect[]>([]);
+
+  useEffect(() => {
+    getTypeNames().then(setTypes)
+  }, [])
+
+  // configuration des filtres
+  const filtersConfig: FilterConfig[] = [
+    {
+      type: "select",
+      key: "type",
+      label: "Type",
+      options: types.map((r) => ({
+        label: r.name,
+        value: r._id,
+      })),
+    },
+  ];
+
+  // retour page quand reset filters
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
 
 
   /* gère l'affichage de la cat dans la sidebarRight */ 
@@ -142,6 +160,10 @@ export default function AdminCategoriesPage() {
               sortDirection={sortDirection}
               onSort={handleSort}
 
+              filters={filters}
+              onFiltersChange={setFilters}
+              filtersConfig={filtersConfig}
+
               limit={limit}
               onLimitChange={setLimit}
 
@@ -193,26 +215,6 @@ export default function AdminCategoriesPage() {
               ]}
               actions={
                 <>
-                  <select
-                    value={filters.type || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
-
-                      setFilters((prev) => ({
-                        ...prev,
-                        type: value || undefined,
-                      }));
-                    }}
-                    className="w-48 toolbar-elt"
-                  >
-                    <option value="">Tous les types</option>
-
-                    {types?.map((type) => (
-                      <option key={type._id} value={type._id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </select>
                   <button
                     className="btn-primary"
                     onClick={() => navigate("/admin/categories/create")}

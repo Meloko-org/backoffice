@@ -516,6 +516,9 @@
 
 @layer components {
 
+
+
+
   /* Raw Menu */
   .row-menu-trigger {
     @apply py-1 px-3 rounded;
@@ -849,6 +852,64 @@
   .toolbar-elt:focus {
     border-color: var(--color-primary);
   }
+
+    /* Data-filters */
+  .data-filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* padding: 1rem; */
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+  }
+
+
+
+  .filter-item {
+    @apply items-center;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .filter-item select,
+  .filter-item input {
+    @apply px-3 py-2 rounded-md border bg-transparent outline-none;
+    /* padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg); */
+  }
+
+  .filter-item select:focus,
+  .filter-item input:focus {
+    border-color: var(--color-primary);
+  }
+
+  .date-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-reset-filter {
+    @apply inline-flex items-center p-1 border rounded-md
+           w-8 h-8 mt-1.5 transition;
+    background-color: var(--form-input-bg);
+    border-color: var(--table-border);
+    color: var(--btn-outline-text);
+  }
+
+  .btn-reset-filter:hover {
+    border-color: var(--btn-primary-bg);
+    color: var(--color-primary);
+  }
+
+
+
+
 
   .user:hover {
     @apply rounded-lg cursor-pointer;

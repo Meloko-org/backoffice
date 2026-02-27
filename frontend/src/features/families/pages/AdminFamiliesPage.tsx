@@ -12,6 +12,7 @@ import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import type { ProductFamily } from "../types/family";
 import type { CategoryForSelect } from "../../categories/types/category";
 import { getCategoryNames } from "../../categories/api/categories.api";
+import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 export default function AdminFamiliesPage() {
   const navigate = useNavigate()
@@ -21,14 +22,6 @@ export default function AdminFamiliesPage() {
   
   const { openRight, closeRight, toggleRight, isRightOpen } = useAdminLayout()
   const { confirm } = useConfirm();
-
-
-  const [categories, setCategories] = useState<CategoryForSelect[]>([]);
-
-  useEffect(() => {
-    getCategoryNames().then(setCategories)
-  }, [])
-
 
   /*
     "Donne-moi une fonction qui retourne items + pagination,
@@ -53,7 +46,32 @@ export default function AdminFamiliesPage() {
   } = useAdminList(getFamiliesList);
 
 
+  /* filtres destinés à DataFiltersBar */
 
+  // récupération des données nécessaires aux filtres: ici les categories
+  const [categories, setCategories] = useState<CategoryForSelect[]>([]);
+
+  useEffect(() => {
+    getCategoryNames().then(setCategories)
+  }, [])
+
+  // configuration des filtres
+  const filtersConfig: FilterConfig[] = [
+    {
+      type: "select",
+      key: "category",
+      label: "Catégories",
+      options: categories.map((r) => ({
+        label: r.name,
+        value: r._id,
+      })),
+    },
+  ];
+
+  // retour page quand reset filters
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
 
 
   /* gère l'affichage de la cat dans la sidebarRight */ 
@@ -141,6 +159,10 @@ export default function AdminFamiliesPage() {
               sortDirection={sortDirection}
               onSort={handleSort}
 
+              filters={filters}
+              onFiltersChange={setFilters}
+              filtersConfig={filtersConfig}
+
               limit={limit}
               onLimitChange={setLimit}
 
@@ -192,26 +214,6 @@ export default function AdminFamiliesPage() {
               ]}
               actions={
                 <>
-                  <select
-                    value={filters.category || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
-
-                      setFilters((prev) => ({
-                        ...prev,
-                        category: value || undefined,
-                      }));
-                    }}
-                    className="w-48 toolbar-elt"
-                  >
-                    <option value="">Toutes les catégories</option>
-
-                    {categories?.map((type) => (
-                      <option key={type._id} value={type._id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </select>
                   <button
                     className="btn-primary"
                     onClick={() => navigate("/admin/families/create")}

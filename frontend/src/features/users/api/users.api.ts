@@ -48,6 +48,9 @@ export const getUsersList = async (
   params: ListParams
 ): Promise<ListResult<User>> => {
 
+
+  console.log("liste params :", params)
+
   const res = await getUsers(params);
 
   return {

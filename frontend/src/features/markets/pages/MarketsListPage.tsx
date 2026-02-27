@@ -11,6 +11,7 @@ import type { Market } from "../types/markets";
 import { BallTriangle } from "react-loader-spinner";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { Pencil, Trash2 } from "lucide-react";
+import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 export default function MarketsListPage() {
 
@@ -21,11 +22,7 @@ export default function MarketsListPage() {
   const { openRight, closeRight, isRightOpen } = useAdminLayout();
   const { confirm } = useConfirm();
 
-  const [ postalCodes, setPostalCodes ] = useState<string[]>([]);
-
-  useEffect(() => {
-    getPostalCodes().then(setPostalCodes)
-  }, [])
+  
 
 
   const {
@@ -46,6 +43,38 @@ export default function MarketsListPage() {
     refetch,
   } = useAdminList(getMarketsList);
 
+
+  /* filtres destinés à DataFiltersBar */
+
+  // récupération des données nécessaires aux filtres: ici les postalcodes
+  const [ postalCodes, setPostalCodes ] = useState<string[]>([]);
+
+  useEffect(() => {
+    getPostalCodes().then(setPostalCodes)
+  }, [])
+
+
+  // configuration des filtres
+  const filtersConfig: FilterConfig[] = [
+    {
+      type: "select",
+      key: "postalCode",
+      label: "Code postal",
+      options: postalCodes.map((code) => ({
+        label: code,
+        value: code,
+      })),
+    },
+  ];
+
+  // retour page quand reset filters
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
+
+
+
+  /* affichage dans la sidebar droite */ 
   const [ selectedMarket, setSelectedMarket ] = useState<Market | null>();
 
   const infoContext: ModelContext = useMemo(() => {
@@ -147,6 +176,10 @@ export default function MarketsListPage() {
               sortDirection={sortDirection}
               onSort={handleSort}
 
+              filters={filters}
+              onFiltersChange={setFilters}
+              filtersConfig={filtersConfig}
+
               limit={limit}
               onLimitChange={setLimit}
 
@@ -198,26 +231,6 @@ export default function MarketsListPage() {
               ]}
               actions={
                 <>
-                  <select
-                    value={filters.postalCode || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
-
-                      setFilters((prev) => ({
-                        ...prev,
-                        postalCode: value || undefined,
-                      }));
-                    }}
-                    className="w-48 toolbar-elt"
-                  >
-                    <option value="">Code postal</option>
-
-                    {postalCodes?.map((code) => (
-                      <option key={code} value={code}>
-                        {code}
-                      </option>
-                    ))}
-                  </select>  
                   <button
                     className="btn-primary"
                     onClick={() => navigate("/admin/markets/create")}

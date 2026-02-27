@@ -28,12 +28,14 @@ async function getUsers({
   }
 
   // 🎛 FILTERS
-  if (filters.isSuspended !== undefined) {
-    filter.isSuspended = filters.isSuspended === "true";
-  }
+  const statusMap = {
+    active: { isDeleted: false, isSuspended: false},
+    suspended: { isSuspended: true },
+    deleted: { isDeleted: true },
+  };
 
-  if (filters.isDeleted !== undefined) {
-    filter.isDeleted = filters.isDeleted === "true";
+  if (filters.status && statusMap[filters.status]) {
+    Object.assign(filter, statusMap[filters.status]);
   }
 
   if (filters.role) {

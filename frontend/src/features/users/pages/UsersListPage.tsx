@@ -14,13 +14,16 @@ import { Ban, Eye, Pencil, Trash2 } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { DataRowMenu, type RowMenuAction } from "../../../components/data-table/DataRowMenu";
+import type { RoleForSelect } from "../../roles/types/roles";
+import { getRoleNames } from "../../roles/api/roles.api";
+import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 export default function UsersListPage() {
   const navigate = useNavigate();
 
-  useAdminPage("Liste des produits");
+  useAdminPage("Liste des utilisateurs");
 
-  const { openRight, closeRight, isRightOpen } = useAdminLayout();
+  const { openRight, closeRight } = useAdminLayout();
   const { confirm } = useConfirm();
 
 
@@ -34,14 +37,55 @@ export default function UsersListPage() {
     setSearch,
     sortKey,
     sortDirection,
+    handleSort,
     filters,
     setFilters,
     limit,
     setLimit,
-    handleSort,
     refetch,
   } = useAdminList(getUsersList);
 
+  
+
+  /* filtres destinés à DataFiltersBar */
+
+  // récupération des données nécessaires aux filtres: ici les roles
+  const [ roles, setRoles ] = useState<RoleForSelect[]>([]);
+
+  useEffect(() => {
+    getRoleNames().then(setRoles)
+  }, [])
+
+  // configuration des filtres
+  const filtersConfig: FilterConfig[] = [
+    {
+      type: "select",
+      key: "role",
+      label: "Rôle",
+      options: roles.map((r) => ({
+        label: r.name,
+        value: r._id,
+      })),
+    },
+    {
+      type: "select",
+      key: "status",
+      label: "Statut",
+      options: [
+        { label: "Actif", value: "active" },
+        { label: "Suspendu", value: "suspended" },
+        { label: "Supprimé", value: "deleted" },
+      ],
+    },
+  ];
+
+  // retour page quand reset filters
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
+
+
+  /* affichage dans la sidebar droite */  
   const [ selectedUser, setSelectedUser ] = useState<User | null>();
 
   const infoContext: ModelContext = useMemo(() => {
@@ -58,6 +102,8 @@ export default function UsersListPage() {
 
   useInfoContext(infoContext)
 
+
+
   useEffect(() => {
     if (selectedUser) {
       openRight();
@@ -65,6 +111,7 @@ export default function UsersListPage() {
       closeRight();
     }
   }, [selectedUser])
+
 
   const handleSelectUser = (user: User) => {
     setSelectedUser(prev =>
@@ -117,7 +164,9 @@ export default function UsersListPage() {
     );
   }
 
-   const handleSuspendToggle = () => {}
+
+  /* Actions du RowMenu */
+  const handleSuspendToggle = () => {}
 
   const userRowActions: RowMenuAction<User>[] = [
     {
@@ -147,7 +196,6 @@ export default function UsersListPage() {
  
 
 
-
   if (loading) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -164,6 +212,8 @@ export default function UsersListPage() {
       </div>
     );
   }
+
+  console.log("filters :", filters)
 
   
   return (
@@ -184,6 +234,11 @@ export default function UsersListPage() {
               sortKey={sortKey}
               sortDirection={sortDirection}
               onSort={handleSort}
+
+              filters={filters}
+              onFiltersChange={setFilters}
+              filtersConfig={filtersConfig}
+              filterReset={true}
 
               limit={limit}
               onLimitChange={setLimit}
@@ -238,11 +293,7 @@ export default function UsersListPage() {
                   ),
                 },
               ]}
-              actions={
-                <>
-                  {/* à définir */}
-                </>
-              }
+              // actions={}
             />
           </div>
         </div>

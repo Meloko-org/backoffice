@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { DataFiltersBar, type FilterConfig } from "./DataFiltersBar";
 
 interface DataToolbarProps {
   search?: string;
@@ -6,6 +7,10 @@ interface DataToolbarProps {
   actions?: ReactNode;
   limit: number;
   onLimitChange: (limit: number) => void;
+  filters?: Record<string, any>;
+  onFiltersChange?: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+  filtersConfig?: FilterConfig[];
+  filterReset?: boolean;
 }
 
 export const DataTableToolbar = ({
@@ -14,6 +19,10 @@ export const DataTableToolbar = ({
   actions,
   limit,
   onLimitChange,
+  filters,
+  onFiltersChange,
+  filtersConfig,
+  filterReset,
 }: DataToolbarProps) => {
   return (
 
@@ -48,8 +57,22 @@ export const DataTableToolbar = ({
         </select>
       </div>
 
-      <div className="grow flex justify-between">
-        {actions}
+      <div className="grow flex justify-end ">
+        <div className="">
+          {filters && onFiltersChange && filtersConfig && (
+            <DataFiltersBar
+              filters={filters}
+              onChange={onFiltersChange}
+              config={filtersConfig}
+              showReset={filterReset}
+            />
+          )}
+        </div>
+        {actions && (
+          <div className="grow flex justify-end">
+            {actions}
+          </div>
+        )}
       </div>
 
       

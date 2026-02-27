@@ -3,7 +3,7 @@ const { roleNames } = require("../controllers/roles.controller");
 const router = express.Router();
 
 
-router.get("/", roleNames);
+router.get("/names", roleNames);
 
 
 

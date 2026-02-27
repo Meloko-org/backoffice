@@ -13,6 +13,7 @@ import type { ModelContext } from "../../../types/admin";
 import { Pencil, Trash2 } from "lucide-react";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { BallTriangle } from "react-loader-spinner";
+import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 export default function AdminProductsPage() {
   const navigate = useNavigate();
@@ -21,14 +22,6 @@ export default function AdminProductsPage() {
 
   const { openRight, closeRight, isRightOpen } = useAdminLayout();
   const { confirm } = useConfirm();
-
-  /**
-   * récupération des familles pour le select de la toolbar
-   */
-  const [ families, setFamilies ] = useState<FamilyForSelect[]>([]);
-  useEffect(() => {
-    getFamilyNames().then(setFamilies);
-  }, [])
 
 
   const {
@@ -49,6 +42,35 @@ export default function AdminProductsPage() {
     refetch,
   } = useAdminList(getProductsList);
 
+
+  /* filtres destinés à DataFiltersBar */
+
+  // récupération des données nécessaires aux filtres: ici les familles
+  const [ families, setFamilies ] = useState<FamilyForSelect[]>([]);
+  useEffect(() => {
+    getFamilyNames().then(setFamilies);
+  }, [])
+
+  // configuration des filtres
+  const filtersConfig: FilterConfig[] = [
+    {
+      type: "select",
+      key: "family",
+      label: "Famille",
+      options: families.map((r) => ({
+        label: r.name,
+        value: r._id,
+      })),
+    },
+  ];
+
+  // retour page quand reset filters
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
+
+
+  /* affichage dans la sidebar droite */  
   const [ selectedProduct, setSelectedProduct ] = useState<Product | null>();
 
   const infoContext: ModelContext = useMemo(() => {
@@ -148,6 +170,10 @@ export default function AdminProductsPage() {
               sortDirection={sortDirection}
               onSort={handleSort}
 
+              filters={filters}
+              onFiltersChange={setFilters}
+              filtersConfig={filtersConfig}
+
               limit={limit}
               onLimitChange={setLimit}
 
@@ -199,26 +225,7 @@ export default function AdminProductsPage() {
               ]}
               actions={
                 <>
-                  <select
-                    value={filters.family || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
 
-                      setFilters((prev) => ({
-                        ...prev,
-                        family: value || undefined,
-                      }));
-                    }}
-                    className="w-48 toolbar-elt"
-                  >
-                    <option value="">Toutes les familles</option>
-
-                    {families?.map((fam) => (
-                      <option key={fam._id} value={fam._id}>
-                        {fam.name}
-                      </option>
-                    ))}
-                  </select>
                   <button
                     className="btn-primary"
                     onClick={() => navigate("/admin/products/create")}
