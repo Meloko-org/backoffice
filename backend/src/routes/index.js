@@ -7,6 +7,7 @@ const adminTypesRoutes = require("../features/types/admin/routes/types.routes.js
 const adminTagCategoriesRoutes = require("../features/tagCategories/admin/routes/tagCategories.routes.js");
 const adminOrdersRoutes = require("../features/orders/admin/routes/AdminOrders.routes.js");
 const adminUsersRoutes = require("../features/users/admin/routes/AdminUsers.routes.js");
+const adminRolesRoutes = require("../features/roles/routes/roles.route.js");
 
 
 module.exports = {
@@ -19,4 +20,5 @@ module.exports = {
   adminTagCategoriesRoutes,
   adminOrdersRoutes,
   adminUsersRoutes,
+  adminRolesRoutes,
 };
