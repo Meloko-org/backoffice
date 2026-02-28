@@ -133,7 +133,7 @@ const userSchema = mongoose.Schema(
 );
 
 
-const collectionName = process.env.USE_FAKe_DB === "true"
+const collectionName = process.env.USE_FAKE_DB === "true"
   ? "fakeusers"
   : "users";
 

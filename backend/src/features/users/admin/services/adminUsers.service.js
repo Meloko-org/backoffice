@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../../../../models/User");
 const Order = require("../../../../models/Order");
 const Role = require("../../../../models/Role");
+const Producer = require("../../../../models/Producer");
 const { ApiError, NotFoundError, ValidationError } = require("../../../../utils/ApiError");
 
 
@@ -283,6 +284,178 @@ async function restoreUser(userId) {
 }
 
 
+export async function getUserDashboard(
+  userId,
+  page = 1,
+  limit = 10
+) {
+
+  const objectUserId = new mongoose.Types.ObjectId(userId);
+
+  /* =========================
+     1️⃣ USER
+  ========================== */
+
+  const user = await User.findById(userId)
+    .populate("roles", "name")
+    .lean();
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  /* =========================
+     2️⃣ PRODUCER
+  ========================== */
+
+  const producer = await Producer.findOne({ owner: userId })
+    .select("_id")
+    .lean();
+
+  /* =========================
+     3️⃣ ORDERS AGGREGATION
+  ========================== */
+
+  const skip = (page - 1) * limit;
+
+  const ordersAggregation = await Order.aggregate([
+    { $match: { user: objectUserId } },
+
+    {
+      $facet: {
+        stats: [
+          {
+            $group: {
+              _id: null,
+              totalOrders: { $sum: 1 },
+              totalSpentAll: { $sum: "$totalTTC" },
+              paidOrdersCount: {
+                $sum: {
+                  $cond: [{ $eq: ["$isPaid", true] }, 1, 0],
+                },
+              },
+              totalSpentPaid: {
+                $sum: {
+                  $cond: [
+                    { $eq: ["$isPaid", true] },
+                    "$totalTTC",
+                    0,
+                  ],
+                },
+              },
+              lastOrderAt: { $max: "$createdAt" },
+            },
+          },
+        ],
+
+        recentOrders: [
+          { $sort: { createdAt: -1 } },
+          { $skip: skip },
+          { $limit: limit },
+          {
+            $project: {
+              _id: 1,
+              orderNumber: 1,
+              createdAt: 1,
+              totalTTC: 1,
+              isPaid: 1,
+              isWithdrawn: 1,
+            },
+          },
+        ],
+
+        totalCount: [{ $count: "count" }],
+      },
+    },
+  ]);
+
+  const stats = ordersAggregation[0].stats[0] || {
+    totalOrders: 0,
+    totalSpentAll: 0,
+    paidOrdersCount: 0,
+    totalSpentPaid: 0,
+    lastOrderAt: null,
+  };
+
+  const totalOrdersCount =
+    ordersAggregation[0].totalCount[0]?.count || 0;
+
+  /* =========================
+     4️⃣ REFUNDED PRODUCTS COUNT
+     (separate lightweight aggregation)
+  ========================== */
+
+  const refundedProductsAgg = await Order.aggregate([
+    { $match: { user: objectUserId } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+    {
+      $match: {
+        "details.products.refunded": true,
+      },
+    },
+    {
+      $count: "refundedProductsCount",
+    },
+  ]);
+
+  const refundedProductsCount =
+    refundedProductsAgg[0]?.refundedProductsCount || 0;
+
+  /* =========================
+     5️⃣ BUILD RESPONSE
+  ========================== */
+
+  const averageBasketTTC =
+    stats.paidOrdersCount > 0
+      ? stats.totalSpentPaid / stats.paidOrdersCount
+      : 0;
+
+  return {
+    user: {
+      id: user._id,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      avatar: user.avatar,
+      roles: user.roles.map((r) => ({
+        id: r._id,
+        name: r.name,
+      })),
+      createdAt: user.createdAt,
+      lastLoginAt: user.lastLoginAt,
+      isSuspended: user.isSuspended,
+      suspendedAt: user.suspendedAt,
+      suspensionReason: user.suspensionReason,
+      isDeleted: user.isDeleted,
+      deletedAt: user.deletedAt,
+      isProducer: !!producer,
+      producerId: producer?._id || null,
+    },
+
+    business: {
+      totalOrders: stats.totalOrders,
+      totalSpentTTC: stats.totalSpentPaid,
+      averageBasketTTC,
+      lastOrderAt: stats.lastOrderAt,
+      paidOrdersCount: stats.paidOrdersCount,
+      cancelledOrdersCount: 0, // (à voir si on l'ajoute via aggregate)
+      refundedProductsCount,
+    },
+
+    recentOrders: {
+      items: ordersAggregation[0].recentOrders,
+      pagination: {
+        page,
+        limit,
+        total: totalOrdersCount,
+        totalPages: Math.ceil(totalOrdersCount / limit),
+      },
+    },
+  };
+}
+
+
 
 
 module.exports = {
@@ -293,4 +466,5 @@ module.exports = {
   softDeleteUser,
   updateUserRoles,
   restoreUser,
+  getUserDashboard,
 };

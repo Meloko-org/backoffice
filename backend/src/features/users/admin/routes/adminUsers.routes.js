@@ -7,6 +7,7 @@ const {
   softDelete,
   updateRoles,
   restore,
+  userDashboard,
 } = require("../controllers/adminUsers.controller");
 const router = express.Router();
 
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.patch("/:id/suspend", suspend);
 router.patch("/:id/reactivate", reactivate);
+router.get("/:id/dashboard", userDashboard);
 router.get("/:id", getUser);
 router.get("/", listUsers)
 

@@ -15,6 +15,7 @@ const { adminTagCategoriesRoutes } = require("./src/routes");
 const { adminOrdersRoutes } = require("./src/routes");
 const { adminUsersRoutes } = require("./src/routes");
 const { adminRolesRoutes } = require("./src/routes");
+const { adminProducersRoutes } = require("./src/routes");
 
 
 
@@ -40,6 +41,7 @@ app.use("/admin/tagCategories", adminTagCategoriesRoutes);
 app.use("/admin/orders", adminOrdersRoutes);
 app.use("/admin/users", adminUsersRoutes);
 app.use("/admin/roles", adminRolesRoutes);
+app.use("/admin/producers", adminProducersRoutes);
 
 /**
  * Route de test

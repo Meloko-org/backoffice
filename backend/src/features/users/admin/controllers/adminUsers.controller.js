@@ -6,6 +6,7 @@ const {
   softDeleteUser,
   updateUserRoles,
   restoreUser,
+  getUserDashboard,
 } = require("../services/adminUsers.service");
 
 const listUsers = async (req, res, next) => {
@@ -153,6 +154,28 @@ const restore = async (req, res, next) => {
   }
 };
 
+
+const userDashboard = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const { id } = req.params;
+
+    const result = await getUserDashboard(
+      id, 
+      Number(page), 
+      Number(limit)
+    );
+
+    res.json({
+      success: true,
+      data: result,
+    })
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   listUsers,
   getUser,
@@ -161,4 +184,5 @@ module.exports = {
   softDelete,
   updateRoles,
   restore,
+  userDashboard,
 };

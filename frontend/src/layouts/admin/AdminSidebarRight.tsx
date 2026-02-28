@@ -63,7 +63,7 @@ export default function AdminSidebarRight() {
   return (
     <aside
       className={`
-        fixed inset-y-0 right-0 w-96 ${isOpen ? "z-50" : "z-10"}
+        fixed inset-y-0 right-0 w-120 ${isOpen ? "z-50" : "z-10"}
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
       >

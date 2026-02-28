@@ -63,11 +63,11 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
     }));
   };
 
-  console.log("active filters :", hasActiveFilters)
-  console.log("showreset :", showReset)
 
   return (
-    <div className="data-filters-bar">
+    <div className="data-filters-bar ">
+
+      <span className="filter-bar-title">FILTRES</span>
 
       {showReset && hasActiveFilters && (
         <button

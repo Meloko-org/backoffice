@@ -187,20 +187,21 @@ export default function UserDetails({
       
       
       {user.addresses && user.addresses.length > 0 && (
-        <div className="h-32 overflow-y-auto">
+        <div className="h-30 overflow-y-auto">
           <div>
             <p className="detail-label text-xs uppercase tracking-wide">
               Adresses
             </p>
           </div>
-          <div className="space-y-1 mb-2">
+          <div className="mb-2 flex flex-row flex-wrap gap-x-2">
             {user.addresses.map((adr) => (
               <div key={adr._id} className={`
+                w-auto
                 ${adr.isDefault === true ? "default-adr-card" : "adr-card"}
               `}>
                 <p className={`
                   font-medium
-                  ${adr.isDefault === true ? "text-primary" : "adr-card-title"}
+                  ${adr.isDefault === true ? "default-adr-card-title" : "adr-card-title"}
                 `}>
                   {adr.name}
                 </p>

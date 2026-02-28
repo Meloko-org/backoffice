@@ -579,14 +579,18 @@
   }
 
   .default-adr-card {
-    @apply rounded-lg border py-1 px-2;
-    border-color: rgb(152, 182, 110);
+    @apply rounded-lg py-1 px-2;
+    /* border-color: rgb(152, 182, 110); */
     background-color: rgb(152, 182, 110, 0.1);
   }
 
+  .default-adr-card-title {
+    color: var(--color-primary);
+  }
+
   .adr-card {
-    @apply rounded-lg border p-2;
-    border-color: var(--bloc-border);
+    @apply rounded-lg py-1 px-2;
+    /* border-color: var(--second-text); */
     background-color: var(--first-plan-bg);
   }
 
@@ -855,18 +859,23 @@
 
     /* Data-filters */
   .data-filters-bar {
-    @apply px-3 py-1;
+    @apply px-3 py-1 items-center rounded-md;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     /* padding: 1rem; */
     background: var(--sidebar-bg);
     border: 1px solid var(--card-border);
-    border-radius: 0.75rem;
+    /* border-radius: 0.75rem; */
   }
 
   .filter-bar-elt {
     @apply p-1;
+  }
+
+  .filter-bar-title {
+    @apply text-xs uppercase;
+    color: var(--p-label-color);
   }
 
 
