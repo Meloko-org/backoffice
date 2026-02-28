@@ -43,7 +43,7 @@ export default function UsersListPage() {
     limit,
     setLimit,
     refetch,
-  } = useAdminList(getUsersList);
+  } = useAdminList(getUsersList, { syncWithUrl: true });
 
   
 

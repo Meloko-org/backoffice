@@ -8,6 +8,14 @@ export type SelectFilterConfig = {
   options: { label: string; value: string }[];
 };
 
+export type MultiSelectFilterConfig = {
+  type: "multiSelect";
+  key: string;
+  label: string;
+  options: { label: string; value: string }[];
+};
+
+
 export type DateRangeFilterConfig = {
   type: "dateRange";
   fromKey: string;
@@ -24,6 +32,7 @@ type BooleanFilter = {
 
 export type FilterConfig =
   | SelectFilterConfig
+  | MultiSelectFilterConfig
   | DateRangeFilterConfig
   | BooleanFilter;
 
@@ -74,14 +83,14 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
 
         if (filter.type === "select") {
           return (
-            <div key={index} >
+            <div key={index}>
               {/* <label>{filter.label}</label> */}
               <select
                 value={filters[filter.key] || ""}
                 onChange={(e) =>
                   handleChange(filter.key, e.target.value)
                 }
-                className="toolbar-elt"
+                className="toolbar-elt filter-bar-elt"
               >
                 <option value="">{filter.label}</option>
                 {filter.options.map((opt) => (
@@ -94,6 +103,39 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
           );
         }
 
+        if (filter.type === "multiSelect") {
+          const selectedValues = filters[filter.key]
+            ? filters[filter.key]!.split(",")
+            : [];
+
+          return (
+            <div key={index}>
+              <select
+                multiple
+                value={selectedValues}
+                onChange={(e) => {
+                  const values = Array.from(e.target.selectedOptions).map(
+                    (opt) => opt.value
+                  );
+
+                  handleChange(
+                    filter.key,
+                    values.length ? values.join(",") : ""
+                  );
+                }}
+                className="toolbar-elt filter-bar-elt"
+              >
+                {filter.options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          );
+        }
+
+
         if (filter.type === "dateRange") {
           return (
             <div key={index} className="filter-item">
@@ -105,6 +147,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
                   onChange={(e) =>
                     handleChange(filter.fromKey, e.target.value)
                   }
+                  className="filter-bar-elt"
                 />
                 <span>→</span>
                 <input
@@ -113,6 +156,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
                   onChange={(e) =>
                     handleChange(filter.toKey, e.target.value)
                   }
+                  className="filter-bar-elt"
                 />
               </div>
             </div>
@@ -129,7 +173,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
                 onChange={(e) =>
                   handleChange(filter.key, e.target.value)
                 }
-                className="toolbar-elt"
+                className="toolbar-elt filter-bar-elt"
               >
                 <option value="">{filter.label}</option>
                 <option value={"true"}>Oui</option>
@@ -145,3 +189,13 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
     </div>
   );
 }
+
+
+/* Récupérer les filtres d'un multi-select, côté backend:
+
+ex: 
+if (filters.roles) {
+  const rolesArray = filters.roles.split(",");
+  filter.roles = { $in: rolesArray.map(id => new mongoose.Types.ObjectId(id)) };
+}
+*/

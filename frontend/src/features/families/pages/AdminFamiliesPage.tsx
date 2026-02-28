@@ -43,7 +43,7 @@ export default function AdminFamiliesPage() {
     setLimit,
     handleSort,
     refetch,
-  } = useAdminList(getFamiliesList);
+  } = useAdminList(getFamiliesList, { syncWithUrl: true });
 
 
   /* filtres destinés à DataFiltersBar */
@@ -162,6 +162,7 @@ export default function AdminFamiliesPage() {
               filters={filters}
               onFiltersChange={setFilters}
               filtersConfig={filtersConfig}
+              filterReset={true}
 
               limit={limit}
               onLimitChange={setLimit}

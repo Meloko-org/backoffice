@@ -855,15 +855,19 @@
 
     /* Data-filters */
   .data-filters-bar {
+    @apply px-3 py-1;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     /* padding: 1rem; */
-    background: var(--card-bg);
+    background: var(--sidebar-bg);
     border: 1px solid var(--card-border);
     border-radius: 0.75rem;
   }
 
+  .filter-bar-elt {
+    @apply p-1;
+  }
 
 
   .filter-item {
@@ -896,7 +900,7 @@
 
   .btn-reset-filter {
     @apply inline-flex items-center p-1 border rounded-md
-           w-8 h-8 mt-1.5 transition;
+           w-8 h-8 transition;
     background-color: var(--form-input-bg);
     border-color: var(--table-border);
     color: var(--btn-outline-text);

@@ -41,7 +41,7 @@ export default function MarketsListPage() {
     setLimit,
     handleSort,
     refetch,
-  } = useAdminList(getMarketsList);
+  } = useAdminList(getMarketsList, { syncWithUrl: true });
 
 
   /* filtres destinés à DataFiltersBar */
@@ -179,6 +179,7 @@ export default function MarketsListPage() {
               filters={filters}
               onFiltersChange={setFilters}
               filtersConfig={filtersConfig}
+              filterReset={true}
 
               limit={limit}
               onLimitChange={setLimit}

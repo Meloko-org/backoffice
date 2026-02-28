@@ -40,7 +40,7 @@ export default function AdminProductsPage() {
     setLimit,
     handleSort,
     refetch,
-  } = useAdminList(getProductsList);
+  } = useAdminList(getProductsList, { syncWithUrl: true });
 
 
   /* filtres destinés à DataFiltersBar */
@@ -173,6 +173,7 @@ export default function AdminProductsPage() {
               filters={filters}
               onFiltersChange={setFilters}
               filtersConfig={filtersConfig}
+              filterReset={true}
 
               limit={limit}
               onLimitChange={setLimit}

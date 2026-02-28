@@ -43,7 +43,7 @@ export default function AdminCategoriesPage() {
     setLimit,
     handleSort,
     refetch,
-  } = useAdminList(getCategoriesList);
+  } = useAdminList(getCategoriesList, { syncWithUrl: true });
 
 
   /* filtres destinés à DataFiltersBar */
@@ -163,6 +163,7 @@ export default function AdminCategoriesPage() {
               filters={filters}
               onFiltersChange={setFilters}
               filtersConfig={filtersConfig}
+              filterReset={true}
 
               limit={limit}
               onLimitChange={setLimit}
