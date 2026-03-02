@@ -31,9 +31,11 @@ export function AnimatedButton({
     <button
       {...props}
       disabled={loading || disabled}
-      className={`${base} ${variants[variant]} ${
-        loading ? "cursor-not-allowed" : ""
-      }`}
+      className={`
+        ${base} 
+        ${success && !loading ? "btn-success" : variants[variant]} 
+        ${loading ? "cursor-not-allowed" : ""}
+      `}
     >
       {!loading && !success && children}
 
@@ -45,7 +47,7 @@ export function AnimatedButton({
         </span>
       )}
 
-      {success && <span className="text-lg">✓</span>}
+      {!loading && success && <span className="text-lg">✓</span>}
     </button>
   );
 }

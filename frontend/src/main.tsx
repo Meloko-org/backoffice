@@ -7,6 +7,28 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import "./index.css";
 
+/**
+ * Utilisation de React query pour :
+ * - cache automatique (pas de refetch inutile)
+ * - Invalidation automatique
+ * - Refetch intelligent (au focus, reconnect, etc)
+ * - code plus propre
+ */
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!clerkPubKey) {
@@ -15,8 +37,10 @@ if (!clerkPubKey) {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={clerkPubKey}>
-      <RouterProvider router={router} />
-    </ClerkProvider>
+    <QueryClientProvider client={queryClient}>
+      <ClerkProvider publishableKey={clerkPubKey}>
+        <RouterProvider router={router} />
+      </ClerkProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

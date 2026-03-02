@@ -18,16 +18,16 @@ export default function UserDetails({
 
 	if (!user) return null;
 
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
 	const imageUrl = user.avatar; 
   const hasImage = Boolean(imageUrl);
 
-  console.log(user)
+  // console.log(user)
 
   const handleDelete = () => {
-    confirm({
+    defineConfirm({
       title: "Supprimer le user",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
@@ -68,13 +68,13 @@ export default function UserDetails({
               ${user.isSuspended ? "bg-warning" : ""}
             `}>
 
-            <div className="flex flex-row gap-x-3 items-center">
-              <div className="basis-1/2">
+            <div className="flex flex-row gap-x-1 items-center">
+              <div className="basis-1/3">
                 <p className="detail-label text-xs uppercase tracking-wide ">
                   Suspendu
                 </p>
               </div>
-              <div className="basis-1/2">
+              <div className="basis-2/3">
                 <p className="detail-info font-medium">
                   {user.isSuspended ? "Oui" : "Non"}
                 </p>
@@ -83,25 +83,32 @@ export default function UserDetails({
 
             {user.isSuspended && (
               <>
-                <div className="flex flex-row gap-x-3">
-                  <div className="basis-1/2">
+                <div className="flex flex-row gap-x-1">
+                  <div className="basis-1/3">
                     <p className="detail-label text-xs uppercase tracking-wide ">
                       Le
                     </p>
                   </div>
-                  <div className="basis-1/2">
+                  <div className="basis-2/3">
                     <p className="detail-info font-medium">
-                      {user.suspendedAt}
+                      {new Date(user.suspendedAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-row gap-x-1">
+                  <div className="basis-1/3">
+                    <p className="detail-label text-xs uppercase tracking-wide ">
+                      Raison
+                    </p>
+                  </div>
+                  <div className="basis-2/3">
+                    <p className="detail-info font-medium">
+                      {user.suspensionReason}
                     </p>
                   </div>
                 </div>
                 
-                <p className="detail-label text-xs uppercase tracking-wide ">
-                  Raison
-                </p>
-                <p className="detail-info font-medium">
-                  {user.suspensionReason}
-                </p>
               </>
             )}
 
@@ -110,17 +117,17 @@ export default function UserDetails({
 
         <div className="basis-1/2">
           <div className={`
-              alert p-2 basis-1/2
+              alert p-2 
               ${user.isDeleted ? "bg-danger" : ""}
             `}>
 
-            <div className="flex flex-row gap-x-3 items-center">
-              <div className="basis-1/2">
+            <div className="flex flex-row gap-x-1 items-center">
+              <div className="basis-1/3">
                 <p className="detail-label text-xs uppercase tracking-wide ">
                   Supprimé
                 </p>
               </div>
-              <div className="basis-1/2">
+              <div className="basis-2/3">
                 <p className="detail-info font-medium">
                   {user.isDeleted ? "Oui" : "Non"}
                 </p>
@@ -130,12 +137,12 @@ export default function UserDetails({
             {user.isDeleted && (
               <>
                 <div className="flex flex-row gap-x-1">
-                  <div className="basis-1/4">
+                  <div className="basis-1/3">
                     <p className="detail-label text-xs uppercase tracking-wide ">
                       Le
                     </p>
                   </div>
-                  <div className="basis-3/4">
+                  <div className="basis-2/3">
                     <p className="detail-info font-medium">
                       {new Date(user.deletedAt).toLocaleDateString()}
                     </p>
@@ -143,12 +150,12 @@ export default function UserDetails({
                 </div>
                 
                 <div className="flex flex-row gap-x-1">
-                  <div className="basis-1/4">
+                  <div className="basis-1/3">
                     <p className="detail-label text-xs uppercase tracking-wide ">
                       Par
                     </p>
                   </div>
-                  <div className="basis-3/4">
+                  <div className="basis-2/3">
                     <p className="detail-info font-medium">
                       {user.deletedByAdmin}
                     </p>
@@ -254,7 +261,7 @@ export default function UserDetails({
       
 
       {/* ACTIONS */}
-      {(onEdit || onDelete) && (
+      {/* {(onEdit || onDelete) && (
         <div className="flex gap-2">
           {onEdit && (
             <button
@@ -276,7 +283,7 @@ export default function UserDetails({
             </button>
           )}
         </div>
-      )}
+      )} */}
 
       {/* IMAGE */}
       <div className="fixed top-17 right-13 w-30">

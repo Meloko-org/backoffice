@@ -23,6 +23,7 @@ import EditProductPage from "./features/products/pages/EditProductPage";
 import CreateMarketPage from "./features/markets/pages/CreateMarketPage";
 import EditMarketPage from "./features/markets/pages/EditMarketPage";
 import UsersListPage from "./features/users/pages/UsersListPage";
+import UserPage from "./features/users/pages/UserPage";
 
 
 
@@ -155,6 +156,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRouteGuard permission="users:manage">
             <UsersListPage />
+          </AdminRouteGuard>
+        )
+      },
+      { 
+        path: "users/:id", 
+        element: (
+          <AdminRouteGuard permission="users:manage">
+            <UserPage />
           </AdminRouteGuard>
         )
       },

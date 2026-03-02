@@ -20,7 +20,7 @@ export default function MarketsListPage() {
   useAdminPage("Liste des points de vente");
 
   const { openRight, closeRight, isRightOpen } = useAdminLayout();
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
   
 
@@ -114,7 +114,7 @@ export default function MarketsListPage() {
   const handleDeleteMarket = (market: Market) => {
     setSelectedMarket(market)
     openRight();
-    confirm({
+    defineConfirm({
       title: "Supprimer le point de vente",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

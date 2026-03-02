@@ -16,6 +16,8 @@ export type Permission =
   | "support:reply"
   | "users:read"
   | "users:manage"
+  | "producers:manage"
+  | "orders:manage"
   | "roles:manage";
 
 export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
@@ -48,6 +50,8 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "support:reply",
     "users:read",
     "users:manage",
+    "producers:manage",
+    "orders:manage",
   ],
 
   "super-admin": [

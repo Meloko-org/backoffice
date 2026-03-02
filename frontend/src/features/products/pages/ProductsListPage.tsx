@@ -21,7 +21,7 @@ export default function AdminProductsPage() {
   useAdminPage("Liste des produits");
 
   const { openRight, closeRight, isRightOpen } = useAdminLayout();
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
   const {
@@ -108,7 +108,7 @@ export default function AdminProductsPage() {
   const handleDeleteProduct = (product: Product) => {
     setSelectedProduct(product)
     openRight();
-    confirm({
+    defineConfirm({
       title: "Supprimer le produit",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

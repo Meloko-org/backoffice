@@ -9,6 +9,7 @@ type FloatingSelectProps = {
   onChange: (value: string) => void;
 };
 
+
 export default function FloatingSelect({
   label,
   disabled = false,
@@ -30,7 +31,7 @@ export default function FloatingSelect({
         className={`
           peer w-full px-3 pt-5 pb-2 text-sm
           focus:outline-none focus:ring-0
-          ${error && "border-red-500 focus:ring-red-500"}
+          ${error && "border-danger focus:ring-danger"}
           ${disabled ? "cursor-not-allowed" : ""}
         `}
       >
@@ -55,11 +56,11 @@ export default function FloatingSelect({
           peer-focus:text-primary
         `}
       >
-        {label}{required && <span className="text-red-500 ml-1">*</span>}
+        {label}{required && <span className="text-danger ml-1">*</span>}
       </label>
 
       {error && (
-        <p className="mt-1 text-xs text-red-600">
+        <p className="mt-1 text-xs text-danger">
           {error}
         </p>
       )}

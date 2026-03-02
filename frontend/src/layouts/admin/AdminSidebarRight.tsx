@@ -63,27 +63,37 @@ export default function AdminSidebarRight() {
   return (
     <aside
       className={`
-        fixed inset-y-0 right-0 w-120 ${isOpen ? "z-50" : "z-10"}
+        fixed inset-y-0 right-0 w-120 
+				${isOpen ? "z-50" : "z-10"}
+				${!content ? "flex items-center" : ""}
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
       >
-			<div className="h-[82%] overflow-y-auto">
-				<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
-					<div className="text-center uppercase tracking-wide mt-3">{infoContext && infoContext.title}</div>
-					<div>
-						{content}
-					</div>
-				</div>
-			</div>
 
-			<div className="h-[18%]">
-				{/* confirmPanel */}
-				<div className="p-1">
+				{/* Si un content est défini, on l'affiche */}
+				{content && (
+					<div className="h-[80%] overflow-y-auto">
+						<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
+							<div className="text-center uppercase tracking-wide mt-3">
+								{infoContext && infoContext.title}
+							</div>
+							<div>
+								{content}
+							</div>
+						</div>
+					</div>
+				)}
+			
+
+			<div className={`${content ? "h-[20%]" : "h-auto w-full"}`}>
+				{/* si les options du confirmPanel sont définies, on affiche confirmPanel */}
+				<div className="p-2">
 					{options && (
 						<ConfirmPanel />
 					)}
 				</div>
 			</div>
+
     </aside>
   );
 }

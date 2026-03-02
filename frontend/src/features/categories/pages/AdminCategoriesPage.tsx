@@ -21,7 +21,7 @@ export default function AdminCategoriesPage() {
   useAdminPage("Liste des catégories")
   
   const { openRight, closeRight } = useAdminLayout()
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
   /*
     "Donne-moi une fonction qui retourne items + pagination,
@@ -115,7 +115,7 @@ export default function AdminCategoriesPage() {
   const handleDeleteCategory = (category: ProductCategory) => {
     setSelectedCategory(category)
     openRight();
-    confirm({
+    defineConfirm({
       title: "Supprimer la catégorie",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

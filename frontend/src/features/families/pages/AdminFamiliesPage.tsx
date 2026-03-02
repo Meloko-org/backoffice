@@ -21,7 +21,7 @@ export default function AdminFamiliesPage() {
   useAdminPage("Liste des familles")
   
   const { openRight, closeRight, toggleRight, isRightOpen } = useAdminLayout()
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
   /*
     "Donne-moi une fonction qui retourne items + pagination,
@@ -114,7 +114,7 @@ export default function AdminFamiliesPage() {
   const handleDeleteFamily = (family: ProductFamily) => {
     setSelectedFamily(family)
     openRight();
-    confirm({
+    defineConfirm({
       title: "Supprimer la famille",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

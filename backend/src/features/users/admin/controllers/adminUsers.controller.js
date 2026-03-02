@@ -33,7 +33,7 @@ const listUsers = async (req, res, next) => {
       filters,
     });
 
-    console.log(JSON.stringify(result.items, null ,2))
+    // console.log(JSON.stringify(result.items, null ,2))
 
     res.json({
       success: true,
@@ -66,7 +66,7 @@ const getUser = async (req, res, next) => {
 const suspend = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { reason } = req.body;
+    const { reason } = req.body ?? {};
 
     const user = await suspendUser(id, reason);
 
@@ -165,6 +165,8 @@ const userDashboard = async (req, res, next) => {
       Number(page), 
       Number(limit)
     );
+
+    console.log("USERDASHBOARD :", JSON.stringify(result, null, 2))
 
     res.json({
       success: true,

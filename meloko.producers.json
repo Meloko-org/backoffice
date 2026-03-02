@@ -1,0 +1,126 @@
+[{
+  "_id": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "socialReason": "Super name",
+  "siren": "120027016",
+  "owner": {
+    "$oid": "66b212d732185b4275e1871a"
+  },
+  "iban": "FR76 3000 6000 0112 3456 7890 189",
+  "bic": "HBUKGB4B",
+  "address": {
+    "address1": "address first part",
+    "address2": "address second part",
+    "postalCode": "06009",
+    "city": "Nice",
+    "country": "France",
+    "_id": {
+      "$oid": "66c9d9090b49e5f6d6f96a75"
+    },
+    "createdAt": {
+      "$date": "2024-08-24T12:58:49.161Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-24T12:58:49.161Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2024-08-06T12:11:23.559Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-24T12:58:49.161Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66c0b9bd18d45a1cd814d6a0"
+  },
+  "socialReason": "Test producteur toto",
+  "siren": "73873737373883",
+  "owner": {
+    "$oid": "66ba12495e99a72249a1d72d"
+  },
+  "iban": "FR7682828283",
+  "bic": "JDJDJFJFJ",
+  "address": {
+    "address1": "Adresse1223",
+    "address2": "Adresse2",
+    "postalCode": "55555",
+    "city": "Cannes",
+    "country": "France",
+    "_id": {
+      "$oid": "67ed262a64e11e5352051ef0"
+    },
+    "createdAt": {
+      "$date": "2025-04-02T11:57:30.485Z"
+    },
+    "updatedAt": {
+      "$date": "2025-04-02T11:57:30.485Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2024-08-17T14:54:53.206Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-06T14:26:09.792Z"
+  },
+  "__v": 0,
+  "onboardingStep": 6
+},
+{
+  "_id": {
+    "$oid": "67ac84e05e87ccec0f0b1549"
+  },
+  "socialReason": "Producteur du var",
+  "siren": "83736362728",
+  "owner": {
+    "$oid": "6747619b353bf7adcbca5b75"
+  },
+  "iban": "FR74 8484 7483 7383",
+  "bic": "KF8R7JDU3",
+  "address": {
+    "address1": "19 place de la republique",
+    "address2": "",
+    "postalCode": "83340",
+    "city": "Cabasse",
+    "country": "France",
+    "_id": {
+      "$oid": "67ac85bb5e87ccec0f0b1555"
+    },
+    "createdAt": {
+      "$date": "2025-02-12T11:27:55.225Z"
+    },
+    "updatedAt": {
+      "$date": "2025-02-12T11:27:55.225Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2025-02-12T11:24:16.993Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:27:55.226Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68da4dc24000d624d24389e2"
+  },
+  "owner": {
+    "$oid": "68da4db94000d624d24389de"
+  },
+  "onboardingStep": 6,
+  "createdAt": {
+    "$date": "2025-09-29T09:13:38.501Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-29T09:18:41.658Z"
+  },
+  "__v": 0,
+  "bic": "8484h4u4u",
+  "iban": "848484858",
+  "siren": "Jeu38474j584u",
+  "socialReason": "JisGoogleProducer"
+}]

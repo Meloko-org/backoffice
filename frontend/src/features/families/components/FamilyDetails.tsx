@@ -19,14 +19,14 @@ export default function FamilyDetails({
 
 	if (!family) return null;
 
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
 	const imageUrl = family.image; 
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
-    confirm({
+    defineConfirm({
       title: "Supprimer la famille",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
@@ -38,19 +38,21 @@ export default function FamilyDetails({
   return (
     <div className="p-4 space-y-4 text-sm">
       {/* IMAGE */}
-      <div className="no-pict w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
-        {hasImage ? (
-          <img
-            src={imageUrl!}
-            alt={family.name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex flex-col items-center gap-2 text-neutral-400">
-            <ImageOff className="w-8 h-8" />
-            <span>Aucune image</span>
-          </div>
-        )}
+      <div className="flex justify-center">
+        <div className="no-pict w-[80%] aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
+          {hasImage ? (
+            <img
+              src={imageUrl!}
+              alt={family.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-2 text-neutral-400">
+              <ImageOff className="w-8 h-8" />
+              <span>Aucune image</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* INFOS */}

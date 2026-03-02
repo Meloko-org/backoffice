@@ -85,3 +85,29 @@ export const getUserDashboard = async (
     }
   )
 }
+
+
+export const suspendUser = async (userId: string, reason: string) => {
+  return apiFetch(`${BASE_URL}/${userId}/suspend`, {
+    method: "PATCH",
+    body: JSON.stringify({ reason }),
+  });
+};
+
+export const unsuspendUser = async (userId: string) => {
+  return apiFetch(`${BASE_URL}/${userId}/reactivate`, {
+    method: "PATCH",
+  });
+};
+
+export const deleteUser = async (userId: string) => {
+  return apiFetch(`${BASE_URL}/${userId}`, {
+    method: "DELETE",
+  });
+};
+
+export const restoreUser = async (userId: string) => {
+  return apiFetch(`${BASE_URL}/${userId}/restore`, {
+    method: "PATCH",
+  });
+}

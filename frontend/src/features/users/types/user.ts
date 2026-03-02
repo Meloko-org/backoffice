@@ -95,13 +95,8 @@ export type UserDashboard = {
       totalTTC: number;
       isPaid: boolean;
       isWithdrawn: boolean;
+      paymentMethod: string;
     }[];
-
-    pagination: {
-      page: number;
-      limit: number;
-      total: number;
-      totalPages: number;
-    };
+    pagination: PaginationMeta;
   };
 };

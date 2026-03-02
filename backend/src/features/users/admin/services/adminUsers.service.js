@@ -284,7 +284,7 @@ async function restoreUser(userId) {
 }
 
 
-export async function getUserDashboard(
+async function getUserDashboard(
   userId,
   page = 1,
   limit = 10
@@ -360,6 +360,7 @@ export async function getUserDashboard(
               totalTTC: 1,
               isPaid: 1,
               isWithdrawn: 1,
+              paymentMethod: 1,
             },
           },
         ],
@@ -448,7 +449,7 @@ export async function getUserDashboard(
       pagination: {
         page,
         limit,
-        total: totalOrdersCount,
+        totalItems: totalOrdersCount, 
         totalPages: Math.ceil(totalOrdersCount / limit),
       },
     },

@@ -1,30 +1,33 @@
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { ConfirmContext } from "../contexts/ConfirmContext";
 
 
-export type ConfirmOptions = {
+export type ConfirmOptions<T = any> = {
   title: string;
   description?: string;
   confirmLabel?: string;
   cancelLabel?: string;
-  onConfirm: () => Promise<void> | void;
+  content?: (value: T, setValue: (v: T) => void) => React.ReactNode;
+  onConfirm: (value: T) => Promise<void>;
+  // content?: () => ReactNode;
+  // onConfirm: () => Promise<void>;
 };
 
 export function ConfirmProvider({ children }: { children: ReactNode }) {
   const [options, setOptions] = useState<ConfirmOptions | null>(null);
 
-  const confirm = (opts: ConfirmOptions) => {
+  function defineConfirm(opts: ConfirmOptions) {
     setOptions(opts);
-  };
+  }
 
-  const close = () => {
+  function close() {
     setOptions(null);
-  };
+  }
 
   return (
     <ConfirmContext.Provider
       value={{
-        confirm,
+        defineConfirm,
         close,
         options,
         isOpen: !!options,
