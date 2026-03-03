@@ -6,7 +6,7 @@ type ConfirmContextType = {
   defineConfirm: (options: ConfirmOptions) => void;
   close: () => void;
   options: ConfirmOptions | null;
-  isOpen: boolean;
+  isConfirmOpen: boolean;
 };
 
 export const ConfirmContext = createContext<ConfirmContextType | undefined>(undefined);

@@ -10,7 +10,7 @@ import { useConfirm } from "./contexts/ConfirmContext";
 function AdminLayoutContent() {
 
   const { isLeftOpen, isRightOpen } = useAdminLayout();
-  const { isOpen } = useConfirm();
+  const { isConfirmOpen } = useConfirm();
 
   // console.log("ADMIN_LAYOUT")
 
@@ -48,7 +48,7 @@ function AdminLayoutContent() {
       </div>
 
       {/* on rajoute un overlay sur tout l'écran pour empécher d'interagir quand confirmPanel est ouvert */}
-      {isOpen && (
+      {isConfirmOpen && (
         <div className="fixed inset-0 z-40 bg-black/50" />
       )}
 

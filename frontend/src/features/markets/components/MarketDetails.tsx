@@ -18,7 +18,7 @@ export default function FamilyDetails({
 
 	if (!market) return null;
 
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
   console.log("MARKETDETAILS :", market)
 
@@ -27,7 +27,7 @@ export default function FamilyDetails({
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
-    confirm({
+    defineConfirm({
       title: "Supprimer le point de vente",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

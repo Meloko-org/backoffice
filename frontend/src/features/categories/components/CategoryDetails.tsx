@@ -19,14 +19,14 @@ export default function CategoryDetails({
 
 	if (!category) return null;
 
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
 	const imageUrl = category.image; 
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
-    confirm({
+    defineConfirm({
       title: "Supprimer la catégorie",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

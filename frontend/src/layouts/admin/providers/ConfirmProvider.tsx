@@ -30,7 +30,7 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
         defineConfirm,
         close,
         options,
-        isOpen: !!options,
+        isConfirmOpen: !!options,
       }}
     >
       {children}

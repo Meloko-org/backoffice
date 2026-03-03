@@ -12,7 +12,7 @@ import { useConfirm } from "./contexts/ConfirmContext";
 export default function AdminSidebarRight() {
 
 	const { infoContext, setInfoContext } = useInfoLayout();
-	const { options, close, isOpen } = useConfirm();
+	const { options, close, isConfirmOpen } = useConfirm();
 	const { closeRight } = useAdminLayout();
 
 	let content = null;
@@ -64,7 +64,7 @@ export default function AdminSidebarRight() {
     <aside
       className={`
         fixed inset-y-0 right-0 w-120 
-				${isOpen ? "z-50" : "z-10"}
+				${isConfirmOpen ? "z-50" : "z-10"}
 				${!content ? "flex items-center" : ""}
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
@@ -73,7 +73,7 @@ export default function AdminSidebarRight() {
 				{/* Si un content est défini, on l'affiche */}
 				{content && (
 					<div className="h-[80%] overflow-y-auto">
-						<div className={isOpen ? "pointer-events-none opacity-50" : "" }>
+						<div className={isConfirmOpen ? "pointer-events-none opacity-50" : "" }>
 							<div className="text-center uppercase tracking-wide mt-3">
 								{infoContext && infoContext.title}
 							</div>

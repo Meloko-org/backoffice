@@ -18,14 +18,14 @@ export default function FamilyDetails({
 
 	if (!product) return null;
 
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
 	const imageUrl = product.image; 
   const hasImage = Boolean(imageUrl);
 
   const handleDelete = () => {
-    confirm({
+    defineConfirm({
       title: "Supprimer le produit",
       description: "Cette action est irréversible.",
       onConfirm: async () => {
