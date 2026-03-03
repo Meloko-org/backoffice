@@ -33,22 +33,22 @@ export const DataTableToolbar = ({
           placeholder="Rechercher..."
           value={search ?? ""}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-64 toolbar-elt"
+          className="toolbar-elt toolbar-search"
         />
       ) : (
         <div />
       )}
 
       <div className="flex gap-1">
-        <label htmlFor="selector" className="leading-3 text-sm text-right flex flex-col justify-center">
-          <span className="block">nombre</span>
-          <span className="block">par page</span>
+        <label htmlFor="selector" className="toolbar-label">
+          <span className="block">nbr/</span>
+          <span className="block">page</span>
         </label>
         <select
           id="selector"
           value={limit}
           onChange={(e) => onLimitChange?.(Number(e.target.value))}
-          className=" w-20 toolbar-elt"
+          className="toolbar-elt toolbar-nbr"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -57,7 +57,7 @@ export const DataTableToolbar = ({
         </select>
       </div>
 
-      <div className="grow flex justify-end ">
+      <div className="grow flex justify-end">
         <div className="">
           {filters && onFiltersChange && filtersConfig && (
             <DataFiltersBar

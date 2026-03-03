@@ -102,8 +102,6 @@ export default function UsersListPage() {
 
   useInfoContext(infoContext)
 
-
-
   useEffect(() => {
     if (selectedUser) {
       openRight();

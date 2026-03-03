@@ -857,16 +857,32 @@
     border-color: var(--color-primary);
   }
 
+  .toolbar-search {
+    @apply w-44;
+  }
+
+  .toolbar-nbr {
+    @apply w-16;
+  }
+
+  .toolbar-label {
+    @apply font-mono leading-2 my-1 mr-1 text-right flex flex-col justify-center;
+    color: var(--second-text);
+    font-size: 0.7rem;
+  }
+
     /* Data-filters */
   .data-filters-bar {
     @apply px-3 py-1 items-center rounded-md;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 1rem;
-    /* padding: 1rem; */
     background: var(--sidebar-bg);
     border: 1px solid var(--card-border);
-    /* border-radius: 0.75rem; */
+  }
+
+  .data-filter-container {
+    @apply flex flex-row gap-x-4;
   }
 
   .filter-bar-elt {
@@ -874,7 +890,7 @@
   }
 
   .filter-bar-title {
-    @apply text-xs uppercase;
+    @apply text-xs uppercase leading-2 mb-1;
     color: var(--p-label-color);
   }
 
@@ -887,9 +903,15 @@
     font-size: 0.875rem;
   }
 
+  .filter-item-label {
+    @apply font-mono leading-1 my-1 mr-1;
+    color: var(--second-text);
+    font-size: 0.7rem;
+  }
+
   .filter-item select,
   .filter-item input {
-    @apply px-3 py-2 rounded-md border bg-transparent outline-none;
+    @apply px-2 py-0 rounded-md border bg-transparent outline-none h-6;
     /* padding: 0.4rem 0.6rem;
     border-radius: 0.5rem;
     border: 1px solid var(--input-border);
@@ -909,7 +931,7 @@
 
   .btn-reset-filter {
     @apply inline-flex items-center p-1 border rounded-md
-           w-8 h-8 transition;
+           w-7 h-7 transition;
     background-color: var(--form-input-bg);
     border-color: var(--table-border);
     color: var(--btn-outline-text);

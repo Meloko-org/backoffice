@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Order = require("../../../../models/Order");
 const { ValidationError, NotFoundError } = require("../../../../utils/ApiError");
+const { buildDateRangeFilter } = require("../../../../helpers/dateHelpers");
 
 
 async function getOrders({
@@ -33,9 +34,18 @@ async function getOrders({
     filter.isPaid = filters.isPaid === "true";
   }
 
-  if (filters.status) {
-    filter["details.status"] = filters.status;
+  if (filters.isWithdrawn !== undefined) {
+    filter.isWithdrawn = filters.isWithdrawn === "true";
   }
+
+  if (filters.paidAtFrom || filters.paidAtTo) {
+    const paidAtFilter =  buildDateRangeFilter(filters, "paidAt")
+
+    filter.paidAt = paidAtFilter
+  }
+
+
+
 
   // 🔀 SORT
   const sort = {

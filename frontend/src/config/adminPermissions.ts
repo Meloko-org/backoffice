@@ -65,6 +65,7 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "markets:read",
     "markets:import",
     "orders:read",
+    "orders:manage",
     "support:read",
     "support:reply",
     "users:read",

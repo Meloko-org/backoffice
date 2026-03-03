@@ -11,6 +11,8 @@ const listOrders = async (req, res, next) => {
       ...filters
     } = req.query;
 
+    console.log(filters)
+
     const pageNumber = Math.max(1, Number(page) || 1);
     const limitNumber = Math.min(100, Math.max(1, Number(limit) || 20));
 
@@ -22,6 +24,8 @@ const listOrders = async (req, res, next) => {
       sortDirection,
       filters,
     });
+
+    console.log(JSON.stringify(result.items[0], null, 2))
 
     res.json({
       success: true,

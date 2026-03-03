@@ -1,6 +1,7 @@
 import CategoryDetails from "../../features/categories/components/CategoryDetails";
 import FamilyDetails from "../../features/families/components/FamilyDetails";
 import MarketDetails from "../../features/markets/components/MarketDetails";
+import OrderDetails from "../../features/orders/components/OrderDetails";
 import ProductDetails from "../../features/products/components/ProductDetails";
 import UserDetails from "../../features/users/components/UserDetails";
 import { ConfirmPanel } from "./components/ConfirmPanel";
@@ -57,6 +58,13 @@ export default function AdminSidebarRight() {
 									onEdit={infoContext.onEdit}
 								/>;
 			break;
+		case "order":
+			content = <OrderDetails 
+									order={infoContext.data} 
+									onDelete={infoContext.onDelete} 
+									onEdit={infoContext.onEdit}
+								/>;
+			break;
 	}
 
 		
@@ -72,7 +80,7 @@ export default function AdminSidebarRight() {
 
 				{/* Si un content est défini, on l'affiche */}
 				{content && (
-					<div className="h-[80%] overflow-y-auto">
+					<div className={`${infoContext?.type !== "order" ? "h-[80%] overflow-y-auto" : ""} `}>
 						<div className={isConfirmOpen ? "pointer-events-none opacity-50" : "" }>
 							<div className="text-center uppercase tracking-wide mt-3">
 								{infoContext && infoContext.title}

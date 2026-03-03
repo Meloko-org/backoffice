@@ -23,7 +23,7 @@ export type DateRangeFilterConfig = {
   label: string;
 };
 
-type BooleanFilter = {
+export type BooleanFilter = {
   type: "boolean";
   key: string;
   label: string;
@@ -65,10 +65,11 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
 
 
   return (
-    <div className="data-filters-bar ">
+    <div className="data-filters-bar">
 
-      <span className="filter-bar-title">FILTRES</span>
+      <p className="filter-bar-title">FILTRES</p>
 
+      <div className="data-filter-container">
       {showReset && hasActiveFilters && (
         <button
           type="button"
@@ -84,13 +85,13 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         if (filter.type === "select") {
           return (
             <div key={index}>
-              {/* <label>{filter.label}</label> */}
+              <label className="filter-item-label">{filter.label}</label>
               <select
                 value={filters[filter.key] || ""}
                 onChange={(e) =>
                   handleChange(filter.key, e.target.value)
                 }
-                className="toolbar-elt filter-bar-elt"
+                className="toolbar-elt"
               >
                 <option value="">{filter.label}</option>
                 {filter.options.map((opt) => (
@@ -123,7 +124,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
                     values.length ? values.join(",") : ""
                   );
                 }}
-                className="toolbar-elt filter-bar-elt"
+                className="toolbar-elt"
               >
                 {filter.options.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -139,7 +140,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         if (filter.type === "dateRange") {
           return (
             <div key={index} className="filter-item">
-              <label>{filter.label}</label>
+              <label className="filter-item-label">{filter.label}</label>
               <div className="date-range">
                 <input
                   type="date"
@@ -166,14 +167,14 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         
         if (filter.type === "boolean") {
           return (
-            <div key={index} >
-              {/* <label>{filter.label}</label> */}
+            <div key={index} className="filter-item">
+              <label className="filter-item-label">{filter.label}</label>
               <select
                 value={filters[filter.key] || ""}
                 onChange={(e) =>
                   handleChange(filter.key, e.target.value)
                 }
-                className="toolbar-elt filter-bar-elt"
+                className="toolbar-elt"
               >
                 <option value="">{filter.label}</option>
                 <option value={"true"}>Oui</option>
@@ -186,6 +187,8 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
 
         return null;
       })}
+      </div>
+
     </div>
   );
 }
