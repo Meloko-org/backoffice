@@ -24,7 +24,7 @@ export default function UsersListPage() {
   useAdminPage("Liste des utilisateurs");
 
   const { openRight, closeRight } = useAdminLayout();
-  const { confirm } = useConfirm();
+  const { defineConfirm } = useConfirm();
 
 
   const {
@@ -126,7 +126,7 @@ export default function UsersListPage() {
   const handleDeleteUser = (user: User) => {
     setSelectedUser(user)
     openRight();
-    confirm({
+    defineConfirm({
       title: "Supprimer le user",
       description: "Cette action est irréversible.",
       onConfirm: async () => {

@@ -19,7 +19,7 @@ export default function MarketsListPage() {
 
   useAdminPage("Liste des points de vente");
 
-  const { openRight, closeRight, isRightOpen } = useAdminLayout();
+  const { openRight, closeRight } = useAdminLayout();
   const { defineConfirm } = useConfirm();
 
   

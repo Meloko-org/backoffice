@@ -1,5 +1,3 @@
-// UserHeaderSection.tsx
-
 import { ImageOff } from "lucide-react";
 import type { UserDashboard } from "../types/user";
 import { useSuspendUser } from "../../../hooks/useSuspendUser";
@@ -7,8 +5,6 @@ import { useDeleteUser } from "../../../hooks/useDeleteUser";
 import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import FloatingSelect from "../../../core/forms/components/floatingSelect";
-import { useEffect, useState } from "react";
-import { suspendUser } from "../api/users.api";
 
 
 type Props = {
@@ -23,9 +19,8 @@ export default function UserHeaderSection({ user }: Props) {
   const { suspend, unsuspend, isLoading } =
     useSuspendUser(user.id);
 
-  const deleteMutation = useDeleteUser(user.id);
+  const { del, restore } = useDeleteUser(user.id);
 
-  // const [reason, setReason] = useState("");
 
 
 
@@ -55,15 +50,9 @@ export default function UserHeaderSection({ user }: Props) {
         }
 
         await suspend(reason); // React Query mutation
-
-        // setReason("");
       },
     });
   }
-
-  // useEffect(() => {
-  //   console.log("reason:", reason);
-  // }, [reason]);
 
   const handleUnsuspend = () => {
     if (!isRightOpen) openRight();
@@ -78,11 +67,27 @@ export default function UserHeaderSection({ user }: Props) {
   }
 
   const handleDelete = () => {
-
+    if (!isRightOpen) openRight();
+    defineConfirm({
+      title: "Supprimer l'utilisateur",
+      confirmLabel: "Supprimer",
+      description: "Un utilisateur supprimé peut être restauré.",
+      onConfirm: async () => {
+        await del(); // React Query mutation
+      },
+    });
   }
 
   const handleRestore = () => {
-
+    if (!isRightOpen) openRight();
+    defineConfirm({
+      title: "Restaurer l'utilisateur",
+      confirmLabel: "Restaurer",
+      description: "Restauration d'un utilisateur supprimé.",
+      onConfirm: async () => {
+        await restore(); // React Query mutation
+      },
+    });
   }
 
 
@@ -121,7 +126,7 @@ export default function UserHeaderSection({ user }: Props) {
             {user.roles.map((role) => (
               <span
                 key={role.id}
-                className="px-2 py-1 rounded-full text-xs bg-neutral-200 dark:bg-neutral-700"
+                className="detail-info slug px-2 py-1 rounded-full text-xs"
               >
                 {role.name}
               </span>
@@ -154,22 +159,25 @@ export default function UserHeaderSection({ user }: Props) {
 
       {/* Actions */}
       <div className="flex flex-col gap-3">
-        {!user.isSuspended ? (
-          <button 
-            className="btn-outline-primary"
-            onClick={handleSuspend}
-            disabled={isLoading}
-          >
-            Suspendre
-          </button>
-        ) : (
-          <button 
-            className="btn-primary"
-            onClick={handleUnsuspend}
-            disabled={isLoading}
-          >
-            Réactiver
-          </button>
+
+        {!user.isDeleted && (
+          !user.isSuspended ? (
+            <button 
+              className="btn-outline-primary"
+              onClick={handleSuspend}
+              disabled={isLoading}
+            >
+              Suspendre
+            </button>
+          ) : (
+            <button 
+              className="btn-primary"
+              onClick={handleUnsuspend}
+              disabled={isLoading}
+            >
+              Réactiver
+            </button>
+          )
         )}
 
         {!user.isDeleted ? (
@@ -189,6 +197,7 @@ export default function UserHeaderSection({ user }: Props) {
             Restaurer
           </button>
         )}
+
       </div>
     </div>
   );

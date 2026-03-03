@@ -8,7 +8,7 @@ export const useDeleteUser = (userId: string) => {
     mutationFn: () => deleteUser(userId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["userDashboard", userId],
+        queryKey: ["user-dashboard", userId],
       });
 
       queryClient.invalidateQueries({
@@ -21,7 +21,7 @@ export const useDeleteUser = (userId: string) => {
     mutationFn: () => restoreUser(userId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["userDashboard", userId],
+        queryKey: ["user-dashboard", userId],
       });
 
       queryClient.invalidateQueries({
@@ -31,8 +31,8 @@ export const useDeleteUser = (userId: string) => {
   })
 
   return {
-    delete: deleteMutation.mutate,
-    restore: restoreMutation.mutate,
+    del: deleteMutation.mutateAsync,
+    restore: restoreMutation.mutateAsync,
     isLoading: deleteMutation.isPending || restoreMutation.isPending,
   }
 
@@ -40,16 +40,3 @@ export const useDeleteUser = (userId: string) => {
 };
 
 
-
-// return useMutation({
-//     mutationFn: () => deleteUser(userId),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({
-//         queryKey: ["userDashboard", userId],
-//       });
-
-//       queryClient.invalidateQueries({
-//         queryKey: ["adminUsers"],
-//       });
-//     },
-//   });

@@ -17,13 +17,11 @@ export function ConfirmPanel() {
   if (!options) return null;
 
 
-
   const handleConfirm = async () => {
     try {
       setLoading(true);
 
       await options.onConfirm(value); // logique métier exécutée ici
-      // await options.onConfirm();
 
       setLoading(false)
       setSuccess(true);
@@ -34,7 +32,7 @@ export function ConfirmPanel() {
         setInfoContext(null); // si besoin
         setSuccess(false);
         setValue(null);
-      }, 2000);
+      }, 1200);
 
     } catch (e) {
       setLoading(false);
@@ -62,10 +60,8 @@ export function ConfirmPanel() {
       {options.content && (
         <div className="mt-4">
           {options.content(value, setValue)}
-          {/* {options.content()} */}
         </div>
       )} 
-
 
 
       <div className="mt-6 flex justify-end gap-3">
@@ -77,8 +73,6 @@ export function ConfirmPanel() {
         >
           {options.cancelLabel ?? "Annuler"}
         </button>
-
-        
 
         <AnimatedButton 
           variant="danger" 
