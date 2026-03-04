@@ -84,7 +84,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
 
         if (filter.type === "select") {
           return (
-            <div key={index}>
+            <div key={index} className="filter-item">
               <label className="filter-item-label">{filter.label}</label>
               <select
                 value={filters[filter.key] || ""}
@@ -110,7 +110,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
             : [];
 
           return (
-            <div key={index}>
+            <div key={index} className="filter-item">
               <select
                 multiple
                 value={selectedValues}

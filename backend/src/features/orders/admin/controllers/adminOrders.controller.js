@@ -1,4 +1,4 @@
-const { getOrders } = require("../services/adminOrders.service");
+const { getOrders, getOrderById } = require("../services/adminOrders.service");
 
 const listOrders = async (req, res, next) => {
   try {

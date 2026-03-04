@@ -19,10 +19,11 @@ async function getOrders({
 
   // 🔎 SEARCH (orderNumber)
   if (search) {
-    filter.orderNumber = {
-      $regex: search,
-      $options: "i",
-    };
+    filter.$or = [
+      { orderNumber: { $regex: search, $options: "i", }},
+      { firstname: { $regex: search, $options: "i", }},
+      { lastname: { $regex: search, $options: "i", }}
+    ];
   }
 
   // 🎛 FILTERS
