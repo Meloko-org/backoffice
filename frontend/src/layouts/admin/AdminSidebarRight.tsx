@@ -23,6 +23,15 @@ export default function AdminSidebarRight() {
 		content = null;
 	}
 
+	const fullPanel = [
+		"order",
+		"orderProduct",
+	]
+
+	const isFullPanel = infoContext?.type && (
+		fullPanel.includes(infoContext?.type)
+	) 
+
 	switch (infoContext?.type) {
 		case "category":
 			content = <CategoryDetails 
@@ -68,7 +77,7 @@ export default function AdminSidebarRight() {
 			break;
 		case "orderProduct":
 			content = <OrderProductDetails 
-									product={infoContext.data} 
+									line={infoContext.data} 
 									// onDelete={infoContext.onDelete} 
 									// onEdit={infoContext.onEdit}
 								/>;
@@ -88,7 +97,7 @@ export default function AdminSidebarRight() {
 
 				{/* Si un content est défini, on l'affiche */}
 				{content && (
-					<div className={`${infoContext?.type !== "order" ? "h-[80%] overflow-y-auto" : ""} `}>
+					<div className={`${!isFullPanel ? "h-[80%] overflow-y-auto" : ""} `}>
 						<div className={isConfirmOpen ? "pointer-events-none opacity-50" : "" }>
 							<div className="text-center uppercase tracking-wide mt-3">
 								{infoContext && infoContext.title}

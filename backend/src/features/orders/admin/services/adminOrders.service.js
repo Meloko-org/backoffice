@@ -117,7 +117,15 @@ async function getOrderById(orderId) {
 
     .populate({
       path: "details.products.product",
-      select: "product productCustomName image",
+      select: `
+        product 
+        productCustomName 
+        image 
+        price
+        weightPerUnit
+        origin
+        format
+        portion`,
       populate: {
         path: "product",
         select: "name family",
@@ -171,11 +179,11 @@ async function getOrderById(orderId) {
   //     select: `
   //       product
   //       productCustomName
-  //       price
-  //       weightPerUnit
-  //       origin
-  //       format
-  //       portion
+        // price
+        // weightPerUnit
+        // origin
+        // format
+        // portion
   //       image
   //     `,
   //     populate: {

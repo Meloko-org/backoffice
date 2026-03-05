@@ -519,6 +519,14 @@
 
 @layer components {
 
+  .right-panel-compact {
+    @apply p-4 space-y-3 text-sm;
+  }
+
+  .right-panel-compact-row {
+    @apply flex flex-row justify-between px-4;
+  }
+
 
 
 
