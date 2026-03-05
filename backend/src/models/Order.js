@@ -111,7 +111,7 @@ const orderDetailSchema = mongoose.Schema({
   creditNotes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "creditnotes",
+      ref: "CreditNote",
       default: null,
     },
   ],
@@ -226,7 +226,6 @@ const orderSchema = mongoose.Schema(
     orderNumber: {
       type: String,
       required: true,
-      unique: true,
     },
   },
   { timestamps: true },

@@ -1,0 +1,1647 @@
+[{
+  "_id": {
+    "$oid": "66b33ca706dea0769ef48aae"
+  },
+  "product": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "shop": {
+    "$oid": "66b339729a76167d3a93df3b"
+  },
+  "price": 500,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T10:29:21.783Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 5000
+},
+{
+  "_id": {
+    "$oid": "66b35fb04fe43d77dbcfd386"
+  },
+  "product": {
+    "$oid": "66b35f7d4fe43d77dbcfd383"
+  },
+  "shop": {
+    "$oid": "66b339729a76167d3a93df3b"
+  },
+  "price": 840,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T10:29:21.784Z"
+  },
+  "__v": 1,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 12000
+},
+{
+  "_id": {
+    "$oid": "66b360204fe43d77dbcfd38a"
+  },
+  "product": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "shop": {
+    "$oid": "66b346534fe43d77dbcfd376"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66bca7b0a8a97a2f43e737e2"
+  },
+  "product": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "shop": {
+    "$oid": "66b339729a76167d3a93df3b"
+  },
+  "price": 399,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T10:29:21.784Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 15000
+},
+{
+  "_id": {
+    "$oid": "66bdf664675aec53cb530728"
+  },
+  "product": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "shop": {
+    "$oid": "66bca4f4a8a97a2f43e737cf"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0857da92d57bdba1bcb8"
+  },
+  "product": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66be076cda92d57bdba1bcb6"
+    },
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-09T09:26:08.646Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 50000
+},
+{
+  "_id": {
+    "$oid": "66be08c6da92d57bdba1bcb9"
+  },
+  "product": {
+    "$oid": "66bdf8c9da92d57bdba1bca6"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "price": 400,
+  "tags": [
+    {
+      "$oid": "66be076cda92d57bdba1bcb6"
+    },
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-09T09:26:08.761Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6000
+},
+{
+  "_id": {
+    "$oid": "66be08f8da92d57bdba1bcba"
+  },
+  "product": {
+    "$oid": "66bdf94855397b94429d410f"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "price": 600,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 50000
+},
+{
+  "_id": {
+    "$oid": "66be0929da92d57bdba1bcbb"
+  },
+  "product": {
+    "$oid": "66bdfbcbda92d57bdba1bcad"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "price": 200,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be096dda92d57bdba1bcbc"
+  },
+  "product": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "price": 600,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 25000
+},
+{
+  "_id": {
+    "$oid": "66be0989da92d57bdba1bcbd"
+  },
+  "product": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "shop": {
+    "$oid": "66be005ada92d57bdba1bcb1"
+  },
+  "price": 600,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 20000
+},
+{
+  "_id": {
+    "$oid": "66be099dda92d57bdba1bcbe"
+  },
+  "product": {
+    "$oid": "66bdfd67da92d57bdba1bcaf"
+  },
+  "shop": {
+    "$oid": "66be005ada92d57bdba1bcb1"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be09bada92d57bdba1bcbf"
+  },
+  "product": {
+    "$oid": "66bdfc6355397b94429d411b"
+  },
+  "shop": {
+    "$oid": "66be005ada92d57bdba1bcb1"
+  },
+  "price": 250,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be09efda92d57bdba1bcc0"
+  },
+  "product": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "shop": {
+    "$oid": "66be005ada92d57bdba1bcb1"
+  },
+  "price": 190,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 80000
+},
+{
+  "_id": {
+    "$oid": "66be0a12da92d57bdba1bcc1"
+  },
+  "product": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 190,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 98000
+},
+{
+  "_id": {
+    "$oid": "66be0a41da92d57bdba1bcc2"
+  },
+  "product": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0a8ada92d57bdba1bcc3"
+  },
+  "product": {
+    "$oid": "66bdf94855397b94429d410f"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 199,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 50000
+},
+{
+  "_id": {
+    "$oid": "66be0ab0da92d57bdba1bcc4"
+  },
+  "product": {
+    "$oid": "66bdfa2655397b94429d4113"
+  },
+  "shop": {
+    "$oid": "66b339729a76167d3a93df3b"
+  },
+  "price": 199,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T10:29:21.784Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 8000
+},
+{
+  "_id": {
+    "$oid": "66be0ad5da92d57bdba1bcc5"
+  },
+  "product": {
+    "$oid": "66bdfa2ada92d57bdba1bca8"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 499,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6000
+},
+{
+  "_id": {
+    "$oid": "66be0aeada92d57bdba1bcc6"
+  },
+  "product": {
+    "$oid": "66bdfb5655397b94429d4117"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 399,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 30000
+},
+{
+  "_id": {
+    "$oid": "66be0b12da92d57bdba1bcc7"
+  },
+  "product": {
+    "$oid": "66bdf997da92d57bdba1bca7"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 500,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 30000
+},
+{
+  "_id": {
+    "$oid": "66be0b69da92d57bdba1bcc8"
+  },
+  "product": {
+    "$oid": "66bdfbc910aced107bf0aaeb"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 299,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 30000
+},
+{
+  "_id": {
+    "$oid": "66be0b90da92d57bdba1bcc9"
+  },
+  "product": {
+    "$oid": "66bdfc2255397b94429d4119"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 299,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 30000
+},
+{
+  "_id": {
+    "$oid": "66be0b9eda92d57bdba1bcca"
+  },
+  "product": {
+    "$oid": "66bdfd67da92d57bdba1bcaf"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 399,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 20000
+},
+{
+  "_id": {
+    "$oid": "66be0bb2da92d57bdba1bccb"
+  },
+  "product": {
+    "$oid": "66bdfe5655397b94429d4121"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 199,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 40000
+},
+{
+  "_id": {
+    "$oid": "66be0bddda92d57bdba1bccc"
+  },
+  "product": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 500,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 24000
+},
+{
+  "_id": {
+    "$oid": "66be0c1ada92d57bdba1bccd"
+  },
+  "product": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 12000
+},
+{
+  "_id": {
+    "$oid": "66be0c59da92d57bdba1bccf"
+  },
+  "product": {
+    "$oid": "66bdf8c9da92d57bdba1bca6"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 300,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 20000
+},
+{
+  "_id": {
+    "$oid": "66be0c8cda92d57bdba1bcd0"
+  },
+  "product": {
+    "$oid": "66bdf94855397b94429d410f"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 200,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0ca0da92d57bdba1bcd1"
+  },
+  "product": {
+    "$oid": "66bdf997da92d57bdba1bca7"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 200,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0cb0da92d57bdba1bcd2"
+  },
+  "product": {
+    "$oid": "66bdfa2ada92d57bdba1bca8"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 400,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 23000
+},
+{
+  "_id": {
+    "$oid": "66be0cc2da92d57bdba1bcd3"
+  },
+  "product": {
+    "$oid": "66bdfb5655397b94429d4117"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 200,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 40000
+},
+{
+  "_id": {
+    "$oid": "66be0ce7da92d57bdba1bcd4"
+  },
+  "product": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 199,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0dc6da92d57bdba1bcd5"
+  },
+  "product": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "shop": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "price": 299,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0f0eda92d57bdba1bcd6"
+  },
+  "product": {
+    "$oid": "66bdf8c9da92d57bdba1bca6"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 299,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "66be0f44da92d57bdba1bcd7"
+  },
+  "product": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "shop": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "price": 599,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-07T09:21:43.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:22:31.863Z"
+  },
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 10000
+},
+{
+  "_id": {
+    "$oid": "672deb9ed0594f2eb6edfbc4"
+  },
+  "product": {
+    "$oid": "66bdfdd255397b94429d411f"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 30000,
+  "tags": [
+    {
+      "$oid": "66be076cda92d57bdba1bcb6"
+    },
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    },
+    {
+      "$oid": "67f520b56319194f6fe01ede"
+    },
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-08T10:44:46.857Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-15T10:45:07.613Z"
+  },
+  "__v": 0,
+  "description": "",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 2000
+},
+{
+  "_id": {
+    "$oid": "672e06cae265b5f20a6f739b"
+  },
+  "product": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 1000,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-11-08T12:40:42.791Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-10T13:43:58.076Z"
+  },
+  "__v": 0,
+  "isDeleted": true,
+  "stockReserved": 0,
+  "stockTotal": 11000
+},
+{
+  "_id": {
+    "$oid": "672e0888e265b5f20a6f73e1"
+  },
+  "product": {
+    "$oid": "66bdfb5655397b94429d4117"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 800,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-11-08T12:48:08.044Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T14:47:01.628Z"
+  },
+  "__v": 0,
+  "description": "La pomme de terre ou patate est un tubercule comestible produit par l’espèce Solanum tuberosum, appartenant à la famille des solanacées. Le terme désigne également la plante elle-même, plante herbacée, vivace par ses tubercules mais toujours cultivée comme une culture annuelle.",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 300
+},
+{
+  "_id": {
+    "$oid": "672e3a705b7e3dce3dabcac7"
+  },
+  "product": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 1100,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-11-08T16:21:04.625Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T07:39:01.673Z"
+  },
+  "__v": 0,
+  "description": "",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 0
+},
+{
+  "_id": {
+    "$oid": "6735c3c377941a120fc7564a"
+  },
+  "product": {
+    "$oid": "66bdfbc910aced107bf0aaeb"
+  },
+  "shop": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "price": 0,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-11-14T09:32:51.074Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-14T09:32:51.074Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 0
+},
+{
+  "_id": {
+    "$oid": "675c4f9a4f6b9c7f25e32c32"
+  },
+  "product": {
+    "$oid": "66bdf9a255397b94429d4111"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 300,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-12-13T15:15:38.823Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:31.098Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 988
+},
+{
+  "_id": {
+    "$oid": "675c4f9a4f6b9c7f25e32c36"
+  },
+  "product": {
+    "$oid": "66bdf8c9da92d57bdba1bca6"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 500,
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    },
+    {
+      "$oid": "67f520b56319194f6fe01ede"
+    },
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    },
+    {
+      "$oid": "67fa9b23ed685c696e951909"
+    },
+    {
+      "$oid": "66be076cda92d57bdba1bcb6"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-13T15:15:38.823Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T14:45:34.227Z"
+  },
+  "__v": 0,
+  "description": "La Gala est une pomme rouge issue du croisement entre la Kidd's Orange Red et la Golden Delicious. La variété a été créée en Nouvelle-Zélande dans les années 1930 par le pépiniériste J.H. Kidd.",
+  "isDeleted": false,
+  "stockReserved": 200,
+  "stockTotal": 900
+},
+{
+  "_id": {
+    "$oid": "675c4f9a4f6b9c7f25e32c35"
+  },
+  "product": {
+    "$oid": "66be02ea55397b94429d412f"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 500,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-12-13T15:15:38.823Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:57.334Z"
+  },
+  "__v": 0,
+  "description": "",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 2400
+},
+{
+  "_id": {
+    "$oid": "675c4f9a4f6b9c7f25e32c34"
+  },
+  "product": {
+    "$oid": "66bdfbcbda92d57bdba1bcad"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 250,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-12-13T15:15:38.823Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:31.334Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 2400,
+  "description": ""
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b159f"
+  },
+  "product": {
+    "$oid": "66bdfdd255397b94429d411f"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 250,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 5000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a0"
+  },
+  "product": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 360,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 5000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a1"
+  },
+  "product": {
+    "$oid": "66be033c10aced107bf0aaf8"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 440,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 4000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a2"
+  },
+  "product": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 350,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a3"
+  },
+  "product": {
+    "$oid": "66bdfbcbda92d57bdba1bcad"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 290,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a6"
+  },
+  "product": {
+    "$oid": "66bdf9a255397b94429d4111"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 95,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 5000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a4"
+  },
+  "product": {
+    "$oid": "66bdfb5655397b94429d4117"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 125,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 8000
+},
+{
+  "_id": {
+    "$oid": "67ac86e65e87ccec0f0b15a5"
+  },
+  "product": {
+    "$oid": "66bdfc6355397b94429d411b"
+  },
+  "shop": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "price": 220,
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-02-12T11:32:54.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T11:36:49.266Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 7000
+},
+{
+  "_id": {
+    "$oid": "67f7c00ce99ab99b905cfd11"
+  },
+  "product": {
+    "$oid": "67f67387b6b1927c29061f6c"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 1500,
+  "tags": [],
+  "createdAt": {
+    "$date": "2024-11-08T12:48:08.044Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:57.990Z"
+  },
+  "productCustomName": "Côte de boeuf du limousin",
+  "weightPerUnit": "200 gr",
+  "origin": "Limousin",
+  "format": "sous vide",
+  "portion": "1 personne",
+  "bestBeforeDate": "4 jours minimum",
+  "description": "Une belle côte de boeuf limousine",
+  "__v": 0,
+  "pricePerKilo": 75,
+  "image": "file:///data/user/0/com.jisdev.frontend/files/productImages/1768475045049-1484.jpeg",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 2
+},
+{
+  "_id": {
+    "$oid": "6801676349d5524a47c539a5"
+  },
+  "product": {
+    "$oid": "66bdfedb10aced107bf0aaf1"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 1300,
+  "description": "Des oranges juteuses qui ont poussé sous le soleil corse.",
+  "tags": [
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    },
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-17T20:41:07.537Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T22:54:57.501Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 1300
+},
+{
+  "_id": {
+    "$oid": "6808915cd8e5a7a1acd2acf0"
+  },
+  "product": {
+    "$oid": "680009d4f410fb83b4b349bc"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "productCustomName": "Travers de porc breton",
+  "price": 1800,
+  "pricePerKilo": 9000,
+  "weightPerUnit": "500gr",
+  "origin": "Bretagne",
+  "format": "Sous vide",
+  "portion": "2 à 3 personnes",
+  "bestBeforeDate": "5 jours minimum",
+  "description": "",
+  "tags": [],
+  "createdAt": {
+    "$date": "2025-04-23T07:06:04.245Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T20:35:05.819Z"
+  },
+  "__v": 0,
+  "image": "file:///data/user/0/host.exp.exponent/files/productImages/1745440498399-149.jpeg",
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 9
+},
+{
+  "_id": {
+    "$oid": "6809de7ab19b50fff4742949"
+  },
+  "product": {
+    "$oid": "67f673bfb6b1927c29061f6d"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "productCustomName": "Entrecôte du limousin",
+  "price": 1300,
+  "pricePerKilo": 6500,
+  "weightPerUnit": "200gr",
+  "origin": "Limousin",
+  "format": "Sous vide",
+  "portion": "1 personne",
+  "bestBeforeDate": "4 jours minimum",
+  "description": "Superbe entrecôte savoureuse du lumousin. \n\nL'entrecôte de boeuf est une coupe prisée provenant de la côte de l'animal, située entre les côtes et le faux filet. Elle est réputée pour sa tendrete et son persillade, qui apportent une texture juteuses et une saveur riche.",
+  "image": "file:///data/user/0/host.exp.exponent/files/productImages/1749550564901-3354.jpeg",
+  "tags": [
+    {
+      "$oid": "67fa9baaed685c696e95190b"
+    },
+    {
+      "$oid": "66b21b6ecca1a8b2836ae009"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-24T06:47:22.978Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-14T16:54:56.583Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 8
+},
+{
+  "_id": {
+    "$oid": "6809eaa4cf35e4cf216e58a8"
+  },
+  "product": {
+    "$oid": "68000ad0f410fb83b4b349bf"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "productCustomName": "Faux filet du limousin",
+  "price": 1100,
+  "pricePerKilo": 7000,
+  "weightPerUnit": "150gr",
+  "origin": "Limousin",
+  "format": "Sous vide",
+  "portion": "1 personne",
+  "bestBeforeDate": "4 jours minimum",
+  "description": "Juteux faux filet du limousin",
+  "image": "file:///data/user/0/host.exp.exponent/files/productImages/1749550746776-7212.jpeg",
+  "tags": [
+    {
+      "$oid": "67fa9baaed685c696e95190b"
+    },
+    {
+      "$oid": "67f520b56319194f6fe01ede"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-24T07:39:16.761Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-10T10:19:11.950Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6
+},
+{
+  "_id": {
+    "$oid": "6809ec7acf35e4cf216e5a0e"
+  },
+  "product": {
+    "$oid": "66be033c10aced107bf0aaf8"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 600,
+  "description": "",
+  "tags": [
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-24T07:47:06.323Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-16T16:58:54.948Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 2500
+},
+{
+  "_id": {
+    "$oid": "6809f35ecf35e4cf216e600b"
+  },
+  "product": {
+    "$oid": "66b35f7d4fe43d77dbcfd383"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "price": 300,
+  "description": "",
+  "tags": [
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-24T08:16:30.168Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-16T16:55:57.021Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 4000
+},
+{
+  "_id": {
+    "$oid": "6809f429cf35e4cf216e607d"
+  },
+  "product": {
+    "$oid": "68000a72f410fb83b4b349be"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "productCustomName": "Joue de boeuf du limousin",
+  "price": 2100,
+  "pricePerKilo": 4200,
+  "weightPerUnit": "500gr",
+  "origin": "Limousin",
+  "format": "Sous vide",
+  "portion": "2 à 3 personnes",
+  "bestBeforeDate": "5 jours minimum",
+  "description": "Joue de boeuf du limousin",
+  "image": "file:///data/user/0/host.exp.exponent/files/productImages/1749550595558-6875.jpeg",
+  "tags": [
+    {
+      "$oid": "67fa9baaed685c696e95190b"
+    },
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-04-24T08:19:53.536Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-10T10:16:39.826Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 6
+},
+{
+  "_id": {
+    "$oid": "68da4eea4000d624d2438a5e"
+  },
+  "product": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "shop": {
+    "$oid": "68da4e734000d624d24389ef"
+  },
+  "price": 358,
+  "description": "",
+  "tags": [
+    {
+      "$oid": "66be07c9da92d57bdba1bcb7"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-09-29T09:18:34.020Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-29T09:18:34.020Z"
+  },
+  "__v": 0,
+  "isDeleted": false,
+  "stockReserved": 0,
+  "stockTotal": 5000
+}]

@@ -1,5 +1,4 @@
 const Role = require("../../../models/Role");
-const { get } = require("../routes/roles.route");
 
 
 async function getRoleNames() {

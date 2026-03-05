@@ -6,4 +6,9 @@ export const queryKeys = {
     page,
     limit,
   ],
+
+  orderDetail: (id: string) => [
+    "order-detail",
+    id,
+  ],
 };

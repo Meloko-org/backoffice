@@ -32,6 +32,9 @@
   --color-warning: #D16014;     /* rgb(209, 96, 20) */
   --color-success: #0081A7;     /* rgb(0, 129, 167) */
 
+  --container-8xl: 88rem;
+  --container-9xl: 96rem;
+
 }
 
 /* =========================
@@ -654,6 +657,16 @@
     color: var(--bloc-sub-text);
   }
 
+
+  /* bloc order */
+  .order-bloc {
+    @apply space-y-6;
+  }
+
+  .order-bloc p {
+    color: var(--fisrt-text);
+  }
+
   /* stats dans ImportSummary */
   .stat {
     @apply rounded-lg border p-4 text-center;
@@ -714,6 +727,18 @@
     @apply rounded-full px-2 py-0.5 text-xs font-semibold;
     background-color: var(--badge-danger-bg);
     color: var(--badge-danger-text);
+  }
+
+  .confirmed-badge {
+    @apply w-20 rounded-full px-2 py-0.5 text-xs font-mono font-semibold;
+    background-color: var(--color-success);
+    color: white;
+  }
+
+  .cancelled-badge {
+    @apply w-20 rounded-full px-2 py-0.5 text-xs font-mono font-semibold;
+    background-color: var(--color-danger);
+    color: white;
   }
 
   /* warning */

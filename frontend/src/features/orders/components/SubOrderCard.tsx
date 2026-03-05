@@ -1,0 +1,52 @@
+import { ProductsTable } from "./ProductsTable";
+import { InvoiceSection } from "./InvoiceSection";
+import type { SubOrderDetail } from "../types/order";
+import { Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { CreditNoteSection } from "./CreditNoteSection";
+
+interface Props {
+  subOrder: SubOrderDetail;
+}
+
+export function SubOrderCard({ subOrder }: Props) {
+
+  const navigate = useNavigate();
+
+  console.log("suborderproducts :", subOrder)
+
+  return (
+    <div className="">
+      <div className="flex flex-row items-center">
+        <h1 className="">
+          Boutique : 
+        </h1>
+        <span className="text-2xl font-semibold mb-4 ml-5">{subOrder.shop.name}</span>
+        <button 
+          className="btn-outline-primary mb-4 ml-4"
+          onClick={() => navigate(`/admin/shops/${subOrder.shop._id}`)}
+        >
+          <Eye />
+        </button>
+      </div>
+      
+
+      <p className="text-sm mb-2">
+        Mode retrait : {subOrder.withdrawMode}
+        {subOrder.withdrawMarket && ` - ${subOrder.withdrawMarket}`}
+      </p>
+
+      <ProductsTable products={subOrder.products} />
+
+      {subOrder.invoice && (
+        <InvoiceSection invoice={subOrder.invoice} />
+      )}
+
+      {subOrder.creditNotes.map((c) => (
+          <CreditNoteSection key={c._id} creditNote={c} />
+        ))
+      }
+
+    </div>
+  );
+}

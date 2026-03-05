@@ -42,6 +42,8 @@ export default function AdminProductsPage() {
     refetch,
   } = useAdminList(getProductsList, { syncWithUrl: true });
 
+  console.log(items)
+
 
   /* filtres destinés à DataFiltersBar */
 

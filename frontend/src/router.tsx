@@ -25,6 +25,7 @@ import EditMarketPage from "./features/markets/pages/EditMarketPage";
 import UsersListPage from "./features/users/pages/UsersListPage";
 import UserPage from "./features/users/pages/UserPage";
 import OrdersListPage from "./features/orders/pages/OrdersListPage";
+import { OrderPage } from "./features/orders/pages/OrderPage";
 
 
 
@@ -173,6 +174,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRouteGuard permission="orders:manage">
             <OrdersListPage />
+          </AdminRouteGuard>
+        )
+      },
+      { 
+        path: "orders/:id", 
+        element: (
+          <AdminRouteGuard permission="orders:manage">
+            <OrderPage />
           </AdminRouteGuard>
         )
       },

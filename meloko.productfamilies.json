@@ -1,0 +1,391 @@
+[{
+  "_id": {
+    "$oid": "66b331c48756ffef5197e3a1"
+  },
+  "name": "Pomme",
+  "description": "Des pommes.",
+  "image": "https://montougo.ca/wp-content/uploads/2020/09/completement-pomme-de-l-entree-au-dessert.jpg",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.263Z"
+  },
+  "__v": 1,
+  "tagCategories": [
+    {
+      "$oid": "67f94637d596f6b20247c568"
+    },
+    {
+      "$oid": "67f94a16d596f6b20247c56a"
+    }
+  ],
+  "productsTypes": [
+    "bulk"
+  ]
+},
+{
+  "_id": {
+    "$oid": "66b35f1a4fe43d77dbcfd37e"
+  },
+  "name": "Banane",
+  "description": "Des bananes.",
+  "image": "https://www.aldi.lu/content/aldi/luxembourg/promotions/source-localenhancement/2019/2019-01/2019-01-02/vast_assortiment/8272/1/0/_jcr_content/assets/imported-images/BILD_INTERNET15/8272_bananen_01.png/_jcr_content/renditions/opt.1250w.png.res/1681477605479/opt.1250w.png",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.329Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bca72fa8a97a2f43e737da"
+  },
+  "name": "Tomate",
+  "description": "Des tomates.",
+  "image": "https://www.alimentarium.org/sites/default/files/media/image/2016-10/AL001-02%20tomate_0.jpg",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.391Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdf7d555397b94429d410b"
+  },
+  "name": "Salade",
+  "description": "Des salades.",
+  "image": "https://www.academiedugout.fr/images/16397/370-274/ffffff/salade-laitue.jpg?poix=50&poiy=50",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.454Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdf84e10aced107bf0aae4"
+  },
+  "name": "Radis",
+  "description": "Des radis.",
+  "image": "https://www.academiedugout.fr/images/16377/1200-auto/radis-rose-copy.jpg?poix=50&poiy=50",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.517Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdf89155397b94429d410d"
+  },
+  "name": "Aubergines",
+  "description": "Des aubergines.",
+  "image": "https://mapetiteassiette.com/wp-content/uploads/2020/07/aubergine.jpg",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.581Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdfaf555397b94429d4115"
+  },
+  "name": "Pommes de terre",
+  "description": "Des pommes de terre.",
+  "image": "https://mapetiteassiette.com/wp-content/uploads/2020/11/pomme-de-terre333-e1605184894919.jpg",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.641Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdfae7da92d57bdba1bcaa"
+  },
+  "name": "Oignon",
+  "description": "Des oignons.",
+  "image": "https://www.academiedugout.fr/images/15721/1200-auto/fotolia_55631648_subscription_xl-copy.jpg?poix=50&poiy=50",
+  "category": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.705Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdfc62da92d57bdba1bcae"
+  },
+  "name": "Poire",
+  "description": "Des poires.",
+  "image": "https://sf1.lechasseurfrancais.com/wp-content/uploads/2024/01/poire-scaled.jpg",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.767Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66bdfd6e55397b94429d411d"
+  },
+  "name": "Agrumes",
+  "description": "Oranges, citrons, mandarine, clémentines etc....",
+  "image": "https://www.darty.com/darty-et-vous/sites/default/files/2022-07/agrumes-494_0.jpg",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.829Z"
+  },
+  "__v": 1,
+  "tagCategories": [
+    {
+      "$oid": "67f94a16d596f6b20247c56a"
+    },
+    {
+      "$oid": "67f94637d596f6b20247c568"
+    }
+  ],
+  "productsTypes": [
+    "bulk"
+  ]
+},
+{
+  "_id": {
+    "$oid": "66bdff5f55397b94429d4123"
+  },
+  "name": "Fraises",
+  "description": "Des fraises",
+  "image": "https://img.cuisineaz.com/1200x675/2018/06/15/i140414-fraises.jpeg",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.894Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "66be026055397b94429d412d"
+  },
+  "name": "Pêches",
+  "description": "Des pêches.",
+  "image": "https://img.passeportsante.net/1200x675/2021-05-03/i102129-peche-nu.webp",
+  "category": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T07:54:19.956Z"
+  },
+  "__v": 1,
+  "productsTypes": [
+    "bulk"
+  ],
+  "tagCategories": []
+},
+{
+  "_id": {
+    "$oid": "67f67301b6b1927c29061f6b"
+  },
+  "name": "Boeuf",
+  "description": "Toutes les pièces de boeuf.",
+  "image": "",
+  "category": {
+    "$oid": "67f671eeb6b1927c29061f69"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T08:01:24.170Z"
+  },
+  "tagCategories": [
+    {
+      "$oid": "67f949c9d596f6b20247c569"
+    },
+    {
+      "$oid": "67f94a55d596f6b20247c56b"
+    }
+  ],
+  "__v": 1,
+  "productsTypes": [
+    "classic"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f673efb6b1927c29061f6e"
+  },
+  "name": "Vins",
+  "description": "Tous les vins.",
+  "image": "",
+  "category": {
+    "$oid": "67f67254b6b1927c29061f6a"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T08:01:24.235Z"
+  },
+  "tagCategories": [
+    {
+      "$oid": "67f949c9d596f6b20247c569"
+    }
+  ],
+  "__v": 1,
+  "productsTypes": [
+    "classic"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67fcd98585c05e6b9e779e28"
+  },
+  "name": "Agneau",
+  "description": "Toutes les pièces d'agneau.",
+  "image": "",
+  "category": {
+    "$oid": "67f671eeb6b1927c29061f69"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T08:01:24.301Z"
+  },
+  "tagCategories": [
+    {
+      "$oid": "67f949c9d596f6b20247c569"
+    },
+    {
+      "$oid": "67f94a55d596f6b20247c56b"
+    }
+  ],
+  "__v": 1,
+  "productsTypes": [
+    "classic"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67fcd9c285c05e6b9e779e29"
+  },
+  "name": "Porc",
+  "description": "Toutes les pièces de porc.",
+  "image": "",
+  "category": {
+    "$oid": "67f671eeb6b1927c29061f69"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:35:16.601Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-15T08:01:24.365Z"
+  },
+  "tagCategories": [
+    {
+      "$oid": "67f949c9d596f6b20247c569"
+    },
+    {
+      "$oid": "67f94a55d596f6b20247c56b"
+    }
+  ],
+  "__v": 1,
+  "productsTypes": [
+    "classic"
+  ]
+}]

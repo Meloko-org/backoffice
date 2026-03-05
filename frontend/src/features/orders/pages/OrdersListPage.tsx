@@ -106,7 +106,7 @@ export default function OrdersListPage() {
   }
 
   const handleEditOrder = (order: Order) => {
-    navigate(`/admin/orders/${order._id}/edit`)
+    navigate(`/admin/orders/${order._id}`)
   }
 
   const handleDeleteOrder = (order: Order) => {

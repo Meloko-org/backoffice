@@ -4,7 +4,7 @@ const stockSchema = mongoose.Schema(
   {
     product: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "products",
+      ref: "Product",
       required: true,
     },
     shop: {
@@ -75,5 +75,10 @@ const stockSchema = mongoose.Schema(
 );
 
 
-const Stock = mongoose.model("Stock", stockSchema, "stocks");
+const collectionName = process.env.USE_FAKE_DB === "true"
+  ? "fakestocks"
+  : "stocks";
+
+
+const Stock = mongoose.model("Stock", stockSchema, collectionName);
 module.exports = Stock;

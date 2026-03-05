@@ -1,0 +1,715 @@
+[{
+  "_id": {
+    "$oid": "66b331f88756ffef5197e3a3"
+  },
+  "name": "Granny Smith",
+  "description": "Pomme Granny Smith",
+  "image": "https://locavor.fr/data/produits/2/31178/31178-pomme-granny-smith-1.jpg",
+  "family": {
+    "$oid": "66b331c48756ffef5197e3a1"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "__v": 0,
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66b35f7d4fe43d77dbcfd383"
+  },
+  "name": "Plantin",
+  "description": "Banane plantin",
+  "image": "https://halalfrais.fr/cdn/shop/products/Platano-Maduro-sw-1-Unidad-3054197_a.jpg?v=1668855938",
+  "family": {
+    "$oid": "66b35f1a4fe43d77dbcfd37e"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bca77aa8a97a2f43e737dd"
+  },
+  "name": "Grappe",
+  "description": "Tomate Grappe",
+  "image": "https://www.alimentarium.org/sites/default/files/media/image/2016-10/AL001-02%20tomate_0.jpg",
+  "family": {
+    "$oid": "66bca72fa8a97a2f43e737da"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdf8c9da92d57bdba1bca6"
+  },
+  "name": "Gala",
+  "description": "Pomme Gala",
+  "image": "https://www.comptoirprimeur.fr/wp-content/uploads/2017/05/royal-gala-livre-a-domicile.jpg",
+  "family": {
+    "$oid": "66b331c48756ffef5197e3a1"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "__v": 0,
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdf94855397b94429d410f"
+  },
+  "name": "Laitue",
+  "description": "Laitue",
+  "image": "https://www.roseedeschamps.fr/wp-content/uploads/2021/05/LAITUE.jpg",
+  "family": {
+    "$oid": "66bdf7d555397b94429d410b"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdf997da92d57bdba1bca7"
+  },
+  "name": "Cerise",
+  "description": "Tomate Cerise",
+  "image": "https://locavor.fr/data/produits/5/113163/barquette-6-plants-tomate-cerise-113163-1617997833-1.jpg",
+  "family": {
+    "$oid": "66bca72fa8a97a2f43e737da"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdf9a255397b94429d4111"
+  },
+  "name": "Batavia",
+  "description": "Batavia",
+  "image": "https://www.panierdeladour.com/555-large_default/salade-batavia-ab.jpg",
+  "family": {
+    "$oid": "66bdf7d555397b94429d410b"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfa2655397b94429d4113"
+  },
+  "name": "Mache",
+  "description": "Mache",
+  "image": "https://modeleprimeur.monpetitdrive.fr/pub/banque_images/201907/legumes/salade-mache-vrac1.jpeg",
+  "family": {
+    "$oid": "66bdf7d555397b94429d410b"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfa2ada92d57bdba1bca8"
+  },
+  "name": "Coeur de Boeuf",
+  "description": "Tomate Coeur de Boeuf",
+  "image": "https://www.les-delices-du-jardin.fr/form/uploads/articles/pics/125_0_tomates_coeur_de_boeuf.jpg",
+  "family": {
+    "$oid": "66bca72fa8a97a2f43e737da"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfb5655397b94429d4117"
+  },
+  "name": "Niçoise",
+  "description": "Pommes de terre",
+  "image": "https://mapetiteassiette.com/wp-content/uploads/2020/11/pomme-de-terre333-e1605184894919.jpg",
+  "family": {
+    "$oid": "66bdfaf555397b94429d4115"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfb83da92d57bdba1bcac"
+  },
+  "name": "Jaune",
+  "description": "Oignon Jaune",
+  "image": "https://lescorbeillesarthur.fr/424-large_default/oignons-jaune.jpg",
+  "family": {
+    "$oid": "66bdfae7da92d57bdba1bcaa"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfbc910aced107bf0aaeb"
+  },
+  "name": "Nouvelles",
+  "description": "Pommes de terre nouvelles",
+  "image": "https://haitzondoa.fr/wp-content/uploads/2022/01/pdt-nouvelle.jpg",
+  "family": {
+    "$oid": "66bdfaf555397b94429d4115"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfbcbda92d57bdba1bcad"
+  },
+  "name": "Rouge",
+  "description": "Oignon Rouge",
+  "image": "https://www.academiedugout.fr/images/15749/1200-auto/fotolia_61211686_subscription_xl-copy.jpg?poix=50&poiy=50",
+  "family": {
+    "$oid": "66bdfae7da92d57bdba1bcaa"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfc2255397b94429d4119"
+  },
+  "name": "Rattes",
+  "description": "Pommes de terre rattes",
+  "image": "https://www.jardiner-malin.fr/wp-content/uploads/2022/01/ratte-pomme-de-terre.jpg",
+  "family": {
+    "$oid": "66bdfaf555397b94429d4115"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfc6355397b94429d411b"
+  },
+  "name": "Vitelotte",
+  "description": "Pommes de terre vitelotte",
+  "image": "https://www.quefaireavec.com/upload/pomme-de-terre-violette-1655282031-47924-0.jpg",
+  "family": {
+    "$oid": "66bdfaf555397b94429d4115"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfd67da92d57bdba1bcaf"
+  },
+  "name": "Carmen",
+  "description": "Poire Carmen",
+  "image": "https://static.libertyprim.com/files/varietes/poire-carmen-large.jpg?1569529728",
+  "family": {
+    "$oid": "66bdfc62da92d57bdba1bcae"
+  },
+  "createdAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:36:08.695Z"
+  },
+  "__v": 0,
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfdd255397b94429d411f"
+  },
+  "name": "Sanguine",
+  "description": "Des oranges",
+  "image": "https://www.le-colibri.net/medias/boutique/3536/oranges-de-table.jpg",
+  "family": {
+    "$oid": "66bdfd6e55397b94429d411d"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfe5655397b94429d4121"
+  },
+  "name": "de Menton",
+  "description": "Des citrons",
+  "image": "https://www.savibio.fr/29-large_default/citron-jaune.jpg",
+  "family": {
+    "$oid": "66bdfd6e55397b94429d411d"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66bdfedb10aced107bf0aaf1"
+  },
+  "name": "Corses",
+  "description": "Des mandarines",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqK4vQrcUmqRup4E6GYNIi92-OFTwSE8EKYQ&s",
+  "family": {
+    "$oid": "66bdfd6e55397b94429d411d"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66be003c55397b94429d4125"
+  },
+  "name": "Du jardin",
+  "description": "Des fraises",
+  "image": "https://mapetiteassiette.com/wp-content/uploads/2021/06/AdobeStock_254635130-min-min.png",
+  "family": {
+    "$oid": "66bdff5f55397b94429d4123"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66be00de55397b94429d4129"
+  },
+  "name": "Gariguette",
+  "description": "Des fraises gariguettes",
+  "image": "https://luchyprimeurs.com/127-large_default/fraise-gariguette.jpg",
+  "family": {
+    "$oid": "66bdff5f55397b94429d4123"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66be01cb55397b94429d412b"
+  },
+  "name": "Cigalines",
+  "description": "Des fraises cigalines",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb-HHDKcpHnnuve8reDWpXdJNa11CWie1rKg&s",
+  "family": {
+    "$oid": "66bdff5f55397b94429d4123"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66be02ea55397b94429d412f"
+  },
+  "name": "Jaunes",
+  "description": "Des pêches jaunes",
+  "image": "https://sobio-www.cellar-fr-north-hds-c1.services.clever-cloud.com/media/cache/bcb_article_header/BcB%20TF/TF%20Juillet%202023/2-787x506px-PECHE.jpg",
+  "family": {
+    "$oid": "66be026055397b94429d412d"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "66be033c10aced107bf0aaf8"
+  },
+  "name": "Pêches blanches",
+  "description": "Des pêches blanches",
+  "image": "https://www.comptoirprimeur.fr/wp-content/uploads/2017/04/peches_blanches-510x510.jpg",
+  "family": {
+    "$oid": "66be026055397b94429d412d"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "gr",
+    "measurement": {
+      "$numberDecimal": "100"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "67f67387b6b1927c29061f6c"
+  },
+  "name": "Côte de boeuf",
+  "description": "Côte de boeuf.",
+  "image": "",
+  "family": {
+    "$oid": "67f67301b6b1927c29061f6b"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "67f673bfb6b1927c29061f6d"
+  },
+  "name": "Entrecôte",
+  "description": "Entrecôte de boeuf.",
+  "image": "",
+  "family": {
+    "$oid": "67f67301b6b1927c29061f6b"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "67f6742db6b1927c29061f6f"
+  },
+  "name": "Rouge",
+  "description": "Les vins rouges.",
+  "image": "",
+  "family": {
+    "$oid": "67f673efb6b1927c29061f6e"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "67f6744bb6b1927c29061f70"
+  },
+  "name": "Rosé",
+  "description": "Les vins rosés.",
+  "image": "",
+  "family": {
+    "$oid": "67f673efb6b1927c29061f6e"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "67f6745eb6b1927c29061f71"
+  },
+  "name": "Blanc",
+  "description": "Les vins blancs.",
+  "image": "",
+  "family": {
+    "$oid": "67f673efb6b1927c29061f6e"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "680008fdf410fb83b4b349bb"
+  },
+  "name": "Joue",
+  "description": "Joue de porc.",
+  "image": "",
+  "family": {
+    "$oid": "67fcd9c285c05e6b9e779e29"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "680009d4f410fb83b4b349bc"
+  },
+  "name": "Travers",
+  "description": "Travers de porc.",
+  "image": "",
+  "family": {
+    "$oid": "67fcd9c285c05e6b9e779e29"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "68000a10f410fb83b4b349bd"
+  },
+  "name": "Côte échine",
+  "description": "Côte échine de porc.",
+  "image": "",
+  "family": {
+    "$oid": "67fcd9c285c05e6b9e779e29"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "68000a72f410fb83b4b349be"
+  },
+  "name": "Joue",
+  "description": "Joue de boeuf.",
+  "image": "",
+  "family": {
+    "$oid": "67f67301b6b1927c29061f6b"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+},
+{
+  "_id": {
+    "$oid": "68000ad0f410fb83b4b349bf"
+  },
+  "name": "Faux filet",
+  "description": "Faux filet de boeuf.",
+  "image": "",
+  "family": {
+    "$oid": "67f67301b6b1927c29061f6b"
+  },
+  "createdAt": "2024-08-07T08:36:08.695+00:00",
+  "updatedAt": "2024-08-07T08:36:08.695+00:00",
+  "weight": {
+    "unit": "piece",
+    "measurement": {
+      "$numberDecimal": "1"
+    }
+  },
+  "vatRate": 5.5
+}]

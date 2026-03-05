@@ -1,6 +1,7 @@
 require("./Address");
 require("./ClickCollect");
 require("./CreditNote");
+require("./Invoice");
 require("./Market");
 require("./OpeningHour");
 require("./Order");

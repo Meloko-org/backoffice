@@ -3,12 +3,15 @@ import { DataTable, type Column } from "../../../components/data-table/DataTable
 import { DataTablePagination } from "../../../components/data-table/DataTablePagination";
 import { useUserDashboard } from "../../../hooks/useUserDashboard";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
+import { Pencil } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   userId: string;
 }
 
 export default function UserOrderSection({ userId }: Props)  {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [limit] = useState(5); // fixe pour dashboard
 
@@ -18,6 +21,10 @@ export default function UserOrderSection({ userId }: Props)  {
 
   const orders = data.recentOrders.items;
   const pagination = data.recentOrders.pagination;
+
+  const handleEditOrder = (orderId: string) => {
+    navigate(`/admin/orders/${orderId}`);
+  }
 
   const columns: Column<typeof orders[number]>[] = [
     {
@@ -46,6 +53,23 @@ export default function UserOrderSection({ userId }: Props)  {
       key: "paymentMethod",
       label: "Méthode",
     },
+    {
+      key: "actions",
+      label: "Actions",
+      render: (order) => (
+        <div className="table-actions">
+          <button 
+            className="table-action-btn edit" 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEditOrder(order._id)
+            }}
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+        </div>
+      )
+    }
   ];
 
   return (

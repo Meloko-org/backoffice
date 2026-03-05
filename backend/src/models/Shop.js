@@ -155,5 +155,9 @@ const shopSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-const Shop = mongoose.model("Shop", shopSchema, "shops");
+const collectionName = process.env.USE_FAKE_DB === "true"
+  ? "fakeshops"
+  : "shops";
+
+const Shop = mongoose.model("Shop", shopSchema, collectionName);
 module.exports = Shop;

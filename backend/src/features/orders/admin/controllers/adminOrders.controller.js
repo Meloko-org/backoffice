@@ -44,6 +44,8 @@ const getOrder = async (req, res, next) => {
 
     const order = await getOrderById(id);
 
+    console.log("order :", JSON.stringify(order, null, 2))
+
     res.json({
       success: true,
       data: order,

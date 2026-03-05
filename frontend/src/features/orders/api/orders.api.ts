@@ -1,6 +1,6 @@
 import { apiFetch } from "../../../lib/apiFetch";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Order, OrderListResponse } from "../types/order";
+import type { Order, OrderDetail, OrderListResponse } from "../types/order";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/orders`;
@@ -60,3 +60,13 @@ export const getOrdersList = async (
     }
   }
 }
+
+
+export const getOrderById = async (
+  id: string
+): Promise<OrderDetail> => {
+  return apiFetch<OrderDetail>(
+    `${BASE_URL}/${id}`,
+    { method: "GET" }
+  );
+};

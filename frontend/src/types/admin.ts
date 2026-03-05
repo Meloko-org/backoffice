@@ -1,7 +1,7 @@
 import type { ProductCategory } from "../features/categories/types/category";
 import type { ProductFamily } from "../features/families/types/family";
 import type { Market } from "../features/markets/types/markets";
-import type { Order } from "../features/orders/types/order";
+import type { Order, ProductLine } from "../features/orders/types/order";
 import type { Product } from "../features/products/types/product";
 import type { User } from "../features/users/types/user";
 
@@ -57,5 +57,12 @@ export type ModelContext =
       data: Order;
       onEdit?: (order: Order) => void;
       onDelete?: (order: Order) => void;
+    }
+  | { 
+      type: "orderProduct"; 
+      title: string;
+      data: ProductLine;
+      // onEdit?: (product: ProductLine) => void;
+      // onDelete?: (product: ProductLine) => void;
     }
   | null;

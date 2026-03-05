@@ -83,12 +83,148 @@ async function getOrderById(orderId) {
   }
 
   const order = await Order.findById(orderId)
+    .select(`
+      orderNumber
+      user
+      billingAddress
+      shippingAddress
+      details
+      totalHT
+      totalVAT
+      totalTTC
+      isPaid
+      paidAt
+      paymentMethod
+      paymentIntentId
+      isWithdrawn
+      createdAt
+    `)
+
     .populate("user", "email firstname lastname")
-    .populate("details.shop")
-    .populate("details.market")
-    .populate("details.invoice")
-    .populate("details.creditNotes")
+
+    .populate({
+      path: "details.shop",
+      select: `
+        name
+        siret
+        isOpen
+        isPremium
+        producer
+        address.city
+        address.postalCode
+      `,
+    })
+
+    .populate({
+      path: "details.products.product",
+      select: "product productCustomName image",
+      populate: {
+        path: "product",
+        select: "name family",
+        populate: {
+          path: "family",
+          select: "name",
+        },
+      },
+    })
+
+    .populate({
+      path: "details.invoice",
+      select: `
+        invoiceNumber
+        issuedAt
+        currency
+        customer.name
+        customer.email
+        customer.address
+        lines
+        totalHT
+        totalVAT
+        totalTTC
+        status
+      `,
+    })
+
+    .populate({
+      path: "details.creditNotes",
+      select: `
+        creditNoteNumber
+        issuedAt
+        status
+        reason
+        lines
+        totalHT
+        totalVAT
+        totalTTC
+        refundedAt
+      `,
+    })
+
     .lean();
+
+
+  // const order = await Order.findById(orderId)
+  //   .populate("user", "email firstname lastname")
+  //   .populate("details.shop", "name siret isOpen isPremium producer address.city address.postalCode")
+  //   .populate({
+  //     path: "details.products.product",
+  //     select: `
+  //       product
+  //       productCustomName
+  //       price
+  //       weightPerUnit
+  //       origin
+  //       format
+  //       portion
+  //       image
+  //     `,
+  //     populate: {
+  //       path: "product",
+  //       select: "name family",
+  //       populate: {
+  //         path: "family",
+  //         select: "name"
+  //       }
+  //     }
+  //   })
+  //   .populate({
+  //     path: "details.invoice",
+  //     select:  `
+  //       invoiceNumber
+  //       issuedAt
+  //       currency
+  //       customer
+  //       lines
+  //       totalHT
+  //       totalVAT
+  //       totalTTC
+  //       status
+  //     `,
+  //   })
+  //   .populate({
+  //     path: "details.creditNotes",
+  //     select: `
+  //       shop
+  //       order
+  //       subOrder
+  //       creditNoteNumber
+  //       issuedAt
+  //       invoice
+  //       status
+  //       reason
+  //       lines
+  //       totalHT
+  //       totalVAT
+  //       totalTTC
+  //       createdAt
+  //       updatedAT
+  //       refundedAt
+  //       stripeRefundId
+  //     `
+  //   })
+  //   .lean();
+
+
 
   if (!order) {
     throw new NotFoundError("Order introuvable.");

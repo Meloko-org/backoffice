@@ -1,0 +1,1879 @@
+[{
+  "_id": {
+    "$oid": "66b339729a76167d3a93df3b"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Tomato & Co.",
+  "siret": "732 829 320 00074",
+  "address": {
+    "address1": "test",
+    "address2": null,
+    "postalCode": "00000",
+    "city": "nice",
+    "country": "france",
+    "latitude": {
+      "$numberDecimal": "43.7009358"
+    },
+    "longitude": {
+      "$numberDecimal": "7.2683912"
+    },
+    "_id": {
+      "$oid": "66b339729a76167d3a93df3c"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": true,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "__v": 0,
+  "notes": [],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": {
+          "closingTime": "17:00",
+          "openingTime": "8:00"
+        },
+        "day": 1
+      }
+    ]
+  },
+  "logo": "https://img.freepik.com/vecteurs-premium/illustration-vectorielle-tomate-rouge-logo-design_194708-2201.jpg",
+  "isPremium": "true",
+  "longDesc": "Je cultive toutes variétés de tomates, de la grappe juteuse à la cerise croquante!Je cultive toutes variétés de tomates, de la grappe juteuse à la cerise croquante!Je cultive toutes variétés de tomates, de la grappe juteuse à la cerise croquante!",
+  "shortDesc": "Je cultive toutes variétés de tomates, de la grappe juteuse à la cerise croquante!",
+  "features": [
+    {
+      "$oid": "689f593a2bf0ed66babf78dd"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78de"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78df"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78e0"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66b346534fe43d77dbcfd376"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Banana 4 ever",
+  "siret": "732 829 320 00075",
+  "address": {
+    "address1": "test",
+    "address2": null,
+    "postalCode": "00000",
+    "city": "Menton",
+    "country": "france",
+    "latitude": {
+      "$numberDecimal": "43.7753495"
+    },
+    "longitude": {
+      "$numberDecimal": "7.5029213"
+    },
+    "_id": {
+      "$oid": "66b339729a76167d3a93df3c"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": true,
+  "reopenDate": null,
+  "markets": [],
+  "notes": [],
+  "logo": "https://i.pinimg.com/originals/0a/2f/ff/0a2fff87ee1be7da2eabd737a29bbafb.png",
+  "isPremium": "false",
+  "longDesc": "Les bananes c'est mon domaine.Les bananes c'est mon domaine.Les bananes c'est mon domaine.Les bananes c'est mon domaine.Les bananes c'est mon domaine.",
+  "shortDesc": "Les bananes c'est mon domaine.",
+  "features": [
+    {
+      "$oid": "689f593a2bf0ed66babf78dd"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78de"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78df"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66bca4f4a8a97a2f43e737cf"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Salades de l'Est",
+  "siret": "732 829 320 00895",
+  "address": {
+    "address1": "8 Boulevard Louis Braille",
+    "address2": null,
+    "postalCode": "06300",
+    "city": "Nice",
+    "country": "france",
+    "latitude": {
+      "$numberDecimal": "43.717850"
+    },
+    "longitude": {
+      "$numberDecimal": "7.294470"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "_id": {
+      "$oid": "68aefdc063149ae95c1ead3f"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": true,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T12:44:48.889Z"
+  },
+  "__v": 1,
+  "notes": [
+    {
+      "$oid": "68aefdc063149ae95c1ead45"
+    }
+  ],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": [
+          {
+            "_id": {
+              "$oid": "68aefdc063149ae95c1ead41"
+            },
+            "closingTime": "17:00",
+            "openingTime": "8:00"
+          }
+        ],
+        "day": 1,
+        "createdAt": {
+          "$date": "2025-08-27T12:44:48.888Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-27T12:44:48.888Z"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "68aefdc063149ae95c1ead42"
+    },
+    "createdAt": {
+      "$date": "2025-08-27T12:44:48.888Z"
+    },
+    "isActive": false,
+    "updatedAt": {
+      "$date": "2025-08-27T12:44:48.888Z"
+    }
+  },
+  "logo": "https://img.freepik.com/vecteurs-premium/logo-salade-fraiche_116238-80.jpg",
+  "isPremium": "true",
+  "longDesc": "Cultivateur spécialisé dans la salade verte.Cultivateur spécialisé dans la salade verte.Cultivateur spécialisé dans la salade verte.Cultivateur spécialisé dans la salade verte.",
+  "shortDesc": "Cultivateur spécialisé dans la salade verte.",
+  "features": [],
+  "crew": [],
+  "socialPostSettings": {
+    "customHashtags": [],
+    "customMentions": [],
+    "frequency": {
+      "mode": "manual",
+      "preferredDays": [],
+      "timesPerWeek": 0
+    }
+  },
+  "socials": {
+    "facebook": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "instagram": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "tiktok": {
+      "connected": false,
+      "isEnabled": false
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Orso",
+  "siret": "732 829 320 00534",
+  "address": {
+    "address1": "712 Avenue Jean Mermos",
+    "address2": null,
+    "postalCode": "06210",
+    "city": "Mandelieu-la-Napoule",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.567032"
+    },
+    "longitude": {
+      "$numberDecimal": "6.948883"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "_id": {
+      "$oid": "68aed7d663149ae95c1eacc8"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": true,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:03:03.123Z"
+  },
+  "__v": 1,
+  "notes": [
+    {
+      "$oid": "68aed7d763149ae95c1eacce"
+    }
+  ],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": [
+          {
+            "_id": {
+              "$oid": "68aed7d663149ae95c1eacca"
+            },
+            "closingTime": "17:00",
+            "openingTime": "8:00"
+          }
+        ],
+        "day": 1,
+        "createdAt": {
+          "$date": "2025-08-27T10:03:03.122Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-27T10:03:03.122Z"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "68aed7d663149ae95c1eaccb"
+    },
+    "createdAt": {
+      "$date": "2025-08-27T10:03:03.123Z"
+    },
+    "isActive": true,
+    "updatedAt": {
+      "$date": "2025-08-27T10:03:03.123Z"
+    }
+  },
+  "logo": "https://lh3.googleusercontent.com/p/AF1QipNSS2_2ojpxfQbssDpcoXCU74ZxKiEJVKRkHllD=s1600-w640",
+  "features": [],
+  "isPremium": "true",
+  "longDesc": "La famille Orso, vous accueille sur l'exploitation !La famille Orso, vous accueille sur l'exploitation !La famille Orso, vous accueille sur l'exploitation !",
+  "shortDesc": "La famille Orso, vous accueille sur l'exploitation !",
+  "crew": [],
+  "socialPostSettings": {
+    "customHashtags": [],
+    "customMentions": [],
+    "frequency": {
+      "mode": "manual",
+      "preferredDays": [],
+      "timesPerWeek": 0
+    }
+  },
+  "socials": {
+    "facebook": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "instagram": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "tiktok": {
+      "connected": false,
+      "isEnabled": false
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66be005ada92d57bdba1bcb1"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "La Ferme des Cairns",
+  "siret": "732 829 320 00213",
+  "address": {
+    "address1": "360 Chemin de Notre Dame de l'Ormeau",
+    "address2": null,
+    "postalCode": "83440",
+    "city": "Seillans",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.6893"
+    },
+    "longitude": {
+      "$numberDecimal": "6.7117"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": false,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "__v": 0,
+  "notes": [],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": {
+          "closingTime": "17:00",
+          "openingTime": "8:00"
+        },
+        "day": 1
+      }
+    ]
+  },
+  "logo": "https://www.paysdefayence.com/wp-content/uploads/wpetourisme/4801288-diaporama.jpg",
+  "features": [],
+  "isPremium": "false",
+  "longDesc": "Bienvenue dans la joyeuse Ferme de la Famille Faur.Bienvenue dans la joyeuse Ferme de la Famille Faur.Bienvenue dans la joyeuse Ferme de la Famille Faur.",
+  "shortDesc": "Bienvenue dans la joyeuse Ferme de la Famille Faur."
+},
+{
+  "_id": {
+    "$oid": "66be0195da92d57bdba1bcb2"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "La Ferme aux Roses",
+  "siret": "732 829 320 00124",
+  "address": {
+    "address1": "145 Chemin de la Constance",
+    "address2": null,
+    "postalCode": "06600",
+    "city": "Antibes",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.604111"
+    },
+    "longitude": {
+      "$numberDecimal": "7.107792"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": false,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "__v": 0,
+  "notes": [],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": {
+          "closingTime": "17:00",
+          "openingTime": "8:00"
+        },
+        "day": 1
+      }
+    ]
+  },
+  "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjmAtiDEjDIxCkp4TdUhzr1mcluLU8WQefug&s",
+  "features": [],
+  "isPremium": "false",
+  "longDesc": "Producteur de fruits et légumes en culture raisonnée.Producteur de fruits et légumes en culture raisonnée.Producteur de fruits et légumes en culture raisonnée.Producteur de fruits et légumes en culture raisonnée.",
+  "shortDesc": "Producteur de fruits et légumes en culture raisonnée."
+},
+{
+  "_id": {
+    "$oid": "66be0353da92d57bdba1bcb3"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Domaine de La Tour",
+  "siret": "732 829 320 00451",
+  "address": {
+    "address1": "3682 Route de Tres",
+    "address2": null,
+    "postalCode": "06440",
+    "city": "L'Escarène",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.8831"
+    },
+    "longitude": {
+      "$numberDecimal": "7.36"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": false,
+  "reopenDate": null,
+  "markets": [],
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "__v": 0,
+  "notes": [],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "periods": {
+          "closingTime": "17:00",
+          "openingTime": "8:00"
+        },
+        "day": 1
+      }
+    ]
+  },
+  "logo": "https://www.made-in-06.com/wp-content/uploads/image4-e1542711265400-1080x608.jpg",
+  "isPremium": "false",
+  "longDesc": "Le Domaine de La Tour est une propriété Agricole authentique nichée dans un écrin de verdure au calme total dans la vallée du Paillon, à 30 minutes de Nice et Monaco.Le Domaine de La Tour est une propriété Agricole authentique nichée dans un écrin de verdure au calme total dans la vallée du Paillon, à 30 minutes de Nice et Monaco.Le Domaine de La Tour est une propriété Agricole authentique nichée dans un écrin de verdure au calme total dans la vallée du Paillon, à 30 minutes de Nice et Monaco.",
+  "shortDesc": "Le Domaine de La Tour est une propriété Agricole authentique nichée dans un écrin de verdure au calme total dans la vallée du Paillon, à 30 minutes de Nice et Monaco.",
+  "features": [
+    {
+      "$oid": "689f593a2bf0ed66babf78dd"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78de"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66be0618da92d57bdba1bcb5"
+  },
+  "producer": {
+    "$oid": "66b212eb32185b4275e18721"
+  },
+  "name": "Herbs and Spices",
+  "siret": "732 829 320 00377",
+  "address": {
+    "address1": "Pl. Adolphes Conil",
+    "address2": null,
+    "postalCode": "06260",
+    "city": "Puget-Théniers",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.955920"
+    },
+    "longitude": {
+      "$numberDecimal": "6.893788"
+    },
+    "createdAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-07T09:08:02.126Z"
+    },
+    "_id": {
+      "$oid": "6853c6378d341d6abcaca21b"
+    }
+  },
+  "photos": [],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": true,
+  "reopenDate": null,
+  "createdAt": {
+    "$date": "2024-08-07T09:08:02.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-14T09:30:26.512Z"
+  },
+  "__v": 0,
+  "notes": [],
+  "clickCollect": {
+    "instructions": "Attendez que j'arrive.",
+    "openingHours": [
+      {
+        "day": 1,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "6735c33277941a120fc755ea"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755e9"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 2,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "6735c33277941a120fc755ec"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755eb"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 3,
+        "periods": [
+          {
+            "openingTime": "9:00",
+            "closingTime": "16:00",
+            "_id": {
+              "$oid": "6735c33277941a120fc755ee"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755ed"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 4,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "6735c33277941a120fc755f0"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755ef"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 5,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "6735c33277941a120fc755f2"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755f1"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 6,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "6735c33277941a120fc755f4"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755f3"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      },
+      {
+        "day": 7,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "6735c33277941a120fc755f6"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "6735c33277941a120fc755f5"
+        },
+        "createdAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        },
+        "updatedAt": {
+          "$date": "2024-11-14T09:30:26.512Z"
+        }
+      }
+    ],
+    "updatedAt": {
+      "$date": "2024-11-14T09:30:26.512Z"
+    }
+  },
+  "logo": "https://i.pinimg.com/originals/28/3c/08/283c08cbf79c0edbc3b6dd455186bf32.jpg",
+  "isPremium": false,
+  "longDesc": "longue description : Vente de fruits et légumes.",
+  "shortDesc": "courte description : Vente de fruits et légumes.",
+  "features": [
+    {
+      "$oid": "689f593a2bf0ed66babf78dd"
+    }
+  ],
+  "markets": []
+},
+{
+  "_id": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "producer": {
+    "$oid": "66c0b9bd18d45a1cd814d6a0"
+  },
+  "siret": "8383728776",
+  "__v": 69,
+  "address": {
+    "address1": "677 avenue jean mermos",
+    "address2": "",
+    "postalCode": "06210",
+    "city": "Mandelieu la napoule",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.562998"
+    },
+    "longitude": {
+      "$numberDecimal": "6.950374"
+    },
+    "_id": {
+      "$oid": "68dbefd6dafacbf4b37e4479"
+    },
+    "createdAt": {
+      "$date": "2025-09-30T14:57:26.322Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-30T14:57:26.322Z"
+    }
+  },
+  "clickCollect": {
+    "_id": {
+      "$oid": "6798d9aa780729037d5bc91e"
+    },
+    "createdAt": {
+      "$date": "2025-01-28T13:20:42.183Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-07T13:30:12.269Z"
+    },
+    "openingHours": [
+      {
+        "day": 1,
+        "periods": [
+          {
+            "openingTime": "9:00",
+            "closingTime": "12:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b1052"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b1051"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 2,
+        "periods": [
+          {
+            "openingTime": "13:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b1054"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b1053"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 3,
+        "periods": [
+          {
+            "openingTime": "13:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b1056"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b1055"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 4,
+        "periods": [
+          {
+            "openingTime": "13:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b1058"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b1057"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 5,
+        "periods": [
+          {
+            "openingTime": "13:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b105a"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b1059"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 6,
+        "periods": [
+          {
+            "openingTime": "13:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67f2420151c73a53d32b105c"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b105b"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      },
+      {
+        "day": 7,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "67f2420151c73a53d32b105e"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67f2420151c73a53d32b105d"
+        },
+        "createdAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        },
+        "updatedAt": {
+          "$date": "2025-04-06T08:57:37.476Z"
+        }
+      }
+    ],
+    "instructions": "Présentez vous à l'accueil avec le  QR code de votre commande",
+    "isActive": true
+  },
+  "createdAt": {
+    "$date": "2024-09-30T12:57:01.551Z"
+  },
+  "isOpen": true,
+  "markets": [
+    {
+      "market": {
+        "$oid": "66bdf6ff55397b94429d4107"
+      },
+      "isActive": true,
+      "openingHours": [
+        {
+          "day": 1,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "12:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8c1"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8c0"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.490Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 2,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "12:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8c3"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8c2"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.490Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 3,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "12:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8c5"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8c4"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.490Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 4,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8c7"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8c6"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.490Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 5,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8c9"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8c8"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.490Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 6,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8cb"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8ca"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 7,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8cd"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8cc"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6798d8a2780729037d5bc8b4"
+      }
+    },
+    {
+      "market": {
+        "$oid": "66bdf72855397b94429d4109"
+      },
+      "isActive": true,
+      "openingHours": [
+        {
+          "day": 1,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8cf"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8ce"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 2,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8d1"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8d0"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 3,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8d3"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8d2"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 4,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8d5"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8d4"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 5,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "13:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8d7"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8d6"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 6,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "13:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8d9"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8d8"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.491Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        },
+        {
+          "day": 7,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "13:00",
+              "_id": {
+                "$oid": "6798d8e3780729037d5bc8db"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6798d8e3780729037d5bc8da"
+          },
+          "createdAt": {
+            "$date": "2025-01-28T13:17:23.492Z"
+          },
+          "updatedAt": {
+            "$date": "2025-12-13T15:40:24.151Z"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6798d8a2780729037d5bc8b5"
+      }
+    }
+  ],
+  "name": "Test shop",
+  "notes": [
+    {
+      "$oid": "68555b658d341d6abcaca222"
+    },
+    {
+      "$oid": "68555b998d341d6abcaca223"
+    },
+    {
+      "$oid": "68555be08d341d6abcaca224"
+    },
+    {
+      "$oid": "68555c138d341d6abcaca225"
+    },
+    {
+      "$oid": "6889dad003c9fd371ba661fc"
+    },
+    {
+      "$oid": "6889db0b03c9fd371ba661fd"
+    },
+    {
+      "$oid": "6889db3703c9fd371ba661fe"
+    },
+    {
+      "$oid": "688a1c6a03c9fd371ba66205"
+    },
+    {
+      "$oid": "688a1ca703c9fd371ba66206"
+    },
+    {
+      "$oid": "68aeb3afaea65c43f64e7cde"
+    }
+  ],
+  "photos": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    },
+    {
+      "$oid": "67f4c44c6319194f6fe01ed9"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-12-13T15:40:24.152Z"
+  },
+  "video": [
+    "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540meloko%252Fmeloko/ImagePicker/41f96b6a-6497-40c9-bec6-ac66c2b26fdb.mp4"
+  ],
+  "isPremium": "true",
+  "logo": "file:///data/user/0/com.crawazaky.frontend/files/shopImages/1759244240507-2083.jpeg",
+  "longDesc": "Passionné de nature, doté d'une solide formation technique et assisté d'outils informatisés, l'agriculteur est un véritable chef d'entreprise, qu'il produise des céréales, des légumes, des fruits, du lait ou de la viande...",
+  "shortDesc": "Super shop, super produits frais",
+  "crew": [
+    {
+      "forname": "michmich",
+      "role": "compteur de paquerettes",
+      "description": "C’est vraiment le meilleur compteur de pâquerettes de la vallée avec son sourire inégalé. Et que dire de ce sourire ?",
+      "photo": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540meloko%252Fmeloko/ImagePicker/a5fcc9c9-1fba-4cfc-88fc-3252f4974c5e.jpeg",
+      "_id": {
+        "$oid": "68654fcd76cd093703242e1e"
+      }
+    },
+    {
+      "forname": "Pétunia",
+      "role": "polisseuse de vaches",
+      "description": "Pétunia fait preuve d'une conscience professionnelle incomparable et d'un coup demain à nul autre pareil.",
+      "photo": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540meloko%252Fmeloko/ImagePicker/97918076-77c9-4aa9-9a4b-826d9d766aac.jpeg",
+      "_id": {
+        "$oid": "68654fcd76cd093703242e1f"
+      }
+    }
+  ],
+  "socials": {
+    "facebook": {
+      "connected": true,
+      "isEnabled": true,
+      "accessToken": "",
+      "refreshToken": "",
+      "userId": "",
+      "username": "@fermeduchamp",
+      "pageId": "",
+      "pageName": "",
+      "expiresAt": null
+    },
+    "instagram": {
+      "connected": true,
+      "isEnabled": true,
+      "accessToken": "",
+      "refreshToken": "",
+      "userId": "",
+      "username": "@fermeduchamp",
+      "pageId": "",
+      "pageName": "",
+      "expiresAt": null
+    },
+    "tiktok": {
+      "connected": true,
+      "isEnabled": true,
+      "username": "@fermeduchamp"
+    }
+  },
+  "socialPostSettings": {
+    "customHashtags": [
+      "Equitable",
+      "Supertag",
+      "Produit du pays",
+      "Promo"
+    ],
+    "customMentions": [
+      "@LaFermeDesCopains",
+      "@LeMoulinAPapa"
+    ],
+    "frequency": {
+      "mode": "reminder",
+      "timesPerWeek": 2,
+      "preferredDays": []
+    }
+  },
+  "features": [
+    {
+      "$oid": "689f593a2bf0ed66babf78de"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78df"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78e0"
+    },
+    {
+      "$oid": "689f593a2bf0ed66babf78dd"
+    }
+  ],
+  "reopenDate": null,
+  "marketsPreviouslyActive": []
+},
+{
+  "_id": {
+    "$oid": "67ac8636415797b00ca33ba7"
+  },
+  "producer": {
+    "$oid": "67ac84e05e87ccec0f0b1549"
+  },
+  "siret": "83837 37383 383",
+  "__v": 0,
+  "address": {
+    "address1": "19 place de la republique",
+    "address2": "",
+    "postalCode": "83340",
+    "city": "Cabasse",
+    "country": "France",
+    "latitude": {
+      "$numberDecimal": "43.425913"
+    },
+    "longitude": {
+      "$numberDecimal": "6.221492"
+    },
+    "_id": {
+      "$oid": "67ac86375e87ccec0f0b155f"
+    },
+    "createdAt": {
+      "$date": "2025-02-12T11:29:59.959Z"
+    },
+    "updatedAt": {
+      "$date": "2025-02-12T11:29:59.959Z"
+    }
+  },
+  "clickCollect": {
+    "_id": {
+      "$oid": "67ac86ac5e87ccec0f0b1564"
+    },
+    "createdAt": {
+      "$date": "2025-02-12T11:31:56.803Z"
+    },
+    "updatedAt": {
+      "$date": "2025-02-12T11:31:56.867Z"
+    },
+    "openingHours": [
+      {
+        "day": 1,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b1567"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b1566"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 2,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b1569"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b1568"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 3,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b156b"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b156a"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 4,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b156d"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b156c"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 5,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b156f"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b156e"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 6,
+        "periods": [
+          {
+            "openingTime": "8:00",
+            "closingTime": "17:00",
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b1571"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b1570"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      },
+      {
+        "day": 7,
+        "periods": [
+          {
+            "openingTime": null,
+            "closingTime": null,
+            "_id": {
+              "$oid": "67ac86ac5e87ccec0f0b1573"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "67ac86ac5e87ccec0f0b1572"
+        },
+        "createdAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        },
+        "updatedAt": {
+          "$date": "2025-02-12T11:31:56.867Z"
+        }
+      }
+    ],
+    "instructions": "Rendez vous à l'accueil muni de votre QR code"
+  },
+  "createdAt": {
+    "$date": "2025-02-12T11:29:59.959Z"
+  },
+  "isOpen": true,
+  "markets": [],
+  "name": "Test shop du var",
+  "notes": [
+    {
+      "$oid": "68555b658d341d6abcaca222"
+    },
+    {
+      "$oid": "68555b998d341d6abcaca223"
+    },
+    {
+      "$oid": "68555be08d341d6abcaca224"
+    },
+    {
+      "$oid": "68555c138d341d6abcaca225"
+    }
+  ],
+  "photos": [],
+  "reopenDate": null,
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-02-12T11:31:56.867Z"
+  },
+  "video": [],
+  "longDesc": "Au coeur de la campagne varoise, nous cultivons les meilleurs fruits et légumes du département.",
+  "shortDesc": "Le meilleur shop du var",
+  "features": [],
+  "isPremium": "true"
+},
+{
+  "_id": {
+    "$oid": "68da4e734000d624d24389ef"
+  },
+  "producer": {
+    "$oid": "68da4dc24000d624d24389e2"
+  },
+  "name": "JisGoogleShop",
+  "siret": "Ur83j47rjrurur8eiej",
+  "logo": "file:///data/user/0/com.crawazaky.frontend/cache/ImagePicker/be328072-644b-431f-a007-8a08327139d3.jpeg",
+  "shortDesc": "Nouveau shop créé depuis un compte google",
+  "photos": [
+    "file:///data/user/0/com.crawazaky.frontend/cache/ImagePicker/8474f970-2544-415f-8877-13c3ddb9d3ed.jpeg"
+  ],
+  "video": [],
+  "types": [
+    {
+      "$oid": "66b210b5bd946e81e70977dd"
+    }
+  ],
+  "isOpen": false,
+  "reopenDate": null,
+  "notes": [],
+  "isPremium": true,
+  "PremiumDate": null,
+  "socials": {
+    "instagram": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "facebook": {
+      "connected": false,
+      "isEnabled": false
+    },
+    "tiktok": {
+      "connected": false,
+      "isEnabled": false
+    }
+  },
+  "socialPostSettings": {
+    "frequency": {
+      "mode": "manual",
+      "timesPerWeek": 0,
+      "preferredDays": []
+    },
+    "customHashtags": [],
+    "customMentions": []
+  },
+  "features": [],
+  "markets": [
+    {
+      "market": {
+        "$oid": "66bdf6ff55397b94429d4107"
+      },
+      "isActive": true,
+      "openingHours": [
+        {
+          "day": 1,
+          "periods": [
+            {
+              "openingTime": "8:00",
+              "closingTime": "13:00",
+              "_id": {
+                "$oid": "68da4ec34000d624d2438a0f"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec34000d624d2438a0e"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          }
+        },
+        {
+          "day": 2,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec34000d624d2438a11"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec34000d624d2438a10"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          }
+        },
+        {
+          "day": 3,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec44000d624d2438a13"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec44000d624d2438a12"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          }
+        },
+        {
+          "day": 4,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec44000d624d2438a15"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec44000d624d2438a14"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          }
+        },
+        {
+          "day": 5,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec44000d624d2438a17"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec44000d624d2438a16"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.003Z"
+          }
+        },
+        {
+          "day": 6,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec44000d624d2438a19"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec44000d624d2438a18"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.004Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.004Z"
+          }
+        },
+        {
+          "day": 7,
+          "periods": [
+            {
+              "openingTime": null,
+              "closingTime": null,
+              "_id": {
+                "$oid": "68da4ec44000d624d2438a1b"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "68da4ec44000d624d2438a1a"
+          },
+          "createdAt": {
+            "$date": "2025-09-29T09:17:56.004Z"
+          },
+          "updatedAt": {
+            "$date": "2025-09-29T09:17:56.004Z"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "68da4ead4000d624d2438a03"
+      }
+    }
+  ],
+  "crew": [],
+  "createdAt": {
+    "$date": "2025-09-29T09:16:35.568Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-29T09:17:56.004Z"
+  },
+  "__v": 1
+}]

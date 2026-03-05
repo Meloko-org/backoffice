@@ -2,6 +2,7 @@ import CategoryDetails from "../../features/categories/components/CategoryDetail
 import FamilyDetails from "../../features/families/components/FamilyDetails";
 import MarketDetails from "../../features/markets/components/MarketDetails";
 import OrderDetails from "../../features/orders/components/OrderDetails";
+import OrderProductDetails from "../../features/orders/components/OrderProductDetails";
 import ProductDetails from "../../features/products/components/ProductDetails";
 import UserDetails from "../../features/users/components/UserDetails";
 import { ConfirmPanel } from "./components/ConfirmPanel";
@@ -63,6 +64,13 @@ export default function AdminSidebarRight() {
 									order={infoContext.data} 
 									onDelete={infoContext.onDelete} 
 									onEdit={infoContext.onEdit}
+								/>;
+			break;
+		case "orderProduct":
+			content = <OrderProductDetails 
+									product={infoContext.data} 
+									// onDelete={infoContext.onDelete} 
+									// onEdit={infoContext.onEdit}
 								/>;
 			break;
 	}

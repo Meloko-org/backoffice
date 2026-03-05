@@ -1,0 +1,137 @@
+[{
+  "_id": {
+    "$oid": "66b331858756ffef5197e39d"
+  },
+  "name": "Fruits",
+  "description": "Des fruits.",
+  "image": "https://www.fortiffsere.fr/wp-content/uploads/2023/04/Fruits-pour-reduire-le-diabete.jpg",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "__v": 0,
+  "type": {
+    "$oid": "66b210b5bd946e81e70977dd"
+  }
+},
+{
+  "_id": {
+    "$oid": "66bca710a8a97a2f43e737d7"
+  },
+  "name": "Légumes",
+  "description": "Des légumes.",
+  "image": "https://www.conservation-nature.fr/wp-content/uploads/2023/06/legumes.jpg",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "66b210b5bd946e81e70977dd"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f671eeb6b1927c29061f69"
+  },
+  "name": "Viande",
+  "description": "Toutes les viandes.",
+  "image": "https://static-wp.santenatureinnovation.com/santenatureinnovation.com/wp-content/uploads/2016/07/25103026/viande.jpg",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "67f4c44c6319194f6fe01ed9"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f67254b6b1927c29061f6a"
+  },
+  "name": "Boissons alcoolisées",
+  "description": "Tous les alcools.",
+  "image": "",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "66cc477fc844239d24552631"
+  }
+},
+{
+  "_id": {
+    "$oid": "68c6c08b0e475dc57313cfc1"
+  },
+  "name": "Oeufs",
+  "description": "Tous les oeufs.",
+  "image": "",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "67f4c5086319194f6fe01eda"
+  }
+},
+{
+  "_id": {
+    "$oid": "68c6c0a40e475dc57313cfc2"
+  },
+  "name": "Huile",
+  "description": "Toutes les huiles.",
+  "image": "",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "67f4c5b36319194f6fe01edc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68c6c0b80e475dc57313cfc3"
+  },
+  "name": "Lait",
+  "description": "Tous les laits.",
+  "image": "",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "67f4c5db6319194f6fe01edd"
+  }
+},
+{
+  "_id": {
+    "$oid": "68c6c1c0aaa36a76acb151fb"
+  },
+  "name": "Miel",
+  "description": "Tous les miels.",
+  "image": "",
+  "createdAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T08:34:13.959Z"
+  },
+  "type": {
+    "$oid": "67f4c5776319194f6fe01edb"
+  }
+}]
