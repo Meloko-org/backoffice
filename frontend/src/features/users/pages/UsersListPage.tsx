@@ -94,7 +94,7 @@ export default function UsersListPage() {
     return {
       type: "user",
       title: "Détail du user",
-      data: selectedUser,
+      user: selectedUser,
       onEdit: () => handleEditUser(selectedUser),
       onDelete: () => handleDeleteUser(selectedUser),
     };

@@ -519,12 +519,57 @@
 
 @layer components {
 
-  .right-panel-compact {
+  /* BLOC DETAILS ------------------------------------- */
+  .bloc-details {
+    @apply p-4 text-sm space-y-3;
+  }
+
+  .details-cols-2 {
+    @apply grid grid-cols-2 gap-x-3;
+  }
+
+  .details-col-right {
+    @apply text-right;
+  }
+
+  .details-label {
+    @apply text-xs uppercase tracking-wide bg-primary/30 px-2;
+    color: var(--p-label-color);
+  }
+
+  .details-info {
+    @apply px-4;
+    color: var(--p-info-color);
+  }
+
+  .details-info-medium {
+    @apply px-4 font-medium;
+    color: var(--p-info-color);
+  }
+
+  .details-shop-bloc {
+    @apply rounded-md mx-3 my-1 p-1 text-center;
+    background-color: var(--first-plan-bg);
+  }
+
+  .details-shop-label {
+    @apply text-xs font-medium text-primary;
+  }
+
+  .details-product-list {
+    @apply m-0;
+    color: var(--p-info-color);
+  }
+
+
+  
+
+  .right-panel {
     @apply p-4 space-y-3 text-sm;
   }
 
   .right-panel-compact-row {
-    @apply flex flex-row justify-between px-4;
+    @apply flex flex-row justify-between px-6;
   }
 
 
@@ -738,13 +783,13 @@
   }
 
   .confirmed-badge {
-    @apply w-20 rounded-full px-2 py-0.5 text-xs font-mono font-semibold;
+    @apply w-20 rounded-full px-2 py-0.5 text-xs text-center font-mono font-semibold;
     background-color: var(--color-success);
     color: white;
   }
 
   .cancelled-badge {
-    @apply w-20 rounded-full px-2 py-0.5 text-xs font-mono font-semibold;
+    @apply w-20 rounded-full px-2 py-0.5 text-xs text-center font-mono font-semibold;
     background-color: var(--color-danger);
     color: white;
   }
@@ -1007,14 +1052,6 @@
 
   .slug {
     background-color: var(--first-plan-bg);
-  }
-
-  .detail-label {
-    color: var(--p-label-color);
-  }
-
-  .detail-info {
-    color: var(--p-info-color);
   }
 
   .form-section { @apply border rounded-lg shadow-sm p-1;

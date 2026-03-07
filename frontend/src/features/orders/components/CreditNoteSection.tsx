@@ -1,3 +1,4 @@
+import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 import { DataTable } from "../../../components/data-table/DataTable";
 import type { Column } from "../../../types/DataTable.types";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
@@ -29,9 +30,16 @@ export function CreditNoteSection({ creditNote }: Props) {
 
   return (
     <div className="mt-6 border-t pt-4">
-      <h4 className="font-semibold mb-2">
-        Avoir {creditNote.creditNoteNumber}
-      </h4>
+
+      <div className="flex flex-row items-center">
+        <h3 className="font-semibold mb-2">
+          Facture {creditNote.creditNoteNumber}
+        </h3>
+        <EyeButton
+          onClick={() => console.log("affichage de l'avoir pdf")}
+          extraClasses="ml-5"
+        />
+      </div>
 
       <p className="text-sm mb-2">
         Émis le {new Date(creditNote.issuedAt).toLocaleString()}

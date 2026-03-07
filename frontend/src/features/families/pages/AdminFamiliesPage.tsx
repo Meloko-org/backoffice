@@ -18,7 +18,7 @@ export default function AdminFamiliesPage() {
   const navigate = useNavigate()
 
   // définit le titre de la page pour AdminHeader
-  useAdminPage("Liste des familles")
+  useAdminPage("Liste des familles");
   
   const { openRight, closeRight, toggleRight, isRightOpen } = useAdminLayout()
   const { defineConfirm } = useConfirm();
@@ -83,7 +83,7 @@ export default function AdminFamiliesPage() {
     return {
       type: "family",
       title: "Détail de la famille",
-      data: selectedFamily,
+      family: selectedFamily,
       onEdit: () => handleEditFamily(selectedFamily),
       onDelete: () => handleDeleteFamily(selectedFamily),
     };

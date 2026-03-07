@@ -56,6 +56,24 @@ async function getOrders({
   const [items, totalItems] = await Promise.all([
     Order.find(filter)
       .populate("user", "email firstname lastname")
+      .populate({
+        path: "details.products.product",
+        select: `
+          product 
+          productCustomName`,
+        populate: {
+          path: "product",
+          select: "name family",
+          populate: {
+            path: "family",
+            select: "name",
+          },
+        },
+      })
+      .populate({
+        path: "details.shop",
+        select: "name",
+      })
       .sort(sort)
       .skip(skip)
       .limit(limit)

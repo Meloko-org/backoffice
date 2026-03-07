@@ -1,6 +1,6 @@
-import { Eye, Pencil } from "lucide-react";
 import type { OrderDetail } from "../types/order";
 import { useNavigate } from "react-router-dom";
+import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 
 interface Props {
   order: OrderDetail;
@@ -16,12 +16,11 @@ export function CustomerSection({ order }: Props) {
 
       <div className="flex flex-row justify-between items-center">
         <p><strong>{user.firstname} {user.lastname}</strong></p>
-        <button 
-          className="btn-outline-primary"
+        <EyeButton 
           onClick={() => navigate(`/admin/users/${order.user._id}`)}
-        >
-          <Eye />
-        </button>
+          extraClasses=""
+        />
+        
       </div>
 
       

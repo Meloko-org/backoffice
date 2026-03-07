@@ -30,7 +30,7 @@ function AdminLayoutContent() {
           relative z-20 flex h-full flex-col
           transition-all duration-300 ease-in-out
           isolate
-          ${isLeftOpen ? "ml-64" : "ml-16"}
+          ${isLeftOpen ? "ml-50" : "ml-16"}
           ${isRightOpen ? "mr-120" : "mr-0"}
         `}
         

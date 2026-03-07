@@ -7,6 +7,7 @@ import type { ProductLine } from "../types/order";
 import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
+import { OrderProductStatusBadge } from "../../../components/admin/badges/OrderProductStatus";
 
 interface Props {
   products: ProductLine[];
@@ -25,9 +26,9 @@ export function ProductsTable({ products }: Props) {
     return {
       type: "orderProduct",
       title: "Détail du produit commandé",
-      data: selectedProduct,
-      // onEdit: () => handleEditUser(selectedUser),
-      // onDelete: () => handleDeleteUser(selectedUser),
+      line: selectedProduct,
+      // onEdit: on passe une fonction si nécessaire,
+      // onDelete: on passe une fonction si nécessaire,
     };
   }, [selectedProduct]);
 
@@ -42,7 +43,6 @@ export function ProductsTable({ products }: Props) {
   }, [selectedProduct])
 
   const handleSelectProduct = (line: ProductLine) => {
-    console.log("product :", line)
     setSelectedProduct(prev =>
       prev?._id === line._id ? null : line
     )
@@ -68,13 +68,7 @@ export function ProductsTable({ products }: Props) {
       key: "productStatus",
       label: "Status",
       render: (p) => (
-        p.productStatus === "confirmed"
-          ? (
-            <div className="confirmed-badge">{p.productStatus}</div>
-          ) 
-          : (
-            <div className="cancelled-badge">{p.productStatus}</div>
-          )
+        <OrderProductStatusBadge status={p.productStatus} />
       )
     },
   ];

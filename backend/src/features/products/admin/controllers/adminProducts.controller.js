@@ -57,8 +57,6 @@ const listProducts = async (req, res, next) => {
       family,
     });
 
-    console.log("products :", JSON.stringify(result, null ,2))
-
     res.json({
       success: true,
       data: result,

@@ -1,3 +1,4 @@
+import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 import { DataTable } from "../../../components/data-table/DataTable";
 import type { Column } from "../../../types/DataTable.types";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
@@ -29,9 +30,16 @@ export function InvoiceSection({ invoice }: Props) {
 
   return (
     <div className="mt-6 border-t pt-4">
-      <h4 className="font-semibold mb-2">
-        Facture {invoice.invoiceNumber}
-      </h4>
+      <div className="flex flex-row items-center">
+        <h3 className="font-semibold mb-2">
+          Facture {invoice.invoiceNumber}
+        </h3>
+        <EyeButton
+          onClick={() => console.log("affichage de la facture pdf")}
+          extraClasses="ml-5"
+        />
+      </div>
+      
 
       <p className="text-sm mb-2">
         Émise le {new Date(invoice.issuedAt).toLocaleString()}

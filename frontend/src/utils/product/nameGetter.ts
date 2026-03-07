@@ -1,7 +1,7 @@
-import type { ProductLine } from "../../features/orders/types/order";
+import type { OrderProduct, ProductLine } from "../../features/orders/types/order";
 
 
-export const getNameFromProductLine = (line: ProductLine) => {
+export const getNameFromProductLine = (line: ProductLine | OrderProduct) => {
 
   if (!line) return null;
 

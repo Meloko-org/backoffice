@@ -18,7 +18,7 @@ export default function AdminCategoriesPage() {
   const navigate = useNavigate()
 
   // définit le titre de la page pour AdminHeader
-  useAdminPage("Liste des catégories")
+  useAdminPage("Liste des catégories");
   
   const { openRight, closeRight } = useAdminLayout()
   const { defineConfirm } = useConfirm();
@@ -83,7 +83,7 @@ export default function AdminCategoriesPage() {
     return {
       type: "category",
       title: "Détail de la catégorie",
-      data: selectedCategory,
+      category: selectedCategory,
       onEdit: () => handleEditCategory(selectedCategory),
       onDelete: () => handleDeleteCategory(selectedCategory),
     };

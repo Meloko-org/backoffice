@@ -82,7 +82,7 @@ export default function OrdersListPage() {
     return {
       type: "order",
       title: "Détail de la commande",
-      data: selectedOrder,
+      order: selectedOrder,
       onEdit: () => handleEditOrder(selectedOrder),
       onDelete: () => handleDeleteOrder(selectedOrder),
     };

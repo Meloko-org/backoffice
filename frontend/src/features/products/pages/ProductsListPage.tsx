@@ -81,7 +81,7 @@ export default function AdminProductsPage() {
     return {
       type: "product",
       title: "Détail du produit",
-      data: selectedProduct,
+      product: selectedProduct,
       onEdit: () => handleEditProduct(selectedProduct),
       onDelete: () => handleDeleteProduct(selectedProduct),
     };

@@ -25,7 +25,7 @@ const listOrders = async (req, res, next) => {
       filters,
     });
 
-    console.log(JSON.stringify(result.items[0], null, 2))
+    console.log("orders :",JSON.stringify(result.items[0], null, 2))
 
     res.json({
       success: true,

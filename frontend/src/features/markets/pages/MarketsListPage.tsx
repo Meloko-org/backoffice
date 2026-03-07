@@ -83,7 +83,7 @@ export default function MarketsListPage() {
     return {
       type: "market",
       title: "Détail du point de vente",
-      data: selectedMarket,
+      market: selectedMarket,
       onEdit: () => handleEditMarket(selectedMarket),
       onDelete: () => handleDeleteMarket(selectedMarket),
     };

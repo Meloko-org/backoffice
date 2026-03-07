@@ -25,23 +25,14 @@ export interface Order {
     country: string;
   } | null;
   details: {
-    products: {
-      product: string;
-      quantity: number;
-      unit: string;
-      unitPriceTTC: number;
-      unitPriceHT: number;
-      vatRate: number;
-      vatAmount: number;
-      totalPriceTTC: number;
-      productStatus: string;
-      refunded: boolean;
-      _id: string;
-    }[];
+    products: OrderProduct[];
     withdrawMode: string;
     withdrawMarket: string;
     withdrawDay: string;
-    shop: string;
+    shop: {
+      _id: string;
+      name: string;
+    };
     shopTotalHT: number;
     shopTotalVAT: number;
     shopTotalTTC: number;
@@ -62,6 +53,31 @@ export interface Order {
   orderNumber: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface OrderProduct {
+  product: {
+    _id: string;
+    product: {
+      _id: string;
+      name: string;
+      family: {
+        _id: string;
+        name: string;
+      }
+    };
+    productCustomName: string;
+  };
+  quantity: number;
+  unit: string;
+  unitPriceTTC: number;
+  unitPriceHT: number;
+  vatRate: number;
+  vatAmount: number;
+  totalPriceTTC: number;
+  productStatus: string;
+  refunded: boolean;
+  _id: string;
 }
 
 
@@ -157,7 +173,7 @@ export interface ProductLine {
 
   totalPriceTTC: number;
 
-  productStatus: string;
+  productStatus: OrderProductStatus;
   refunded: boolean;
   refundReason: string;
   refundedAt: string;
@@ -241,3 +257,7 @@ export interface Address {
   city: string;
   country: string;
 }
+
+export type OrderProductStatus =
+  | "confirmed"
+  | "cancelled";

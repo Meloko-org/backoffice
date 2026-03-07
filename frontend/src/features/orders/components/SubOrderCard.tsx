@@ -4,6 +4,7 @@ import type { SubOrderDetail } from "../types/order";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CreditNoteSection } from "./CreditNoteSection";
+import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 
 interface Props {
   subOrder: SubOrderDetail;
@@ -22,12 +23,10 @@ export function SubOrderCard({ subOrder }: Props) {
           Boutique : 
         </h1>
         <span className="text-2xl font-semibold mb-4 ml-5">{subOrder.shop.name}</span>
-        <button 
-          className="btn-outline-primary mb-4 ml-4"
+        <EyeButton 
           onClick={() => navigate(`/admin/shops/${subOrder.shop._id}`)}
-        >
-          <Eye />
-        </button>
+          extraClasses="mb-4 ml-4"
+        />
       </div>
       
 

@@ -70,7 +70,7 @@ export default function AdminSidebar() {
       className={`
         fixed inset-y-0 left-0 z-10
         transition-all duration-300
-        ${isLeftOpen ? "w-64" : "w-16"}
+        ${isLeftOpen ? "w-50" : "w-16"}
 				overflow-visible
       `}
       style={{ background: "var(--app-sidebar-bg)" }}
