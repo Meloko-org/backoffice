@@ -4,7 +4,7 @@ import ProductDetails from "../components/ProductDetails";
 const rightPanel: RightPanelMap = {
   product: {
     component: ProductDetails,
-    fullPanel: true,
+    fullPanel: false,
   },
 }
 

@@ -107,7 +107,7 @@
     --app-sidebar-bg: var(--color-sidebar-bg-light);
     --app-second-text: var(--color-text-light);
 
-    --p-label-color: rgb(38, 46, 32, 0.5);
+    --p-label-color: rgb(38, 46, 32, 0.8);
     --p-info-color: var(--color-text-light);
 
     --btn-signout-bg: var(--color-bg-light);
@@ -425,7 +425,7 @@
   }
   /* Dark mode */  
   html.dark h1, h2, h3, h4, h5, h6 {
-    color: rgb(152, 182, 110, 0.5)
+    color: rgb(152, 182, 110, 0.7)
   }
 
 
@@ -527,13 +527,37 @@
   .details-cols-2 {
     @apply grid grid-cols-2 gap-x-3;
   }
+  .details-cols-3 {
+    @apply grid grid-cols-3 gap-x-3;
+  }
+
+  .details-inline {
+    @apply flex items-center w-full gap-x-2;
+  }
 
   .details-col-right {
     @apply text-right;
   }
 
+  .details-image-ctn {
+    @apply w-[80%] mx-auto;
+  }
+
+  .details-image {
+    @apply w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center;
+    background-color: var(--first-plan-bg)
+  }
+
+  .details-no-image {
+    @apply flex flex-col items-center gap-2 text-neutral-400;
+  }
+
+  .details-desc {
+    @apply overflow-y-auto max-h-20;
+  }
+
   .details-label {
-    @apply text-xs uppercase tracking-wide bg-primary/30 px-2;
+    @apply text-xs uppercase tracking-wide bg-primary/20 px-2;
     color: var(--p-label-color);
   }
 
@@ -702,9 +726,9 @@
     color: var(--bloc-text);
   }
 
-  .bloc h2 {
+  /* .bloc h2 { 
     color: rgba(152, 182, 110, 0.5);
-  }
+  }*/
 
   .bloc-sub-text {
     color: var(--bloc-sub-text);
@@ -1051,6 +1075,7 @@
   }
 
   .slug {
+    @apply font-mono text-xs px-2 py-1 rounded inline-block;
     background-color: var(--first-plan-bg);
   }
 

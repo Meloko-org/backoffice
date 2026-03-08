@@ -1,5 +1,3 @@
-import OrderRightPanel from "../../../features/orders/config/rightPanel"
-
 
 export type RightPanelType =
   | "category"
@@ -16,9 +14,6 @@ export interface RightPanelConfig {
   fullPanel?: boolean;
 }
 
-// export const rightPanelRegistry: Partial<Record<RightPanelType, RightPanelConfig>> = {
-//   ...OrderRightPanel,
-// }
 
 /**
  * Utilisation de Vite: import.meta.glob pour créer un auto-registry

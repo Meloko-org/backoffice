@@ -1,7 +1,8 @@
-import { ImageOff, Pencil, Trash2 } from "lucide-react";
+import { ImageOff, Pencil, Eye, Trash2, Trash } from "lucide-react";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import type { Product } from "../types/product";
 import { deleteProduct } from "../api/products.api";
+import DetailsButton from "../../../components/admin/buttons/DetailsButton";
 
 type Props = {
 	product: Product;
@@ -35,116 +36,120 @@ export default function FamilyDetails({
   };
 
   return (
-    <div className="p-4 space-y-4 text-sm">
+    <div className="bloc-details">
       {/* IMAGE */}
-      <div className="no-pict w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
-        {hasImage ? (
-          <img
-            src={imageUrl!}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex flex-col items-center gap-2 text-neutral-400">
-            <ImageOff className="w-8 h-8" />
-            <span>Aucune image</span>
-          </div>
-        )}
+      <div className="details-image-ctn">
+        <div className="details-image">
+          {hasImage ? (
+            <img
+              src={imageUrl!}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="details-no-image">
+              <ImageOff className="w-8 h-8" />
+              <span>Aucune image</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* INFOS */}
-      <div className="space-y-2">
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide">
-            Nom
-          </p>
-          <p className="detail-info font-medium">{product.name}</p>
-        </div>
-
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide ">
-            Slug
-          </p>
-          <p className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
-            {product.slug}
-          </p>
-        </div>
-
-        {product.family?.name && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Famille
-            </p>
-            <p className="detail-info ">{product.family.name}</p>
-          </div>
-        )}
-
-        {product.family?.category.name && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Catégorie
-            </p>
-            <p className="detail-info ">{product.family.category.name}</p>
-          </div>
-        )}
-
-        <div className="flex justify-between gap-x-4">
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">Unité</div>
-            <div className="detail-info">{product.weight.unit}</div>
-          </div>
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">Mesure</div>
-            <div className="detail-info ">{product.weight.measurement}</div>
-          </div>
-          <div className="flex items-center w-full gap-x-2">
-            <div className="detail-label text-xs uppercase tracking-wide">TAV</div>
-            <div className="detail-info ">{product.vatRate}</div>
-          </div>
-        </div>
-
-        
-
-        {product.description && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Description
-            </p>
-            <p className="detail-info leading-relaxed">
-              {product.description}
-            </p>
-          </div>
-        )}
-
-        
-
-
+      <div>
+        <p className="details-label">
+          Nom
+        </p>
+        <p className="details-info">{product.name}</p>
       </div>
+
+      <div>
+        <p className="details-label">
+          Slug
+        </p>
+        <p className="details-info slug ">
+          {product.slug}
+        </p>
+      </div>
+
+      <div>
+        <p className="details-label">
+          Famille
+        </p>
+        <p className="details-info">{product.family.name}</p>
+      </div>
+
+      <div>
+        <p className="details-label">
+          Catégorie
+        </p>
+        <p className="details-info">{product.family.category.name}</p>
+      </div>
+
+      <div className="details-cols-3">
+        <div className="details-inline">
+          <div className="details-label">Unité</div>
+          <div className="details-info">{product.weight.unit}</div>
+        </div>
+        <div className="details-inline">
+          <div className="details-label">Mesure</div>
+          <div className="details-info ">{product.weight.measurement}</div>
+        </div>
+        <div className="details-inline">
+          <div className="details-label">TVA</div>
+          <div className="details-info ">{product.vatRate}</div>
+        </div>
+      </div>
+
+      
+      <div>
+        <p className="details-label">
+          Description
+        </p>
+        <p className="details-info details-desc">
+          {product.description}
+        </p>
+      </div>
+
+      
 
       {/* ACTIONS */}
       {(onEdit || onDelete) && (
-        <div className="pt-2 flex gap-2">
-          {onEdit && (
-            <button
-              onClick={() => onEdit(product)}
-              className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Pencil className="w-4 h-4" />
-              Éditer
-            </button>
-          )}
+        <div className="details-cols-2 mt-5">
 
-          {onDelete && (
-            <button
-              onClick={handleDelete}
-              className="flex-1 btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Trash2 className="w-4 h-4" />
-              Supprimer
-            </button>
-          )}
+          <div className="">
+            {onEdit && (
+
+              <DetailsButton
+                label="Éditer"
+                icon={Eye}
+                onClick={() => onEdit(product)}
+                extraClasses="w-full btn-primary"
+              />
+            )}
+          </div>
+
+          <div>
+            {onDelete && (
+              <DetailsButton
+                label="Supprimer"
+                icon={Trash}
+                onClick={handleDelete}
+                extraClasses="w-full btn-danger"
+              />
+              // <button
+              //   onClick={handleDelete}
+              //   className="flex-1 w-full btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
+              // >
+              //   <Trash2 className="w-4 h-4" />
+              //   Supprimer
+              // </button>
+            )}
+          </div>
+
         </div>
       )}
+
     </div>
   );
 }

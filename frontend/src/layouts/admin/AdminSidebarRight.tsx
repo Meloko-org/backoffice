@@ -17,6 +17,8 @@ export default function AdminSidebarRight() {
 
 	const PanelComponent = panelConfig.component;
 	const isFullPanel = panelConfig.fullPanel;
+
+	console.log("isFullPanel :", isFullPanel)
 		
   return (
     <aside
