@@ -1,42 +1,30 @@
-import { ImageOff, Pencil, Eye, Trash2, Trash } from "lucide-react";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import { ImageOff } from "lucide-react";
 import type { Product } from "../types/product";
-import { deleteProduct } from "../api/products.api";
-import DetailsButton from "../../../components/admin/buttons/DetailsButton";
+import DetailsActions from "../../../components/admin/details/DetailsActions";
+import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
 
 type Props = {
 	product: Product;
-	onEdit?: (product: Product) => void;
-  onDelete?: (product: Product) => void;
 }
 
 
 export default function FamilyDetails({
 	product,
-	onEdit,
-	onDelete,
 }: Props) {
 
 	if (!product) return null;
 
-  const { defineConfirm } = useConfirm();
+
+  const config = rightPanelRegistry.product
 
 
 	const imageUrl = product.image; 
   const hasImage = Boolean(imageUrl);
 
-  const handleDelete = () => {
-    defineConfirm({
-      title: "Supprimer le produit",
-      description: "Cette action est irréversible.",
-      onConfirm: async () => {
-        await deleteProduct(product._id);
-      },
-    });
-  };
 
   return (
     <div className="bloc-details">
+      
       {/* IMAGE */}
       <div className="details-image-ctn">
         <div className="details-image">
@@ -111,44 +99,12 @@ export default function FamilyDetails({
         </p>
       </div>
 
-      
 
-      {/* ACTIONS */}
-      {(onEdit || onDelete) && (
-        <div className="details-cols-2 mt-5">
-
-          <div className="">
-            {onEdit && (
-
-              <DetailsButton
-                label="Éditer"
-                icon={Eye}
-                onClick={() => onEdit(product)}
-                extraClasses="w-full btn-primary"
-              />
-            )}
-          </div>
-
-          <div>
-            {onDelete && (
-              <DetailsButton
-                label="Supprimer"
-                icon={Trash}
-                onClick={handleDelete}
-                extraClasses="w-full btn-danger"
-              />
-              // <button
-              //   onClick={handleDelete}
-              //   className="flex-1 w-full btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-              // >
-              //   <Trash2 className="w-4 h-4" />
-              //   Supprimer
-              // </button>
-            )}
-          </div>
-
-        </div>
-      )}
+      <DetailsActions
+        item={product}
+        actions={config?.actions ?? []}
+        wrapperClasses="details-cols-2 mt-5"
+      />
 
     </div>
   );

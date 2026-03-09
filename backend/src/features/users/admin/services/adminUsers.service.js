@@ -298,6 +298,7 @@ async function getUserDashboard(
 
   const user = await User.findById(userId)
     .populate("roles", "name")
+    .populate("bookmarks", "name")
     .lean();
 
   if (!user) {
@@ -419,6 +420,11 @@ async function getUserDashboard(
       firstname: user.firstname,
       lastname: user.lastname,
       avatar: user.avatar,
+      addresses: user.addresses,
+      bookmarks: user.bookmarks.map((b) => ({
+        _id: b._id,
+        name: b.name
+      })),
       roles: user.roles.map((r) => ({
         id: r._id,
         name: r.name,

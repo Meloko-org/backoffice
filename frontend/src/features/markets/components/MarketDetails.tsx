@@ -1,149 +1,113 @@
-import { ImageOff, Pencil, Trash2 } from "lucide-react";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import { ImageOff } from "lucide-react";
 import type { Market } from "../types/markets";
-import { deleteMarket } from "../api/markets.api";
+import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
+import DetailsActions from "../../../components/admin/details/DetailsActions";
 
 type Props = {
 	market: Market;
-	onEdit?: (market: Market) => void;
-  onDelete?: (market: Market) => void;
 }
 
 
 export default function FamilyDetails({
 	market,
-	onEdit,
-	onDelete,
 }: Props) {
 
 	if (!market) return null;
 
-  const { defineConfirm } = useConfirm();
-
-  console.log("MARKETDETAILS :", market)
-
+  const config = rightPanelRegistry.category;
 
 	const imageUrl = market.image; 
   const hasImage = Boolean(imageUrl);
 
-  const handleDelete = () => {
-    defineConfirm({
-      title: "Supprimer le point de vente",
-      description: "Cette action est irréversible.",
-      onConfirm: async () => {
-        await deleteMarket(market._id);
-      },
-    });
-  };
-
   return (
-    <div className="p-4 space-y-4 text-sm">
+    <div className="bloc-details">
+
       {/* IMAGE */}
-      <div className="no-pict w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
-        {hasImage ? (
-          <img
-            src={imageUrl!}
-            alt={market.name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex flex-col items-center gap-2 text-neutral-400">
-            <ImageOff className="w-8 h-8" />
-            <span>Aucune image</span>
-          </div>
-        )}
+      <div className="details-image-ctn">
+        <div className="details-image">
+          {hasImage ? (
+            <img
+              src={imageUrl!}
+              alt={market.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="details-no-image">
+              <ImageOff className="w-8 h-8" />
+              <span>Aucune image</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* INFOS */}
-      <div className="space-y-2">
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide">
-            Nom
-          </p>
-          <p className="detail-info font-medium">{market.name}</p>
-        </div>
-
-        <div>
-          <p className="detail-label text-xs uppercase tracking-wide ">
-            Slug
-          </p>
-          <p className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
-            {market.slug}
-          </p>
-        </div>
-
-        {market.address && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Adresse
-            </p>
-            <div>
-              <p className="detail-info ">{market.address.address1}</p>
-              <p className="detail-info ">{market.address.address2}</p>
-              <div className="space-x-3">
-                <span className="detail-info ">{market.address.postalCode}</span>
-                <span className="detail-info ">{market.address.city}</span>
-              </div>
-            </div>
-
-            <div className="space-y-0 mt-3">
-              <div className="flex items-center w-full gap-x-2">
-                <div className="detail-label text-xs uppercase tracking-wide">Latitude</div>
-                <div className="detail-info">{market.address.latitude}</div>
-              </div>
-              <div className="flex items-center w-full gap-x-2">
-                <div className="detail-label text-xs uppercase tracking-wide">Longitude</div>
-                <div className="detail-info ">{market.address.longitude}</div>
-              </div>
-            </div>
-
-          </div>
-        )}
-
-
-
-                
-
-        {market.description && (
-          <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
-              Description
-            </p>
-            <p className="detail-info leading-relaxed">
-              {market.description}
-            </p>
-          </div>
-        )}
-
-        
-
-
+      <div>
+        <p className="details-label">
+          Nom
+        </p>
+        <p className="details-info">{market.name}</p>
       </div>
 
-      {/* ACTIONS */}
-      {(onEdit || onDelete) && (
-        <div className="pt-2 flex gap-2">
-          {onEdit && (
-            <button
-              onClick={() => onEdit(market)}
-              className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Pencil className="w-4 h-4" />
-              Éditer
-            </button>
-          )}
+      <div>
+        <p className="details-label">
+          Slug
+        </p>
+        <p className="details-info slug">
+          {market.slug}
+        </p>
+      </div>
 
-          {onDelete && (
-            <button
-              onClick={handleDelete}
-              className="flex-1 btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Trash2 className="w-4 h-4" />
-              Supprimer
-            </button>
-          )}
+      <div>
+        <p className="details-label">
+          Adresse
+        </p>
+        <div className="adr-card">
+          <p className="details-info m-0 px-1">{market.address.address1}</p>
+          <p className="details-info m-0 px-1">{market.address.address2}</p>
+          <div className="space-x-3">
+            <span className="details-info px-1">{market.address.postalCode}</span>
+            <span className="details-info px-1">{market.address.city}</span>
+          </div>
         </div>
-      )}
+      </div>
+
+      <div className="details-cols-2">
+        <div>
+          <p className="details-label">
+          Latitude
+          </p>
+          <p className="details-info slug">
+            {market.address.latitude}
+          </p>
+        </div>
+        <div>
+          <p className="details-label">
+            Longitude
+          </p>
+          <p className="details-info slug">
+            {market.address.longitude}
+          </p>
+        </div>
+      </div>          
+
+      <div>
+        <p className="details-label">
+          Description
+        </p>
+        <p className="details-info details-desc">
+          {market.description}
+        </p>
+      </div>
+
+
+
+      {/* ACTIONS */}
+      <DetailsActions
+        item={market}
+        actions={config?.actions ?? []}
+        wrapperClasses="details-cols-2 mt-5"
+      />
+
     </div>
   );
 }

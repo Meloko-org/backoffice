@@ -27,8 +27,6 @@ export function ProductsTable({ products }: Props) {
       type: "orderProduct",
       title: "Détail du produit commandé",
       line: selectedProduct,
-      // onEdit: on passe une fonction si nécessaire,
-      // onDelete: on passe une fonction si nécessaire,
     };
   }, [selectedProduct]);
 

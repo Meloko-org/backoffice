@@ -1,22 +1,6 @@
 import type { PaginationMeta } from "../../../types/global.types";
 
-export interface User {
-  _id: string;
-  email: string;
-  clerkUUID: string;
-  clerkPasswordEnabled: boolean;
-  roles: {
-    _id: string;
-    name: string; 
-  }[];
-  firstname: string;
-  lastname: string;
-  avatar: string | null;
-  bookmarks: {
-    _id: string;
-    name: string;
-  }[];
-  addresses: {
+export interface Address {
     _id: string;
     name: string;
     isDefault: boolean;
@@ -29,7 +13,27 @@ export interface User {
     },
     createdAt: string;
     updatedAt: string;
+  };
+
+export interface Bookmark {
+  _id: string;
+  name: string;
+}
+
+export interface User {
+  _id: string;
+  email: string;
+  clerkUUID: string;
+  clerkPasswordEnabled: boolean;
+  roles: {
+    _id: string;
+    name: string; 
   }[];
+  firstname: string;
+  lastname: string;
+  avatar: string | null;
+  bookmarks: Bookmark[];
+  addresses: Address[];
   favSearch: string[];
   isDeleted: boolean;
   isSuspended: boolean;
@@ -62,6 +66,10 @@ export type UserDashboard = {
       id: string;
       name: string;
     }[];
+
+    bookmarks: Bookmark[];
+    addresses: Address[];
+    favSearch: string[];
 
     createdAt: string;
     lastLoginAt?: string;

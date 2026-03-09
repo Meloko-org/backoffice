@@ -9,6 +9,8 @@ import UserOrdersSection from "../components/UserOrderSection";
 import UserProducerSection from "../components/UserProducerSection";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { BallTriangle } from "react-loader-spinner";
+import UserAddressSection from "../components/UserAddressSection";
+import UserBookmarksSection from "../components/UserBookmarksSection";
 
 export default function UserPage() {
   const { id } = useParams<{ id: string }>();
@@ -23,6 +25,8 @@ export default function UserPage() {
     page,
     limit
   );
+
+  console.log("data in page :", data)
 
   if (isLoading) {
     return (
@@ -70,13 +74,24 @@ export default function UserPage() {
 
       </div>
 
+      <div className="grid grid-cols-3 gap-x-10">
+        <div className="space-y-5">
+          <UserAddressSection addresses={data.user.addresses}/>
+          <UserBookmarksSection bookmarks={data.user.bookmarks} />
+        </div>
+        
+        <div className="col-span-2">
+          {/* 4️⃣ RECENT ORDERS */}
+          {id && (
+            <UserOrdersSection
+              userId={id}
+            />
+          )}
+        </div>
+      </div>
 
-      {/* 4️⃣ RECENT ORDERS */}
-      {id && (
-        <UserOrdersSection
-          userId={id}
-        />
-      )}
+
+      
       
     </div>
   );

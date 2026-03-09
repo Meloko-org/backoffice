@@ -1,10 +1,26 @@
+import { Eye, Trash } from "lucide-react";
 import type { RightPanelMap } from "../../../layouts/admin/config/rightPanelRegistry";
 import ProductDetails from "../components/ProductDetails";
+
 
 const rightPanel: RightPanelMap = {
   product: {
     component: ProductDetails,
     fullPanel: false,
+    actions: [
+      {
+        label: "Éditer",
+        icon: Eye,
+        variant: "primary",
+        action: "edit",
+      },
+      {
+        label: "Supprimer",
+        icon: Trash,
+        variant: "danger",
+        action: "delete",
+      },
+    ],
   },
 }
 

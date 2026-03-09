@@ -1,58 +1,43 @@
-import { ImageOff, Pencil, Trash2 } from "lucide-react";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import { ImageOff } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
+import DetailsActions from "../../../components/admin/details/DetailsActions";
+import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
 
 type Props = {
 	user: User;
-	onEdit?: (user: User) => void;
-  onDelete?: (user: User) => void;
 }
 
 
 export default function UserDetails({
 	user,
-	onEdit,
-	onDelete,
 }: Props) {
 
 	if (!user) return null;
 
-  const { defineConfirm } = useConfirm();
-
+  const config = rightPanelRegistry.user;
 
 	const imageUrl = user.avatar; 
   const hasImage = Boolean(imageUrl);
 
-  // console.log(user)
-
-  const handleDelete = () => {
-    defineConfirm({
-      title: "Supprimer le user",
-      description: "Cette action est irréversible.",
-      onConfirm: async () => {
-        // await deleteUser(user._id);
-      },
-    });
-  };
 
   return (
-    <div className="p-4 space-y-3 text-sm relative">
+    <div className="bloc-details">
 
       <div>
-        <p className="detail-label text-xs uppercase tracking-wide">
+        <p className="details-label">
           Nom / Prénom
         </p>
-        <p className="detail-info font-medium m-0">{user.firstname}</p>
-        <p className="detail-info font-medium">{user.lastname}</p>
+        <p className="details-info m-0">{user.firstname}</p>
+        <p className="details-info">{user.lastname}</p>
       </div>
 
       <div>
-        <p className="detail-label text-xs uppercase tracking-wide ">
+        <p className="details-label">
           Rôle
         </p>
         {user.roles.map((role) => (
-          <p key={role._id} className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block">
+          <p key={role._id} className="details-info slug">
             {role.name}
           </p>
         ))}
@@ -60,22 +45,22 @@ export default function UserDetails({
       
 
       {/* Suspension / Suppression */}
-      <div className="flex flex-row gap-x-2">
+      <div className="details-cols-2">
 
-        <div className="basis-1/2">
+        <div className="">
           <div className={`
-              warning p-2
-              ${user.isSuspended ? "bg-warning" : ""}
+              warning px-2 pt-2 pb-0
+              ${user.isSuspended ? "bg-warning/30" : ""}
             `}>
 
             <div className="flex flex-row gap-x-1 items-center">
               <div className="basis-1/3">
-                <p className="detail-label text-xs uppercase tracking-wide ">
+                <p className="details-label-warning">
                   Suspendu
                 </p>
               </div>
               <div className="basis-2/3">
-                <p className="detail-info font-medium">
+                <p className="details-info">
                   {user.isSuspended ? "Oui" : "Non"}
                 </p>
               </div>
@@ -85,12 +70,12 @@ export default function UserDetails({
               <>
                 <div className="flex flex-row gap-x-1">
                   <div className="basis-1/3">
-                    <p className="detail-label text-xs uppercase tracking-wide ">
+                    <p className="details-label-warning">
                       Le
                     </p>
                   </div>
                   <div className="basis-2/3">
-                    <p className="detail-info font-medium">
+                    <p className="details-info">
                       {new Date(user.suspendedAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -98,12 +83,12 @@ export default function UserDetails({
 
                 <div className="flex flex-row gap-x-1">
                   <div className="basis-1/3">
-                    <p className="detail-label text-xs uppercase tracking-wide ">
+                    <p className="details-label-warning">
                       Raison
                     </p>
                   </div>
                   <div className="basis-2/3">
-                    <p className="detail-info font-medium">
+                    <p className="details-info">
                       {user.suspensionReason}
                     </p>
                   </div>
@@ -115,20 +100,20 @@ export default function UserDetails({
           </div>
         </div>
 
-        <div className="basis-1/2">
+        <div className="">
           <div className={`
-              alert p-2 
-              ${user.isDeleted ? "bg-danger" : ""}
+              alert px-2 pt-2 pb-0 
+              ${user.isDeleted ? "bg-danger/30" : ""}
             `}>
 
             <div className="flex flex-row gap-x-1 items-center">
               <div className="basis-1/3">
-                <p className="detail-label text-xs uppercase tracking-wide ">
+                <p className="details-label-danger">
                   Supprimé
                 </p>
               </div>
               <div className="basis-2/3">
-                <p className="detail-info font-medium">
+                <p className="details-info">
                   {user.isDeleted ? "Oui" : "Non"}
                 </p>
               </div>
@@ -138,12 +123,12 @@ export default function UserDetails({
               <>
                 <div className="flex flex-row gap-x-1">
                   <div className="basis-1/3">
-                    <p className="detail-label text-xs uppercase tracking-wide ">
+                    <p className="details-label-danger">
                       Le
                     </p>
                   </div>
                   <div className="basis-2/3">
-                    <p className="detail-info font-medium">
+                    <p className="details-info">
                       {new Date(user.deletedAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -151,12 +136,12 @@ export default function UserDetails({
                 
                 <div className="flex flex-row gap-x-1">
                   <div className="basis-1/3">
-                    <p className="detail-label text-xs uppercase tracking-wide ">
+                    <p className="details-label-danger">
                       Par
                     </p>
                   </div>
                   <div className="basis-2/3">
-                    <p className="detail-info font-medium">
+                    <p className="details-info">
                       {user.deletedByAdmin}
                     </p>
                   </div>
@@ -174,19 +159,19 @@ export default function UserDetails({
 
       {/* INFOS */}
       <div>
-        <p className="detail-label text-xs uppercase tracking-wide ">
+        <p className="details-label">
           Email
         </p>
-        <p className="detail-info font-medium">
+        <p className="details-info">
           {user.email}
         </p>
       </div>
 
       <div>
-        <p className="detail-label text-xs uppercase tracking-wide ">
+        <p className="details-label">
           ClerkUUId
         </p>
-        <p className="detail-info font-medium">
+        <p className="details-info">
           {user.clerkUUID}
         </p>
       </div>
@@ -196,7 +181,7 @@ export default function UserDetails({
       {user.addresses && user.addresses.length > 0 && (
         <div className="h-30 overflow-y-auto">
           <div>
-            <p className="detail-label text-xs uppercase tracking-wide">
+            <p className="details-label">
               Adresses
             </p>
           </div>
@@ -212,11 +197,11 @@ export default function UserDetails({
                 `}>
                   {adr.name}
                 </p>
-                <p className="detail-info m-0">{adr.address.address1}</p>
-                <p className="detail-info m-0">{adr.address.address2}</p>
+                <p className="details-info m-0 px-1">{adr.address.address1}</p>
+                <p className="details-info m-0 px-1">{adr.address.address2}</p>
                 <div className="space-x-3">
-                  <span className="detail-info ">{adr.address.postalCode}</span>
-                  <span className="detail-info ">{adr.address.city}</span>
+                  <span className="details-info px-1">{adr.address.postalCode}</span>
+                  <span className="details-info px-1">{adr.address.city}</span>
                 </div>
               </div>
             ))}
@@ -228,62 +213,42 @@ export default function UserDetails({
       {user.stripeUUID && (
         <>
           <div>
-            <p className="detail-label text-xs uppercase tracking-wide ">
+            <p className="details-label">
               StripeUUID
             </p>
-            <p className="detail-info font-medium">
+            <p className="details-info">
               {user.stripeUUID}
             </p>
           </div>
 
           <div className="flex flex-row gap-x-2">
             <div className="basis-1/2">
-              <p className="detail-label text-xs uppercase tracking-wide ">
+              <p className="details-label">
                 Nombre de commandes
               </p>
-              <p className="detail-info font-medium">
+              <p className="details-info">
                 {user.totalOrders}
               </p>
             </div>
 
             <div className="basis-1/2">
-              <p className="detail-label text-xs uppercase tracking-wide ">
+              <p className="details-label">
                 Total dépensé
               </p>
-              <p className="detail-info font-medium">
+              <p className="details-info">
                 {formatPriceToEuros(user.totalSpent)}
               </p>
             </div>
           </div>
         </>
       )}
-        
-      
 
-      {/* ACTIONS */}
-      {/* {(onEdit || onDelete) && (
-        <div className="flex gap-2">
-          {onEdit && (
-            <button
-              onClick={() => onEdit(user)}
-              className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Pencil className="w-4 h-4" />
-              Éditer
-            </button>
-          )}
+      <DetailsActions
+        item={user}
+        actions={config?.actions ?? []}
+        wrapperClasses="details-cols-2 mt-5"
+      />
 
-          {onDelete && (
-            <button
-              onClick={handleDelete}
-              className="flex-1 btn-danger flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              <Trash2 className="w-4 h-4" />
-              Supprimer
-            </button>
-          )}
-        </div>
-      )} */}
 
       {/* IMAGE */}
       <div className="fixed top-17 right-13 w-30">
@@ -303,5 +268,6 @@ export default function UserDetails({
           </div>
         </div>
     </div>
+
   );
 }

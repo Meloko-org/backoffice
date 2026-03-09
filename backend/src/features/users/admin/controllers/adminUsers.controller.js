@@ -52,6 +52,8 @@ const getUser = async (req, res, next) => {
 
     const result = await getUserById(id);
 
+    console.log(result)
+
     res.json({
       success: true,
       data: result,

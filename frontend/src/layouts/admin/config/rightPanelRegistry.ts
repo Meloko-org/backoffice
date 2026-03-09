@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react"
 
 export type RightPanelType =
   | "category"
@@ -9,9 +10,17 @@ export type RightPanelType =
   | "orderProduct"
 
 
+export interface RightPanelAction {
+  label: string
+  icon: LucideIcon
+  variant?: "primary" | "danger"
+  action: "edit" | "delete"
+}
+
 export interface RightPanelConfig {
   component: React.ComponentType<any>;
   fullPanel?: boolean;
+  actions?: RightPanelAction[];
 }
 
 

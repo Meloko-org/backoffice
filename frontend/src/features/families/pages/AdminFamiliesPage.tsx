@@ -13,6 +13,7 @@ import type { ProductFamily } from "../types/family";
 import type { CategoryForSelect } from "../../categories/types/category";
 import { getCategoryNames } from "../../categories/api/categories.api";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
+import { BallTriangle } from "react-loader-spinner";
 
 export default function AdminFamiliesPage() {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function AdminFamiliesPage() {
   // définit le titre de la page pour AdminHeader
   useAdminPage("Liste des familles");
   
-  const { openRight, closeRight, toggleRight, isRightOpen } = useAdminLayout()
+  const { openRight, closeRight } = useAdminLayout()
   const { defineConfirm } = useConfirm();
 
   /*
@@ -137,6 +138,24 @@ export default function AdminFamiliesPage() {
       closeRight();
     };
   }, []);
+  
+
+  if (loading) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#98B66E"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+  }
 
 	// console.log("ADMIN_CATEGORIES_PAGE")
 

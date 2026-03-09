@@ -17,11 +17,11 @@ export default function OrderProductDetails({ line}: Props) {
   const productName = getNameFromProductLine(line);
 
   return (
-    <div className="right-panel">
+    <div className="bloc-details">
 
       {/* IMAGE */}
-      <div className="px-15 mb-5">
-        <div className="no-pict w-full aspect-4/3 rounded-lg overflow-hidden flex items-center justify-center">
+      <div className="details-image-ctn">
+        <div className="details-image">
           {hasImage ? (
             <img
               src={imageUrl!}
@@ -29,7 +29,7 @@ export default function OrderProductDetails({ line}: Props) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="flex flex-col items-center gap-2 text-neutral-400">
+            <div className="details-no-image">
               <ImageOff className="w-8 h-8" />
               <span>Aucune image</span>
             </div>
@@ -37,134 +37,137 @@ export default function OrderProductDetails({ line}: Props) {
         </div>
       </div>
 
-      <div className="flex space-x-3">
-        <div className="basis-1/2 space-y-3">
+      <div className="details-cols-2">
+        <div className="">
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               Produit
             </p>
-            <p className="detail-info font-medium m-0">{productName}</p>
+            <p className="details-info">{productName}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               Prix
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.product.price)}</p>
+            <p className="details-info">{formatPriceToEuros(line.product.price)}</p>
           </div>
 
           {line.product.productCustomName && (
             <>
               <div>
-                <p className="detail-label">
+                <p className="details-label">
                   poids par unité
                 </p>
-                <p className="detail-info font-medium m-0">{line.product.weightPerUnit}</p>
+                <p className="details-info">{line.product.weightPerUnit}</p>
               </div>
               <div>
-                <p className="detail-label">
+                <p className="details-label">
                   origine
                 </p>
-                <p className="detail-info font-medium m-0">{line.product.origin}</p>
+                <p className="details-info">{line.product.origin}</p>
               </div>
               <div>
-                <p className="detail-label">
+                <p className="details-label">
                   format
                 </p>
-                <p className="detail-info font-medium m-0">{line.product.format}</p>
+                <p className="details-info">{line.product.format}</p>
               </div>
               <div>
-                <p className="detail-label">
+                <p className="details-label">
                   portion
                 </p>
-                <p className="detail-info font-medium m-0">{line.product.portion}</p>
+                <p className="details-info">{line.product.portion}</p>
               </div>
             </>
           )}
 
         </div>
 
-        <div className="basis-1/2 space-y-3 text-right">
+        <div className="details-col-right">
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               Prix Unitaire HT
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.unitPriceHT)}</p>
+            <p className="details-info">{formatPriceToEuros(line.unitPriceHT)}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               taux tva
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.vatRate)}</p>
+            <p className="details-info">{formatPriceToEuros(line.vatRate)}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               montant tva
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.vatAmount)}</p>
+            <p className="details-info">{formatPriceToEuros(line.vatAmount)}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               Prix Unitaire ttc
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.unitPriceTTC)}</p>
+            <p className="details-info">{formatPriceToEuros(line.unitPriceTTC)}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               quantité
             </p>
-            <p className="detail-info font-medium m-0">{`${line.quantity} ${line.unit}`}</p>
+            <p className="details-info">{`${line.quantity} ${line.unit}`}</p>
           </div>
           <div>
-            <p className="detail-label">
+            <p className="details-label">
               Prix total ttc
             </p>
-            <p className="detail-info font-medium m-0">{formatPriceToEuros(line.totalPriceTTC)}</p>
+            <p className="details-info">{formatPriceToEuros(line.totalPriceTTC)}</p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-row w-56 justify-between mx-auto my-5">
-        <span className="detail-label text-xs uppercase tracking-wide">
-          Status du produit
-        </span>
-        <span className="detail-info font-medium m-0">
+      <div className="details-cols-2 my-3 items-center">
+        {/* <div className="details-col-right"> */}
+          <h3 className="text-right">
+            Status du produit
+          </h3>
+        {/* </div> */}
+
+        <p className="details-info">
           <OrderProductStatusBadge status={line.productStatus} />
-        </span>
+        </p>
       </div>
 
 
       {line.productStatus === "cancelled" && (
-        <>
-          <div className="rounded-lg bg-danger/10 p-4">
-          <div>
-            <p className="detail-label">
+        <div className="rounded-lg bg-danger/10 px-4 pt-4 pb-2">
+
+          <div className="details-cols-2">
+            <p className="details-label-danger">
               Remboursé
             </p>
-            <p className="detail-info font-medium m-0">{line.refunded ? "OUI" : "NON"}</p>
+            <p className="details-info">{line.refunded ? "OUI" : "NON"}</p>
           </div>
           
-          <div>
-            <p className="detail-label">
-              Raison du remboursement
-            </p>
-            <p className="detail-info font-medium m-0">{line.refundReason}</p>
-          </div>
-          
-          <div>
-            <p className="detail-label">
+          <div className="details-cols-2">
+            <p className="details-label-danger">
               Date du remboursement
             </p>
-            <p className="detail-info font-medium m-0">{new Date(line.refundedAt).toLocaleDateString()}</p>
+            <p className="details-info">{new Date(line.refundedAt).toLocaleDateString()}</p>
           </div>
           
           <div>
-            <p className="detail-label">
+            <p className="details-label-danger">
+              Raison du remboursement
+            </p>
+            <p className="details-info">{line.refundReason}</p>
+          </div>
+          
+          <div>
+            <p className="details-label-danger">
               Avoir
             </p>
-            <p className="detail-info font-medium m-0">{line.refundCreditNote}</p>
+            <p className="details-info">{line.refundCreditNote}</p>
           </div>
-          </div>
-        </>
+
+        </div>
       )}
       
       
