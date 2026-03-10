@@ -92,6 +92,14 @@ async function updateCategory(categoryId, payload) {
     throw new NotFoundError("Catégorie introuvable.", 404);
   }
 
+  /**
+   * Pour corriger la copie des données depuis la base originale
+   * qui n'a pas de slug : pourra être supprimé
+   */
+  if (!category.slug) {
+    category.slug = normalizeSlug(category.name);
+  }
+
   // 1️⃣ Si le nom change → vérifier dépendances
   if (payload.name && payload.name !== category.name) {
     const familiesCount = await ProductFamily.countDocuments({

@@ -113,6 +113,14 @@ async function updateProduct(productId, payload) {
     throw new NotFoundError("Produit introuvable");
   }
 
+  /**
+   * Pour corriger la copie des données depuis la base originale
+   * qui n'a pas de slug : pourra être supprimé
+   */
+  if (!product.slug) {
+    product.slug = normalizeSlug(product.name, { prefix: product.family.slug})
+  }
+
 
   /**
    * Si une famille est fournie, il faut être sur d'avoir le bon slug family

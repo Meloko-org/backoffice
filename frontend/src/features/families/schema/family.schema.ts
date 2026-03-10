@@ -32,6 +32,7 @@ export const familySchema =
     sections: [
       {
         title: "Informations générales",
+        isAlertContainer: true,
         fields: {
           name: field.input({
             label: "Nom",

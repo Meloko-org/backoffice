@@ -64,6 +64,7 @@ export const productSchema =
 
       {
         title: "Informations générales",
+        isAlertContainer: true,
         isEnabled: ({ values, mode }) =>
           mode === "edit" || !!values.familyId,
         fields: {

@@ -121,6 +121,14 @@ async function updateFamily(familyId, payload) {
     throw new NotFoundError("Famille introuvable");
   }
 
+  /**
+   * Pour corriger la copie des données depuis la base originale
+   * qui n'a pas de slug : pourra être supprimé
+   */
+  if (!family.slug) {
+    family.slug = normalizeSlug(family.name, { prefix: family.category.slug})
+  }
+
   // 1️⃣ Rename → vérifier produits
   if (payload.name && payload.name !== family.name) {
     const productsCount = await Product.countDocuments({

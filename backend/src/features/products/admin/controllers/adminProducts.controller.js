@@ -69,6 +69,7 @@ const listProducts = async (req, res, next) => {
 
 const createProductHandler = async (req, res, next) => {
   try {
+    console.log(req.body)
     validateCreateProduct(req.body);
 
     const product = await createProduct(req.body);

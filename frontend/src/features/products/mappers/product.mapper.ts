@@ -9,7 +9,7 @@ export function mapFormToPayload(
     image: values.image || undefined,
     family: values.familyId,
     weight: {
-      measurement: values.weightMeasurement,
+      measurement: Number(values.weightMeasurement),
       unit: values.weightUnit,
     },
     vatRate: values.vatRate,
