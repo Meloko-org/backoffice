@@ -46,6 +46,12 @@ export function ProductsTable({ products }: Props) {
     )
   }
 
+  useEffect(() => {
+    return () => {
+      closeRight();
+    };
+  }, []);
+
   const columns: Column<typeof products[number]>[] = [
     {
       key: "product",

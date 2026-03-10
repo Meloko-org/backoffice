@@ -10,8 +10,8 @@ export default function UserAddressSection({ addresses }: Props) {
     <>
       <h2>Adresses</h2>
       <div className="bloc">
-        {addresses.map((adr) => (
-          <div className={`${adr.isDefault ? "default-adr-card" : "adr-card"}`}>
+        {addresses.length > 0 && addresses.map((adr) => (
+          <div key={adr._id} className={`${adr.isDefault ? "default-adr-card" : "adr-card"}`}>
             <p className={`font-medium adr-card-title`}>
               {adr.name}
             </p>
@@ -22,8 +22,8 @@ export default function UserAddressSection({ addresses }: Props) {
               <span className="details-info px-0">{adr.address.city}</span>
             </div>
             <div className="details-cols-2 bg-black mt-3 rounded-sm">
-              <span className="text-xs text-center text-(--second-text)">crée le {new Date(adr.createdAt).toLocaleDateString()}</span>
-              <span className="text-xs text-center text-(--second-text)">modifié le {new Date(adr.updatedAt).toLocaleDateString()}</span>
+              <span className="text-xs text-center text-(--second-text)">créée le {new Date(adr.createdAt).toLocaleDateString()}</span>
+              <span className="text-xs text-center text-(--second-text)">modifiée le {new Date(adr.updatedAt).toLocaleDateString()}</span>
             </div>
           </div>
         ))}

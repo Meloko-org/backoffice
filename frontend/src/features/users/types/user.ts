@@ -72,6 +72,7 @@ export type UserDashboard = {
     favSearch: string[];
 
     createdAt: string;
+    updatedAt: string;
     lastLoginAt?: string;
 
     isSuspended: boolean;

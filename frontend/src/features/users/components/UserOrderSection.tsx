@@ -13,7 +13,7 @@ interface Props {
 export default function UserOrderSection({ userId }: Props)  {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [limit] = useState(5); // fixe pour dashboard
+  const [limit] = useState(8); // fixe pour dashboard
 
   const { data, isLoading } = useUserDashboard(userId, page, limit);
 
@@ -74,7 +74,7 @@ export default function UserOrderSection({ userId }: Props)  {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold">
+      <h2>
         Commandes récentes
       </h2>
 

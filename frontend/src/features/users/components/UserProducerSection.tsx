@@ -29,7 +29,7 @@ export default function UserProducerSection({
                 to={`/admin/producers/${producerId}`}
                 className="btn-outline-primary"
               >
-                Voir la fiche producteur
+                Voir la fiche
               </Link>
             </>
           ) : (

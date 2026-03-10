@@ -154,6 +154,13 @@ export default function UserHeaderSection({ user }: Props) {
               {new Date(user.lastLoginAt).toLocaleString()}
             </p>
           )}
+
+          
+          <div className="details-cols-2 bg-black rounded-sm pr-2">
+            <span className="text-xs text-center text-(--second-text)">créé le {new Date(user.createdAt).toLocaleDateString()}</span>
+            <span className="text-xs text-center text-(--second-text)">modifié le {new Date(user.updatedAt).toLocaleDateString()}</span>
+          </div>
+
         </div>
       </div>
 

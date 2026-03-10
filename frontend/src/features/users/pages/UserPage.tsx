@@ -52,12 +52,12 @@ export default function UserPage() {
 
       <div className="flex flex-row gap-x-5">
 
-        <div className="basis-2/5">
+        <div className="basis-1/2">
           {/* 1️⃣ HEADER */}
           <UserHeaderSection user={data.user} />
         </div>
 
-        <div className="basis-3/5 flex items-center">
+        <div className="basis-1/2 flex items-center">
 
           <div className="w-full space-y-5">
             {/* 2️⃣ BUSINESS KPIs */}
@@ -76,8 +76,8 @@ export default function UserPage() {
 
       <div className="grid grid-cols-3 gap-x-10">
         <div className="space-y-5">
-          <UserAddressSection addresses={data.user.addresses}/>
-          <UserBookmarksSection bookmarks={data.user.bookmarks} />
+          <UserAddressSection addresses={data.user.addresses ?? []}/>
+          <UserBookmarksSection bookmarks={data.user.bookmarks ?? []} />
         </div>
         
         <div className="col-span-2">

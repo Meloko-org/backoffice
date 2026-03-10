@@ -748,6 +748,15 @@
     color: var(--fisrt-text);
   }
 
+  /* Eléments de bloc */
+  .bookmark-raw {
+    @apply flex flex-row items-center mb-4;
+  }
+
+  .bookmark-raw:last-child {
+    @apply flex flex-row items-center mb-0;
+  }
+
   /* stats dans ImportSummary */
   .stat {
     @apply rounded-lg border p-4 text-center;

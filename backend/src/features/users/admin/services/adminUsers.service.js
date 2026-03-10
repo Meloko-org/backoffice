@@ -430,6 +430,7 @@ async function getUserDashboard(
         name: r.name,
       })),
       createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
       lastLoginAt: user.lastLoginAt,
       isSuspended: user.isSuspended,
       suspendedAt: user.suspendedAt,
