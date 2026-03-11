@@ -6,8 +6,8 @@ import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext"
 export type DetailsAction = {
   label: string;
   icon: LucideIcon;
-  variant?: "primary" | "danger";
-  action: "edit" | "delete";
+  variant?: "success" | "primary" | "warning" | "danger";
+  action: "display" | "edit" | "suspend" | "delete";
 }
 
 type Props = {
@@ -28,6 +28,8 @@ export default function DetailsActions({
   const actionHandlers = {
     edit: infoContext?.onEdit,
     delete: infoContext?.onDelete,
+    display: infoContext?.onDisplay,
+    suspend: infoContext?.onSuspend,
   }
 
   return (
@@ -44,7 +46,13 @@ export default function DetailsActions({
             icon={action.icon}
             onClick={() => handler(item as any)}
             extraClasses={`w-full ${
-              action.variant === "danger" ? "btn-danger" : "btn-primary"
+              action.variant === "danger" 
+                ? "btn-danger" 
+                : action.variant === "warning"
+                  ? "btn-warning"
+                  : action.variant === "primary"
+                    ? "btn-primary"
+                    : "btn-success"
             }`}
           />
         )

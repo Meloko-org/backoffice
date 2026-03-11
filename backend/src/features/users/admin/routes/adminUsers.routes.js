@@ -6,6 +6,7 @@ const {
   suspend, 
   softDelete,
   updateRoles,
+  update,
   restore,
   userDashboard,
 } = require("../controllers/adminUsers.controller");
@@ -21,6 +22,7 @@ router.get("/", listUsers)
 
 router.patch("/:id/roles", updateRoles);
 router.patch("/:id/restore", restore);
+router.put("/:id", update);
 
 router.delete("/:id", softDelete);
 

@@ -56,6 +56,11 @@ async function getUsers({
         model: "Role",
         select: "name"
       })
+      .populate({
+        path: "deletedByAdmin",
+        model: "User",
+        select: "lastname"
+      })
       .sort(sort)
       .skip(skip)
       .limit(limit)
@@ -109,12 +114,19 @@ async function getUserById(userId) {
     throw new ApiError("Invalid user id", 400);
   }
 
-  const user = await User.findById(userId).lean();
+  const user = await User.findById(userId)
+    .populate({
+      path: "roles",
+      model: "Role",
+      select: "name"
+    })
+    .lean();
 
   if (!user) {
     throw new NotFoundError("User introuvable.");
   }
 
+  /*
   // Stats globales
   const statsAggregation = await Order.aggregate([
     { $match: { user: new mongoose.Types.ObjectId(userId) } },
@@ -160,7 +172,9 @@ async function getUserById(userId) {
       cancelledOrders,
     },
     recentOrders,
-  };
+  };*/
+
+  return user;
 }
 
 
@@ -255,6 +269,48 @@ async function updateUserRoles(userId, rolesIds) {
   }
 
   user.roles = rolesIds;
+
+  await user.save();
+
+  return user;
+}
+
+async function updateUser(userId, payload) {
+
+  if (!payload.roles) {
+    throw new ValidationError("User must have a role");
+  }
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new NotFoundError("User introuvable.");
+  }
+
+  if (payload.firstname && payload.firstname !== user.firstname) {
+    user.firstname = payload.firstname
+  }
+
+  if (payload.lastname && payload.lastname !== user.lastname) {
+    user.lastname = payload.lastname;
+  }
+
+  if (payload.avatar !== user.avatar) {
+    user.avatar = payload.avatar;
+  }
+
+  if (payload.suspensionReason && payload.suspensionReason !== user.suspensionReason) {
+    user.suspensionReason = payload.suspensionReason;
+  }
+
+  // vérifier que le rôle existe
+  const roleExists = await Role.exists({ _id: payload.role });
+
+  if (!roleExists) {
+    throw new ValidationError("Role invalide");
+  }
+
+  user.roles = payload.roles;
 
   await user.save();
 
@@ -473,6 +529,7 @@ module.exports = {
   reactivateUser,
   softDeleteUser,
   updateUserRoles,
+  updateUser,
   restoreUser,
   getUserDashboard,
 };

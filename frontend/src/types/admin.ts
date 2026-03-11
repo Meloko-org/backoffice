@@ -10,13 +10,21 @@ export type AdminRole =
   | "super-admin"
   | "admin"
   | "support"
-  | "dev";
+  | "dev"
+  | "user";
 
+
+export type SuspensionReason =
+  | "abuse"
+  | "fraud"
+  | "spam";
 
 type ModelContextBase<T> = {
   title: string;
   onEdit?: (item: T) => void;
   onDelete?: (item: T) => void; 
+  onDisplay?: (item: T) => void;
+  onSuspend?: (item: T) => void;
 }
 
 export type ModelContext =

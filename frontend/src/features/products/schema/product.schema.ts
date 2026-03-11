@@ -95,7 +95,7 @@ export const productSchema =
             required: true,
             options: VAT_RATES.map((rate) => ({
               label: `${rate} %`,
-              value: rate,
+              value: rate.toString(),
             })),
           })
         }

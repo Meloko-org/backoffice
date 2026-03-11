@@ -1,9 +1,11 @@
+import type { FieldOption } from "../types";
+
 type SelectProps = {
   label: string;
   disabled?: boolean;
 	required?: boolean;
   error?: string;
-  options: { value: string; label: string }[];
+  options: FieldOption[];
 } & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value" | "onChange"> & {
   value: string;
   onChange: (value: string) => void;

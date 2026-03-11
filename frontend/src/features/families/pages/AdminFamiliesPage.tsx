@@ -13,7 +13,8 @@ import type { ProductFamily } from "../types/family";
 import type { CategoryForSelect } from "../../categories/types/category";
 import { getCategoryNames } from "../../categories/api/categories.api";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
-import { BallTriangle } from "react-loader-spinner";
+import Loader from "../../../components/admin/Loader";
+
 
 export default function AdminFamiliesPage() {
   const navigate = useNavigate()
@@ -142,18 +143,7 @@ export default function AdminFamiliesPage() {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
 

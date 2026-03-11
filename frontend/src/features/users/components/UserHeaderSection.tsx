@@ -122,15 +122,9 @@ export default function UserHeaderSection({ user }: Props) {
 
           {/* Badges */}
           <div className="flex gap-2 mt-2 flex-wrap">
-
-            {user.roles.map((role) => (
-              <span
-                key={role.id}
-                className="detail-info slug px-2 py-1 rounded-full text-xs"
-              >
-                {role.name}
-              </span>
-            ))}
+            <span className="detail-info slug px-2 py-1 rounded-full text-xs">
+              {user.roles.name}
+            </span>
           </div>
 
           <div className="flex gap-2 mt-2 flex-wrap">

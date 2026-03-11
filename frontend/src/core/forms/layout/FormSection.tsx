@@ -16,7 +16,6 @@ export default function FormSection({
   isAlertContainer,
 }: FormSectionProps) {
 
-  console.log("warnings :", globalWarnings)
 	
   return (
     <div className={`

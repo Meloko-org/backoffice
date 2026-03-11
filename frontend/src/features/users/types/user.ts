@@ -28,7 +28,7 @@ export interface User {
   roles: {
     _id: string;
     name: string; 
-  }[];
+  };
   firstname: string;
   lastname: string;
   avatar: string | null;
@@ -38,7 +38,10 @@ export interface User {
   isDeleted: boolean;
   isSuspended: boolean;
   deletedAt: string;
-  deletedByAdmin: string;
+  deletedByAdmin: {
+    _id: string;
+    lastname: string;
+  };
   lastLoginAt: string;
   suspendedAt: string;
   suspensionReason: string;
@@ -65,7 +68,7 @@ export type UserDashboard = {
     roles: {
       id: string;
       name: string;
-    }[];
+    };
 
     bookmarks: Bookmark[];
     addresses: Address[];
@@ -81,6 +84,10 @@ export type UserDashboard = {
 
     isDeleted: boolean;
     deletedAt?: string;
+    deletedByAdmin: {
+      _id: string;
+      lastname: string;
+    };
 
     isProducer: boolean;
     producerId?: string | null;
@@ -109,3 +116,20 @@ export type UserDashboard = {
     pagination: PaginationMeta;
   };
 };
+
+
+export interface UserPayload {
+  firstname: string;
+  lastname: string;
+  avatar: string | null;
+  suspensionReason: string;
+  roles: string;
+}
+
+export interface UserFormValues {
+  firstname: string;
+  lastname: string;
+  avatar: string | null,
+  suspensionReason: string;
+  roles: string;
+}

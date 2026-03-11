@@ -1,5 +1,5 @@
-export type FieldOption = {
-  value: string | number;
+export type FieldOption<T = string> = {
+  value: T;
   label: string;
   description?: string;
   color?: string;

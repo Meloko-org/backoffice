@@ -17,6 +17,8 @@ export default function UserDetails({
 
   const config = rightPanelRegistry.user;
 
+  console.log(config)
+
 	const imageUrl = user.avatar; 
   const hasImage = Boolean(imageUrl);
 
@@ -36,11 +38,9 @@ export default function UserDetails({
         <p className="details-label">
           Rôle
         </p>
-        {user.roles.map((role) => (
-          <p key={role._id} className="details-info slug">
-            {role.name}
-          </p>
-        ))}
+        <p key={user.roles._id} className="details-info slug">
+          {user.roles.name}
+        </p>
       </div>
       
 
@@ -142,7 +142,7 @@ export default function UserDetails({
                   </div>
                   <div className="basis-2/3">
                     <p className="details-info">
-                      {user.deletedByAdmin}
+                      {user.deletedByAdmin.lastname}
                     </p>
                   </div>
                 </div>
@@ -246,7 +246,7 @@ export default function UserDetails({
       <DetailsActions
         item={user}
         actions={config?.actions ?? []}
-        wrapperClasses="details-cols-2 mt-5"
+        wrapperClasses="details-button-row mt-5"
       />
 
 

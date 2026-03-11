@@ -11,10 +11,10 @@ export type RightPanelType =
 
 
 export interface RightPanelAction {
-  label: string
-  icon: LucideIcon
-  variant?: "primary" | "danger"
-  action: "edit" | "delete"
+  label: string;
+  icon: LucideIcon;
+  variant?: "success" | "primary" | "warning" | "danger";
+  action: "display" | "edit" | "suspend" | "delete";
 }
 
 export interface RightPanelConfig {

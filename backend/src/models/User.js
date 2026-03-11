@@ -74,7 +74,7 @@ const userSchema = mongoose.Schema(
       unique: true,
     },
     roles: {
-      type: [mongoose.Schema.Types.ObjectId],
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
       required: true,
     },
@@ -126,7 +126,8 @@ const userSchema = mongoose.Schema(
     },
     deletedByAdmin: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "admins"
+      ref: "User",
+      default: null,
     }
   },
   { timestamps: true },

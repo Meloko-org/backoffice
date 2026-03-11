@@ -26,6 +26,7 @@ import UsersListPage from "./features/users/pages/UsersListPage";
 import UserPage from "./features/users/pages/UserPage";
 import OrdersListPage from "./features/orders/pages/OrdersListPage";
 import { OrderPage } from "./features/orders/pages/OrderPage";
+import EditUserPage from "./features/users/pages/EditUserPage";
 
 
 
@@ -168,6 +169,13 @@ export const router = createBrowserRouter([
             <UserPage />
           </AdminRouteGuard>
         )
+      },
+      { 
+        path: "users/:id/edit", 
+        element: (
+          <AdminRouteGuard permission="families:manage">
+            <EditUserPage />
+          </AdminRouteGuard>)
       },
       { 
         path: "orders", 

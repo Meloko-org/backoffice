@@ -5,10 +5,8 @@ import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutConte
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import { useAdminList } from "../../../hooks/useAdminList";
 import { getUsersList } from "../api/users.api";
-import type { Product } from "../../products/types/product";
 import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
-import { BallTriangle } from "react-loader-spinner";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { Ban, Eye, Pencil, Trash2 } from "lucide-react";
 import type { User } from "../types/user";
@@ -17,6 +15,7 @@ import { DataRowMenu, type RowMenuAction } from "../../../components/data-table/
 import type { RoleForSelect } from "../../roles/types/roles";
 import { getRoleNames } from "../../roles/api/roles.api";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
+import Loader from "../../../components/admin/Loader";
 
 export default function UsersListPage() {
   const navigate = useNavigate();
@@ -55,6 +54,8 @@ export default function UsersListPage() {
   useEffect(() => {
     getRoleNames().then(setRoles)
   }, [])
+
+  console.log("item0", items[0])
 
   // configuration des filtres
   const filtersConfig: FilterConfig[] = [
@@ -97,6 +98,8 @@ export default function UsersListPage() {
       user: selectedUser,
       onEdit: () => handleEditUser(selectedUser),
       onDelete: () => handleDeleteUser(selectedUser),
+      onDisplay: () => navigate(`/admin/users/${selectedUser._id}`),
+      onSuspend: () => handleSuspendUser(selectedUser),
     };
   }, [selectedUser]);
 
@@ -126,7 +129,20 @@ export default function UsersListPage() {
     openRight();
     defineConfirm({
       title: "Supprimer le user",
-      description: "Cette action est irréversible.",
+      description: "Cette action est réversible.",
+      onConfirm: async () => {
+        // await deleteUser(user._id);
+        refetch();
+      },
+    });
+  }
+
+  const handleSuspendUser = (user: User) => {
+    setSelectedUser(user)
+    openRight();
+    defineConfirm({
+      title: "Suspendre le user",
+      description: "Cette action est réversible.",
       onConfirm: async () => {
         // await deleteUser(user._id);
         refetch();
@@ -196,22 +212,10 @@ export default function UsersListPage() {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
 
-  console.log("filters :", filters)
 
   
   return (
@@ -252,11 +256,9 @@ export default function UsersListPage() {
                   label: "Rôles", 
                   sortable: true,
                   render: (user) => 
-                    user.roles.map(role => (
-                      <p key={role._id} className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block mr-1">
-                        {role.name}
+                      <p  className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block mr-1">
+                        {user.roles.name}
                       </p>
-                    ))
                  },
                 { key: "totalOrders", label: "Commandes", sortable: true },
                 {

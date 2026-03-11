@@ -1,6 +1,7 @@
-import { apiFetch } from "../../../lib/apiFetch";
+import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
+import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { User, UserDashboard, UserListResponse } from "../types/user";
+import type { User, UserDashboard, UserListResponse, UserPayload } from "../types/user";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/users`;
@@ -107,4 +108,29 @@ export const restoreUser = async (userId: string) => {
   return apiFetch(`${BASE_URL}/${userId}/restore`, {
     method: "PATCH",
   });
+}
+
+
+export const getUserById = async (userId: string): Promise<User> => {
+
+  return apiFetch<User>(
+    `${BASE_URL}/${userId}`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+export const updateUser = async (
+  id: string,
+  payload: UserPayload
+): Promise<ApiResponse<User>> => {
+
+  return apiFetchFull<User>(
+    `${BASE_URL}/${id}`, 
+    {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    }
+  )
 }

@@ -5,6 +5,7 @@ const {
   reactivateUser,
   softDeleteUser,
   updateUserRoles,
+  updateUser,
   restoreUser,
   getUserDashboard,
 } = require("../services/adminUsers.service");
@@ -33,7 +34,7 @@ const listUsers = async (req, res, next) => {
       filters,
     });
 
-    // console.log(JSON.stringify(result.items, null ,2))
+    console.log(JSON.stringify(result.items[0], null ,2))
 
     res.json({
       success: true,
@@ -52,7 +53,7 @@ const getUser = async (req, res, next) => {
 
     const result = await getUserById(id);
 
-    console.log(result)
+    console.log(JSON.stringify(result, null, 2))
 
     res.json({
       success: true,
@@ -139,6 +140,23 @@ const updateRoles = async (req, res, next) => {
 };
 
 
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log("body :", req.body)
+
+    const user = await updateUser(id, req.body);
+
+    res.json({
+      success: true,
+      data: user,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 const restore = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -187,6 +205,7 @@ module.exports = {
   reactivate,
   softDelete,
   updateRoles,
+  update,
   restore,
   userDashboard,
 };
