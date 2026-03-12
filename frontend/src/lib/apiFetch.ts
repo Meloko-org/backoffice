@@ -1,10 +1,14 @@
+import { getAuthToken } from "../auth/clerkTokenProvider";
 import type { ApiError, ApiResponse } from "../types/global.types";
 
 
 async function buildHeaders(init?: RequestInit) {
 
+  const token = await getAuthToken();
+
   return {
     "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}`} : {}),
     ...(init?.headers ?? {}),
   };
 }
@@ -63,8 +67,6 @@ export async function apiFetchFull<T>(
   input: RequestInfo,
   init?: RequestInit
 ): Promise<ApiResponse<T>> {
-
-  console.log("init :", init)
 
   const response = await fetch(input, {
     ...init,

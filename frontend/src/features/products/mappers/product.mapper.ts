@@ -12,7 +12,7 @@ export function mapFormToPayload(
       measurement: Number(values.weightMeasurement),
       unit: values.weightUnit,
     },
-    vatRate: values.vatRate,
+    vatRate: Number(values.vatRate),
   };
 }
 

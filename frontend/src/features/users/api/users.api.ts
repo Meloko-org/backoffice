@@ -126,18 +126,17 @@ export const getUserById = async (userId: string): Promise<User> => {
 export const updateUser = async (
   id: string,
   payload: UserPayload,
-  token?: string,
+  // token?: string,
 ): Promise<ApiResponse<User>> => {
 
-  console.log("token in apifetch :", token)
 
   return apiFetchFull<User>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',
-      headers: token
-      ? { Authorization: `Bearer ${token}` }
-      : undefined,
+      // headers: token
+      // ? { Authorization: `Bearer ${token}` }
+      // : undefined,
       body: JSON.stringify(payload)
     }
   )

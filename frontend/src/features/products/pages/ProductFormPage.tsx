@@ -61,7 +61,7 @@ export default function ProductFormPage({
     loadProduct();
   }, [isEdit, productId]);
 
-  console.log(initialValues)
+  console.log("initialValues :", initialValues)
 
 
   const handleSubmit = async (
@@ -69,6 +69,8 @@ export default function ProductFormPage({
     ) => {
       const payload =
         mapFormToPayload(values);
+
+      console.log("payload :", payload)
   
       if (isEdit && productId) {
         return await updateProduct(productId, payload);

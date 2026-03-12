@@ -19,7 +19,7 @@ type UserFormPageProps = {
 export default function UserFormPage({ userId }: UserFormPageProps) {
 
   const navigate = useNavigate();
-  const { getToken } = useAuth();
+  // const { getToken } = useAuth();
 
   const defaultValues: UserFormValues = {
     firstname: "",
@@ -61,13 +61,13 @@ export default function UserFormPage({ userId }: UserFormPageProps) {
       values: UserFormValues
     ): Promise<ApiResponse<any>> => {
 
-      const token = await getToken();
-      console.log("le token :", token)
+      // const token = await getToken();
+      // console.log("le token :", token)
 
       const payload =
         mapFormValuesToPayload(values);
   
-      return updateUser(userId!, payload, token!);
+      return updateUser(userId!, payload);
     };
 
 

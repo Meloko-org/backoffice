@@ -87,6 +87,8 @@ const createProductHandler = async (req, res, next) => {
 const updateProductHandler = async (req, res, next) => {
   try {
 
+    console.log("body :", req.body);
+
     validateUpdateProduct(req.body);
 
     const product = await updateProduct(
