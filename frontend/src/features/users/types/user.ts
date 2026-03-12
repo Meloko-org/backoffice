@@ -25,7 +25,7 @@ export interface User {
   email: string;
   clerkUUID: string;
   clerkPasswordEnabled: boolean;
-  roles: {
+  role: {
     _id: string;
     name: string; 
   };
@@ -65,7 +65,7 @@ export type UserDashboard = {
     firstname: string | null;
     lastname: string | null;
     avatar: string | null;
-    roles: {
+    role: {
       id: string;
       name: string;
     };
@@ -123,7 +123,7 @@ export interface UserPayload {
   lastname: string;
   avatar: string | null;
   suspensionReason: string;
-  roles: string;
+  role: string;
 }
 
 export interface UserFormValues {
@@ -131,5 +131,5 @@ export interface UserFormValues {
   lastname: string;
   avatar: string | null,
   suspensionReason: string;
-  roles: string;
+  role: string;
 }

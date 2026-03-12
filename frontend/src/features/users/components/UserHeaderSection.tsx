@@ -123,7 +123,7 @@ export default function UserHeaderSection({ user }: Props) {
           {/* Badges */}
           <div className="flex gap-2 mt-2 flex-wrap">
             <span className="detail-info slug px-2 py-1 rounded-full text-xs">
-              {user.roles.name}
+              {user.role.name}
             </span>
           </div>
 

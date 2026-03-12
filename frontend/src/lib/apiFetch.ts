@@ -1,6 +1,16 @@
 import type { ApiError, ApiResponse } from "../types/global.types";
 
 
+async function buildHeaders(init?: RequestInit) {
+
+  return {
+    "Content-Type": "application/json",
+    ...(init?.headers ?? {}),
+  };
+}
+
+
+
 /**
   Son rôle :
   - gérer response.ok
@@ -14,11 +24,8 @@ export async function apiFetch<T>(
 ): Promise<T> {
 
   const response = await fetch(input, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers ?? {}),
-    },
     ...init,
+    headers: await buildHeaders(init),
   });
 
   let data: any = null;
@@ -57,12 +64,11 @@ export async function apiFetchFull<T>(
   init?: RequestInit
 ): Promise<ApiResponse<T>> {
 
+  console.log("init :", init)
+
   const response = await fetch(input, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers ?? {}),
-    },
     ...init,
+    headers: await buildHeaders(init),
   });
 
   let data: any = null;

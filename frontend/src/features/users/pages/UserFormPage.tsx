@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
 import type { UserFormValues } from "../types/user";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { getUserById, updateUser } from "../api/users.api";
 import { mapFormValuesToPayload, mapUserToFormValues } from "../mappers/user.mapper";
-import { BallTriangle } from "react-loader-spinner";
 import { AdminForm } from "../../../core/forms/FormRenderer";
 import { userSchema } from "../schema/user.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
@@ -19,13 +19,14 @@ type UserFormPageProps = {
 export default function UserFormPage({ userId }: UserFormPageProps) {
 
   const navigate = useNavigate();
+  const { getToken } = useAuth();
 
   const defaultValues: UserFormValues = {
     firstname: "",
     lastname: "",
     avatar: "",
     suspensionReason: "",
-    roles: "",
+    role: "",
   }
 
   const [ initialValues, setInitialValues ] = 
@@ -59,13 +60,16 @@ export default function UserFormPage({ userId }: UserFormPageProps) {
     const handleSubmit = async (
       values: UserFormValues
     ): Promise<ApiResponse<any>> => {
+
+      const token = await getToken();
+      console.log("le token :", token)
+
       const payload =
         mapFormValuesToPayload(values);
   
-        return updateUser(userId!, payload);
+      return updateUser(userId!, payload, token!);
     };
 
-  console.log("initial :", initialValues)
 
   if (loading) {
     return (

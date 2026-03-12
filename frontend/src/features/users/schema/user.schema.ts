@@ -43,7 +43,7 @@ export const userSchema =
       {
         title: "Rôle",
         fields: {
-          roles: field.radioGroup({
+          role: field.radioGroup({
             label: "Roles",
             required: true,
             options: fetchRoles,

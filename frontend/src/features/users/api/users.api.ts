@@ -8,6 +8,8 @@ const BASE_URL = `${API_ROOT}/admin/users`;
 
 
 
+
+
 export const getUsers = async (params: {
   page?: number;
   limit?: number;
@@ -123,13 +125,19 @@ export const getUserById = async (userId: string): Promise<User> => {
 
 export const updateUser = async (
   id: string,
-  payload: UserPayload
+  payload: UserPayload,
+  token?: string,
 ): Promise<ApiResponse<User>> => {
+
+  console.log("token in apifetch :", token)
 
   return apiFetchFull<User>(
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',
+      headers: token
+      ? { Authorization: `Bearer ${token}` }
+      : undefined,
       body: JSON.stringify(payload)
     }
   )

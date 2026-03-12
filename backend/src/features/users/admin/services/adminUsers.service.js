@@ -40,7 +40,7 @@ async function getUsers({
   }
 
   if (filters.role) {
-    filter.roles = new mongoose.Types.ObjectId(filters.role);
+    filter.role = new mongoose.Types.ObjectId(filters.role);
   }
 
   // 🔀 SORT
@@ -52,7 +52,7 @@ async function getUsers({
   const [items, totalItems] = await Promise.all([
     User.find(filter)
       .populate({
-        path: "roles",
+        path: "role",
         model: "Role",
         select: "name"
       })
@@ -116,7 +116,7 @@ async function getUserById(userId) {
 
   const user = await User.findById(userId)
     .populate({
-      path: "roles",
+      path: "role",
       model: "Role",
       select: "name"
     })
@@ -275,9 +275,9 @@ async function updateUserRoles(userId, rolesIds) {
   return user;
 }
 
-async function updateUser(userId, payload) {
+async function updateUser(userId, payload, currentUser) {
 
-  if (!payload.roles) {
+  if (!payload.role) {
     throw new ValidationError("User must have a role");
   }
 
@@ -303,6 +303,13 @@ async function updateUser(userId, payload) {
     user.suspensionReason = payload.suspensionReason;
   }
 
+  if (
+    payload.role === "super-admin" &&
+    currentUser.role.name !== "super-admin"
+  ) {
+    throw new ForbiddenError("Cannot assign super-admin role");
+  }
+
   // vérifier que le rôle existe
   const roleExists = await Role.exists({ _id: payload.role });
 
@@ -310,7 +317,7 @@ async function updateUser(userId, payload) {
     throw new ValidationError("Role invalide");
   }
 
-  user.roles = payload.roles;
+  user.role = payload.role;
 
   await user.save();
 
@@ -353,7 +360,7 @@ async function getUserDashboard(
   ========================== */
 
   const user = await User.findById(userId)
-    .populate("roles", "name")
+    .populate("role", "name")
     .populate("bookmarks", "name")
     .lean();
 
@@ -481,10 +488,10 @@ async function getUserDashboard(
         _id: b._id,
         name: b.name
       })),
-      roles: user.roles.map((r) => ({
-        id: r._id,
-        name: r.name,
-      })),
+      role: {
+        id: user.role._id,
+        name: user.role.name,
+      },
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       lastLoginAt: user.lastLoginAt,

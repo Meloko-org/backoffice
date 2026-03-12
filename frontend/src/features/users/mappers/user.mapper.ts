@@ -9,7 +9,7 @@ export const mapUserToFormValues = (
     lastname: user.lastname,
     avatar: user.avatar,
     suspensionReason: user.suspensionReason,
-    roles: user.roles._id
+    role: user.role._id
   }
 }
 
@@ -23,6 +23,6 @@ export const mapFormValuesToPayload = (
     lastname: values.lastname,
     avatar: values.avatar,
     suspensionReason: values.suspensionReason,
-    roles: values.roles,
+    role: values.role,
   }
 }

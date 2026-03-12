@@ -1,7 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const { clerkMiddleware } = require("@clerk/express");
+
+require("dotenv").config();
 
 const app = express();
+
+
 
 const { ApiError } = require("./src/utils/ApiError");
 
@@ -22,6 +27,8 @@ const { adminProducersRoutes } = require("./src/routes");
 
 require("./src/models/index");
 
+
+
 /**
  * Middlewares globaux
  */
@@ -30,6 +37,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+app.use(clerkMiddleware());
 
 app.use("/api/products", productsRoutes);
 app.use("/admin/products", adminProductsRoutes);
@@ -43,15 +51,20 @@ app.use("/admin/users", adminUsersRoutes);
 app.use("/admin/roles", adminRolesRoutes);
 app.use("/admin/producers", adminProducersRoutes);
 
+
+
 /**
  * Route de test
  */
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "ok",
-    service: "meloko-web-backend",
-    timestamp: new Date().toISOString(),
+app.get("/auth-test", (req, res) => {
+
+  console.log("Authorization:", req.headers.authorization);
+  console.log("Auth:", req.auth);
+
+  res.json({
+    auth: req.auth || null
   });
+
 });
 
 /* Gestion des erreurs */

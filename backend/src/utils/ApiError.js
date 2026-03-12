@@ -23,6 +23,12 @@ class ValidationError extends ApiError {
   }
 }
 
+class ForbiddenError extends ApiError {
+  constructor(fieldErrors) {
+    super("Unauthorized", 400, fieldErrors);
+  }
+}
+
 
 class GeolocationNotFoundError extends ApiError {
   constructor(query) {
@@ -43,6 +49,7 @@ module.exports = {
   ApiError,
   NotFoundError,
   ValidationError,
+  ForbiddenError,
   GeolocationNotFoundError,
   GeolocationServiceError,
 };

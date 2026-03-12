@@ -34,7 +34,7 @@ const listUsers = async (req, res, next) => {
       filters,
     });
 
-    console.log(JSON.stringify(result.items[0], null ,2))
+    // console.log(JSON.stringify(result.items[0], null ,2))
 
     res.json({
       success: true,
@@ -145,7 +145,7 @@ const update = async (req, res, next) => {
     const { id } = req.params;
     console.log("body :", req.body)
 
-    const user = await updateUser(id, req.body);
+    const user = await updateUser(id, req.body, req.user);
 
     res.json({
       success: true,

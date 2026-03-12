@@ -257,7 +257,7 @@ export default function UsersListPage() {
                   sortable: true,
                   render: (user) => 
                       <p  className="detail-info slug font-mono text-xs px-2 py-1 rounded inline-block mr-1">
-                        {user.roles.name}
+                        {user.role.name}
                       </p>
                  },
                 { key: "totalOrders", label: "Commandes", sortable: true },

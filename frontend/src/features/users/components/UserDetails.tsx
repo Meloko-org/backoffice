@@ -38,8 +38,8 @@ export default function UserDetails({
         <p className="details-label">
           Rôle
         </p>
-        <p key={user.roles._id} className="details-info slug">
-          {user.roles.name}
+        <p key={user.role._id} className="details-info slug">
+          {user.role.name}
         </p>
       </div>
       

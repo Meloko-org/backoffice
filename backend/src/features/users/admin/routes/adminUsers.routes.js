@@ -10,6 +10,8 @@ const {
   restore,
   userDashboard,
 } = require("../controllers/adminUsers.controller");
+const requireAuth = require("../../../../middlewares/requireAuth");
+const requireRole = require("../../../../middlewares/requireRole");
 const router = express.Router();
 
 
@@ -22,7 +24,12 @@ router.get("/", listUsers)
 
 router.patch("/:id/roles", updateRoles);
 router.patch("/:id/restore", restore);
-router.put("/:id", update);
+router.put(
+  "/:id", 
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  update
+);
 
 router.delete("/:id", softDelete);
 
