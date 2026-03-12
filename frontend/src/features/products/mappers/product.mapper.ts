@@ -31,6 +31,6 @@ export function mapProductToFormValues(
     weightMeasurement: product.weight.measurement,
     weightUnit: product.weight.unit as "gr" | "piece",
 
-    vatRate: Number(product.vatRate),
+    vatRate: product.vatRate.toString(),
   };
 }

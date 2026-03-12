@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const requireAuth = require("../../../../middlewares/requireAuth");
+const requireRole = require("../../../../middlewares/requireRole");
+
 
 const {
   listFamilies,
@@ -11,12 +14,54 @@ const {
   familyNamesforCategory,
 } = require("../controllers/families.controller");
 
-router.get("/category/:id", familyNamesforCategory);
-router.get("/names", familyNames);
-router.get("/:id", getFamily);
-router.get("/", listFamilies);
-router.post("/", createFamilyHandler);
-router.put("/:id", updateFamilyHandler);
-router.delete("/:id", deleteFamilyHandler);
+
+
+router.get("/category/:id",
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  familyNamesforCategory
+);
+
+router.get(
+  "/names", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  familyNames
+);
+
+router.get(
+  "/:id", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  getFamily
+);
+
+router.get(
+  "/", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  listFamilies
+);
+
+router.post(
+  "/", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  createFamilyHandler
+);
+
+router.put(
+  "/:id", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  updateFamilyHandler
+);
+
+router.delete(
+  "/:id", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"), 
+  deleteFamilyHandler
+);
 
 module.exports = router;

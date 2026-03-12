@@ -4,7 +4,7 @@ import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import { useAdminList } from "../../../hooks/useAdminList";
-import { getUsersList } from "../api/users.api";
+import { deleteUser, getUsersList, suspendUser } from "../api/users.api";
 import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
@@ -55,7 +55,6 @@ export default function UsersListPage() {
     getRoleNames().then(setRoles)
   }, [])
 
-  console.log("item0", items[0])
 
   // configuration des filtres
   const filtersConfig: FilterConfig[] = [
@@ -131,7 +130,7 @@ export default function UsersListPage() {
       title: "Supprimer le user",
       description: "Cette action est réversible.",
       onConfirm: async () => {
-        // await deleteUser(user._id);
+        await deleteUser(user._id);
         refetch();
       },
     });
@@ -144,7 +143,7 @@ export default function UsersListPage() {
       title: "Suspendre le user",
       description: "Cette action est réversible.",
       onConfirm: async () => {
-        // await deleteUser(user._id);
+        await suspendUser(user._id);
         refetch();
       },
     });
@@ -182,6 +181,8 @@ export default function UsersListPage() {
   /* Actions du RowMenu */
   const handleSuspendToggle = () => {}
 
+  const handleDeleteToggle = () => {}
+
   const userRowActions: RowMenuAction<User>[] = [
     {
       label: "Voir",
@@ -203,7 +204,7 @@ export default function UsersListPage() {
       label: (user: User) => user.isDeleted ? "Restaurer" : "Supprimer",
       icon: <Trash2 className="w-4 h-4" />,
       variant: "danger",
-      onClick: handleDeleteUser,
+      onClick: handleDeleteToggle,
     },
   ];
 

@@ -16,14 +16,51 @@ const router = express.Router();
 
 
 
-router.patch("/:id/suspend", suspend);
-router.patch("/:id/reactivate", reactivate);
-router.get("/:id/dashboard", userDashboard);
-router.get("/:id", getUser);
-router.get("/", listUsers)
+router.patch(
+  "/:id/suspend", 
+  requireAuth,
+  requireRole("admin", "super-admin"), 
+  suspend
+);
 
+router.patch(
+  "/:id/reactivate",  
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  reactivate
+);
+
+router.get(
+  "/:id/dashboard",  
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"),
+  userDashboard
+);
+
+router.get(
+  "/:id",  
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"),
+  getUser
+);
+
+router.get(
+  "/", 
+  requireAuth,
+  requireRole("admin", "super-admin", "dev"),
+  listUsers
+)
+
+// pas utilisée
 router.patch("/:id/roles", updateRoles);
-router.patch("/:id/restore", restore);
+
+router.patch(
+  "/:id/restore", 
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  restore
+);
+
 router.put(
   "/:id", 
   requireAuth,
@@ -31,7 +68,12 @@ router.put(
   update
 );
 
-router.delete("/:id", softDelete);
+router.delete(
+  "/:id", 
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  softDelete
+);
 
 
 module.exports = router;

@@ -59,6 +59,6 @@ export interface ProductFormValues {
   weightMeasurement: number;
   weightUnit: "gr" | "piece";
 
-  vatRate: number;
+  vatRate: string;
 }
 

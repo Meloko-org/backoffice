@@ -6,8 +6,8 @@ import { mapFormToPayload, mapProductToFormValues } from "../mappers/product.map
 import { AdminForm } from "../../../core/forms/FormRenderer";
 import { productSchema } from "../schema/product.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
-import { BallTriangle } from "react-loader-spinner";
 import { createProduct, getProductById, updateProduct } from "../api/products.api";
+import Loader from "../../../components/admin/Loader";
 
 type ProductFormPageProps = {
   mode: "create" | "edit";
@@ -30,7 +30,7 @@ export default function ProductFormPage({
     familyId: "",
     weightMeasurement: 0,
     weightUnit: "gr",
-    vatRate: 0
+    vatRate: "0"
   }
 
   const [ initialValues, setInitialValues ]= useState<Partial<ProductFormValues>>(defaultValues);
@@ -61,7 +61,6 @@ export default function ProductFormPage({
     loadProduct();
   }, [isEdit, productId]);
 
-  console.log("initialValues :", initialValues)
 
 
   const handleSubmit = async (
@@ -83,18 +82,7 @@ export default function ProductFormPage({
 
   if (loading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
 

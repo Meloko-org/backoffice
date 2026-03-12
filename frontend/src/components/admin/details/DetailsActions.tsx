@@ -32,6 +32,8 @@ export default function DetailsActions({
     suspend: infoContext?.onSuspend,
   }
 
+  console.log("handlers :", actionHandlers)
+
   return (
     <div className={wrapperClasses}>
       {actions.map((action) => {
