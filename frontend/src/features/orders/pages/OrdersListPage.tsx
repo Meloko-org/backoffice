@@ -41,8 +41,6 @@ export default function OrdersListPage() {
     refetch,
   } = useAdminList(getOrdersList, { syncWithUrl: true });
 
-  console.log("filters :", filters)
-
 
 
   /* filtres destinés à DataFiltersBar */

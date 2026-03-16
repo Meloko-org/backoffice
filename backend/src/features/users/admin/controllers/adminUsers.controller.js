@@ -107,7 +107,7 @@ const softDelete = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const user = await softDeleteUser(id);
+    const user = await softDeleteUser(id, req.user);
 
     res.json({
       success: true,

@@ -1,26 +1,19 @@
-import type { LucideIcon } from "lucide-react"
-
 export type RightPanelType =
   | "category"
   | "family"
   | "product"
   | "market"
   | "user"
+  | "userPage"
   | "order"
   | "orderProduct"
 
 
-export interface RightPanelAction {
-  label: string;
-  icon: LucideIcon;
-  variant?: "success" | "primary" | "warning" | "danger";
-  action: "display" | "edit" | "suspend" | "delete";
-}
 
 export interface RightPanelConfig {
   component: React.ComponentType<any>;
   fullPanel?: boolean;
-  actions?: RightPanelAction[];
+  actions?: string[];
 }
 
 

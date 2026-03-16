@@ -1,5 +1,3 @@
-// UserPage.tsx
-
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useUserDashboard } from "../../../hooks/useUserDashboard";
@@ -8,9 +6,10 @@ import UserBusinessSection from "../components/UserBusinessSection";
 import UserOrdersSection from "../components/UserOrderSection";
 import UserProducerSection from "../components/UserProducerSection";
 import { useAdminPage } from "../../../hooks/useAdminPage";
-import { BallTriangle } from "react-loader-spinner";
 import UserAddressSection from "../components/UserAddressSection";
 import UserBookmarksSection from "../components/UserBookmarksSection";
+import Loader from "../../../components/admin/Loader";
+
 
 export default function UserPage() {
   const { id } = useParams<{ id: string }>();
@@ -26,22 +25,10 @@ export default function UserPage() {
     limit
   );
 
-  console.log("data in page :", data)
 
   if (isLoading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
   if (isError || !data) return <div>Error loading user</div>;

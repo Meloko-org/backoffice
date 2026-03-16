@@ -1,14 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUser, restoreUser } from "../features/users/api/users.api";
 
-export const useDeleteUser = (userId: string) => {
+export const useDeleteUser = () => {
+
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
-    mutationFn: () => deleteUser(userId),
-    onSuccess: () => {
+    mutationFn: (id: string) => deleteUser(id),
+    onSuccess: (_, id) => {
       queryClient.invalidateQueries({
-        queryKey: ["user-dashboard", userId],
+        queryKey: ["user-dashboard", id],
       });
 
       queryClient.invalidateQueries({
@@ -18,10 +19,10 @@ export const useDeleteUser = (userId: string) => {
   })
 
   const restoreMutation = useMutation({
-    mutationFn: () => restoreUser(userId),
-    onSuccess: () => {
+    mutationFn: (id: string) => restoreUser(id),
+    onSuccess: (_, id) => {
       queryClient.invalidateQueries({
-        queryKey: ["user-dashboard", userId],
+        queryKey: ["user-dashboard", id],
       });
 
       queryClient.invalidateQueries({

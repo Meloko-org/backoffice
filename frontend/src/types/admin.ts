@@ -21,10 +21,7 @@ export type SuspensionReason =
 
 type ModelContextBase<T> = {
   title: string;
-  onEdit?: (item: T) => void;
-  onDelete?: (item: T) => void; 
-  onDisplay?: (item: T) => void;
-  onSuspend?: (item: T) => void;
+  refetch?: () => void;
 }
 
 export type ModelContext =

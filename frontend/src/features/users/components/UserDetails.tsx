@@ -3,6 +3,11 @@ import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useInfoContext } from "../../../hooks/useInfoContext";
+import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext";
+import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
+import type { UserActionContext } from "../config/user.actions";
 
 type Props = {
 	user: User;
@@ -17,7 +22,15 @@ export default function UserDetails({
 
   const config = rightPanelRegistry.user;
 
-  console.log(config)
+  const { infoContext } = useInfoLayout()
+  const baseCtx = useUserActionsContext();
+  const ctx: UserActionContext = {
+    ...baseCtx,
+    refetch: infoContext?.refetch
+  }
+
+
+  console.log("panel config :",config)
 
 	const imageUrl = user.avatar; 
   const hasImage = Boolean(imageUrl);
@@ -43,7 +56,6 @@ export default function UserDetails({
         </p>
       </div>
       
-
       {/* Suspension / Suppression */}
       <div className="details-cols-2">
 
@@ -155,7 +167,6 @@ export default function UserDetails({
         </div>
         
       </div>
-      
 
       {/* INFOS */}
       <div>
@@ -175,8 +186,6 @@ export default function UserDetails({
           {user.clerkUUID}
         </p>
       </div>
-
-      
       
       {user.addresses && user.addresses.length > 0 && (
         <div className="h-30 overflow-y-auto">
@@ -208,7 +217,6 @@ export default function UserDetails({
           </div>
         </div>
       )}
-      
         
       {user.stripeUUID && (
         <>
@@ -245,7 +253,8 @@ export default function UserDetails({
 
       <DetailsActions
         item={user}
-        actions={config?.actions ?? []}
+        ctx={ctx}
+        actionKeys={config?.actions ?? []}
         wrapperClasses="details-button-row mt-5"
       />
 

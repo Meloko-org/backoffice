@@ -3,9 +3,9 @@ import type { ConfirmOptions } from "../providers/ConfirmProvider";
 
 
 type ConfirmContextType = {
-  defineConfirm: (options: ConfirmOptions) => void;
+  defineConfirm: <T>(options: ConfirmOptions<T>) => void;
   close: () => void;
-  options: ConfirmOptions | null;
+  options: ConfirmOptions<any> | null;
   isConfirmOpen: boolean;
 };
 

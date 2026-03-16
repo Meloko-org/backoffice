@@ -1,10 +1,8 @@
 import { ImageOff } from "lucide-react";
 import type { UserDashboard } from "../types/user";
-import { useSuspendUser } from "../../../hooks/useSuspendUser";
-import { useDeleteUser } from "../../../hooks/useDeleteUser";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
-import FloatingSelect from "../../../core/forms/components/floatingSelect";
+import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
+import type { UserActionContext } from "../config/user.actions";
+import { userActionsRegistry } from "../config/userActionsRegistry";
 
 
 type Props = {
@@ -13,82 +11,26 @@ type Props = {
 
 export default function UserHeaderSection({ user }: Props) {
 
-  const { openRight, isRightOpen } = useAdminLayout();
-  const { defineConfirm } = useConfirm();
 
-  const { suspend, unsuspend, isLoading } =
-    useSuspendUser(user.id);
+  // const userForActions = {
+  //   _id: user._id,
+  //   isSuspended: user.isSuspended,
+  //   isDeleted: user.isDeleted
+  // }
 
-  const { del, restore } = useDeleteUser(user.id);
+  const baseCtx = useUserActionsContext();
 
-
-
-
-  const handleSuspend = () => {
-    if (!isRightOpen) openRight();
-
-    defineConfirm({
-      title: "Suspendre l'utilisateur",
-      confirmLabel: "Suspendre",
-      content: (value, setValue) => (
-        <FloatingSelect
-          label="Raison de la suspension"
-          options={[
-            // { value: "", label: "Choisir une raison" },
-            { value: "fraud", label: "Fraude" },
-            { value: "abuse", label: "Abus" },
-            { value: "spam", label: "Spam" },
-          ]}
-          value={value || ""}
-          onChange={setValue}
-        />
-      ),
-      onConfirm: async (reason) => {
-        if (!reason) {
-          console.log("Aucune raison sélectionnée")
-          throw new Error("Aucune raison sélectionnée");
-        }
-
-        await suspend(reason); // React Query mutation
-      },
-    });
+  const ctx: UserActionContext = {
+    ...baseCtx
   }
 
-  const handleUnsuspend = () => {
-    if (!isRightOpen) openRight();
-    defineConfirm({
-      title: "Réactiver l'utilisateur",
-      confirmLabel: "Réactiver",
-      description: "Enlever la suspension de l'utilisateur",
-      onConfirm: async () => {
-        await unsuspend(); // React Query mutation
-      },
-    });
-  }
+  const headerActionKeys: (keyof typeof userActionsRegistry)[] = [
+    "suspend", "delete"
+  ]
 
-  const handleDelete = () => {
-    if (!isRightOpen) openRight();
-    defineConfirm({
-      title: "Supprimer l'utilisateur",
-      confirmLabel: "Supprimer",
-      description: "Un utilisateur supprimé peut être restauré.",
-      onConfirm: async () => {
-        await del(); // React Query mutation
-      },
-    });
-  }
-
-  const handleRestore = () => {
-    if (!isRightOpen) openRight();
-    defineConfirm({
-      title: "Restaurer l'utilisateur",
-      confirmLabel: "Restaurer",
-      description: "Restauration d'un utilisateur supprimé.",
-      onConfirm: async () => {
-        await restore(); // React Query mutation
-      },
-    });
-  }
+  const headerActions = headerActionKeys
+    .map((key) => userActionsRegistry[key])
+    .filter((def) => !def.visible || def.visible(user))
 
 
   console.log("user :", user)
@@ -128,7 +70,7 @@ export default function UserHeaderSection({ user }: Props) {
           </div>
 
           <div className="flex gap-2 mt-2 flex-wrap">
-            {user.isSuspended && (
+            {!user.isDeleted && user.isSuspended && (
               <span className="badge-warning px-2 py-1">
                 Suspendu
               </span>
@@ -161,43 +103,31 @@ export default function UserHeaderSection({ user }: Props) {
       {/* Actions */}
       <div className="flex flex-col gap-3">
 
-        {!user.isDeleted && (
-          !user.isSuspended ? (
-            <button 
-              className="btn-outline-primary"
-              onClick={handleSuspend}
-              disabled={isLoading}
-            >
-              Suspendre
-            </button>
-          ) : (
-            <button 
-              className="btn-primary"
-              onClick={handleUnsuspend}
-              disabled={isLoading}
-            >
-              Réactiver
-            </button>
-          )
-        )}
+        {headerActions.map((action, index) => {
 
-        {!user.isDeleted ? (
-          <button 
-            className="btn-danger"
-            onClick={handleDelete}
-            disabled={isLoading}
-          >
-            Supprimer
-          </button>
-        ) : (
-          <button 
-            className="btn-outline-primary"
-            onClick={handleRestore}
-            disabled={isLoading}
-          >
-            Restaurer
-          </button>
-        )}
+          const label =
+            typeof action.label === "function"
+              ? action.label(user)
+              : action.label;
+
+          const variantClass =
+            action.variant === "danger"
+              ? "btn-danger"
+              : action.variant === "warning"
+              ? "btn-outline-primary"
+              : "btn-primary";
+
+          return (
+            <button
+              key={index}
+              className={variantClass}
+              onClick={() => action.run(user, ctx)}
+            >
+              {label}
+            </button>
+          );
+        })}
+
 
       </div>
     </div>

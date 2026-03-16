@@ -56,6 +56,7 @@ async function getUsers({
         model: "Role",
         select: "name"
       })
+      .populate("bookmarks", "name")
       .populate({
         path: "deletedByAdmin",
         model: "User",
@@ -362,11 +363,18 @@ async function getUserDashboard(
   const user = await User.findById(userId)
     .populate("role", "name")
     .populate("bookmarks", "name")
+    .populate({
+      path: "deletedByAdmin",
+      model: "User",
+      select: "lastname"
+    })
     .lean();
 
   if (!user) {
     throw new Error("User not found");
   }
+  
+  console.log("user dashbord :", user)
 
   /* =========================
      2️⃣ PRODUCER
@@ -478,7 +486,7 @@ async function getUserDashboard(
 
   return {
     user: {
-      id: user._id,
+      _id: user._id,
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
@@ -489,7 +497,7 @@ async function getUserDashboard(
         name: b.name
       })),
       role: {
-        id: user.role._id,
+        _id: user.role._id,
         name: user.role.name,
       },
       createdAt: user.createdAt,
@@ -500,6 +508,12 @@ async function getUserDashboard(
       suspensionReason: user.suspensionReason,
       isDeleted: user.isDeleted,
       deletedAt: user.deletedAt,
+      deletedByAdmin: user.deletedByAdmin 
+        ? {
+          _id: user.deletedByAdmin._id.toString(),
+          lastname: user.deletedByAdmin.lastname,
+        }
+        : null,
       isProducer: !!producer,
       producerId: producer?._id || null,
     },

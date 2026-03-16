@@ -5,7 +5,7 @@ export type RowMenuAction<T> = {
   label: string | ((row: T) => string);
   icon?: React.ReactNode;
   onClick: (row: T) => void;
-  variant?: "default" | "warning" | "danger";
+  variant?: "success" | "primary" | "warning" | "danger" | "default";
   hidden?: (row: T) => boolean;
   disabled?: (row: T) => boolean;
 };
@@ -26,6 +26,7 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
   const visibleActions = actions.filter(
     (action) => !action.hidden || !action.hidden(row)
   );
+
 
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();

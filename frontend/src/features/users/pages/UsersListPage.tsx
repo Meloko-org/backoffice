@@ -1,14 +1,11 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
 import { useAdminList } from "../../../hooks/useAdminList";
-import { deleteUser, getUsersList, suspendUser } from "../api/users.api";
+import { getUsersList } from "../api/users.api";
 import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
-import { Ban, Eye, Pencil, Trash2 } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { DataRowMenu, type RowMenuAction } from "../../../components/data-table/DataRowMenu";
@@ -16,16 +13,18 @@ import type { RoleForSelect } from "../../roles/types/roles";
 import { getRoleNames } from "../../roles/api/roles.api";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 import Loader from "../../../components/admin/Loader";
+import { runUserAction, type UserActionContext } from "../config/user.actions";
+import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
+import { userActionsRegistry } from "../config/userActionsRegistry";
+
+
 
 export default function UsersListPage() {
-  const navigate = useNavigate();
 
   useAdminPage("Liste des utilisateurs");
 
-  const { openRight, closeRight } = useAdminLayout();
-  const { defineConfirm } = useConfirm();
 
-
+  /* GESTION DES DONNEES A AFFICHER */
   const {
     items,
     pagination,
@@ -45,8 +44,21 @@ export default function UsersListPage() {
   } = useAdminList(getUsersList, { syncWithUrl: true });
 
   
+  const defineStatus = (user: User): ReactNode => {
+    let stickerClass = "sticker-success";
 
-  /* filtres destinés à DataFiltersBar */
+    if (user.isDeleted) stickerClass = "sticker-alert";
+    else if (user.isSuspended) stickerClass = "sticker-warning";
+
+    return (
+      <div className="table-status">
+        <div className={`sticker ${stickerClass}`}></div>
+      </div>
+    );
+  }
+
+
+  /* GESTION DES FILTRES POUR DataFiltersBar */
 
   // récupération des données nécessaires aux filtres: ici les roles
   const [ roles, setRoles ] = useState<RoleForSelect[]>([]);
@@ -84,8 +96,46 @@ export default function UsersListPage() {
     setPage(1);
   }, [filters]);
 
+  const handleSearch = (value: string) => {
+    setPage(1);
+    setSearch(value);
+  };
 
-  /* affichage dans la sidebar droite */  
+
+
+  /* GESTION DES ACTIONS DU USER */
+  // appels à tous les hooks nécessaires 
+  // const navigate = useNavigate();
+  // const { openRight, closeRight } = useAdminLayout();
+  // const { defineConfirm } = useConfirm();
+  // const { suspend, unsuspend } = useSuspendUser();
+  // const { del, restore } = useDeleteUser();
+
+  // création du context des actions
+  // const ctx = {
+  //   navigate,
+  //   openRight,
+  //   defineConfirm,
+  //   suspend,
+  //   unsuspend,
+  //   del,
+  //   restore,
+  //   refetch,
+  // }
+
+  // remplace le code précédent
+  const baseCtx = useUserActionsContext();
+
+  const ctx: UserActionContext = {
+    ...baseCtx,
+    refetch
+  }
+
+
+
+
+  /* GESTION DE L'AFFICHAGE DANS LE rightPanel */  
+  const { openRight, closeRight } = useAdminLayout();
   const [ selectedUser, setSelectedUser ] = useState<User | null>();
 
   const infoContext: ModelContext = useMemo(() => {
@@ -94,15 +144,25 @@ export default function UsersListPage() {
     return {
       type: "user",
       title: "Détail du user",
+      refetch,
       user: selectedUser,
-      onEdit: () => handleEditUser(selectedUser),
-      onDelete: () => handleDeleteUser(selectedUser),
-      onDisplay: () => navigate(`/admin/users/${selectedUser._id}`),
-      onSuspend: () => handleSuspendUser(selectedUser),
+
+      // onEdit: () => handleEditUser(selectedUser),
+      // onDelete: () => handleDeleteUser(selectedUser),
+      // onDisplay: () => navigate(`/admin/users/${selectedUser._id}`),
+      // onSuspend: () => handleSuspendUser(selectedUser),
+      // onUnsuspend: () => handleUnsuspendUser(selectedUser),
+      // onRestore: () => handleRestoreUser(selectedUser), 
     };
   }, [selectedUser]);
 
   useInfoContext(infoContext)
+
+  const handleSelectUser = (user: User) => {
+    setSelectedUser(prev =>
+      prev?._id === user._id ? null : user
+    )
+  }
 
   useEffect(() => {
     if (selectedUser) {
@@ -112,101 +172,32 @@ export default function UsersListPage() {
     }
   }, [selectedUser])
 
-
-  const handleSelectUser = (user: User) => {
-    setSelectedUser(prev =>
-      prev?._id === user._id ? null : user
-    )
-  }
-
-  const handleEditUser = (user: User) => {
-    navigate(`/admin/users/${user._id}/edit`)
-  }
-
-  const handleDeleteUser = (user: User) => {
-    setSelectedUser(user)
-    openRight();
-    defineConfirm({
-      title: "Supprimer le user",
-      description: "Cette action est réversible.",
-      onConfirm: async () => {
-        await deleteUser(user._id);
-        refetch();
-      },
-    });
-  }
-
-  const handleSuspendUser = (user: User) => {
-    setSelectedUser(user)
-    openRight();
-    defineConfirm({
-      title: "Suspendre le user",
-      description: "Cette action est réversible.",
-      onConfirm: async () => {
-        await suspendUser(user._id);
-        refetch();
-      },
-    });
-  }
-
-
-  const handleSearch = (value: string) => {
-    setPage(1);
-    setSearch(value);
-  };
-
-
-
   useEffect(() => {
     return () => {
       closeRight();
     };
   }, []);
 
+ 
 
-  const defineStatus = (user: User): ReactNode => {
-    let stickerClass = "sticker-success";
+  const rowMenuKeys: (keyof typeof userActionsRegistry)[]  = ["display", "edit", "suspend", "delete"];
 
-    if (user.isDeleted) stickerClass = "sticker-alert";
-    else if (user.isSuspended) stickerClass = "sticker-warning";
+  const userRowActions: RowMenuAction<User>[] = rowMenuKeys.map((key) => {
 
-    return (
-      <div className="table-status">
-        <div className={`sticker ${stickerClass}`}></div>
-      </div>
-    );
-  }
+    const def = userActionsRegistry[key];
 
+    return {
+      label: (user: User) => 
+        typeof def.label === "function"
+          ? def.label(user)
+          : def.label,
 
-  /* Actions du RowMenu */
-  const handleSuspendToggle = () => {}
-
-  const handleDeleteToggle = () => {}
-
-  const userRowActions: RowMenuAction<User>[] = [
-    {
-      label: "Voir",
-      icon: <Eye className="w-4 h-4" />,
-      onClick: (user: User) => navigate(`/admin/users/${user._id}`),
-    },
-    {
-      label: "Éditer",
-      icon: <Pencil className="w-4 h-4" />,
-      onClick: handleEditUser,
-    },
-    {
-      label: (user: User) => user.isSuspended ? "Réactiver" : "Suspendre",
-      icon: <Ban className="w-4 h-4" />,
-      variant: "warning",
-      onClick: handleSuspendToggle,
-    },
-    {
-      label: (user: User) => user.isDeleted ? "Restaurer" : "Supprimer",
-      icon: <Trash2 className="w-4 h-4" />,
-      variant: "danger",
-      onClick: handleDeleteToggle,
-    },
-  ];
+      icon: <def.icon className="h-4 w-4" />,
+      variant: def.variant,
+      hidden: (user: User) => def.visible ? !def.visible(user) : false,
+      onClick: (user: User) => def.run(user, ctx)
+    }
+  });
 
  
 

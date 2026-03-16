@@ -14,6 +14,10 @@ export function ConfirmPanel() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    console.log("ConfirmPanel mounted");
+  }, []);
+
   if (!options) return null;
 
 
@@ -45,12 +49,10 @@ export function ConfirmPanel() {
     setValue(null);
   };
 
-  useEffect(() => {
-    console.log("ConfirmPanel mounted");
-  }, []);
+
 
   return (
-    <div className="p-6 confirm-panel shadow-xl rounded-xl">
+    <div className="p-5 confirm-panel shadow-xl rounded-xl">
       <h3 className="text-lg font-semibold">{options.title}</h3>
 
       {options.description && (

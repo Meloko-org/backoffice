@@ -1,52 +1,52 @@
-import type { LucideIcon } from "lucide-react"
 import DetailsButton from "../buttons/DetailsButton"
-import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext"
+import { userActionsRegistry } from "../../../features/users/config/userActionsRegistry";
+import type { UserActionContext } from "../../../features/users/config/user.actions";
 
-
-export type DetailsAction = {
-  label: string;
-  icon: LucideIcon;
-  variant?: "success" | "primary" | "warning" | "danger";
-  action: "display" | "edit" | "suspend" | "delete";
-}
 
 type Props = {
-  item: unknown;
-  actions: DetailsAction[];
+  item: any;
+  ctx: UserActionContext;
+  actionKeys: string[];
   wrapperClasses?: string;
 }
 
 export default function DetailsActions({
   item,
-  actions,
+  ctx,
+  actionKeys,
   wrapperClasses = "details-cols-2 mt-5",
 }: Props) {
-  if (!actions?.length) return null
-
-  const { infoContext } = useInfoLayout();
-
-  const actionHandlers = {
-    edit: infoContext?.onEdit,
-    delete: infoContext?.onDelete,
-    display: infoContext?.onDisplay,
-    suspend: infoContext?.onSuspend,
-  }
-
-  console.log("handlers :", actionHandlers)
+  
 
   return (
     <div className={wrapperClasses}>
-      {actions.map((action) => {
-        const handler = actionHandlers[action.action];
 
-        if (!handler) return null;
+      {actionKeys.map((key) => {
+        const action = userActionsRegistry[key]
+
+        if (!action) return null;
+
+        if (action.visible && !action.visible(item)) {
+          return null;
+        }
+
+        
+        const label =
+          typeof action.label === "function"
+            ? action.label(item)
+            : action.label
+
+        const Icon = action.icon
+        
 
         return (
           <DetailsButton
-            key={action.label}
-            label={action.label}
-            icon={action.icon}
-            onClick={() => handler(item as any)}
+            key={key}
+            label={label}
+            icon={Icon}
+
+            onClick={() => action.run(item, ctx)}
+
             extraClasses={`w-full ${
               action.variant === "danger" 
                 ? "btn-danger" 

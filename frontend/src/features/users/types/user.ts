@@ -1,27 +1,16 @@
 import type { PaginationMeta } from "../../../types/global.types";
 
-export interface Address {
-    _id: string;
-    name: string;
-    isDefault: boolean;
-    address: {
-      address1: string;
-      address2: string;
-      postalCode: string;
-      city: string;
-      country: string;
-    },
-    createdAt: string;
-    updatedAt: string;
-  };
 
-export interface Bookmark {
+/* type nécessaire pour les actions du user */
+export interface UserActionTarget {
   _id: string;
-  name: string;
+  isDeleted: boolean;
+  isSuspended: boolean;
 }
 
-export interface User {
-  _id: string;
+
+/* types pour la liste des users */
+export interface User extends UserActionTarget {
   email: string;
   clerkUUID: string;
   clerkPasswordEnabled: boolean;
@@ -35,8 +24,6 @@ export interface User {
   bookmarks: Bookmark[];
   addresses: Address[];
   favSearch: string[];
-  isDeleted: boolean;
-  isSuspended: boolean;
   deletedAt: string;
   deletedByAdmin: {
     _id: string;
@@ -52,46 +39,48 @@ export interface User {
   updatedAt: string;
 }
 
+
+
 export interface UserListResponse {
   items: User[];
   pagination: PaginationMeta;
 }
 
 
-export type UserDashboard = {
-  user: {
-    id: string;
-    email: string;
-    firstname: string | null;
-    lastname: string | null;
-    avatar: string | null;
-    role: {
-      id: string;
-      name: string;
-    };
-
-    bookmarks: Bookmark[];
-    addresses: Address[];
-    favSearch: string[];
-
-    createdAt: string;
-    updatedAt: string;
-    lastLoginAt?: string;
-
-    isSuspended: boolean;
-    suspendedAt?: string;
-    suspensionReason?: string;
-
-    isDeleted: boolean;
-    deletedAt?: string;
-    deletedByAdmin: {
-      _id: string;
-      lastname: string;
-    };
-
-    isProducer: boolean;
-    producerId?: string | null;
+/* types pour le dashboard User */
+export interface UserDashboardUser extends UserActionTarget {
+  email: string;
+  firstname: string | null;
+  lastname: string | null;
+  avatar: string | null;
+  role: {
+    _id: string;
+    name: string;
   };
+
+  bookmarks: Bookmark[];
+  addresses: Address[];
+  favSearch: string[];
+
+  createdAt: string;
+  updatedAt: string;
+  lastLoginAt?: string;
+
+  suspendedAt?: string;
+  suspensionReason?: string;
+
+  deletedAt?: string;
+  deletedByAdmin: {
+    _id: string;
+    lastname: string;
+  };
+
+  isProducer: boolean;
+  producerId?: string | null;
+}
+
+export type UserDashboard = {
+  user: UserDashboardUser;
 
   business: {
     totalOrders: number;
@@ -118,6 +107,7 @@ export type UserDashboard = {
 };
 
 
+/* types pour afficher les form (FormValues) et valider les form  (Payload)*/ 
 export interface UserPayload {
   firstname: string;
   lastname: string;
@@ -132,4 +122,25 @@ export interface UserFormValues {
   avatar: string | null,
   suspensionReason: string;
   role: string;
+}
+
+/* types communs utilisés dans d'autres types */
+export interface Address {
+    _id: string;
+    name: string;
+    isDefault: boolean;
+    address: {
+      address1: string;
+      address2: string;
+      postalCode: string;
+      city: string;
+      country: string;
+    },
+    createdAt: string;
+    updatedAt: string;
+  };
+
+export interface Bookmark {
+  _id: string;
+  name: string;
 }

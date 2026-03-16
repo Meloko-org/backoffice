@@ -1,22 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { suspendUser, unsuspendUser } from "../features/users/api/users.api";
 
-export const useSuspendUser = (id: string) => {
+export const useSuspendUser = () => {
+  
   const queryClient = useQueryClient();
 
   const suspendMutation = useMutation({
-    mutationFn: (reason: string) => suspendUser(id, reason),
-    onSuccess: () => {
+    mutationFn: ({id, reason}: { id: string, reason: string}) => suspendUser(id, reason),
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["user-dashboard", id],
+        queryKey: ["user-dashboard", variables.id],
         exact: false,
       });
     },
   });
 
   const unsuspendMutation = useMutation({
-    mutationFn: () => unsuspendUser(id),
-    onSuccess: () => {
+    mutationFn: (id: string) => unsuspendUser(id),
+    onSuccess: (_, id) => {
         queryClient.invalidateQueries({
         queryKey: ["user-dashboard", id],
         exact: false,
