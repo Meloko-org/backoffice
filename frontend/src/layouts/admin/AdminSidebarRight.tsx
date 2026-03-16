@@ -1,11 +1,12 @@
 import { ConfirmPanel } from "./components/ConfirmPanel";
-import { rightPanelRegistry } from "./config/rightPanelRegistry";
+import { rightPanelRegistry } from "./registries/rightPanel/rightPanelRegistry";
 import { useInfoLayout } from "./contexts/AdminInfoContext";
 import { useConfirm } from "./contexts/ConfirmContext";
 
 
 export default function AdminSidebarRight() {
 
+	console.log("sidebar :", rightPanelRegistry)
 
 	const { infoContext } = useInfoLayout();
 	const { options, isConfirmOpen } = useConfirm();

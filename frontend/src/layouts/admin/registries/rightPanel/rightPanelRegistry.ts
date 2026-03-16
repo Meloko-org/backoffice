@@ -21,7 +21,7 @@ export interface RightPanelConfig {
  * Utilisation de Vite: import.meta.glob pour créer un auto-registry
  */
 const modules = import.meta.glob(
-  "../../../features/**/config/rightPanel.ts",
+  "../../../../features/**/config/rightPanel.ts",
   { eager: true }
 ) as Record<
   string,
@@ -45,3 +45,4 @@ export type RightPanelMap =
   Partial<Record<RightPanelType, RightPanelConfig>>
 
 
+console.log("rightPanelRegistry loaded")

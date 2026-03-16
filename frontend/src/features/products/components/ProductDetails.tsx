@@ -1,7 +1,7 @@
 import { ImageOff } from "lucide-react";
 import type { Product } from "../types/product";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
+import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 
 type Props = {
 	product: Product;

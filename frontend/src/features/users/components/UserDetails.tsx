@@ -2,7 +2,7 @@ import { ImageOff } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
+import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext";
 import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
 import type { UserActionContext } from "../config/user.actions";

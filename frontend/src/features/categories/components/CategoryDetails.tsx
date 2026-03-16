@@ -1,5 +1,5 @@
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
+import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import type { ProductCategory } from "../types/category";
 import { ImageOff } from "lucide-react";
 
