@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 
 type Props = {
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   onClick: () => void;
   extraClasses?: string;
 }
@@ -23,7 +23,7 @@ export default function DetailsButton({
           ${extraClasses ?? ""}
         `}
     >
-      <Icon className="w-4 h-4" />
+      {Icon && <Icon className="w-4 h-4" />}
       {label}
     </button>
   )

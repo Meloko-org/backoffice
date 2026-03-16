@@ -1,31 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import type { ResolvedAction } from "../../layouts/admin/registries/actions/action.types";
 
-export type RowMenuAction<T> = {
-  label: string | ((row: T) => string);
-  icon?: React.ReactNode;
-  onClick: (row: T) => void;
-  variant?: "success" | "primary" | "warning" | "danger" | "default";
-  hidden?: (row: T) => boolean;
-  disabled?: (row: T) => boolean;
-};
+type Props = {
+  actions: ResolvedAction[]
+}
 
-type Props<T> = {
-  row: T;
-  actions: RowMenuAction<T>[];
-};
-
-export function DataRowMenu<T>({ row, actions }: Props<T>) {
+export function DataRowMenu({ actions }: Props) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [visible, setVisible] = useState(false);
-
-  const visibleActions = actions.filter(
-    (action) => !action.hidden || !action.hidden(row)
-  );
 
 
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,10 +23,9 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
 
     setPosition({
       top: rect.bottom + window.scrollY,
-      left: rect.right + window.scrollX, // largeur menu approx
+      left: rect.right + window.scrollX,
     });
 
-    // setOpen((prev) => !prev);
     if (!open) {
       setVisible(true);
       setOpen(true);
@@ -49,7 +35,6 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
     }
   };
 
-  // Fermer si click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -70,8 +55,6 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
     };
   }, [open]);
 
-
-  // fermeture au scroll
   useEffect(() => {
     if (!open) return;
 
@@ -80,7 +63,7 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
       setTimeout(() => setVisible(false), 150);
     };
 
-    window.addEventListener("scroll", handleClose, true); // capture
+    window.addEventListener("scroll", handleClose, true);
     window.addEventListener("resize", handleClose);
 
     return () => {
@@ -89,9 +72,7 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
     };
   }, [open]);
 
-
-
-  const getVariantClass = (variant?: string) => {
+  const getVariantClass = (variant?: Props["actions"][number]["variant"]) => {
     switch (variant) {
       case "danger":
         return "text-danger hover:bg-danger/20";
@@ -102,9 +83,8 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
     }
   };
 
-
   return (
-    <div className="">
+    <div>
       <button
         ref={buttonRef}
         className="row-menu-trigger"
@@ -123,150 +103,30 @@ export function DataRowMenu<T>({ row, actions }: Props<T>) {
               left: position.left,
             }}
           >
-            {visibleActions.map((action, index) => {
-              const isDisabled = action.disabled?.(row);
-
+            {actions.map((action, index) => {
               return (
                 <button
                   key={index}
-                  disabled={isDisabled}
+                  disabled={action.disabled}
                   onClick={() => {
-                    if (!isDisabled) {
-                      action.onClick(row);
-                      setOpen(false);
+                    if (!action.disabled) {
+                      action.run()
+                      setOpen(false)
                     }
                   }}
                   className={`
                     ${getVariantClass(action.variant)}
-                    ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
-                    `}
+                    ${action.disabled ? "opacity-50 cursor-not-allowed" : ""}
+                  `}
                 >
-                  {action.icon}
-                  {typeof action.label === "function"
-                    ? action.label(row)
-                    : action.label
-                  }
+                  {action.icon && <action.icon className="h-4 w-4" />}
+                  {action.label}
                 </button>
-              )}
-            )}
+              )
+            })}
           </div>,
           document.body
         )}
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useEffect, useRef, useState } from "react";
-// import { MoreVertical } from "lucide-react";
-
-// export type RowMenuAction<T> = {
-//   label: string | ((row: T) => string);
-//   icon?: React.ReactNode;
-//   onClick: (row: T) => void;
-//   variant?: "default" | "warning" | "danger";
-//   hidden?: (row: T) => boolean;
-//   disabled?: (row: T) => boolean;
-// };
-
-// type DataRowMenuProps<T> = {
-//   row: T;
-//   actions: RowMenuAction<T>[];
-// };
-
-// export function DataRowMenu<T>({ row, actions }: DataRowMenuProps<T>) {
-//   const [open, setOpen] = useState(false);
-//   const menuRef = useRef<HTMLDivElement>(null);
-
-//   const visibleActions = actions.filter(
-//     (action) => !action.hidden || !action.hidden(row)
-//   );
-
-//   useEffect(() => {
-//     const handleClickOutside = (event: MouseEvent) => {
-//       if (
-//         menuRef.current &&
-//         !menuRef.current.contains(event.target as Node)
-//       ) {
-//         setOpen(false);
-//       }
-//     };
-
-//     document.addEventListener("mousedown", handleClickOutside);
-//     return () => {
-//       document.removeEventListener("mousedown", handleClickOutside);
-//     };
-//   }, []);
-
-//   const getVariantClass = (variant?: string) => {
-//     switch (variant) {
-//       case "danger":
-//         return "text-red-600 hover:bg-red-50";
-//       case "warning":
-//         return "text-orange-600 hover:bg-orange-50";
-//       default:
-//         return "text-neutral-700 hover:bg-neutral-100";
-//     }
-//   };
-
-//   return (
-//     <div className="relative" ref={menuRef}>
-//       <button
-//         onClick={(e) => {
-//           e.stopPropagation();
-//           setOpen((prev) => !prev);
-//         }}
-//         className="p-1 rounded hover:bg-neutral-200"
-//       >
-//         <MoreVertical className="w-4 h-4" />
-//       </button>
-
-//       {open && (
-//         <div className="absolute right-0 mt-2 w-44 bg-white border border-neutral-200 rounded-md shadow-lg z-50">
-//           {visibleActions.map((action, index) => {
-//             const isDisabled = action.disabled?.(row);
-
-//             return (
-//               <button
-//                 key={index}
-//                 disabled={isDisabled}
-//                 onClick={(e) => {
-//                   e.stopPropagation();
-//                   if (!isDisabled) {
-//                     action.onClick(row);
-//                     setOpen(false);
-//                   }
-//                 }}
-//                 className={`
-//                   w-full flex items-center gap-2 px-3 py-2 text-sm text-left
-//                   ${getVariantClass(action.variant)}
-//                   ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
-//                 `}
-//               >
-//                 {action.icon}
-//                 {typeof action.label === "function"
-//                   ? action.label(row)
-//                   : action.label
-//                 }
-//               </button>
-//             );
-//           })}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-

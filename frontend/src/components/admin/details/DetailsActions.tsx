@@ -1,51 +1,30 @@
+import type { ResolvedAction } from "../../../layouts/admin/registries/actions/action.types";
 import DetailsButton from "../buttons/DetailsButton"
-import { userActionsRegistry } from "../../../features/users/config/userActionsRegistry";
-import type { UserActionContext } from "../../../features/users/config/user.actions";
+
 
 
 type Props = {
-  item: any;
-  ctx: UserActionContext;
-  actionKeys: string[];
+  actions: ResolvedAction[];
   wrapperClasses?: string;
 }
 
 export default function DetailsActions({
-  item,
-  ctx,
-  actionKeys,
+  actions,
   wrapperClasses = "details-cols-2 mt-5",
 }: Props) {
-  
 
   return (
     <div className={wrapperClasses}>
 
-      {actionKeys.map((key) => {
-        const action = userActionsRegistry[key]
-
-        if (!action) return null;
-
-        if (action.visible && !action.visible(item)) {
-          return null;
-        }
-
+      {actions.map((action, index) => {
         
-        const label =
-          typeof action.label === "function"
-            ? action.label(item)
-            : action.label
-
-        const Icon = action.icon
-        
-
         return (
           <DetailsButton
-            key={key}
-            label={label}
-            icon={Icon}
+            key={index}
+            label={action.label}
+            icon={action.icon}
 
-            onClick={() => action.run(item, ctx)}
+            onClick={() => action.run()}
 
             extraClasses={`w-full ${
               action.variant === "danger" 

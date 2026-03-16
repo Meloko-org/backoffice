@@ -1,29 +1,20 @@
-import { Ban, Eye, Pencil, Trash, type LucideIcon } from "lucide-react"
+import { Ban, Eye, Pencil, Trash} from "lucide-react"
 import type { UserActionTarget } from "../types/user"
 import type { UserActionContext } from "./user.actions"
 import FloatingSelect from "../../../core/forms/components/floatingSelect";
+import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
 
 
-export type UserAction = {
-  label: string | ((user: UserActionTarget) => string);
-  icon: LucideIcon
-  variant?: "success" | "primary" | "warning" | "danger" | "default"
-
-  visible?: (user: UserActionTarget) => boolean
-
-  run: (
-    user: UserActionTarget,
-    ctx: UserActionContext
-  ) => void | Promise<void>
-}
 
 
-export const userActionsRegistry: Record<string, UserAction> = {
+export const userActions = createActionsRegistry<UserActionTarget, UserActionContext>({
 
   display: {
     label: "Voir",
     icon: Eye,
     variant: "success",
+
+    placement: ["rowMenu", "details"],
 
     visible: () => true,
 
@@ -37,6 +28,8 @@ export const userActionsRegistry: Record<string, UserAction> = {
     icon: Pencil,
     variant: "primary",
 
+    placement: ["rowMenu", "details"],
+
     visible: (user) => !user.isDeleted,
 
     run: (user, ctx) => {
@@ -48,6 +41,8 @@ export const userActionsRegistry: Record<string, UserAction> = {
     label: (user) => user.isSuspended ? "Réactiver" : "Suspendre",
     icon: Ban,
     variant: "warning",
+
+    placement: ["rowMenu", "details", "user-header"],
 
     visible: (user) => !user.isDeleted,
 
@@ -105,6 +100,8 @@ export const userActionsRegistry: Record<string, UserAction> = {
     icon: Trash,
     variant: "danger",
 
+    placement: ["rowMenu", "details", "user-header"],
+
     visible: () => true,
 
     run: (user, ctx) => {
@@ -140,4 +137,4 @@ export const userActionsRegistry: Record<string, UserAction> = {
     },
   },
 
-}
+})

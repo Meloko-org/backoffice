@@ -8,14 +8,14 @@ import { useInfoContext } from "../../../hooks/useInfoContext";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
-import { DataRowMenu, type RowMenuAction } from "../../../components/data-table/DataRowMenu";
+import { DataRowMenu } from "../../../components/data-table/DataRowMenu";
 import type { RoleForSelect } from "../../roles/types/roles";
 import { getRoleNames } from "../../roles/api/roles.api";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 import Loader from "../../../components/admin/Loader";
-import { runUserAction, type UserActionContext } from "../config/user.actions";
+import { type UserActionContext } from "../config/user.actions";
 import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
-import { userActionsRegistry } from "../config/userActionsRegistry";
+import { userActions } from "../config/userActionsRegistry";
 
 
 
@@ -103,37 +103,6 @@ export default function UsersListPage() {
 
 
 
-  /* GESTION DES ACTIONS DU USER */
-  // appels à tous les hooks nécessaires 
-  // const navigate = useNavigate();
-  // const { openRight, closeRight } = useAdminLayout();
-  // const { defineConfirm } = useConfirm();
-  // const { suspend, unsuspend } = useSuspendUser();
-  // const { del, restore } = useDeleteUser();
-
-  // création du context des actions
-  // const ctx = {
-  //   navigate,
-  //   openRight,
-  //   defineConfirm,
-  //   suspend,
-  //   unsuspend,
-  //   del,
-  //   restore,
-  //   refetch,
-  // }
-
-  // remplace le code précédent
-  const baseCtx = useUserActionsContext();
-
-  const ctx: UserActionContext = {
-    ...baseCtx,
-    refetch
-  }
-
-
-
-
   /* GESTION DE L'AFFICHAGE DANS LE rightPanel */  
   const { openRight, closeRight } = useAdminLayout();
   const [ selectedUser, setSelectedUser ] = useState<User | null>();
@@ -146,13 +115,6 @@ export default function UsersListPage() {
       title: "Détail du user",
       refetch,
       user: selectedUser,
-
-      // onEdit: () => handleEditUser(selectedUser),
-      // onDelete: () => handleDeleteUser(selectedUser),
-      // onDisplay: () => navigate(`/admin/users/${selectedUser._id}`),
-      // onSuspend: () => handleSuspendUser(selectedUser),
-      // onUnsuspend: () => handleUnsuspendUser(selectedUser),
-      // onRestore: () => handleRestoreUser(selectedUser), 
     };
   }, [selectedUser]);
 
@@ -178,36 +140,25 @@ export default function UsersListPage() {
     };
   }, []);
 
- 
+  
+  /* GESTION DES ACTIONS DU USER */
+  /* création du context des actions (récupère tous les hooks nécessaires) */
+  const baseCtx = useUserActionsContext();
 
-  const rowMenuKeys: (keyof typeof userActionsRegistry)[]  = ["display", "edit", "suspend", "delete"];
+  const ctx: UserActionContext = {
+    ...baseCtx,
+    refetch
+  }
 
-  const userRowActions: RowMenuAction<User>[] = rowMenuKeys.map((key) => {
-
-    const def = userActionsRegistry[key];
-
-    return {
-      label: (user: User) => 
-        typeof def.label === "function"
-          ? def.label(user)
-          : def.label,
-
-      icon: <def.icon className="h-4 w-4" />,
-      variant: def.variant,
-      hidden: (user: User) => def.visible ? !def.visible(user) : false,
-      onClick: (user: User) => def.run(user, ctx)
-    }
-  });
-
- 
+  /* les actions sont récupérées directement dans les props de DataLayoutList */
 
 
+  /* Loading */
   if (loading) {
     return (
       <Loader />
     );
   }
-
 
   
   return (
@@ -278,14 +229,12 @@ export default function UsersListPage() {
                   render: (user) => (
                     <div className="table-actions">
                       <DataRowMenu
-                        row={user}
-                        actions={userRowActions}
+                        actions={userActions.getActions(user, ctx,"rowMenu")}
                       />
                     </div>
                   ),
                 },
               ]}
-              // actions={}
             />
           </div>
         </div>

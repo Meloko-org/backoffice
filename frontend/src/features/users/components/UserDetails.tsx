@@ -3,11 +3,10 @@ import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { rightPanelRegistry } from "../../../layouts/admin/config/rightPanelRegistry";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
-import { useInfoContext } from "../../../hooks/useInfoContext";
 import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext";
 import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
 import type { UserActionContext } from "../config/user.actions";
+import { userActions } from "../config/userActionsRegistry";
 
 type Props = {
 	user: User;
@@ -20,8 +19,9 @@ export default function UserDetails({
 
 	if (!user) return null;
 
-  const config = rightPanelRegistry.user;
+  // const config = rightPanelRegistry.user;
 
+  /* création du context des actions (récupère tous les hooks nécessaires) */
   const { infoContext } = useInfoLayout()
   const baseCtx = useUserActionsContext();
   const ctx: UserActionContext = {
@@ -29,8 +29,9 @@ export default function UserDetails({
     refetch: infoContext?.refetch
   }
 
+  /* Récupération des actions spécifiques à UserDetails */ 
+  const actions = userActions.getActions(user, ctx, "details")
 
-  console.log("panel config :",config)
 
 	const imageUrl = user.avatar; 
   const hasImage = Boolean(imageUrl);
@@ -252,9 +253,7 @@ export default function UserDetails({
       )}
 
       <DetailsActions
-        item={user}
-        ctx={ctx}
-        actionKeys={config?.actions ?? []}
+        actions={actions}
         wrapperClasses="details-button-row mt-5"
       />
 

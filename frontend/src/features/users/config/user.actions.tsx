@@ -1,6 +1,6 @@
-import type { UserActionTarget } from "../types/user";
+// import type { UserActionTarget } from "../types/user";
 import type { ConfirmOptions } from "../../../layouts/admin/providers/ConfirmProvider";
-import { userActionsRegistry } from "./userActionsRegistry";
+// import { userActionsRegistry } from "./userActionsRegistry";
 
 
 
@@ -15,15 +15,15 @@ export type UserActionContext = {
   refetch?: () => Promise<any> | void;
 }
 
-export async function runUserAction(
-  action: string,
-  user: UserActionTarget,
-  ctx: UserActionContext
-) {
+// export async function runUserAction(
+//   action: string,
+//   user: UserActionTarget,
+//   ctx: UserActionContext
+// ) {
 
-  const actionDef = userActionsRegistry[action];
+//   const actionDef = userActionsRegistry[action];
 
-  if (!actionDef) return;
+//   if (!actionDef) return;
 
-  return actionDef.run(user, ctx)
-}
+//   return actionDef.run(user, ctx)
+// }

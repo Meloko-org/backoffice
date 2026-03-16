@@ -2,7 +2,7 @@ import { ImageOff } from "lucide-react";
 import type { UserDashboard } from "../types/user";
 import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
 import type { UserActionContext } from "../config/user.actions";
-import { userActionsRegistry } from "../config/userActionsRegistry";
+import { userActions } from "../config/userActionsRegistry";
 
 
 type Props = {
@@ -11,29 +11,14 @@ type Props = {
 
 export default function UserHeaderSection({ user }: Props) {
 
-
-  // const userForActions = {
-  //   _id: user._id,
-  //   isSuspended: user.isSuspended,
-  //   isDeleted: user.isDeleted
-  // }
-
+  /* création du context des actions (récupère tous les hooks nécessaires) */
   const baseCtx = useUserActionsContext();
-
   const ctx: UserActionContext = {
     ...baseCtx
   }
 
-  const headerActionKeys: (keyof typeof userActionsRegistry)[] = [
-    "suspend", "delete"
-  ]
-
-  const headerActions = headerActionKeys
-    .map((key) => userActionsRegistry[key])
-    .filter((def) => !def.visible || def.visible(user))
-
-
-  console.log("user :", user)
+  /* Récupération des actions spécifiques à UserHeaderSection */   
+  const actions = userActions.getActions(user, ctx, "user-header")
 
   return (
     <div className="bloc flex justify-between items-start">
@@ -103,12 +88,7 @@ export default function UserHeaderSection({ user }: Props) {
       {/* Actions */}
       <div className="flex flex-col gap-3">
 
-        {headerActions.map((action, index) => {
-
-          const label =
-            typeof action.label === "function"
-              ? action.label(user)
-              : action.label;
+        {actions.map((action, index) => {
 
           const variantClass =
             action.variant === "danger"
@@ -121,9 +101,9 @@ export default function UserHeaderSection({ user }: Props) {
             <button
               key={index}
               className={variantClass}
-              onClick={() => action.run(user, ctx)}
+              onClick={() => action.run()}
             >
-              {label}
+              {action.label}
             </button>
           );
         })}
