@@ -1,6 +1,6 @@
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 import { DataTable } from "../../../components/data-table/DataTable";
-import type { Column } from "../../../types/DataTable.types";
+import type { Column } from "../../../components/data-table/DataTable";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import type { InvoiceDetail, InvoiceLine } from "../types/order";
 

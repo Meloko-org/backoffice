@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { DataTable } from "../../../components/data-table/DataTable";
 import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
-import type { Column } from "../../../types/DataTable.types";
+import type { Column } from "../../../components/data-table/DataTable";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import type { ProductLine } from "../types/order";
 import type { ModelContext } from "../../../types/admin";

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 export type SortDirection = "asc" | "desc";
 
 export interface Column<T> {
-  key: keyof T | string;
+  key: keyof T | (string & {});
   label: string;
   sortable?: boolean;
   className?: string;

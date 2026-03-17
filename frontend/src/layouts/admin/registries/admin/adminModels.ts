@@ -1,8 +1,7 @@
+import type { UserActionContext } from "../../../../features/users/config/user.actions";
+import type { User } from "../../../../features/users/types/user";
+import type { ModelAdminConfig } from "./createModelAdmin";
+
 export interface AdminModels {
-  users: any
-  products: any
-  orders: any
-  categories: any
-  families: any
-  roles: any
+  users: ModelAdminConfig<User, UserActionContext>
 }

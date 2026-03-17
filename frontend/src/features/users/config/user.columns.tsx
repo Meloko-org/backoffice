@@ -1,5 +1,5 @@
 import { DataRowMenu } from "../../../components/data-table/DataRowMenu";
-import type { Column } from "../../../types/DataTable.types";
+import type { Column } from "../../../components/data-table/DataTable";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import type { User } from "../types/user";
 import { renderUserStatus } from "../utils/renderUserStatus";
