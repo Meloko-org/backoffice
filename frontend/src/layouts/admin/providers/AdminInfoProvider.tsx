@@ -1,6 +1,5 @@
-import { useMemo, useState, type ReactNode } from "react";
-import { AdminInfoContext } from "../contexts/AdminInfoContext";
-import type { ModelContext } from "../../../types/admin";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { AdminInfoContext, type ModelInfoContext } from "../contexts/AdminInfoContext";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +7,7 @@ type Props = {
 
 export default function AdminInfoProvider({ children }: Props) {
   
-	const [ infoContext, setInfoContext ] = useState<ModelContext>(null);
+	const [ infoContext, setInfoContext ] = useState<ModelInfoContext>(null);
 
 	const value = useMemo(
 		() => ({
@@ -17,6 +16,10 @@ export default function AdminInfoProvider({ children }: Props) {
 		}),
 		[infoContext]
 	);
+
+	useEffect(() => {
+		console.log("infoContext changed:", infoContext);
+	}, [infoContext]);
 
 	return (
 		<AdminInfoContext.Provider value={value}>

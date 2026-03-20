@@ -4,6 +4,7 @@ import { useConfirm } from "../layouts/admin/contexts/ConfirmContext";
 import { useSuspendUser } from "./useSuspendUser";
 import { useDeleteUser } from "./useDeleteUser";
 import { useAdminLayout } from "../layouts/admin/contexts/AdminLayoutContext";
+import { useMemo } from "react";
 
 export function useUserActionsContext(): UserActionContext {
 
@@ -15,13 +16,22 @@ export function useUserActionsContext(): UserActionContext {
   const { del, restore } = useDeleteUser();
 
 
-  return {
-    navigate,
-    openRight,
-    defineConfirm,
-    suspend,
-    unsuspend,
-    del,
-    restore,
-  };
+  return useMemo(() => (
+    {
+      navigate,
+      openRight,
+      defineConfirm,
+      suspend,
+      unsuspend,
+      del,
+      restore,
+    }
+  ), [navigate,
+      openRight,
+      defineConfirm,
+      suspend,
+      unsuspend,
+      del,
+      restore,])
+  ;
 }

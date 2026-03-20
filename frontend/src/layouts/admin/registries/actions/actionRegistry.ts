@@ -10,6 +10,8 @@ export function createActionsRegistry<T, Ctx>(
     placement?: ActionPlacement
   ): ResolvedAction[] {
 
+    if (!item) return [];
+
     return Object.values(registry)
 
       .filter((action) => {

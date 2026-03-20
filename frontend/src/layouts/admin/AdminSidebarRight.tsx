@@ -1,19 +1,19 @@
 import { ConfirmPanel } from "./components/ConfirmPanel";
 import { rightPanelRegistry } from "./registries/rightPanel/rightPanelRegistry";
-import { useInfoLayout } from "./contexts/AdminInfoContext";
+import { useAdminInfo } from "./contexts/AdminInfoContext";
 import { useConfirm } from "./contexts/ConfirmContext";
 
 
 export default function AdminSidebarRight() {
 
-	console.log("sidebar :", rightPanelRegistry)
 
-	const { infoContext } = useInfoLayout();
+	const { infoContext } = useAdminInfo();
 	const { options, isConfirmOpen } = useConfirm();
 
 	const panelConfig = infoContext 
 		? rightPanelRegistry[infoContext.type]
 		: null;
+
 
 	const PanelComponent = panelConfig?.component ?? null;
 	const isFullPanel = panelConfig?.fullPanel;
@@ -38,7 +38,10 @@ export default function AdminSidebarRight() {
 								{infoContext && infoContext.title}
 							</div>
 							<div>
-								<PanelComponent {...infoContext} />
+								<PanelComponent 
+									id={infoContext.id}
+									title={infoContext.title}
+								/>
 							</div>
 						</div>
 					</div>

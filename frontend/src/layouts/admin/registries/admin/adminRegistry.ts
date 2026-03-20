@@ -1,3 +1,7 @@
+/**
+ * Stockage runtime
+ */
+
 import type { AdminModels } from "./adminModels"
 
 

@@ -2,35 +2,43 @@ import { ImageOff } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
-import { useInfoLayout } from "../../../layouts/admin/contexts/AdminInfoContext";
 import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
-import type { UserActionContext } from "../config/user.actions";
 import { userActions } from "../config/userActionsRegistry";
+import { useEffect, useMemo, useState } from "react";
+import { getUserById } from "../api/users.api";
+import Loader from "../../../components/admin/Loader";
 
 type Props = {
-	user: User;
+	id: string;
 }
 
 
 export default function UserDetails({
-	user,
+	id,
 }: Props) {
 
-	if (!user) return null;
+  const [ user, setUser ] = useState<User | null>(null);
 
-  // const config = rightPanelRegistry.user;
+  /* fetch du user */
+  useEffect(() => {
+    getUserById(id).then(setUser)
+  }, [id])
 
   /* création du context des actions (récupère tous les hooks nécessaires) */
-  const { infoContext } = useInfoLayout()
-  const baseCtx = useUserActionsContext();
-  const ctx: UserActionContext = {
-    ...baseCtx,
-    refetch: infoContext?.refetch
-  }
+  const ctx = useUserActionsContext();
 
   /* Récupération des actions spécifiques à UserDetails */ 
-  const actions = userActions.getActions(user, ctx, "details")
+  const actions = useMemo(() => {
+    if (!user) return [];
+    return userActions.getActions(user, ctx, "details")
+  }, [user, ctx])
+
+  /* loader */
+  if (!user) {
+    return (
+      <Loader />
+    )
+  }
 
 
 	const imageUrl = user.avatar; 

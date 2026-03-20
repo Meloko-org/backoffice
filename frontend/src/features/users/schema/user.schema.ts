@@ -4,7 +4,7 @@ import { getRoleNames } from "../../roles/api/roles.api";
 import type { UserFormValues } from "../types/user";
 
 
-async function fetchRoles(): Promise<FieldOption<string>[]> {
+export async function fetchRoles(): Promise<FieldOption<string>[]> {
   const data = await getRoleNames();
 
   return data.map((r: any) => ({
@@ -13,7 +13,14 @@ async function fetchRoles(): Promise<FieldOption<string>[]> {
   }))
 }
 
-export const userSchema = 
+export type UserFormCtx = {
+  roles?: FieldOption<string>[];
+};
+
+
+export const userFormSchema = (
+  ctx: UserFormCtx & { values: Partial<UserFormValues> }
+) =>
   defineFormSchema<UserFormValues>({
     sections: [
       {
@@ -25,19 +32,17 @@ export const userSchema =
             required: true,
             floating: true,
           }),
-
           lastname: field.input({
             label: "Prénom",
             required: true,
             floating: true,
           }),
-
           avatar: field.input({
             label: "Avatar",
             required: false,
             floating: true,
           }),
-        }
+        },
       },
 
       {
@@ -46,9 +51,9 @@ export const userSchema =
           role: field.radioGroup({
             label: "Roles",
             required: true,
-            options: fetchRoles,
-          })
-        }
+            options: ctx.roles ?? [],
+          }),
+        },
       },
 
       {
@@ -57,15 +62,77 @@ export const userSchema =
         fields: {
           suspensionReason: field.select({
             label: "Raison de la suspension",
-            required: false,
-            floating: true,
             options: [
-              { label: "Fraude", value: "fraud"},
-              { label: "Spam", value:"spam" },
-              { label: "Abus", value: "abuse" }
-            ]
-          })
-        }
-      }
-    ]
-  })
+              { label: "Fraude", value: "fraud" },
+              { label: "Spam", value: "spam" },
+              { label: "Abus", value: "abuse" },
+            ],
+          }),
+        },
+      },
+    ],
+  });
+
+
+/*
+export const userSchema = {
+  form: {
+    loaders: {
+      roles: fetchRoles,
+    },
+
+    schema: (ctx: UserFormCtx) =>
+      defineFormSchema<UserFormValues>({
+        sections: [
+          {
+            title: "Informations générales",
+            isAlertContainer: true,
+            fields: {
+              firstname: field.input({
+                label: "Nom",
+                required: true,
+                floating: true,
+              }),
+              lastname: field.input({
+                label: "Prénom",
+                required: true,
+                floating: true,
+              }),
+              avatar: field.input({
+                label: "Avatar",
+                required: false,
+                floating: true,
+              }),
+            },
+          },
+
+          {
+            title: "Rôle",
+            fields: {
+              role: field.radioGroup({
+                label: "Roles",
+                required: true,
+                options: ctx.roles ?? [], 
+              }),
+            },
+          },
+
+          {
+            title: "Suspension",
+            isVisible: ({ values }) => Boolean(values.suspensionReason),
+            fields: {
+              suspensionReason: field.select({
+                label: "Raison de la suspension",
+                options: [
+                  { label: "Fraude", value: "fraud" },
+                  { label: "Spam", value: "spam" },
+                  { label: "Abus", value: "abuse" },
+                ],
+              }),
+            },
+          },
+        ],
+      }),
+  }
+}
+  */

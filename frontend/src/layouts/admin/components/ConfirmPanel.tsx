@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useConfirm } from "../contexts/ConfirmContext";
 import { AnimatedButton } from "../../../components/global/buttons/AnimatedButton";
-import { useInfoLayout } from "../contexts/AdminInfoContext";
+import { useAdminInfo } from "../contexts/AdminInfoContext";
 import { useAdminLayout } from "../contexts/AdminLayoutContext";
 
 export function ConfirmPanel() {
 
   const { options, close } = useConfirm();
-  const { setInfoContext } = useInfoLayout();
+  const { setInfoContext } = useAdminInfo();
   const { closeRight } = useAdminLayout();
 
   const [value, setValue] = useState<any>(null);

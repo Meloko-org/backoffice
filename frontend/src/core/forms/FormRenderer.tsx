@@ -5,6 +5,13 @@ import FormSection from "./layout/FormSection";
 import { AnimatedButton } from "../../components/global/buttons/AnimatedButton";
 import type { ApiResponse, ApiSuccessResponse } from "../../types/global.types";
 
+/* helper */
+function isSchemaFunction<TValues, TCtx>(
+  schema: ResolvableSchema<TValues, TCtx>
+): schema is (ctx: TCtx & { values: Partial<TValues> }) => FormSchema<TValues> {
+  return typeof schema === "function";
+}
+
 
 export type FieldRendererContext<TValues> = {
   field: FormFieldSchema<TValues>;
@@ -24,8 +31,17 @@ export type FieldRenderer<TValues> = (
 ) => React.ReactNode;
 
 
-type AdminFormProps<TValues extends Record<string, any>> = {
-  schema: FormSchema<TValues>;
+type ResolvableSchema<TValues, TCtx> =
+  | FormSchema<TValues>
+  | ((ctx: TCtx & { values: Partial<TValues> }) => FormSchema<TValues>);
+
+
+type AdminFormProps<
+  TValues extends Record<string, any>,
+  TCtx = any
+> = {
+  schema: ResolvableSchema<TValues, TCtx>;
+  ctx?: TCtx;
   initialValues?: Partial<TValues>;
   mode?: "create" | "edit";
   submitLabel?: string;
@@ -34,15 +50,31 @@ type AdminFormProps<TValues extends Record<string, any>> = {
   renderers: Record<string, FieldRenderer<TValues>>;
 };
 
-export function AdminForm<TValues extends Record<string, any>>({
+export function AdminForm<
+  TValues extends Record<string, any>,
+  TCtx = any
+>({
   schema,
+  ctx,
   initialValues,
   mode = "create",
   submitLabel = "Enregistrer",
   onSubmit,
   onSuccess,
   renderers,
-}: AdminFormProps<TValues>) {
+}: AdminFormProps<TValues, TCtx>) {
+
+  const initialResolvedSchema = isSchemaFunction(schema)
+    ? schema({ ...(ctx as TCtx), values: initialValues ?? {} })
+    : schema;
+
+  const form = useFormEngine<TValues>({
+    schema: initialResolvedSchema,
+    initialValues,
+    mode,
+    onSubmit,
+    onSuccess,
+  });
 
   const {
     values,
@@ -57,16 +89,14 @@ export function AdminForm<TValues extends Record<string, any>>({
     isFieldVisible,
     isFieldDisabled,
     submit,
-  } = useFormEngine<TValues>({
-    schema,
-    initialValues,
-    mode,
-    onSubmit,
-    onSuccess,
-  });
+  } = form;
 
-  // vérifie s'il y a bien une section définie comme AlertContainer
-  const hasAlertSection = schema.sections.some(s => s.isAlertContainer);
+  const resolvedSchema = isSchemaFunction(schema)
+    ? schema({ ...(ctx as TCtx), values })
+    : schema;
+
+  const hasAlertSection = resolvedSchema.sections.some(s => s.isAlertContainer);
+
 
   return (
     <form
@@ -77,7 +107,7 @@ export function AdminForm<TValues extends Record<string, any>>({
       className="space-y-6 max-w-2xl"
     >
 
-      {schema.sections.map((section, sectionIndex) => {
+      {resolvedSchema.sections.map((section, sectionIndex) => {
 
         const sectionVisible = section.isVisible?.({ values, mode }) ?? true;
         if (!sectionVisible) return null;

@@ -1,18 +1,26 @@
 import { createContext, useContext } from "react";
-import type { ModelContext } from "../../../types/admin";
+import type { RightPanelType } from "../registries/rightPanel/rightPanelRegistry";
+// import type { ModelContext } from "../../../types/admin";
+
+export type ModelInfoContext = {
+	type: RightPanelType;
+	id: string;
+	title?: string;
+} | null;
 
 type AdminInfoContextType = {
-	infoContext: ModelContext;
-	setInfoContext: (context: ModelContext) => void;
+	infoContext: ModelInfoContext;
+	setInfoContext: React.Dispatch<React.SetStateAction<ModelInfoContext>>;
+	// setInfoContext: (context: ModelContext) => void;
 }
 
 export const AdminInfoContext = createContext<AdminInfoContextType | null>(null)
 
-export function useInfoLayout() {
+export function useAdminInfo() {
 	const ctx = useContext(AdminInfoContext);
 
 	if (!ctx) {
-		throw new Error("useInfoLayout must be used inside AdminLayoutProvider");
+		throw new Error("useAdminInfo must be used inside AdminLayoutProvider");
 	}
 	
 	return ctx;

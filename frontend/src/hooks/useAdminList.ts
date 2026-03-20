@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "./useDebounce";
 import type { ListParams, ListResult, PaginationMeta } from "../types/list.types";
 import { useSearchParams } from "react-router-dom";
+import { adminEvents } from "../features/users/events/adminEvents";
 
 /*
 	"useAdminList est un hook générique.
@@ -111,7 +112,7 @@ export function useAdminList<T>(
   ]);
 
   // ---------- FETCH ----------
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!isInitialized.current) return;
 
     setLoading(true);
@@ -131,7 +132,7 @@ export function useAdminList<T>(
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, debouncedSearch, sortKey, sortDirection, filters, limit]);
 
   // Reset page when filters/search change
   useEffect(() => {
@@ -141,6 +142,12 @@ export function useAdminList<T>(
   useEffect(() => {
     fetchData();
   }, [page, debouncedSearch, sortKey, sortDirection, filters, limit]);
+
+  // ajout de la subscription
+  useEffect(() => {
+    const unsubscribe = adminEvents.subscribe("users:refresh", fetchData);
+    return unsubscribe;
+  }, [fetchData]);
 
   const handleSort = (key: string) => {
     if (sortKey === key) {

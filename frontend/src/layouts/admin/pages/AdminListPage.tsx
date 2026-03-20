@@ -4,6 +4,9 @@ import { adminRegistry } from "../registries/admin/adminRegistry"
 import { Loader } from "lucide-react"
 import { DataListLayout } from "../../../components/data-table/DataListLayout"
 import type { AdminModels } from "../registries/admin/adminModels"
+import { useConfirm } from "../contexts/ConfirmContext"
+import { useAdminLayout } from "../contexts/AdminLayoutContext"
+import type { UserActionContext } from "../../../features/users/config/user.actions"
 
 
 
@@ -43,17 +46,16 @@ export default function AdminListPage<K extends keyof AdminModels>({
     refetch,
     onRowClick,
   } = useAdminListController(admin.getList, {
-    enableRightPanel: !!admin.details,
+      enableRightPanel: !!admin.details,
+      getInfoContext: admin.details
+        ? (item) => ({
+            type: admin.entityName,
+            id: (item as any)._id,
+            title: `Détail`,
+          })
+        : undefined,
+    })
 
-    getInfoContext: admin.details
-      ? (item, refetch) => ({
-          type: model,
-          title: `Détail`,
-          refetch,
-          [admin.entityName || "item"]: item,
-        })
-      : undefined,
-  })
 
   /* ========================= */
   /* DYNAMIC FILTERS */
@@ -87,13 +89,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
   /* ========================= */
   /* ACTIONS CONTEXT */
   /* ========================= */
-
-  const baseCtx = admin.actions?.useContext?.()
-
-  const ctx = {
-    ...baseCtx,
-    refetch,
-  }
+  const ctx = admin.actions?.useContext?.() as UserActionContext
 
   const columns = admin.columns
     ? admin.columns(ctx)

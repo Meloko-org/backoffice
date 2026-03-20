@@ -3,6 +3,7 @@ import type { UserActionTarget } from "../types/user"
 import type { UserActionContext } from "./user.actions"
 import FloatingSelect from "../../../core/forms/components/floatingSelect";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
+import { adminEvents } from "../events/adminEvents";
 
 
 
@@ -58,7 +59,7 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
           onConfirm: async () => {
             await ctx.unsuspend(user._id)
-            ctx.refetch?.()
+            adminEvents.emit("users:refresh")
           },
         })
 
@@ -86,8 +87,8 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
               id: user._id,
               reason
             })
-
-            ctx.refetch?.()
+            adminEvents.emit("users:refresh")
+            
           },
         })
 
@@ -116,7 +117,7 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
           onConfirm: async () => {
             await ctx.restore(user._id)
-            ctx.refetch?.()
+            adminEvents.emit("users:refresh")
           },
         })
 
@@ -128,7 +129,7 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
           onConfirm: async () => {
             await ctx.del(user._id)
-            ctx.refetch?.()
+            adminEvents.emit("users:refresh")
           },
         })
 

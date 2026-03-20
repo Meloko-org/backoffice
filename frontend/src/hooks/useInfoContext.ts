@@ -1,22 +1,29 @@
 import { useEffect } from "react";
-import { useInfoLayout } from "../layouts/admin/contexts/AdminInfoContext";
-import type { ModelContext } from "../types/admin";
+import { useAdminInfo, type ModelInfoContext } from "../layouts/admin/contexts/AdminInfoContext";
 
 
-export function useInfoContext(
-	context: ModelContext | null,
-) {
 
-  const { setInfoContext } = useInfoLayout();
-  
-	useEffect(() => {
-    setInfoContext(context);
 
-		// fonction de cleanup
+export function useInfoContext(context: ModelInfoContext | null) {
+  const { setInfoContext } = useAdminInfo();
+
+  useEffect(() => {
+    setInfoContext(prev => {
+      if (
+        prev?.id === context?.id &&
+        prev?.type === context?.type
+      ) {
+        return prev;
+      }
+      return context;
+    });
+
     return () => {
-      setInfoContext(null);
+      setInfoContext(prev => {
+        if (prev === null) return prev;
+        return null;
+      });
     };
-		
-  }, [context, setInfoContext]);
+  }, [context?.id, context?.type, setInfoContext]);
 
 }

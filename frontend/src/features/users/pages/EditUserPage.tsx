@@ -1,9 +1,16 @@
 import { useParams } from "react-router-dom";
-import UserFormPage from "./UserFormPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function EditUserPage() {
-  
-  const { id } = useParams<{ id: string}>();
+  const { id } = useParams<{ id: string }>();
 
-  return <UserFormPage mode="edit" userId={id} />
+  if (!id) return null;
+
+  return (
+    <AdminFormPage
+      model="users"
+      mode="edit"
+      id={id}
+    />
+  );
 }

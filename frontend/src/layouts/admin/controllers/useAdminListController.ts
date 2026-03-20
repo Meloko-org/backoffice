@@ -2,16 +2,21 @@ import { useEffect, useMemo, useState } from "react"
 import { useAdminList } from "../../../hooks/useAdminList"
 import { useAdminLayout } from "../contexts/AdminLayoutContext"
 import { useInfoContext } from "../../../hooks/useInfoContext"
+import type { ModelInfoContext } from "../contexts/AdminInfoContext"
 
 
 type Options<T> = {
   syncWithUrl?: boolean
   enableRightPanel?: boolean
-  getInfoContext?: (item: T, refetch: () => void) => any
+  getInfoContext?: (item: T) => ModelInfoContext,
 }
 
+type WithId = {
+  _id: string;
+};
 
-export function useAdminListController<T>(
+
+export function useAdminListController<T extends WithId>(
   queryFn: any,
   options?: Options<T>
 ) {
@@ -49,18 +54,22 @@ export function useAdminListController<T>(
   const [selectedItem, setSelectedItem] = useState<T | null>(null)
 
   const infoContext = useMemo(() => {
-    if (!selectedItem || !getInfoContext) return null
+    if (!selectedItem || !getInfoContext) return null;
 
-    return getInfoContext(selectedItem, refetch)
-  }, [selectedItem, refetch, getInfoContext])
+    return getInfoContext(selectedItem);
+  }, [
+    selectedItem?._id, // ✅ clé stable
+    getInfoContext
+  ]);
 
   useInfoContext(infoContext)
+
 
   const onRowClick = (item: T) => {
     if (!enableRightPanel) return
 
     setSelectedItem((prev) =>
-      (prev as any)?._id === (item as any)._id ? null : item
+      prev?._id === item._id ? null : item
     )
   }
 
@@ -71,11 +80,13 @@ export function useAdminListController<T>(
     else closeRight()
   }, [selectedItem])
 
+
   useEffect(() => {
     return () => {
       if (enableRightPanel) closeRight()
     }
   }, [])
+
 
   return {
     ...list,
