@@ -3,9 +3,8 @@ import type { AdminModels } from "../registries/admin/adminModels";
 import { adminRegistry } from "../registries/admin/adminRegistry";
 import Loader from "../../../components/admin/Loader";
 import { AdminForm } from "../../../core/forms/FormRenderer";
+import type { InferFormCtx, InferFormValues } from "../config/adminTypes";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
-import type { UserFormValues } from "../../../features/users/types/user";
-import type { UserFormCtx } from "../../../features/users/schema/user.schema";
 
 
 
@@ -21,6 +20,9 @@ export default function AdminFormPage<K extends keyof AdminModels>({
   id,
 }: Props<K>) {
   const admin = adminRegistry.get(model);
+
+  type FormValues = InferFormValues<K> & Record<string, any>;
+  type FormCtx = InferFormCtx<K>;
 
   console.log("AdminformPage admin :", admin)
 
@@ -64,7 +66,7 @@ export default function AdminFormPage<K extends keyof AdminModels>({
     useContext,
   } = admin.form;
 
-  
+
   const baseCtx = useContext?.() ?? {};
   const ctx = {
     ...baseCtx,
@@ -123,7 +125,7 @@ export default function AdminFormPage<K extends keyof AdminModels>({
   return (
     <div className="p-8">
       <div className="mx-auto max-w-3xl">
-        <AdminForm<UserFormValues, UserFormCtx>
+        <AdminForm<any, any>
           schema={schema}
           ctx={ctx}
           initialValues={initialValues}

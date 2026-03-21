@@ -13,8 +13,8 @@ class AdminRegistry {
     this.models = models;
   }
 
-  get<K extends keyof AdminModels>(model: K): AdminModels[K] {
-    return this.models[model];
+  get<K extends keyof AdminModels>(model: K)  {
+    return this.models[model] as AdminModels[K];
   }
 
   getAll() {

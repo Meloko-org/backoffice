@@ -4,9 +4,8 @@ import { adminRegistry } from "../registries/admin/adminRegistry"
 import { Loader } from "lucide-react"
 import { DataListLayout } from "../../../components/data-table/DataListLayout"
 import type { AdminModels } from "../registries/admin/adminModels"
-import { useConfirm } from "../contexts/ConfirmContext"
-import { useAdminLayout } from "../contexts/AdminLayoutContext"
 import type { UserActionContext } from "../../../features/users/config/user.actions"
+import type { InferListCtx } from "../config/adminTypes"
 
 
 
@@ -20,6 +19,9 @@ export default function AdminListPage<K extends keyof AdminModels>({
 }: Props<K>) {
 
   const admin = adminRegistry.get(model)
+
+  type ListCtx = InferListCtx<K>;
+
 
   if (!admin.getList) {
     throw new Error(`No getList defined for model "${String(model)}"`)
@@ -89,10 +91,10 @@ export default function AdminListPage<K extends keyof AdminModels>({
   /* ========================= */
   /* ACTIONS CONTEXT */
   /* ========================= */
-  const ctx = admin.actions?.useContext?.() as UserActionContext
+  const ctx = admin.actions?.useContext?.();
 
   const columns = admin.columns
-    ? admin.columns(ctx)
+    ? admin.columns(ctx as any)
     : []
 
   /* ========================= */

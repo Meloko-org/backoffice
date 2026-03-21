@@ -5,7 +5,6 @@ import AdminSidebarRight from "./AdminSidebarRight";
 import AdminSidebar from "./AdminSidebar";
 import { ConfirmProvider } from "./providers/ConfirmProvider";
 import { useConfirm } from "./contexts/ConfirmContext";
-import "./registries/admin/registerAdmins"
 
 
 function AdminLayoutContent() {
