@@ -19,7 +19,7 @@ type UseAdminListOptions = {
 
 export function useAdminList<T>(
   fetcher: Fetcher<T>,
-  options?: UseAdminListOptions
+  options?: UseAdminListOptions & { model: string }
 ) {
   const syncWithUrl = options?.syncWithUrl ?? false;
   const defaultLimit = options?.defaultLimit ?? 5;
@@ -145,7 +145,9 @@ export function useAdminList<T>(
 
   // ajout de la subscription
   useEffect(() => {
-    const unsubscribe = adminEvents.subscribe("users:refresh", fetchData);
+    if (!options?.model) return;
+    const eventName = `${options.model}:refresh`
+    const unsubscribe = adminEvents.subscribe(eventName, fetchData);
     return unsubscribe;
   }, [fetchData]);
 

@@ -3,7 +3,6 @@ import type { AdminModels } from "../registries/admin/adminModels";
 import { adminRegistry } from "../registries/admin/adminRegistry";
 import Loader from "../../../components/admin/Loader";
 import { AdminForm } from "../../../core/forms/FormRenderer";
-import type { InferFormCtx, InferFormValues } from "../config/adminTypes";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 
 
@@ -21,11 +20,6 @@ export default function AdminFormPage<K extends keyof AdminModels>({
 }: Props<K>) {
   const admin = adminRegistry.get(model);
 
-  type FormValues = InferFormValues<K> & Record<string, any>;
-  type FormCtx = InferFormCtx<K>;
-
-  console.log("AdminformPage admin :", admin)
-
   if (!admin.form) {
     throw new Error(`No form defined for model "${String(model)}"`);
   }
@@ -37,7 +31,6 @@ export default function AdminFormPage<K extends keyof AdminModels>({
   const [dynamicData, setDynamicData] = useState<Record<string, any>>({});
 
   useEffect(() => {
-    console.log("dynamicData in AdminFormPage")
     const loaders = admin.form?.loaders;
     if (!loaders) return;
 

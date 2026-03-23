@@ -1,23 +1,43 @@
+import { useEffect, useMemo, useState } from "react";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import type { ProductCategory } from "../types/category";
 import { ImageOff } from "lucide-react";
+import { getCategoryById } from "../api/categories.api";
+import { useCategoryActionsContext } from "../hooks/useCategoryActionContext";
+import Loader from "../../../components/admin/Loader";
+import { categoryActions } from "../config/categoryActionsRegistry";
 
 
 type Props = {
-	category: ProductCategory;
+	id: string;
 }
 
 
 export default function CategoryDetails({
-	category,
+	id,
 }: Props) {
 
-	if (!category) return null;
+	const [ category, setCategory ] = useState<ProductCategory | null>(null)
 
-  const config = rightPanelRegistry.category;
+  useEffect(() => {
+    getCategoryById(id).then(setCategory)
+  }, [id])
 
-	const imageUrl = category.image; 
+  const ctx = useCategoryActionsContext();
+
+  const actions = useMemo(() => {
+    if (!category) return [];
+    return categoryActions.getActions(category, ctx, "details")
+  }, [category, ctx])
+
+
+  if (!category) {
+    return (
+      <Loader />
+    )
+  }
+
+	const imageUrl = category?.image; 
   const hasImage = Boolean(imageUrl);
 
   return (
@@ -75,8 +95,7 @@ export default function CategoryDetails({
 
       {/* ACTIONS */}
       <DetailsActions
-        item={category}
-        actions={config?.actions ?? []}
+        actions={actions}
         wrapperClasses="details-cols-2 mt-5"
       />
 

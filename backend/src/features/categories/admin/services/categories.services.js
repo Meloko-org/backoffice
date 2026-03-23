@@ -2,6 +2,7 @@ const { ApiError, NotFoundError, ValidationError } = require("../../../../utils/
 const { normalizeSlug } = require("../../../../utils/normalize");
 const ProductCategory = require("../../../../models/ProductCategory");
 const ProductFamily = require("../../../../models/ProductFamily");
+const Type = require("../../../../models/Type");
 const mongoose = require("mongoose");
 
 

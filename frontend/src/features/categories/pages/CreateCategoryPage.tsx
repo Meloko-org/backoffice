@@ -1,7 +1,13 @@
-import CategoryFormPage from "./CategoryFormPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function CreateCategoryPage() {
-  return <CategoryFormPage mode="create" />
+  
+     return (
+      <AdminFormPage
+        model="categories" 
+        mode="create" 
+      />
+     )
 }
 
 

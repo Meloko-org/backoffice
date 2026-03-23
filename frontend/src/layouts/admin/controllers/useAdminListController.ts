@@ -9,6 +9,7 @@ type Options<T> = {
   syncWithUrl?: boolean
   enableRightPanel?: boolean
   getInfoContext?: (item: T) => ModelInfoContext,
+  model: string
 }
 
 type WithId = {
@@ -27,7 +28,12 @@ export function useAdminListController<T extends WithId>(
     ...restOptions
   } = options || {}
 
+  if (!options?.model) {
+    throw new Error("model is required in useAdminListController");
+  }
+
   const list = useAdminList<T>(queryFn, {
+    model: options!.model,
     syncWithUrl: true,
     ...restOptions,
   })

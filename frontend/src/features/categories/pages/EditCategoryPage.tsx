@@ -1,9 +1,18 @@
 import { useParams } from "react-router-dom";
-import CategoryFormPage from "./CategoryFormPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function EditCategoryPage() {
 
   const { id } = useParams<{ id: string }>();
 
-	 return <CategoryFormPage mode="edit" categoryId={id} />
+  if (!id) return null;
+
+	 return (
+    <AdminFormPage
+      model="categories" 
+      mode="edit" 
+      id={id} 
+    />
+   )
+   
 }

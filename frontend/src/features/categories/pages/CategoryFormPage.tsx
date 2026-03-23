@@ -4,11 +4,11 @@ import { useAdminPage } from "../../../hooks/useAdminPage";
 import { createCategory, getCategoryById, updateCategory } from "../api/categories.api";
 import { mapCategoryToFormValues, mapFormValuesToPayload } from "../mappers/category.mapper";
 import { AdminForm } from "../../../core/forms/FormRenderer";
-import { categorySchema } from "../schema/category.schema";
+import { categoryFormSchema } from "../schema/category.schema";
 import { useEffect, useState } from "react";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
-import { BallTriangle } from "react-loader-spinner";
 import type { ApiResponse } from "../../../types/global.types";
+import Loader from "../../../components/admin/Loader";
 
 type CategoryFormPageProps = {
   mode: "create" | "edit";
@@ -21,6 +21,9 @@ export default function CategoryFormPage({
 }: CategoryFormPageProps) {
   const navigate = useNavigate();
   const isEdit = mode === "edit";
+
+  console.log("mode :", mode)
+  console.log("isEdit :", isEdit)
 
   const defaultValues: CategoryFormValues = {
     name: "",
@@ -76,18 +79,7 @@ export default function CategoryFormPage({
 
   if (loading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
 
@@ -95,7 +87,7 @@ export default function CategoryFormPage({
     <div className="p-8">
       <div className="mx-auto max-w-4xl space-y-6">
         <AdminForm<CategoryFormValues>
-          schema={categorySchema}
+          schema={categoryFormSchema}
           initialValues={initialValues}
           mode={mode}
           submitLabel={

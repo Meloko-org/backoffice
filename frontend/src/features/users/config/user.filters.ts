@@ -2,8 +2,10 @@ import type { FilterConfig } from "../../../components/data-table/DataFiltersBar
 import type { RoleForSelect } from "../../roles/types/roles";
 
 export function createUserFilters(
-  roles: RoleForSelect[]
+  data: Record<string, any>
 ): FilterConfig[] {
+
+  const roles: RoleForSelect[] = data.roles || [];
 
   return [
     {

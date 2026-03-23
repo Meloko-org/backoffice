@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/clerk-react";
 import type { UserFormValues } from "../types/user";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { getUserById, updateUser } from "../api/users.api";
 import { mapFormValuesToPayload, mapUserToFormValues } from "../mappers/user.mapper";
 import { AdminForm } from "../../../core/forms/FormRenderer";
-import { userSchema } from "../schema/user.schema";
+import { userFormSchema } from "../schema/user.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 import { useNavigate } from "react-router-dom";
 import type { ApiResponse } from "../../../types/global.types";
@@ -82,7 +81,7 @@ export default function UserFormPage({ userId }: UserFormPageProps) {
     <div className="p-8">
       <div className="mx-auto max-w-4xl space-y-6">
         <AdminForm<UserFormValues>
-          schema={userSchema}
+          schema={userFormSchema}
           initialValues={initialValues}
           mode="edit"
           submitLabel="Mettre à jour"

@@ -23,7 +23,10 @@ export type ModelAdminConfig<
   
   /* LIST */
   columns?: (ctx: TListCtx) => Column<TEntity>[];
-  filters?: (...args: any[]) => FilterConfig[];
+  filters?: (data: Record<string, any>) => FilterConfig[];
+  toolbar?: {
+    actions?: (ctx: TListCtx) => React.ReactNode;
+  }
 
   /* DATA */
   getList?: (params: any) => Promise<any>;

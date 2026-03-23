@@ -4,7 +4,7 @@ import { getTypeNames } from "../../types/api/types.api";
 import type { CategoryFormValues } from "../types/category";
 
 
-async function fetchTypes(): Promise<FieldOption[]> {
+export async function fetchTypes(): Promise<FieldOption[]> {
 
   const data = await getTypeNames()
 
@@ -14,8 +14,12 @@ async function fetchTypes(): Promise<FieldOption[]> {
   }));
 }
 
+export type CategoryFormCtx = {
+  types?: FieldOption<string>[];
+}
 
-export const categorySchema =
+
+export const categoryFormSchema = 
   defineFormSchema<CategoryFormValues>({
     sections: [
       {

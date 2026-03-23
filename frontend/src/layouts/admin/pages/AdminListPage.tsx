@@ -4,8 +4,6 @@ import { adminRegistry } from "../registries/admin/adminRegistry"
 import { Loader } from "lucide-react"
 import { DataListLayout } from "../../../components/data-table/DataListLayout"
 import type { AdminModels } from "../registries/admin/adminModels"
-import type { UserActionContext } from "../../../features/users/config/user.actions"
-import type { InferListCtx } from "../config/adminTypes"
 
 
 
@@ -20,7 +18,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
 
   const admin = adminRegistry.get(model)
 
-  type ListCtx = InferListCtx<K>;
+  
 
 
   if (!admin.getList) {
@@ -45,9 +43,9 @@ export default function AdminListPage<K extends keyof AdminModels>({
     limit,
     setLimit,
     setPage,
-    refetch,
     onRowClick,
   } = useAdminListController(admin.getList, {
+      model: admin.model,
       enableRightPanel: !!admin.details,
       getInfoContext: admin.details
         ? (item) => ({
@@ -84,7 +82,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
   }, [admin])
 
   const filtersConfig = admin.filters
-    ? admin.filters(dynamicData.roles || [])
+    ? admin.filters(dynamicData)
     : []
 
 
@@ -92,6 +90,8 @@ export default function AdminListPage<K extends keyof AdminModels>({
   /* ACTIONS CONTEXT */
   /* ========================= */
   const ctx = admin.actions?.useContext?.();
+
+  const toolbarActions = admin.toolbar?.actions?.(ctx as any)
 
   const columns = admin.columns
     ? admin.columns(ctx as any)
@@ -135,6 +135,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
           onPageChange={setPage}
 
           columns={columns as any}
+          actions={toolbarActions}
         />
       </div>
     </div>

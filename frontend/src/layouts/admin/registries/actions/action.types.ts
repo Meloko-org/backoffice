@@ -4,6 +4,7 @@ export type ActionPlacement =
   | "rowMenu"
   | "details"
   | "user-header"
+  | "inline";
 
 export type ActionDefinition<T, Ctx> = {
   label: string | ((item: T) => string)
