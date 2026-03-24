@@ -1,12 +1,12 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
+import type { ProductActionTarget } from "../types/product";
+import type { ProductActionContext } from "./product.actions";
 import { adminEvents } from "../../users/events/adminEvents";
-import type { CategoryActionContext } from "./category.actions";
-import type { CategoryActionTarget } from "../types/category";
 
-export const categoryActions = createActionsRegistry<
-  CategoryActionTarget, 
-  CategoryActionContext
+export const productActions = createActionsRegistry<
+  ProductActionTarget, 
+  ProductActionContext
 >({
 
   edit: {
@@ -16,8 +16,8 @@ export const categoryActions = createActionsRegistry<
 
     placement: ["details", "inline"],
 
-    run: (category, ctx) => {
-      ctx.navigate(`/admin/categories/${category._id}/edit`)
+    run: (product, ctx) => {
+      ctx.navigate(`/admin/products/${product._id}/edit`)
     },
   },
 
@@ -29,15 +29,15 @@ export const categoryActions = createActionsRegistry<
     placement: ["details", "inline"],
 
     visible: () => true,
-    run: (category, ctx) => {
+    run: (product, ctx) => {
       ctx.openRight?.();
       ctx.defineConfirm({
-        title: "Supprimer la catégorie",
+        title: "Supprimer le produit",
         confirmLabel: "Supprimer",
 
         onConfirm: async () => {
-          await ctx.del(category._id)
-          adminEvents.emit("categories:refresh")
+          await ctx.del(product._id)
+          adminEvents.emit("products:refresh")
         }
       })
     }

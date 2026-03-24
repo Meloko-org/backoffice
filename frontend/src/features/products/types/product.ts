@@ -1,7 +1,11 @@
 import type { PaginationMeta } from "../../../types/global.types";
 
-export interface Product {
+
+export interface ProductActionTarget {
   _id: string;
+}
+
+export interface Product extends ProductActionTarget {
   name: string;
   slug: string;
   description: string;

@@ -18,6 +18,11 @@ export const categoriesAdmin = createModelAdmin<
   CategoryFormCtx
 >({
   model: "categories",
+  
+  getList: getCategoriesList,
+  loaders: {
+    types: getTypeNames,
+  },
 
   filters: createCategoryFilters,
   columns: createCategoriesColumns,
@@ -30,11 +35,6 @@ export const categoriesAdmin = createModelAdmin<
         Créer une catégorie
       </button>
     )
-  },
-  
-  getList: getCategoriesList,
-  loaders: {
-    types: getTypeNames,
   },
 
   actions: {

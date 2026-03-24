@@ -1,9 +1,20 @@
 import { useParams } from "react-router-dom";
-import ProductFormPage from "./ProductFormPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
+import { useAdminPage } from "../../../hooks/useAdminPage";
 
 export default function EditProductPage() {
 
   const { id } = useParams<{ id: string}>();
 
-  return <ProductFormPage mode="edit" productId={id}/>
+  if (!id) return null;
+
+  useAdminPage("Modifier le produit");
+
+  return (
+    <AdminFormPage
+      model="products" 
+      mode="edit" 
+      id={id} 
+    />
+  )
 }

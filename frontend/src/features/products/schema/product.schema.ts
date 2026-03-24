@@ -5,7 +5,7 @@ import { getFamilyNamesForCategory } from "../../families/api/families.api";
 import type { ProductFormValues } from "../types/product";
 
 
-async function fetchCategories(): Promise<FieldOption[]> {
+export async function fetchCategories(): Promise<FieldOption[]> {
   const data = await getCategoryNames();
 
   return data.map((cat: any) => ({
@@ -14,7 +14,12 @@ async function fetchCategories(): Promise<FieldOption[]> {
   }))
 }
 
-async function fetchFamiliesForCategory(categoryId: string): Promise<FieldOption[]> {
+export type ProductFormCtx = {
+  categories?: FieldOption<string>[];
+}
+
+/* loader dynamique dépendant des catégories donc non référencé dans AdminModel */
+export async function fetchFamiliesForCategory(categoryId: string): Promise<FieldOption[]> {
   const data = await getFamilyNamesForCategory(categoryId);
 
   return data.map((fam: any) => ({
@@ -26,7 +31,9 @@ async function fetchFamiliesForCategory(categoryId: string): Promise<FieldOption
 // const VAT_RATES = import.meta.env.VITE_VAT_RATES;
 const VAT_RATES = [5.5, 10, 20];
 
-export const productSchema =
+export const productFormSchema = (
+  ctx: ProductFormCtx & { values: Partial<ProductFormValues>}
+) =>
   defineFormSchema<ProductFormValues>({
     sections: [
       {
@@ -36,7 +43,7 @@ export const productSchema =
             label: "Catégorie",
             required: true,
             floating: true,
-            options: fetchCategories,
+            options: ctx.categories ?? [],
             disabled: ({ mode }) => mode === "edit",
           }),
         }

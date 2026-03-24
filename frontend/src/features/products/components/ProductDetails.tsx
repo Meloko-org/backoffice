@@ -2,20 +2,39 @@ import { ImageOff } from "lucide-react";
 import type { Product } from "../types/product";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
+import { useEffect, useMemo, useState } from "react";
+import { getProductById } from "../api/products.api";
+import { useProductActionsContext } from "../hooks/useProductActionContext";
+import { productActions } from "../config/productActionsRegistry";
+import Loader from "../../../components/admin/Loader";
 
 type Props = {
-	product: Product;
+	id: string;
 }
 
 
 export default function FamilyDetails({
-	product,
+	id,
 }: Props) {
 
-	if (!product) return null;
+	const [ product, setProduct ] = useState<Product | null>(null);
 
+  useEffect(() => {
+    getProductById(id).then(setProduct)
+  }, [id])
 
-  const config = rightPanelRegistry.product
+  const ctx = useProductActionsContext();
+
+  const actions = useMemo(() => {
+    if (!product) return [];
+    return productActions.getActions(product, ctx, "details")
+  }, [product, ctx])
+
+  if (!product) {
+      return (
+        <Loader />
+      )
+    }
 
 
 	const imageUrl = product.image; 
@@ -101,8 +120,7 @@ export default function FamilyDetails({
 
 
       <DetailsActions
-        item={product}
-        actions={config?.actions ?? []}
+        actions={actions}
         wrapperClasses="details-cols-2 mt-5"
       />
 

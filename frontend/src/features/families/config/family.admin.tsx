@@ -4,7 +4,7 @@ import { createFamily, getFamiliesList, getFamilyById, updateFamily } from "../a
 import FamilyDetails from "../components/FamilyDetails";
 import { useFamilyActionsContext } from "../hooks/useFamilyActionContext";
 import { mapFamilyToFormValues, mapFormValuesToPayload } from "../mappers/family.mapper";
-import { familyFormSchema, fetchCategories, type FamilyFormCtx } from "../schema/family.schema";
+import { familyFormSchema, fetchCategories, fetchTagCategories, type FamilyFormCtx } from "../schema/family.schema";
 import { type ProductFamily, type FamilyFormValues } from "../types/family";
 import type { FamilyActionContext } from "./family.actions";
 import { createFamiliesColumns } from "./family.columns";
@@ -73,9 +73,12 @@ export const familiesAdmin = createModelAdmin<
     },
 
     loaders: {
-      types: async () => {
+      categories: async () => {
         return fetchCategories();
       },
+      tagCategories: async () => {
+        return fetchTagCategories();
+      }
     },
 
     useContext: () => ({}),

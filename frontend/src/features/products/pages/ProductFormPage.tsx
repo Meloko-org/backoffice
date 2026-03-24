@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { mapFormToPayload, mapProductToFormValues } from "../mappers/product.mapper";
 import { AdminForm } from "../../../core/forms/FormRenderer";
-import { productSchema } from "../schema/product.schema";
+import { productFormSchema } from "../schema/product.schema";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
 import { createProduct, getProductById, updateProduct } from "../api/products.api";
 import Loader from "../../../components/admin/Loader";
@@ -92,7 +92,7 @@ export default function ProductFormPage({
     <div className="p-8">
       <div className="mx-auto max-w-4xl space-y-6">
         <AdminForm<ProductFormValues>
-          schema={productSchema}
+          schema={productFormSchema}
           initialValues={initialValues}
           mode={mode}
           submitLabel={

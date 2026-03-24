@@ -5,7 +5,7 @@ import { getTagCategoryNames } from "../../tagCategories/api/tagCategory.api";
 import type { FamilyFormValues } from "../types/family";
 
 
-async function fetchTagCategories(): Promise<FieldOption[]> {
+export async function fetchTagCategories(): Promise<FieldOption[]> {
   const data = await getTagCategoryNames();
 
   return data.map((t: any) => ({
@@ -33,7 +33,9 @@ export type FamilyFormCtx = {
 
 
 
-export const familyFormSchema = 
+export const familyFormSchema = (
+  ctx: FamilyFormCtx & { values: Partial<FamilyFormValues>}
+) =>
   defineFormSchema<FamilyFormValues>({
     sections: [
       {
@@ -50,7 +52,7 @@ export const familyFormSchema =
             label: "Catégorie",
             required: true,
             floating: true,
-            options: fetchCategories,
+            options: ctx.categories ?? [],
             disabled: ({ mode }) => mode === "edit",
           }),
 
@@ -67,9 +69,9 @@ export const familyFormSchema =
           }),
 
           tagCategories: field.checkboxGroup({
-            label: "Tag Catégories",
+            label: "Catégories de tags",
             required: false,
-            options: fetchTagCategories,
+            options: ctx.tagCategories ?? [],
           }),
 
           productsTypes: field.radioGroup({

@@ -19,7 +19,9 @@ export type CategoryFormCtx = {
 }
 
 
-export const categoryFormSchema = 
+export const categoryFormSchema = (
+  ctx: CategoryFormCtx & { values: Partial<CategoryFormValues>}
+) => 
   defineFormSchema<CategoryFormValues>({
     sections: [
       {
@@ -36,7 +38,7 @@ export const categoryFormSchema =
             label: "Type",
             required: true,
             floating: true,
-            options: fetchTypes,
+            options: ctx.types ?? [],
             disabled: ({ mode }) => mode === "edit",
           }),
           

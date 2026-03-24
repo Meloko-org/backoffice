@@ -66,14 +66,14 @@ export const router = createBrowserRouter([
       { 
         path: "products/create", 
         element: (
-          <AdminRouteGuard permission="categories:manage">
+          <AdminRouteGuard permission="products:manage">
             <CreateProductPage />
           </AdminRouteGuard>)
       },
       { 
         path: "products/:id/edit", 
         element: (
-          <AdminRouteGuard permission="categories:manage">
+          <AdminRouteGuard permission="products:manage">
             <EditProductPage />
           </AdminRouteGuard>)
       },

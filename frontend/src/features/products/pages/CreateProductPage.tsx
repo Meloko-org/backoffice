@@ -1,5 +1,14 @@
-import ProductFormPage from "./ProductFormPage";
+import { useAdminPage } from "../../../hooks/useAdminPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function CreateProductPage() {
-  return <ProductFormPage mode="create" />
+
+  useAdminPage("Créer un produit");
+    
+  return (
+    <AdminFormPage
+      model="products" 
+      mode="create" 
+    />
+  )
 }
