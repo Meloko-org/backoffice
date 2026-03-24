@@ -1,21 +1,40 @@
 import { ImageOff } from "lucide-react";
 import type { ProductFamily } from "../types/family";
-import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
+import { useEffect, useMemo, useState } from "react";
+import { getFamilyById } from "../api/families.api";
+import { useFamilyActionsContext } from "../hooks/useFamilyActionContext";
+import { familyActions } from "../config/familyActionsRegistry";
+import Loader from "../../../components/admin/Loader";
 
 
 type Props = {
-	family: ProductFamily;
+	id: string;
 }
 
 
 export default function FamilyDetails({
-	family,
+	id,
 }: Props) {
 
-	if (!family) return null;
+	const [ family, setFamily ] = useState<ProductFamily | null>(null);
 
-  const config = rightPanelRegistry.family;
+  useEffect(() => {
+    getFamilyById(id).then(setFamily)
+  }, [id])
+
+  const ctx = useFamilyActionsContext();
+
+  const actions = useMemo(() => {
+    if (!family) return [];
+    return familyActions.getActions(family, ctx, "details")
+  }, [family, ctx])
+
+  if (!family) {
+    return (
+      <Loader />
+    )
+  }
 
 	const imageUrl = family.image; 
   const hasImage = Boolean(imageUrl);
@@ -110,8 +129,7 @@ export default function FamilyDetails({
 
       {/* ACTIONS */}
       <DetailsActions
-        item={family}
-        actions={config?.actions ?? []}
+        actions={actions}
         wrapperClasses="details-cols-2 mt-5"
       />
 

@@ -9,13 +9,11 @@ import ProductsImportPage from "./features/products/pages/ProductsImportPage";
 import ProductsListPage from "./features/products/pages/ProductsListPage";
 import MarketsImportPage from "./features/markets/pages/MarketsImportPage";
 import MarketsListPage from "./features/markets/pages/MarketsListPage";
-import AdminCategoriesPage from "./features/categories/pages/AdminCategoriesPage";
 import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
 import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
 import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
-import AdminFamiliesPage from "./features/families/pages/AdminFamiliesPage";
 import CreateFamilyPage from "./features/families/pages/CreateFamilyPage";
 import EditFamilyPage from "./features/families/pages/EditFamilyPage";
 import CreateProductPage from "./features/products/pages/CreateProductPage";
@@ -28,6 +26,7 @@ import OrdersListPage from "./features/orders/pages/OrdersListPage";
 import { OrderPage } from "./features/orders/pages/OrderPage";
 import EditUserPage from "./features/users/pages/EditUserPage";
 import CategoriesListPage from "./features/categories/pages/CategoriesListPage";
+import FamiliesListPage from "./features/families/pages/FamiliesListPage";
 
 
 
@@ -104,7 +103,8 @@ export const router = createBrowserRouter([
         path: "families", 
         element: (
           <AdminRouteGuard permission="families:manage">
-            <AdminFamiliesPage />
+            {/* <AdminFamiliesPage /> */}
+            <FamiliesListPage />
           </AdminRouteGuard> )
       },
       { 

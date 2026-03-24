@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
+import { useAdminPage } from "../../../hooks/useAdminPage";
 
 export default function EditCategoryPage() {
 
@@ -7,12 +8,14 @@ export default function EditCategoryPage() {
 
   if (!id) return null;
 
-	 return (
+  useAdminPage("Modifier la catégorie");
+
+	return (
     <AdminFormPage
       model="categories" 
       mode="edit" 
       id={id} 
     />
-   )
+  )
    
 }

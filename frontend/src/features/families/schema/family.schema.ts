@@ -16,7 +16,7 @@ async function fetchTagCategories(): Promise<FieldOption[]> {
   }))
 }
 
-async function fetchCategories(): Promise<FieldOption[]> {
+export async function fetchCategories(): Promise<FieldOption[]> {
   const data = await getCategoryNames();
 
   return data.map((t: any) => ({
@@ -26,8 +26,14 @@ async function fetchCategories(): Promise<FieldOption[]> {
 }
 
 
+export type FamilyFormCtx = {
+  tagCategories?: FieldOption<string>[];
+  categories?: FieldOption<string>[];
+}
 
-export const familySchema = 
+
+
+export const familyFormSchema = 
   defineFormSchema<FamilyFormValues>({
     sections: [
       {

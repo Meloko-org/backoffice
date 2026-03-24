@@ -3,6 +3,7 @@
  */
 
 import { categoriesAdmin } from "../../../../features/categories/config/category.admin";
+import { familiesAdmin } from "../../../../features/families/config/family.admin";
 import { usersAdmin } from "../../../../features/users/config/user.admin";
 import type { AdminModels } from "./adminModels"
 
@@ -27,5 +28,6 @@ class AdminRegistry {
 export const adminRegistry = new AdminRegistry({
   users: usersAdmin,
   categories: categoriesAdmin,
+  families: familiesAdmin,
 });
 
