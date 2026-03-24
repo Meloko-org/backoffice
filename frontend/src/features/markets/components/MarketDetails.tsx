@@ -1,20 +1,39 @@
 import { ImageOff } from "lucide-react";
 import type { Market } from "../types/markets";
-import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
+import { useEffect, useMemo, useState } from "react";
+import { getMarketById } from "../api/markets.api";
+import { useMarketActionsContext } from "../hooks/useMarketActionContext";
+import { marketActions } from "../config/marketActionsRegistry";
+import Loader from "../../../components/admin/Loader";
 
 type Props = {
-	market: Market;
+	id: string;
 }
 
 
 export default function FamilyDetails({
-	market,
+	id,
 }: Props) {
 
-	if (!market) return null;
+	const [ market, setMarket ] = useState<Market | null>(null)
 
-  const config = rightPanelRegistry.category;
+  useEffect(() => {
+    getMarketById(id).then(setMarket)
+  }, [id])
+
+  const ctx = useMarketActionsContext();
+
+  const actions = useMemo(() => {
+    if (!market) return [];
+    return marketActions.getActions(market, ctx, "details")
+  }, [ market, ctx])
+
+  if (!market) {
+      return (
+        <Loader />
+      )
+    }
 
 	const imageUrl = market.image; 
   const hasImage = Boolean(imageUrl);
@@ -103,8 +122,7 @@ export default function FamilyDetails({
 
       {/* ACTIONS */}
       <DetailsActions
-        item={market}
-        actions={config?.actions ?? []}
+        actions={actions}
         wrapperClasses="details-cols-2 mt-5"
       />
 

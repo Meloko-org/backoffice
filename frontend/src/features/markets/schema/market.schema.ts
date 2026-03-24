@@ -1,7 +1,14 @@
 import { defineFormSchema, field } from "../../../core/forms/schema";
 import type { MarketFormValues } from "../types/markets";
 
-export const marketSchema = 
+
+export type MarketFormCtx = {
+
+}
+
+export const marketFormSchema = (
+  ctx: MarketFormCtx & { values: Partial<MarketFormValues>}
+) =>
   defineFormSchema<MarketFormValues>({
     sections: [
       {

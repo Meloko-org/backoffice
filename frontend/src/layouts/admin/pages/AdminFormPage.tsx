@@ -20,8 +20,6 @@ export default function AdminFormPage<K extends keyof AdminModels>({
 }: Props<K>) {
   const admin = adminRegistry.get(model);
 
-  console.log("admin :", admin)
-
   if (!admin.form) {
     throw new Error(`No form defined for model "${String(model)}"`);
   }

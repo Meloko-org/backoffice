@@ -1,9 +1,20 @@
 import { useParams } from "react-router-dom";
-import MarketFormPage from "./MarketFormPage";
+import { useAdminPage } from "../../../hooks/useAdminPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function EditMarketPage() {
 
-  const { id } = useParams<{ id: string}>();
+  const { id } = useParams<{ id: string }>();
   
-  return <MarketFormPage mode="edit" marketId={id} />
+    if (!id) return null;
+  
+    useAdminPage("Modifier le point de vente");
+  
+    return (
+      <AdminFormPage
+        model="markets" 
+        mode="edit" 
+        id={id} 
+      />
+    )
 }

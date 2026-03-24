@@ -1,7 +1,11 @@
 import type { PaginationMeta } from "../../../types/global.types";
 
-export interface Market {
+
+export interface MarketActionTarget {
   _id: string;
+}
+
+export interface Market extends MarketActionTarget {
   name: string;
   slug: string;
   description: string;

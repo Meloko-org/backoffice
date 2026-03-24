@@ -1,5 +1,13 @@
-import MarketFormPage from "./MarketFormPage";
+import { useAdminPage } from "../../../hooks/useAdminPage";
+import AdminFormPage from "../../../layouts/admin/pages/AdminFormPage";
 
 export default function CreateMarketPage() {
-  return <MarketFormPage mode="create" />
+  useAdminPage("Créer un point de vente");
+    
+    return (
+      <AdminFormPage
+        model="markets" 
+        mode="create" 
+      />
+    )
 }
