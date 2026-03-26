@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { SignOutButton, useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import SidebarIconButton from "./components/SidebarIconButton";
 import type { AdminMenuItem } from "./config/adminMenu"

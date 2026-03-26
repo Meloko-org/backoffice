@@ -207,10 +207,6 @@ const orderSchema = mongoose.Schema(
       index: true,
       default: null,
     },
-    // stripePIId: {
-    //   type: String,
-    //   unique: true,
-    // },
     totalHT: {
       type: Number,
       required: true,

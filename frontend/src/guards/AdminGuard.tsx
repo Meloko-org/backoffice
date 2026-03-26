@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useUserRole } from "../hooks/useUserRole";
-import { BallTriangle } from "react-loader-spinner";
+import Loader from "../components/admin/Loader";
 
 export default function AdminGuard({
   children,
@@ -13,22 +13,13 @@ export default function AdminGuard({
   if (!isLoaded) {
     return (
       <div className="w-full h-full flex justify-center items-center bg-warning">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
+        <Loader />
       </div>
     );
   }
 
   if (role !== "admin") {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;

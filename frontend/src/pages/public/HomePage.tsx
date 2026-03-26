@@ -1,5 +1,3 @@
-
-import { SignOutButton } from "@clerk/clerk-react";
 import DarkModeToggle from "../../components/global/DarkModeToggle";
 
 export default function HomePage() {
@@ -12,11 +10,7 @@ export default function HomePage() {
 
       <DarkModeToggle />
 
-			<SignOutButton >
-          <button className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700">
-            Se déconnecter
-          </button>
-        </SignOutButton>
+
     </div>
   );
 }

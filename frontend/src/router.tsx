@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminGuard from "./guards/AdminGuard";
 import Home from "./pages/public/HomePage";
 import Login from "./pages/public/LoginPage";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDashboard from "./pages/admin/dashboard/AdminDashboard";
 import AdminLayout from "./layouts/admin/AdminLayout";
 import PostLoginRedirect from "./pages/PostLoginRedirect";
 import ProductsImportPage from "./features/products/pages/ProductsImportPage";

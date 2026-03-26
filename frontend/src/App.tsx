@@ -3,7 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 import HomePage from "./pages/public/HomePage";
 import LoginPage from "./pages/public/LoginPage";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDashboard from "./pages/admin/dashboard/AdminDashboard";
 
 
 

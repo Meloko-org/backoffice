@@ -7,10 +7,12 @@ import type { UserFormValues } from "../types/user";
 export async function fetchRoles(): Promise<FieldOption<string>[]> {
   const data = await getRoleNames();
 
-  return data.map((r: any) => ({
-    value: r._id,
-    label: r.name,
-  }))
+  return data
+    .filter((r: any) => r.name !== "super-admin")
+    .map((r: any) => ({
+      value: r._id,
+      label: r.name,
+    }))
 }
 
 export type UserFormCtx = {

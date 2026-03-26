@@ -133,6 +133,8 @@ const userSchema = mongoose.Schema(
   { timestamps: true },
 );
 
+userSchema.index({ createdAt: 1});
+
 
 const collectionName = process.env.USE_FAKE_DB === "true"
   ? "fakeusers"
