@@ -1,16 +1,16 @@
 import { ImageOff } from "lucide-react";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
-import type { ProductLine } from "../types/order";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { OrderProductStatusBadge } from "../../../components/admin/badges/OrderProductStatus";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 type Props = {
-  line: ProductLine;
+  context: Extract<ModelInfoContext, { type: "orderProduct" }>
 }
 
-export default function OrderProductDetails({ line}: Props) {
+export default function OrderProductDetails({ context }: Props) {
 
-  if (!line) return null;
+  const line = context.data
 
   const imageUrl = line.product.image; 
   const hasImage = Boolean(imageUrl);
@@ -130,9 +130,9 @@ export default function OrderProductDetails({ line}: Props) {
           </h3>
         {/* </div> */}
 
-        <p className="details-info">
+        <div className="details-info">
           <OrderProductStatusBadge status={line.productStatus} />
-        </p>
+        </div>
       </div>
 
 

@@ -3,7 +3,7 @@ import type { Column } from "../../../../components/data-table/DataTable";
 import type { FormSchema } from "../../../../core/forms/types";
 import type { ApiResponse, ApiSuccessResponse } from "../../../../types/global.types";
 import type { createActionsRegistry } from "../actions/actionRegistry";
-import type { RightPanelType } from "../rightPanel/rightPanelRegistry";
+import type { RightPanelContextMap, RightPanelType } from "../rightPanel/rightPanelRegistry";
 
 
 /** ici on crée une "Admin Model Configuration"
@@ -41,7 +41,7 @@ export type ModelAdminConfig<
 
   /* RIGHT PANEL */
   details?: React.ComponentType<any>;
-  entityName: RightPanelType;
+  entityName: keyof RightPanelContextMap;
 
   /* FORM */
   form?: AdminFormConfig<TFormValues, TFormCtx>;
@@ -88,6 +88,6 @@ export function createModelAdmin<
 >(
   config: ModelAdminConfig<TEntity, TFormValues, TListCtx, TFormCtx>
 ) {
-  console.log("config registry :", config)
+  // console.log("config registry :", config)
   return config;
 }

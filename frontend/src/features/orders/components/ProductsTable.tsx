@@ -4,10 +4,10 @@ import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutConte
 import type { Column } from "../../../components/data-table/DataTable";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import type { ProductLine } from "../types/order";
-import type { ModelContext } from "../../../types/admin";
 import { useInfoContext } from "../../../hooks/useInfoContext";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
 import { OrderProductStatusBadge } from "../../../components/admin/badges/OrderProductStatus";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 interface Props {
   products: ProductLine[];
@@ -20,15 +20,14 @@ export function ProductsTable({ products }: Props) {
   /* affichage dans la sidebar droite */  
   const [ selectedProduct, setSelectedProduct ] = useState<ProductLine | null>(null);
 
-  const infoContext: ModelContext = useMemo(() => {
-    if (!selectedProduct) return null;
 
-    return {
+  const infoContext: ModelInfoContext = selectedProduct
+    ? {
       type: "orderProduct",
       title: "Détail du produit commandé",
-      line: selectedProduct,
-    };
-  }, [selectedProduct]);
+      data: selectedProduct,
+    }
+    : null;
 
   useInfoContext(infoContext)
 
@@ -45,6 +44,7 @@ export function ProductsTable({ products }: Props) {
       prev?._id === line._id ? null : line
     )
   }
+
 
   useEffect(() => {
     return () => {

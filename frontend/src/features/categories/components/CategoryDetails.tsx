@@ -3,19 +3,22 @@ import DetailsActions from "../../../components/admin/details/DetailsActions";
 import type { ProductCategory } from "../types/category";
 import { ImageOff } from "lucide-react";
 import { getCategoryById } from "../api/categories.api";
-import { useCategoryActionsContext } from "../hooks/useCategoryActionContext";
+import { useCategoryActionsContext } from "../hooks/useCategoryActionsContext";
 import Loader from "../../../components/admin/Loader";
 import { categoryActions } from "../config/categoryActionsRegistry";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 
 type Props = {
-	id: string;
+	context: WithId<"category"> 
 }
 
 
 export default function CategoryDetails({
-	id,
+	context,
 }: Props) {
+
+  const { id } = context
 
 	const [ category, setCategory ] = useState<ProductCategory | null>(null)
 

@@ -3,18 +3,21 @@ import type { Market } from "../types/markets";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { useEffect, useMemo, useState } from "react";
 import { getMarketById } from "../api/markets.api";
-import { useMarketActionsContext } from "../hooks/useMarketActionContext";
+import { useMarketActionsContext } from "../hooks/useMarketActionsContext";
 import { marketActions } from "../config/marketActionsRegistry";
 import Loader from "../../../components/admin/Loader";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 type Props = {
-	id: string;
+	context: WithId<"market"> 
 }
 
 
 export default function FamilyDetails({
-	id,
+	context,
 }: Props) {
+
+  const { id } = context
 
 	const [ market, setMarket ] = useState<Market | null>(null)
 

@@ -4,6 +4,7 @@ import { adminRegistry } from "../registries/admin/adminRegistry";
 import Loader from "../../../components/admin/Loader";
 import { AdminForm } from "../../../core/forms/FormRenderer";
 import { adminFormRenderers } from "../../../core/forms/components/adminFormRenderers";
+import { hasForm } from "../../../guards/AdminFormGuard";
 
 
 
@@ -20,7 +21,7 @@ export default function AdminFormPage<K extends keyof AdminModels>({
 }: Props<K>) {
   const admin = adminRegistry.get(model);
 
-  if (!admin.form) {
+  if (!hasForm(admin)) {
     throw new Error(`No form defined for model "${String(model)}"`);
   }
 

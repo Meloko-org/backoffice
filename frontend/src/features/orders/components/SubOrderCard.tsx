@@ -14,8 +14,6 @@ export function SubOrderCard({ subOrder }: Props) {
 
   const navigate = useNavigate();
 
-  console.log("suborderproducts :", subOrder)
-
   return (
     <div className="">
       <div className="flex flex-row items-center">

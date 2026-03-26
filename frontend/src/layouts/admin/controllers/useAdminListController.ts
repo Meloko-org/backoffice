@@ -12,12 +12,15 @@ type Options<T> = {
   model: string
 }
 
+
 type WithId = {
   _id: string;
 };
 
 
-export function useAdminListController<T extends WithId>(
+export function useAdminListController<
+  T extends WithId,
+>(
   queryFn: any,
   options?: Options<T>
 ) {
@@ -63,10 +66,7 @@ export function useAdminListController<T extends WithId>(
     if (!selectedItem || !getInfoContext) return null;
 
     return getInfoContext(selectedItem);
-  }, [
-    selectedItem?._id, // ✅ clé stable
-    getInfoContext
-  ]);
+  }, [selectedItem?._id,getInfoContext]);
 
   useInfoContext(infoContext)
 
@@ -92,6 +92,8 @@ export function useAdminListController<T extends WithId>(
       if (enableRightPanel) closeRight()
     }
   }, [])
+
+  // console.log("selectedItem :", selectedItem)
 
 
   return {

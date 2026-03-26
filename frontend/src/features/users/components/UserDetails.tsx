@@ -2,20 +2,23 @@ import { ImageOff } from "lucide-react";
 import type { User } from "../types/user";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
 import { userActions } from "../config/userActionsRegistry";
 import { useEffect, useMemo, useState } from "react";
 import { getUserById } from "../api/users.api";
 import Loader from "../../../components/admin/Loader";
+import { useUserActionsContext } from "../hooks/useUserActionsContext";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 type Props = {
-	id: string;
+	context: WithId<"user"> 
 }
 
 
 export default function UserDetails({
-	id,
+	context,
 }: Props) {
+
+  const { id } = context
 
   const [ user, setUser ] = useState<User | null>(null);
 

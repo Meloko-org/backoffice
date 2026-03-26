@@ -2,7 +2,7 @@ import { createModelAdmin } from "../../../layouts/admin/registries/admin/create
 import { getCategoryNames } from "../../categories/api/categories.api";
 import { createFamily, getFamiliesList, getFamilyById, updateFamily } from "../api/families.api";
 import FamilyDetails from "../components/FamilyDetails";
-import { useFamilyActionsContext } from "../hooks/useFamilyActionContext";
+import { useFamilyActionsContext } from "../hooks/useFamilyActionsContext";
 import { mapFamilyToFormValues, mapFormValuesToPayload } from "../mappers/family.mapper";
 import { familyFormSchema, fetchCategories, fetchTagCategories, type FamilyFormCtx } from "../schema/family.schema";
 import { type ProductFamily, type FamilyFormValues } from "../types/family";

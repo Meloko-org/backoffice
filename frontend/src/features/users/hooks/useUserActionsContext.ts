@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import type { UserActionContext } from "../features/users/config/user.actions";
-import { useConfirm } from "../layouts/admin/contexts/ConfirmContext";
-import { useSuspendUser } from "./useSuspendUser";
-import { useDeleteUser } from "./useDeleteUser";
-import { useAdminLayout } from "../layouts/admin/contexts/AdminLayoutContext";
 import { useMemo } from "react";
+import type { UserActionContext } from "../config/user.actions";
+import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useSuspendUser } from "../../../hooks/useSuspendUser";
+import { useDeleteUser } from "./useDeleteUser";
 
 export function useUserActionsContext(): UserActionContext {
 

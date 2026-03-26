@@ -2,7 +2,7 @@ import { createModelAdmin } from "../../../layouts/admin/registries/admin/create
 import { getFamilyNames } from "../../families/api/families.api";
 import { createProduct, getProductById, getProductsList, updateProduct } from "../api/products.api";
 import ProductDetails from "../components/ProductDetails";
-import { useProductActionsContext } from "../hooks/useProductActionContext";
+import { useProductActionsContext } from "../hooks/useProductActionsContext";
 import { mapFormToPayload, mapProductToFormValues } from "../mappers/product.mapper";
 import { fetchCategories, productFormSchema, type ProductFormCtx } from "../schema/product.schema";
 import type { Product, ProductFormValues } from "../types/product";

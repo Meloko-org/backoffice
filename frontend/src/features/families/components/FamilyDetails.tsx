@@ -3,19 +3,22 @@ import type { ProductFamily } from "../types/family";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { useEffect, useMemo, useState } from "react";
 import { getFamilyById } from "../api/families.api";
-import { useFamilyActionsContext } from "../hooks/useFamilyActionContext";
+import { useFamilyActionsContext } from "../hooks/useFamilyActionsContext";
 import { familyActions } from "../config/familyActionsRegistry";
 import Loader from "../../../components/admin/Loader";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 
 type Props = {
-	id: string;
+	context: WithId<"family"> 
 }
 
 
 export default function FamilyDetails({
-	id,
+	context,
 }: Props) {
+
+  const { id } = context
 
 	const [ family, setFamily ] = useState<ProductFamily | null>(null);
 

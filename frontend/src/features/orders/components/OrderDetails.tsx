@@ -1,22 +1,44 @@
+import { useEffect, useMemo, useState } from "react";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
-import type { Order } from "../types/order"
+import type { Order, OrderDetail } from "../types/order"
+import { getOrderById } from "../api/orders.api";
+import { useOrderActionsContext } from "../hooks/useOrderActionsContext";
+import { orderActions } from "../config/orderActionRegistry";
+import DetailsActions from "../../../components/admin/details/DetailsActions";
+import Loader from "../../../components/admin/Loader";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 type Props = {
-  order: Order;
-  onEdit?: (order: Order) => void;
-  onDelete?: (order: Order) => void;
+  context: WithId<"order"> 
 }
 
 export default function OrderDetails({
-  order,
-  onEdit,
-  onDelete,
+  context,
 }: Props) {
 
-  if (!order) return null;
+  const { id } = context
 
-  console.log(order)
+  const [ order, setOrder ] = useState<OrderDetail | null>(null)
+
+  useEffect(() => {
+    getOrderById(id).then(setOrder)
+  }, [id])
+
+  // console.log("order :", order)
+  const ctx = useOrderActionsContext();
+
+  const actions = useMemo(() => {
+    if (!order) return [];
+    return orderActions.getActions(order, ctx, "details")
+  }, [order, ctx])
+
+
+  if (!order) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <div className="bloc-details">
@@ -131,7 +153,7 @@ export default function OrderDetails({
           <div className="flex flex-row gap-x-3">
             <div className="grow"></div>
             <div className="shrink rounded-lg border border-primary p-2">PAYÉE</div>
-            {order.isPaid
+            {order.isPaid && order.paidAt
               ? (
                 <div className="flex flex-row items-center mt-1">
                   <p className="details-label">
@@ -170,6 +192,13 @@ export default function OrderDetails({
           <p className="details-info">{order.isWithdrawn ? "OUI" : "NON"}</p>
         </div>
       </div>
+
+
+      {/* ACTIONS */}
+      <DetailsActions
+        actions={actions}
+        wrapperClasses="details-cols-2 mt-5"
+      />
       
 
     </div>

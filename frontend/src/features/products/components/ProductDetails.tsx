@@ -1,21 +1,23 @@
 import { ImageOff } from "lucide-react";
 import type { Product } from "../types/product";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { rightPanelRegistry } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import { useEffect, useMemo, useState } from "react";
 import { getProductById } from "../api/products.api";
-import { useProductActionsContext } from "../hooks/useProductActionContext";
+import { useProductActionsContext } from "../hooks/useProductActionsContext";
 import { productActions } from "../config/productActionsRegistry";
 import Loader from "../../../components/admin/Loader";
+import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
 
 type Props = {
-	id: string;
+	context: WithId<"product"> 
 }
 
 
 export default function FamilyDetails({
-	id,
+	context,
 }: Props) {
+
+  const { id } = context
 
 	const [ product, setProduct ] = useState<Product | null>(null);
 

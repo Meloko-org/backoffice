@@ -1,4 +1,4 @@
-import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
+import { useUserActionsContext } from "../../users/hooks/useUserActionsContext";
 import { createModelAdmin } from "../../../layouts/admin/registries/admin/createModelAdmin";
 import { getRoleNames } from "../../roles/api/roles.api";
 import { getUserById, getUsersList, updateUser } from "../api/users.api";

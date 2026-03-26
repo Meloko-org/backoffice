@@ -1,6 +1,6 @@
 import { ImageOff } from "lucide-react";
 import type { UserDashboard } from "../types/user";
-import { useUserActionsContext } from "../../../hooks/useUserActionsContext";
+import { useUserActionsContext } from "../../users/hooks/useUserActionsContext";
 import type { UserActionContext } from "../config/user.actions";
 import { userActions } from "../config/userActionsRegistry";
 

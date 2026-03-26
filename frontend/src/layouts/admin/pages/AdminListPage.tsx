@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useAdminListController } from "../controllers/useAdminListController"
 import { adminRegistry } from "../registries/admin/adminRegistry"
 import { Loader } from "lucide-react"
 import { DataListLayout } from "../../../components/data-table/DataListLayout"
 import type { AdminModels } from "../registries/admin/adminModels"
+import type { ModelInfoContext } from "../contexts/AdminInfoContext"
 
 
 
@@ -18,7 +19,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
 
   const admin = adminRegistry.get(model)
 
-  
+  // console.log("admin :", admin)
 
 
   if (!admin.getList) {
@@ -28,6 +29,19 @@ export default function AdminListPage<K extends keyof AdminModels>({
   /* ========================= */
   /* DATA */
   /* ========================= */
+
+  const getInfoContext = useCallback(
+    (item: any): ModelInfoContext => {
+      if (!admin.details) return null;
+
+      return {
+        type: admin.entityName as any,
+        id: item._id,
+        title: "Détail",
+      };
+    },
+    [admin.entityName, admin.details]
+  );
 
   const {
     items,
@@ -47,14 +61,9 @@ export default function AdminListPage<K extends keyof AdminModels>({
   } = useAdminListController(admin.getList, {
       model: admin.model,
       enableRightPanel: !!admin.details,
-      getInfoContext: admin.details
-        ? (item) => ({
-            type: admin.entityName,
-            id: (item as any)._id,
-            title: `Détail`,
-          })
-        : undefined,
+      getInfoContext: admin.details ? getInfoContext : undefined,
     })
+
 
 
   /* ========================= */

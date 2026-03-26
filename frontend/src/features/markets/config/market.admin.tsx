@@ -1,7 +1,7 @@
 import { createModelAdmin } from "../../../layouts/admin/registries/admin/createModelAdmin";
 import { createMarket, getMarketById, getMarketsList, updateMarket } from "../api/markets.api";
 import MarketDetails from "../components/MarketDetails";
-import { useMarketActionsContext } from "../hooks/useMarketActionContext";
+import { useMarketActionsContext } from "../hooks/useMarketActionsContext";
 import { mapFormToPayload, mapMarketToFormValues } from "../mappers/market.mapper";
 import { marketFormSchema, type MarketFormCtx } from "../schema/market.schema";
 import { type Market, type MarketFormValues } from "../types/markets";

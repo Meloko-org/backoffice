@@ -4,7 +4,7 @@ import { OrderHeaderSection } from "../components/OrderHeaderSection";
 import { CustomerSection } from "../components/CustomerSection";
 import { SubOrdersSection } from "../components/SubOrderSection";
 import { useAdminPage } from "../../../hooks/useAdminPage";
-import { BallTriangle } from "react-loader-spinner";
+import Loader from "../../../components/admin/Loader";
 
 export function OrderPage() {
   const { id } = useParams<{ id: string }>();
@@ -14,20 +14,10 @@ export function OrderPage() {
 
   if (isLoading) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#98B66E"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
+      <Loader />
     );
   }
+
   if (isError || !order) return <div>Erreur chargement commande</div>;
 
   return (

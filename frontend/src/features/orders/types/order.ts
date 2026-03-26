@@ -1,7 +1,11 @@
 import type { PaginationMeta } from "../../../types/global.types";
 
-export interface Order {
+
+export interface OrderActionTarget {
   _id: string;
+}
+
+export interface Order extends OrderActionTarget {
   user: {
     _id: string;
     email: string;

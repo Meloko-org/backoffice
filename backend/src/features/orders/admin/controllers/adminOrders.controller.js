@@ -40,6 +40,7 @@ const listOrders = async (req, res, next) => {
 
 const getOrder = async (req, res, next) => {
   try {
+    console.log("params :", req.params)
     const { id } = req.params;
 
     const order = await getOrderById(id);
