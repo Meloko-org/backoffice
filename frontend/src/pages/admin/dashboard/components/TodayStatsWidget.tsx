@@ -1,31 +1,44 @@
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
+import type { AdminDashboardData } from "../types";
 
 type Props = {
-  orders: number;
-  revenue?: number;
+  data: AdminDashboardData
 };
 
-export default function TodayStatsWidget({ orders, revenue }: Props) {
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      
-      {/* Orders */}
-      <div className="bg-white rounded-2xl shadow p-4">
-        <div className="text-sm text-gray-500">Commandes aujourd’hui</div>
-        <div className="text-2xl font-semibold mt-2">
-          {orders}
-        </div>
-      </div>
+export default function TodayStatsWidget({ data }: Props) {
 
-      {/* Revenue */}
-      {revenue !== undefined && (
-        <div className="bg-white rounded-2xl shadow p-4">
-          <div className="text-sm text-gray-500">Chiffre d’affaires</div>
-          <div className="text-2xl font-semibold mt-2">
-            {formatPriceToEuros(revenue)}
+  const orders = data.today.ordersCount;
+  const revenue = data.today.revenue;
+
+  console.log("orders :", orders)
+  console.log("revenue :", revenue)
+
+  return (
+    <div className="dashboard-bloc">
+
+      <div className="dashboard-title">AUJOURD'HUI</div>
+
+      <div className="dashboard-content">
+        {/* Orders */}
+        <div className="">
+          <h3>Commandes</h3>
+          <div className="dashboard-data-1">
+            {orders}
           </div>
         </div>
-      )}
+
+        {/* Revenue */}
+        {revenue !== undefined && (
+          <div className="">
+            <h3>Chiffre d’affaires</h3>
+            <div className="dashboard-data-1">
+              {formatPriceToEuros(revenue)}
+            </div>
+          </div>
+        )}
+      </div>
+      
+      
       
     </div>
   );

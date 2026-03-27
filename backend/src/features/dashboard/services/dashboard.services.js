@@ -1,6 +1,5 @@
 const Order = require("../../../models/Order");
 const User = require("../../../models/User");
-const mongoose = require("mongoose");
 
 
 async function getTodayStats() {
@@ -30,7 +29,7 @@ async function getTodayStats() {
   ]);
 
   return {
-    orders: stats[0]?.orders || 0,
+    ordersCount: stats[0]?.orders || 0,
     revenue: stats[0]?.revenue || 0,
   };
 }
@@ -104,6 +103,239 @@ async function getRecentUsers() {
 }
 
 
+async function getOrdersTimeseries(days = 7) {
+  const from = new Date();
+  from.setHours(0, 0, 0, 0);
+  from.setDate(from.getDate() - days + 1);
+
+  const result = await Order.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: from },
+        isPaid: true,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+        },
+        orders: { $sum: 1 },
+        revenue: { $sum: "$totalTTC" },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
+  ]);
+
+  return result.map((d) => ({
+    date: d._id,
+    orders: d.orders,
+    revenue: d.revenue,
+  }));
+}
+
+
+async function getRevenue7Days() {
+  const from = new Date();
+  from.setHours(0, 0, 0, 0);
+  from.setDate(from.getDate() - 6);
+
+  const result = await Order.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: from },
+        isPaid: true,
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        revenue: { $sum: "$totalTTC" },
+      },
+    },
+  ]);
+
+  return result[0]?.revenue || 0;
+}
+
+
+async function getAverageCart() {
+  const result = await Order.aggregate([
+    {
+      $match: { isPaid: true },
+    },
+    {
+      $group: {
+        _id: null,
+        avgCart: { $avg: "$totalTTC" },
+      },
+    },
+  ]);
+
+  return Math.round(result[0]?.avgCart || 0);
+}
+
+
+async function getRevenueByMarket() {
+  return Order.aggregate([
+    {
+      $match: { isPaid: true },
+    },
+
+    {
+      $unwind: "$details",
+    },
+
+    // 🔥 fallback si pas de withdrawMarket
+    {
+      $addFields: {
+        marketName: {
+          $ifNull: ["$details.withdrawMarket", "Marché inconnu"],
+        },
+      },
+    },
+
+    {
+      $group: {
+        _id: "$marketName",
+        revenue: { $sum: "$details.shopTotalTTC" },
+        count: { $sum: 1 },
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        name: "$_id",
+        revenue: 1,
+        count: 1,
+      },
+    },
+
+    {
+      $sort: { revenue: -1 },
+    },
+
+    {
+      $limit: 5,
+    },
+  ]);
+}
+
+
+async function getTopProducts() {
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+
+    {
+      $group: {
+        _id: "$details.products.product",
+        quantity: { $sum: "$details.products.quantity" },
+        revenue: { $sum: "$details.products.totalPriceTTC" },
+      },
+    },
+
+    {
+      $lookup: {
+        from: "stocks",
+        localField: "_id",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+
+    { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+    {
+      $project: {
+        name: "$product.productCustomName",
+        quantity: 1,
+        revenue: 1,
+      },
+    },
+
+    { $sort: { quantity: -1 } },
+    { $limit: 5 },
+  ]);
+}
+
+
+async function getTopShops() {
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+
+    {
+      $group: {
+        _id: "$details.shop",
+        revenue: { $sum: "$details.shopTotalTTC" },
+        orders: { $sum: 1 },
+      },
+    },
+
+    {
+      $lookup: {
+        from: "shops",
+        localField: "_id",
+        foreignField: "_id",
+        as: "shop",
+      },
+    },
+
+    { $unwind: { path: "$shop", preserveNullAndEmptyArrays: true } },
+
+    {
+      $project: {
+        name: "$shop.name",
+        revenue: 1,
+        orders: 1,
+      },
+    },
+
+    { $sort: { revenue: -1 } },
+    { $limit: 5 },
+  ]);
+}
+
+
+async function getTopMarketsByUsage() {
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+
+    {
+      $group: {
+        _id: "$details.market",
+        count: { $sum: 1 },
+      },
+    },
+
+    {
+      $lookup: {
+        from: "markets",
+        localField: "_id",
+        foreignField: "_id",
+        as: "market",
+      },
+    },
+
+    { $unwind: { path: "$market", preserveNullAndEmptyArrays: true } },
+
+    {
+      $project: {
+        name: "$market.name",
+        count: 1,
+      },
+    },
+
+    { $sort: { count: -1 } },
+    { $limit: 5 },
+  ]);
+}
 
 module.exports = {
   getTodayStats,
@@ -111,4 +343,11 @@ module.exports = {
   getAlerts,
   getRecentOrders,
   getRecentUsers,
+  getOrdersTimeseries,
+  getRevenue7Days,
+  getAverageCart,
+  getRevenueByMarket,
+  getTopProducts,
+  getTopShops,
+  getTopMarketsByUsage,
 }

@@ -1,4 +1,17 @@
-const { getTodayStats, getUserStats, getAlerts, getRecentOrders, getRecentUsers } = require("../services/dashboard.services");
+const { 
+  getTodayStats, 
+  getUserStats, 
+  getAlerts, 
+  getRecentOrders, 
+  getRecentUsers, 
+  getOrdersTimeseries,
+  getRevenue7Days,
+  getAverageCart,
+  getRevenueByMarket, 
+  getTopProducts,
+  getTopShops,
+  getTopMarketsByUsage,
+} = require("../services/dashboard.services");
 
 const dashboard = async (req, res) => {
   const role = req.user.role.name;
@@ -9,13 +22,27 @@ const dashboard = async (req, res) => {
     userStats,
     alerts,
     recentOrders,
-    recentUsers
+    recentUsers,
+    timeseries,
+    revenue7Days,
+    avgCart,
+    revenueByMarket,
+    topProducs,
+    topShops,
+    topMarketsByUsage
   ] = await Promise.all([
     getTodayStats(),
     getUserStats(),
     getAlerts(),
     getRecentOrders(),
-    getRecentUsers()
+    getRecentUsers(),
+    getOrdersTimeseries(100),
+    getRevenue7Days(),
+    getAverageCart(),
+    getRevenueByMarket(),
+    getTopProducts(),
+    getTopShops(),
+    getTopMarketsByUsage(),
   ]);
 
   const data = {
@@ -24,14 +51,21 @@ const dashboard = async (req, res) => {
     alerts,
     recentOrders,
     recentUsers,
+    timeseries,
+    revenue7Days,
+    avgCart,
+    revenueByMarket,
+    topProducs,
+    topShops,
+    topMarketsByUsage
   };
 
   // 🔥 filtrage par rôle
-  if (role !== "admin") {
-    data.today = {
-      orders: data.today.orders,
-    };
+  if (!["super-admin", "admin"].includes(role)) {
+    delete data.today.revenue;
   }
+
+  console.log("data :", data)
 
   res.json(data);
 }
