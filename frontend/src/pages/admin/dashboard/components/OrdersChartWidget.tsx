@@ -26,13 +26,15 @@ export default function OrdersChartWidget({ data }: Props) {
       </div>
 
       <div className="dashboard-content">
-        <LineChart width={400} height={400} data={line}>
-          <XAxis dataKey="date" />
-          <Tooltip />
-          <CartesianGrid stroke="#f5f5f5" />
-          <Line type="monotone" dataKey="orders" stroke="#98B66E" />
-          <Line type="monotone" dataKey="revenue" stroke="#0081A7" />
-        </LineChart>
+        <div className="flex flex-row justify-center">
+          <LineChart width={400} height={300} data={line}>
+            <XAxis dataKey="date" />
+            <Tooltip />
+            <CartesianGrid stroke="#f5f5f5" />
+            <Line type="monotone" dataKey="orders" stroke="#98B66E" />
+            <Line type="monotone" dataKey="revenue" stroke="#0081A7" />
+          </LineChart>
+        </div>
       </div>
       
 

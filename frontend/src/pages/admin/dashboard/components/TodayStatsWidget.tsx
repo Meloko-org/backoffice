@@ -21,7 +21,7 @@ export default function TodayStatsWidget({ data }: Props) {
       <div className="dashboard-content">
         {/* Orders */}
         <div className="">
-          <h3>Commandes</h3>
+          <h2>Commandes</h2>
           <div className="dashboard-data-1">
             {orders}
           </div>
@@ -30,7 +30,7 @@ export default function TodayStatsWidget({ data }: Props) {
         {/* Revenue */}
         {revenue !== undefined && (
           <div className="">
-            <h3>Chiffre d’affaires</h3>
+            <h2>Chiffre d’affaires</h2>
             <div className="dashboard-data-1">
               {formatPriceToEuros(revenue)}
             </div>

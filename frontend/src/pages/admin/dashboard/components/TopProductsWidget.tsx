@@ -13,10 +13,10 @@ export function TopProductsWidget({ data }: Props) {
       <div className="dashboard-title">Top produits</div>
 
       <div className="dashboard-content">
-        {products.map((p, i) => (
-          <div key={i} className="flex justify-between">
-            <span>{p._id || "Produit inconnu"}</span>
-            <span>{p.quantity}</span>
+        {products.map((p) => (
+          <div key={p._id} className="flex justify-between">
+            <span>{p.name}</span>
+            <span>{p.quantityFormatted}</span>
           </div>
         ))}
       </div>

@@ -27,34 +27,69 @@ export default function AdminDashboard() {
   if (!data) return <div>Erreur</div>;
 
   return (
-    <div className="p-8 space-y-6 bg-pr">
+    <div className="mx-auto max-w-7xl">
 
       <div className="grid grid-cols-6 gap-6">
-        <div>
-          <TodayStatsWidget data={data }/>
+
+        <div className="col-span-4 space-y-6">
+
+          <div className="grid grid-cols-3 gap-6">
+            <div>
+              <TodayStatsWidget data={data }/>
+            </div>
+            <div>
+              <UsersWidget data={data} />
+            </div>
+            <div>
+              <div className="grid grid-row-2 gap-6">
+                <div>
+                  <Revenue7DaysWidget data={data} />
+                </div>
+                <div>
+                  <AvgCartWidget data={data} />
+                </div>
+              </div>
+            </div>
+            
+
+          </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <TopProductsWidget data={data} />
+            </div>
+            <div>
+              <TopShopsWidget data={data} />
+            </div>
+            <div>
+              <RevenueByMarketWidget data={data} />
+            </div>
+            <div>
+              <TopMarketsWidget data={data} />
+            </div>
+          </div>
+            
         </div>
-        <div>
-          <UsersWidget data={data} />
-        </div>
-        <div className="col-span-2">
+
+        <div className="col-span-2 space-y-6">
           <RecentOrdersWidget data={data} />
-        </div>
-        <div className="col-span-2">
           <OrdersChartWidget data={data} />
         </div>
+
+
       </div>
 
-      <Revenue7DaysWidget data={data} />
+      
 
-      <AvgCartWidget data={data} />
+      
 
-      <RevenueByMarketWidget data={data} />
+     
 
-      <TopProductsWidget data={data} />
+      
 
-      <TopShopsWidget data={data} />
+      
 
-      <TopMarketsWidget data={data} />
+      
 
 
     </div>

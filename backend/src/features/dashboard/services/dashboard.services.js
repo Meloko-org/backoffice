@@ -188,18 +188,16 @@ async function getRevenueByMarket() {
       $unwind: "$details",
     },
 
-    // 🔥 fallback si pas de withdrawMarket
+    // ✅ FILTRE CRUCIAL
     {
-      $addFields: {
-        marketName: {
-          $ifNull: ["$details.withdrawMarket", "Marché inconnu"],
-        },
+      $match: {
+        "details.withdrawMode": "market",
       },
     },
 
     {
       $group: {
-        _id: "$marketName",
+        _id: "$details.withdrawMarket",
         revenue: { $sum: "$details.shopTotalTTC" },
         count: { $sum: 1 },
       },
@@ -228,32 +226,103 @@ async function getRevenueByMarket() {
 async function getTopProducts() {
   return Order.aggregate([
     { $match: { isPaid: true } },
+
     { $unwind: "$details" },
     { $unwind: "$details.products" },
 
     {
       $group: {
-        _id: "$details.products.product",
+        _id: "$details.products.product", // stockId
         quantity: { $sum: "$details.products.quantity" },
         revenue: { $sum: "$details.products.totalPriceTTC" },
       },
     },
 
+    // 🔹 STOCK
     {
       $lookup: {
         from: "stocks",
         localField: "_id",
         foreignField: "_id",
+        as: "stock",
+      },
+    },
+    { $unwind: "$stock" },
+
+    // 🔹 PRODUCT
+    {
+      $lookup: {
+        from: "products",
+        localField: "stock.product",
+        foreignField: "_id",
         as: "product",
       },
     },
-
     { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+    // 🔹 FAMILY
+    {
+      $lookup: {
+        from: "productfamilies",
+        localField: "product.family",
+        foreignField: "_id",
+        as: "family",
+      },
+    },
+    { $unwind: { path: "$family", preserveNullAndEmptyArrays: true } },
+
+    // 🔥 NAME + UNIT + FORMATTED QUANTITY
+    {
+      $addFields: {
+        // 🧾 NOM
+        name: {
+          $cond: [
+            { $ifNull: ["$stock.productCustomName", false] },
+            "$stock.productCustomName",
+            {
+              $concat: [
+                { $ifNull: ["$family.name", ""] },
+                " ",
+                { $ifNull: ["$product.name", ""] },
+              ],
+            },
+          ],
+        },
+
+        // ⚖️ UNIT
+        unit: "$product.weight.unit",
+
+        // 🔥 FORMAT QUANTITY
+        quantityFormatted: {
+          $cond: [
+            { $eq: ["$product.weight.unit", "gr"] },
+            {
+              $concat: [
+                {
+                  $toString: {
+                    $round: [
+                      { $divide: ["$quantity", 1000] },
+                      2
+                    ],
+                  },
+                },
+                " kg",
+              ],
+            },
+            {
+              $toString: "$quantity",
+            },
+          ],
+        },
+      },
+    },
 
     {
       $project: {
-        name: "$product.productCustomName",
-        quantity: 1,
+        _id: 1,
+        name: 1,
+        quantity: 1, // brut (utile si besoin)
+        quantityFormatted: 1, // ✅ affichage
         revenue: 1,
       },
     },
@@ -304,36 +373,43 @@ async function getTopShops() {
 
 async function getTopMarketsByUsage() {
   return Order.aggregate([
-    { $match: { isPaid: true } },
-    { $unwind: "$details" },
+    {
+      $match: { isPaid: true },
+    },
+
+    {
+      $unwind: "$details",
+    },
+
+    // ✅ FILTRE ESSENTIEL
+    {
+      $match: {
+        "details.withdrawMode": "market",
+      },
+    },
 
     {
       $group: {
-        _id: "$details.market",
+        _id: "$details.withdrawMarket",
         count: { $sum: 1 },
       },
     },
 
     {
-      $lookup: {
-        from: "markets",
-        localField: "_id",
-        foreignField: "_id",
-        as: "market",
-      },
-    },
-
-    { $unwind: { path: "$market", preserveNullAndEmptyArrays: true } },
-
-    {
       $project: {
-        name: "$market.name",
+        _id: 0,
+        name: "$_id",
         count: 1,
       },
     },
 
-    { $sort: { count: -1 } },
-    { $limit: 5 },
+    {
+      $sort: { count: -1 },
+    },
+
+    {
+      $limit: 5,
+    },
   ]);
 }
 

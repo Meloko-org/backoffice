@@ -736,6 +736,10 @@
     color: var(--bloc-text);
   }
 
+  .dashboard-bloc h2 {
+    @apply m-0;
+  }
+
   .dashboard-title {
     @apply rounded-t-lg pl-3 py-1 font-semibold;
     background-color: var(--table-head-bg);

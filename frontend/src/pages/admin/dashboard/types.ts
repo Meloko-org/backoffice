@@ -30,7 +30,9 @@ export type AdminDashboardData = {
   
   topProducs: {
     _id: string;
+    name: string;
     quantity: number;
+    quantityFormatted: string;
     revenue: number;
   }[],
   topShops: {
@@ -40,7 +42,7 @@ export type AdminDashboardData = {
     name: string;
   }[],
   topMarketsByUsage: {
-    _id: string;
+    name: string;
     count: number;
   }[];
 };
