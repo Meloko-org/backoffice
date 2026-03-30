@@ -5,7 +5,7 @@ type Props = {
   extraClasses?: string;
 }
 
-export function EyeButton({
+export function WidgetButton({
   onClick,
   extraClasses,
 }: Props) {
@@ -13,7 +13,7 @@ export function EyeButton({
   return (
     <button 
       className={`
-          btn-outline-primary 
+          btn-widget 
           ${extraClasses}
         `}
       onClick={onClick}

@@ -728,7 +728,7 @@
     color: var(--warning-text);
   }
 
-
+  /* dashboard */
   .dashboard-bloc {
     @apply rounded-xl border shadow-sm;
     background-color: var(--bloc-bg);
@@ -743,7 +743,23 @@
   .dashboard-title {
     @apply rounded-t-lg pl-3 py-1 font-semibold;
     background-color: var(--table-head-bg);
-    color: white;
+    color: var(--first-text);
+  }
+
+  .dashboard-title-link {
+    @apply flex flex-row justify-between rounded-t-lg px-3 py-1 font-semibold;
+    background-color: var(--table-head-bg);
+    color: var(--first-text);
+  }
+
+  .btn-widget {
+    @apply rounded-md cursor-pointer;
+    color: var(--second-text);
+  }
+
+  .btn-widget:hover {
+    background-color: var(--table-head-bg);
+    color: var(--first-text);
   }
 
   .dashboard-content {
@@ -753,6 +769,31 @@
   .dashboard-data-1 {
     @apply text-2xl font-semibold;
     color: var(--bloc-text);
+  }
+
+  /* dashboard panels */
+  .panel-list-btn {
+    @apply flex justify-between items-center py-1 px-3 rounded-md cursor-pointer;
+  }
+
+  .panel-list-btn:hover {
+    background-color: var(--first-plan-bg);
+  }
+
+
+  /* dashboard statCard */
+  .stat-card {
+    @apply rounded-lg shadow p-4 border border-primary;
+    background-color: var(--first-plan-bg);
+  }
+
+  .stat-card-title {
+    @apply text-xs;
+    color: var(--second-text);
+  }
+
+  .stat-card-value {
+    @apply text-lg font-semibold mt-1;
   }
 
 

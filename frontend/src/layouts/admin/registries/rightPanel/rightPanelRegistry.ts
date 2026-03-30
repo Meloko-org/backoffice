@@ -1,5 +1,5 @@
 import type { ProductLine } from "../../../../features/orders/types/order";
-import type { ModelInfoContext, WithData, WithId } from "../../contexts/AdminInfoContext";
+import type { ModelInfoContext, WithData, WithId, WithType } from "../../contexts/AdminInfoContext";
 
 // export type RightPanelType =
 //   | "category"
@@ -27,6 +27,9 @@ export type RightPanelContextMap = {
   userPage: WithId<"userPage">;
   order: WithId<"order">;
   orderProduct: WithData<"orderProduct", ProductLine>;
+  topProducts: WithType<"topProducts">;
+  topProduct: WithId<"topProduct">;
+  productAnalytics: WithId<"productAnalytics">
 };
 
 export type RightPanelType = keyof RightPanelContextMap;
@@ -51,7 +54,10 @@ export type RightPanelMap = {
  * Utilisation de Vite: import.meta.glob pour créer un auto-registry
  */
 const modules = import.meta.glob(
-  "../../../../features/**/config/rightPanel.ts",
+  [
+    "../../../../features/**/config/rightPanel.ts",
+    "../../../../pages/admin/**/config/rightPanel.ts",
+  ],
   { eager: true }
 ) as Record<
   string,

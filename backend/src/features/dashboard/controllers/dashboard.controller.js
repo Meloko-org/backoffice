@@ -1,6 +1,7 @@
 const { 
   getTodayStats, 
   getUserStats, 
+  getShopStats,
   getAlerts, 
   getRecentOrders, 
   getRecentUsers, 
@@ -11,7 +12,10 @@ const {
   getTopProducts,
   getTopShops,
   getTopMarketsByUsage,
+  getTopProductDetails,
 } = require("../services/dashboard.services");
+
+
 
 const dashboard = async (req, res) => {
   const role = req.user.role.name;
@@ -20,6 +24,7 @@ const dashboard = async (req, res) => {
   const [
     todayStats,
     userStats,
+    shopStats,
     alerts,
     recentOrders,
     recentUsers,
@@ -33,6 +38,7 @@ const dashboard = async (req, res) => {
   ] = await Promise.all([
     getTodayStats(),
     getUserStats(),
+    getShopStats(),
     getAlerts(),
     getRecentOrders(),
     getRecentUsers(),
@@ -48,6 +54,7 @@ const dashboard = async (req, res) => {
   const data = {
     today: todayStats,
     users: userStats,
+    shops: shopStats,
     alerts,
     recentOrders,
     recentUsers,
@@ -65,12 +72,38 @@ const dashboard = async (req, res) => {
     delete data.today.revenue;
   }
 
-  console.log("data :", data)
-
   res.json(data);
 }
 
 
+const topProducts = async (req, res) => {
+
+  let { limit } = req.query;
+
+  // sécurisation du param limit
+  const parsedLimit = Math.min(
+    Math.max(parseInt(limit, 10) || 5, 1), 
+    100 
+  );
+  const data = await getTopProducts(parsedLimit);
+
+  res.json(data)
+}
+
+
+const topProductDetails = async (req, res) => {
+  const { id } = req.params;
+
+  const data = await getTopProductDetails(id);
+
+  console.log("product detail :", data)
+
+  res.json(data);
+};
+
+
 module.exports = {
   dashboard,
+  topProducts,
+  topProductDetails,
 }

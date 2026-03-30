@@ -11,7 +11,7 @@ export function TopShopsWidget({ data }: Props) {
 
   return (
     <div className="dashboard-bloc">
-      <div className="dashboard-title">Top producteurs</div>
+      <div className="dashboard-title">Top shops</div>
 
       <div className="dashboard-content">
         {shops.map((s, i) => (

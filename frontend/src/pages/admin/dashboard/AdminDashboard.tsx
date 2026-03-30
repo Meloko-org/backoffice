@@ -6,6 +6,7 @@ import OrdersChartWidget from "./components/OrdersChartWidget";
 import RecentOrdersWidget from "./components/RecentOrdersWidget";
 import { Revenue7DaysWidget } from "./components/Revenue7DaysWidget";
 import { RevenueByMarketWidget } from "./components/RevenueByMarketWidget";
+import ShopsWidget from "./components/ShopsWidget";
 import TodayStatsWidget from "./components/TodayStatsWidget";
 import { TopMarketsWidget } from "./components/TopMarketsWidget";
 import { TopProductsWidget } from "./components/TopProductsWidget";
@@ -27,7 +28,7 @@ export default function AdminDashboard() {
   if (!data) return <div>Erreur</div>;
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-6xl">
 
       <div className="grid grid-cols-6 gap-6">
 
@@ -42,12 +43,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <div className="grid grid-row-2 gap-6">
-                <div>
-                  <Revenue7DaysWidget data={data} />
-                </div>
-                <div>
-                  <AvgCartWidget data={data} />
-                </div>
+                <ShopsWidget data={data} />
               </div>
             </div>
             
@@ -72,6 +68,14 @@ export default function AdminDashboard() {
         </div>
 
         <div className="col-span-2 space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <Revenue7DaysWidget data={data} />
+            </div>
+            <div>
+              <AvgCartWidget data={data} />
+            </div>
+          </div>
           <RecentOrdersWidget data={data} />
           <OrdersChartWidget data={data} />
         </div>

@@ -8,6 +8,14 @@ export type AdminDashboardData = {
     newToday: number;
     newWeek: number;
   };
+  shops: {
+    total: number;
+    totalPremium: number;
+    newToday: number;
+    newTodayPremium: number;
+    newWeek: number;
+    newWeekPremium: number; 
+  };
   alerts: {
     cancelledOrders: number;
     refunds: number;
@@ -28,13 +36,7 @@ export type AdminDashboardData = {
     count: number;
   }[];
   
-  topProducs: {
-    _id: string;
-    name: string;
-    quantity: number;
-    quantityFormatted: string;
-    revenue: number;
-  }[],
+  topProducs: TopProduct[],
   topShops: {
     _id: string;
     revenue: number;
@@ -46,3 +48,48 @@ export type AdminDashboardData = {
     count: number;
   }[];
 };
+
+
+export interface TopProduct {
+  _id: string;
+  quantity: number;
+  revenue: number;
+  name: string;
+  quantityFormatted: string;
+}
+
+
+export interface TopProductDetails {
+  _id: string;
+
+  name: string;
+  shop: {
+    _id: string;
+    name: string;
+  };
+
+  product: {
+    _id: string;
+    name: string;
+    family?: string;
+  };
+
+  pricing: {
+    unit: "gr" | "piece";
+    priceTTC: number;
+  };
+
+  stats: {
+    totalQuantity: number;
+    totalRevenue: number;
+    ordersCount: number;
+  };
+
+  timeline: {
+    date: string;
+    quantity: number;
+    revenue: number;
+  }[];
+}
+
+

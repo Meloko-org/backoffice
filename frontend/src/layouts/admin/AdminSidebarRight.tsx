@@ -3,6 +3,7 @@ import { rightPanelRegistry } from "./registries/rightPanel/rightPanelRegistry";
 import { useAdminInfo } from "./contexts/AdminInfoContext";
 import { useConfirm } from "./contexts/ConfirmContext";
 import { renderRightPanel } from "../../helpers/rightPanelHelper";
+import { AnimatePresence, motion } from "motion/react";
 
 
 export default function AdminSidebarRight() {
@@ -14,6 +15,11 @@ export default function AdminSidebarRight() {
 	const panelConfig = infoContext 
 		? rightPanelRegistry[infoContext.type]
 		: null;
+	const level = infoContext?.level ?? 0;
+	const direction = infoContext?.direction ?? "forward";
+
+	const initialX = direction === "forward" ? "100%" : "-100%";
+	const exitX = direction === "forward" ? "-100%" : "100%";
 
 	if (!panelConfig || !infoContext) return null;
 
@@ -41,12 +47,36 @@ export default function AdminSidebarRight() {
 								{infoContext && infoContext.title}
 							</div>
 							<div>
-								{panelConfig && infoContext &&
-									renderRightPanel(
-										panelConfig as any,
-										infoContext as any
-									)
-								}
+
+								<AnimatePresence mode="wait">
+									<motion.div
+										key={infoContext.type + (("id" in infoContext && infoContext.id) || "")}
+    
+										initial={
+											level > 0
+												? { x: direction === "forward" ? 100 : -100, opacity: 0 }
+												: false // ❌ pas d'animation si level 0
+										}
+
+										animate={{ x: 0, opacity: 1 }}
+
+										exit={
+											level > 0
+												? { x: direction === "forward" ? -100 : 100, opacity: 0 }
+												: undefined
+										}
+
+										transition={{ duration: 0.2 }}
+									>
+										{panelConfig && infoContext &&
+											renderRightPanel(
+												panelConfig as any,
+												infoContext as any
+											)
+										}
+									</motion.div>
+								</AnimatePresence>
+								
 							</div>
 						</div>
 					</div>

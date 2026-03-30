@@ -1,5 +1,9 @@
 const Order = require("../../../models/Order");
 const User = require("../../../models/User");
+const Shop = require("../../../models/Shop");
+const Stock = require("../../../models/Stock");
+const mongoose = require("mongoose");
+const getCollection = require("../../../utils/collectionName");
 
 
 async function getTodayStats() {
@@ -50,6 +54,96 @@ async function getUserStats() {
   return {
     total,
     today,
+  };
+}
+
+
+async function getShopStats() {
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const startOfWeek = new Date();
+  startOfWeek.setDate(startOfWeek.getDate() - 7);
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  const result = await Shop.aggregate([
+    {
+      $match: {
+        isOpen: true, // ✅ uniquement shops actifs
+      },
+    },
+
+    {
+      $facet: {
+        // 🔹 TOTAL
+        total: [
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 },
+              premium: {
+                $sum: {
+                  $cond: [{ $eq: ["$isPremium", true] }, 1, 0],
+                },
+              },
+            },
+          },
+        ],
+
+        // 🔹 TODAY
+        today: [
+          {
+            $match: {
+              createdAt: { $gte: startOfToday },
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 },
+              premium: {
+                $sum: {
+                  $cond: [{ $eq: ["$isPremium", true] }, 1, 0],
+                },
+              },
+            },
+          },
+        ],
+
+        // 🔹 WEEK
+        week: [
+          {
+            $match: {
+              createdAt: { $gte: startOfWeek },
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 },
+              premium: {
+                $sum: {
+                  $cond: [{ $eq: ["$isPremium", true] }, 1, 0],
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+
+  const data = result[0];
+
+  return {
+    total: data.total[0]?.count || 0,
+    totalPremium: data.total[0]?.premium || 0,
+
+    newToday: data.today[0]?.count || 0,
+    newTodayPremium: data.today[0]?.premium || 0,
+
+    newWeek: data.week[0]?.count || 0,
+    newWeekPremium: data.week[0]?.premium || 0,
   };
 }
     
@@ -223,7 +317,8 @@ async function getRevenueByMarket() {
 }
 
 
-async function getTopProducts() {
+async function getTopProducts(limit = 5) {
+
   return Order.aggregate([
     { $match: { isPaid: true } },
 
@@ -328,7 +423,7 @@ async function getTopProducts() {
     },
 
     { $sort: { quantity: -1 } },
-    { $limit: 5 },
+    { $limit: limit },
   ]);
 }
 
@@ -413,9 +508,241 @@ async function getTopMarketsByUsage() {
   ]);
 }
 
+
+async function getTopProductDetails(stockId) {
+  const objectId = new mongoose.Types.ObjectId(stockId);
+
+  // =========================
+  // 1️⃣ STATS
+  // =========================
+  const statsResult = await Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+
+    {
+      $match: {
+        "details.products.product": objectId,
+      },
+    },
+
+    {
+      $group: {
+        _id: null,
+        totalQuantity: { $sum: "$details.products.quantity" },
+        totalRevenue: { $sum: "$details.products.totalPriceTTC" },
+        orders: { $addToSet: "$_id" }, // 🔥 set d’orders uniques
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        totalQuantity: 1,
+        totalRevenue: 1,
+        ordersCount: { $size: "$orders" }, // ✅ FIX
+      },
+    },
+  ]);
+
+  const stats = statsResult[0] || {
+    totalQuantity: 0,
+    totalRevenue: 0,
+    ordersCount: 0,
+  };
+
+  // =========================
+  // 2️⃣ TIMELINE (7 ou 30 jours)
+  // =========================
+  const timeline = await Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+
+    {
+      $match: {
+        "details.products.product": objectId,
+      },
+    },
+
+    {
+      $group: {
+        _id: {
+          date: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$createdAt",
+            },
+          },
+        },
+        quantity: { $sum: "$details.products.quantity" },
+        revenue: { $sum: "$details.products.totalPriceTTC" },
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        date: "$_id.date",
+        quantity: 1,
+        revenue: 1,
+      },
+    },
+
+    { $sort: { date: 1 } },
+  ]);
+
+  // =========================
+  // 3️⃣ STOCK (SAFE via mongoose)
+  // =========================
+  const stock = await mongoose.model("Stock")
+    .findById(objectId)
+    .populate({
+      path: "product",
+      populate: { path: "family" },
+    })
+    .populate("shop")
+    .lean();
+
+  if (!stock) return null;
+
+  // =========================
+  // 4️⃣ NOM PRODUIT
+  // =========================
+  const name =
+    stock.productCustomName ||
+    `${stock.product?.family?.name || ""} ${stock.product?.name || ""}`.trim();
+
+  // =========================
+  // 5️⃣ RETURN FINAL
+  // =========================
+  return {
+    _id: stock._id,
+
+    name,
+
+    product: {
+      _id: stock.product?._id,
+      name: stock.product?.name,
+      family: stock.product?.family?.name,
+    },
+
+    shop: {
+      _id: stock.shop?._id,
+      name: stock.shop?.name,
+    },
+
+    pricing: {
+      unit: stock.product?.weight?.unit,
+      priceTTC: stock.price,
+    },
+
+    stats,
+
+    timeline,
+  };
+}
+
+// async function getTopProductDetails(stockId) {
+//   const result = await Order.aggregate([
+//     { $match: { isPaid: true } },
+
+//     { $unwind: "$details" },
+//     { $unwind: "$details.products" },
+
+//     {
+//       $match: {
+//         "details.products.product": new mongoose.Types.ObjectId(stockId),
+//       },
+//     },
+
+//     {
+//       $group: {
+//         _id: null,
+//         totalQuantity: { $sum: "$details.products.quantity" },
+//         totalRevenue: { $sum: "$details.products.totalPriceTTC" },
+//         ordersCount: { $sum: 1 },
+//       },
+//     },
+
+//     {
+//       $lookup: {
+//         from: getCollection("stocks"),
+//         localField: "_id",
+//         foreignField: "_id",
+//         as: "stock",
+//       },
+//     },
+
+//     { $unwind: "$stock" },
+
+//     {
+//       $lookup: {
+//         from: getCollection("products"),
+//         localField: "stock.product",
+//         foreignField: "_id",
+//         as: "product",
+//       },
+//     },
+
+//     { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+//     {
+//       $lookup: {
+//         from: getCollection("productfamilies"),
+//         localField: "product.family",
+//         foreignField: "_id",
+//         as: "family",
+//       },
+//     },
+
+//     { $unwind: { path: "$family", preserveNullAndEmptyArrays: true } },
+
+//     {
+//       $lookup: {
+//         from: getCollection("shops"),
+//         localField: "stock.shop",
+//         foreignField: "_id",
+//         as: "shop",
+//       },
+//     },
+
+//     { $unwind: "$shop" },
+
+//     {
+//       $project: {
+//         name: {
+//           $ifNull: [
+//             "$stock.productCustomName",
+//             { $concat: ["$family.name", " ", "$product.name"] },
+//           ],
+//         },
+//         shop: {
+//           _id: "$shop._id",
+//           name: "$shop.name",
+//         },
+//         pricing: {
+//           unit: "$product.weight.unit",
+//           priceTTC: "$stock.priceTTC",
+//         },
+//         stats: {
+//           totalQuantity: "$totalQuantity",
+//           totalRevenue: "$totalRevenue",
+//           ordersCount: "$ordersCount",
+//         },
+//       },
+//     },
+//   ]);
+
+//   console.log("AGG RESULT:", JSON.stringify(result, null, 2));
+
+//   return result[0] || null;
+// }
+
 module.exports = {
   getTodayStats,
   getUserStats,
+  getShopStats,
   getAlerts,
   getRecentOrders,
   getRecentUsers,
@@ -426,4 +753,5 @@ module.exports = {
   getTopProducts,
   getTopShops,
   getTopMarketsByUsage,
+  getTopProductDetails,
 }
