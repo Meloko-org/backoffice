@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { 
   getTodayStats, 
   getUserStats, 
@@ -13,7 +14,13 @@ const {
   getTopShops,
   getTopMarketsByUsage,
   getTopProductDetails,
+  getProductGlobalStats,
+  getProductTimeline,
+  getProductTopShops,
+  getProductPricing,
+  getProductInsights,
 } = require("../services/dashboard.services");
+const getStockIdsFromProduct = require("../../../helpers/productHelper");
 
 
 
@@ -32,7 +39,7 @@ const dashboard = async (req, res) => {
     revenue7Days,
     avgCart,
     revenueByMarket,
-    topProducs,
+    topProducts,
     topShops,
     topMarketsByUsage
   ] = await Promise.all([
@@ -62,7 +69,7 @@ const dashboard = async (req, res) => {
     revenue7Days,
     avgCart,
     revenueByMarket,
-    topProducs,
+    topProducts,
     topShops,
     topMarketsByUsage
   };
@@ -96,14 +103,68 @@ const topProductDetails = async (req, res) => {
 
   const data = await getTopProductDetails(id);
 
-  console.log("product detail :", data)
+  // console.log("product detail :", data)
 
   res.json(data);
 };
 
 
+
+const productAnalytics = async (req, res) => {
+  const { productId } = req.params;
+
+  // 1️⃣ récupérer les stocks
+  const stockIds = await getStockIdsFromProduct(productId);
+
+  if (!stockIds.length) {
+    return res.json(null);
+  }
+
+  // 2️⃣ requêtes parallèles
+  const [
+    stats,
+    timeline,
+    topShops,
+    pricing,
+  ] = await Promise.all([
+    getProductGlobalStats(stockIds),
+    getProductTimeline(stockIds),
+    getProductTopShops(stockIds),
+    getProductPricing(productId),
+  ]);
+
+  // 3️⃣ récupérer info produit
+  const product = await mongoose.model("Product")
+    .findById(productId)
+    .populate("family")
+    .lean();
+
+  // 4️⃣ insights
+  const insights = await getProductInsights({ timeline, topShops, pricing });
+
+  const data = {
+    product: {
+      _id: product._id,
+      name: product.name,
+      family: product.family?.name,
+      unit: product.weight.unit,
+      type: product.family.productsTypes,
+    },
+    stats,
+    timeline,
+    topShops,
+    pricing,
+    insights,
+  }
+
+  console.log(data)
+
+  res.json(data);
+}
+
 module.exports = {
   dashboard,
   topProducts,
   topProductDetails,
+  productAnalytics,
 }

@@ -1,5 +1,5 @@
 import { apiFetch } from "../../../../lib/apiFetch";
-import { type AdminDashboardData, type TopProduct, type TopProductDetails } from "../types";
+import { type AdminDashboardData, type ProductAnalytics, type TopProduct, type TopProductDetails } from "../types";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/dashboard`;
@@ -29,6 +29,17 @@ export const getTopProductDetails = async (id: string): Promise<TopProductDetail
 
   return apiFetch<TopProductDetails>(
     `${BASE_URL}/topProducts/${id}`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+
+export const getProductAnalytics = async (productId: string): Promise<ProductAnalytics> => {
+
+  return apiFetch<ProductAnalytics>(
+    `${BASE_URL}/${productId}/analytics`, 
     {
       method: 'GET'
     }

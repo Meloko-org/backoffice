@@ -36,7 +36,7 @@ export type AdminDashboardData = {
     count: number;
   }[];
   
-  topProducs: TopProduct[],
+  topProducts: TopProduct[],
   topShops: {
     _id: string;
     revenue: number;
@@ -49,7 +49,7 @@ export type AdminDashboardData = {
   }[];
 };
 
-
+/* représente un stock */
 export interface TopProduct {
   _id: string;
   quantity: number;
@@ -92,4 +92,46 @@ export interface TopProductDetails {
   }[];
 }
 
+
+export interface ProductAnalytics {
+  product: {
+    _id: string;
+    name: string;
+    family?: string;
+    unit: "gr" | "piece";
+    type: string[];
+  };
+
+  stats: {
+    totalQuantity: number;
+    totalRevenue: number;
+    ordersCount: number;
+    avgOrderValue: number;
+  };
+
+  timeline: {
+    date: string;
+    quantity: number;
+    revenue: number;
+  }[];
+
+  topShops: {
+    _id: string;
+    name: string;
+    quantity: number;
+    revenue: number;
+  }[];
+
+  pricing: {
+    avg: number;
+    min: number;
+    max: number;
+  };
+
+  insights: {
+    bestDay: string;
+    topShop: string;
+    avgPrice: number;
+  };
+}
 

@@ -643,101 +643,177 @@ async function getTopProductDetails(stockId) {
   };
 }
 
-// async function getTopProductDetails(stockId) {
-//   const result = await Order.aggregate([
-//     { $match: { isPaid: true } },
 
-//     { $unwind: "$details" },
-//     { $unwind: "$details.products" },
+async function getProductGlobalStats(stockIds) {
+  const result = await Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
 
-//     {
-//       $match: {
-//         "details.products.product": new mongoose.Types.ObjectId(stockId),
-//       },
-//     },
+    {
+      $match: {
+        "details.products.product": { $in: stockIds },
+      },
+    },
 
-//     {
-//       $group: {
-//         _id: null,
-//         totalQuantity: { $sum: "$details.products.quantity" },
-//         totalRevenue: { $sum: "$details.products.totalPriceTTC" },
-//         ordersCount: { $sum: 1 },
-//       },
-//     },
+    {
+      $group: {
+        _id: null,
+        totalQuantity: { $sum: "$details.products.quantity" },
+        totalRevenue: { $sum: "$details.products.totalPriceTTC" },
+        orders: { $addToSet: "$_id" },
+      },
+    },
 
-//     {
-//       $lookup: {
-//         from: getCollection("stocks"),
-//         localField: "_id",
-//         foreignField: "_id",
-//         as: "stock",
-//       },
-//     },
+    {
+      $project: {
+        _id: 0,
+        totalQuantity: 1,
+        totalRevenue: 1,
+        ordersCount: { $size: "$orders" },
+      },
+    },
+  ]);
 
-//     { $unwind: "$stock" },
+  const stats = result[0] || {
+    totalQuantity: 0,
+    totalRevenue: 0,
+    ordersCount: 0,
+  };
 
-//     {
-//       $lookup: {
-//         from: getCollection("products"),
-//         localField: "stock.product",
-//         foreignField: "_id",
-//         as: "product",
-//       },
-//     },
+  return {
+    ...stats,
+    avgOrderValue: stats.ordersCount
+      ? stats.totalRevenue / stats.ordersCount
+      : 0,
+  };
+}
 
-//     { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
 
-//     {
-//       $lookup: {
-//         from: getCollection("productfamilies"),
-//         localField: "product.family",
-//         foreignField: "_id",
-//         as: "family",
-//       },
-//     },
+async function getProductTimeline(stockIds) {
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
 
-//     { $unwind: { path: "$family", preserveNullAndEmptyArrays: true } },
+    {
+      $match: {
+        "details.products.product": { $in: stockIds },
+      },
+    },
 
-//     {
-//       $lookup: {
-//         from: getCollection("shops"),
-//         localField: "stock.shop",
-//         foreignField: "_id",
-//         as: "shop",
-//       },
-//     },
+    {
+      $group: {
+        _id: {
+          date: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$createdAt",
+            },
+          },
+        },
+        quantity: { $sum: "$details.products.quantity" },
+        revenue: { $sum: "$details.products.totalPriceTTC" },
+      },
+    },
 
-//     { $unwind: "$shop" },
+    {
+      $project: {
+        _id: 0,
+        date: "$_id.date",
+        quantity: 1,
+        revenue: 1,
+      },
+    },
 
-//     {
-//       $project: {
-//         name: {
-//           $ifNull: [
-//             "$stock.productCustomName",
-//             { $concat: ["$family.name", " ", "$product.name"] },
-//           ],
-//         },
-//         shop: {
-//           _id: "$shop._id",
-//           name: "$shop.name",
-//         },
-//         pricing: {
-//           unit: "$product.weight.unit",
-//           priceTTC: "$stock.priceTTC",
-//         },
-//         stats: {
-//           totalQuantity: "$totalQuantity",
-//           totalRevenue: "$totalRevenue",
-//           ordersCount: "$ordersCount",
-//         },
-//       },
-//     },
-//   ]);
+    { $sort: { date: 1 } },
+  ]);
+}
 
-//   console.log("AGG RESULT:", JSON.stringify(result, null, 2));
 
-//   return result[0] || null;
-// }
+async function getProductTopShops(stockIds) {
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+
+    {
+      $match: {
+        "details.products.product": { $in: stockIds },
+      },
+    },
+
+    {
+      $group: {
+        _id: "$details.shop",
+        quantity: { $sum: "$details.products.quantity" },
+        revenue: { $sum: "$details.products.totalPriceTTC" },
+      },
+    },
+
+    {
+      $lookup: {
+        from: "shops",
+        localField: "_id",
+        foreignField: "_id",
+        as: "shop",
+      },
+    },
+
+    { $unwind: "$shop" },
+
+    {
+      $project: {
+        _id: "$shop._id",
+        name: "$shop.name",
+        quantity: 1,
+        revenue: 1,
+      },
+    },
+
+    { $sort: { quantity: -1 } },
+    { $limit: 5 },
+  ]);
+}
+
+async function getProductPricing(productId) {
+  const result = await mongoose.model("Stock").aggregate([
+    {
+      $match: {
+        product: new mongoose.Types.ObjectId(productId),
+      },
+    },
+
+    {
+      $group: {
+        _id: null,
+        avg: { $avg: "$price" },
+        min: { $min: "$price" },
+        max: { $max: "$price" },
+      },
+    },
+  ]);
+
+  return result[0] || { avg: 0, min: 0, max: 0 };
+}
+
+async function getProductInsights({ timeline, topShops, pricing }) {
+  if (!timeline.length) {
+    return {
+      bestDay: null,
+      topShop: null,
+      avgPrice: pricing.avg,
+    };
+  }
+
+  const bestDay = [...timeline].sort((a, b) => b.revenue - a.revenue)[0];
+
+  return {
+    bestDay: bestDay.date,
+    topShop: topShops[0]?.name || null,
+    avgPrice: pricing.avg,
+  };
+}
 
 module.exports = {
   getTodayStats,
@@ -754,4 +830,9 @@ module.exports = {
   getTopShops,
   getTopMarketsByUsage,
   getTopProductDetails,
+  getProductGlobalStats,
+  getProductTimeline,
+  getProductTopShops,
+  getProductPricing,
+  getProductInsights,
 }

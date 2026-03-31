@@ -1,7 +1,8 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
+import TopProductWidgetButton from "../../../../components/admin/widgetButtons/TopProductWidgetButton";
 import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
 import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
-import type { AdminDashboardData } from "../types";
+import type { AdminDashboardData, TopProduct } from "../types";
 
 type Props = {
   data: AdminDashboardData
@@ -12,7 +13,11 @@ export function TopProductsWidget({ data }: Props) {
   const { isRightOpen, openRight } = useAdminLayout();
   const { setInfoContext } = useAdminInfo();
 
-  const products = data.topProducs;
+
+  const products = data.topProducts;
+
+  console.log("data :", data)
+  console.log("products :", products)
 
 
   const handlePanel = () => {
@@ -26,6 +31,24 @@ export function TopProductsWidget({ data }: Props) {
     }
   }
 
+  const handleProductPanel = (p: TopProduct) => {
+    console.log("youpi")
+    setInfoContext({
+      id: p._id, 
+      type: "topProduct",
+      title: p.name,
+      level: 1,
+      meta: {
+        name: p.name
+      },
+      direction: "forward"
+    })
+    if (!isRightOpen) {
+      openRight()
+    }
+    
+  }
+
   return (
     <div className="dashboard-bloc">
       <div className="dashboard-title-link">
@@ -36,12 +59,15 @@ export function TopProductsWidget({ data }: Props) {
         />
       </div>
 
-      <div className="dashboard-content">
+      <div className="dashboard-content space-y-1">
         {products.map((p) => (
-          <div key={p._id} className="flex justify-between">
-            <span>{p.name}</span>
-            <span>{p.quantityFormatted}</span>
-          </div>
+          <TopProductWidgetButton
+            key={p._id}
+            label={p.name}
+            quantity={p.quantityFormatted}
+            onClick={() => handleProductPanel(p)}
+            extraClasses="w-full"
+          />
         ))}
       </div>
     </div>

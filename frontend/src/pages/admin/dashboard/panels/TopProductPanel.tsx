@@ -38,7 +38,8 @@ export default function TopProductPanel({ context }: Props) {
   };
 
  
-console.log("data :", data)
+  console.log("data :", data)
+  
   if (loading) return <Loader />;
   if (!data) return <div className="p-6">Erreur sdfgsdf</div>;
 

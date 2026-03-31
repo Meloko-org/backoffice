@@ -43,7 +43,7 @@ export default function AdminSidebarRight() {
 				{PanelComponent && infoContext && (
 					<div className={`${!isFullPanel ? "h-[78%] overflow-y-auto" : "h-full"} `}>
 						<div className={isConfirmOpen ? "pointer-events-none opacity-50" : "" }>
-							<div className="text-center uppercase tracking-wide pt-2">
+							<div className="text-center uppercase tracking-wide pt-2 font-semibold">
 								{infoContext && infoContext.title}
 							</div>
 							<div>

@@ -16,12 +16,12 @@ export default function TodayStatsWidget({ data }: Props) {
   return (
     <div className="dashboard-bloc">
 
-      <div className="dashboard-title">AUJOURD'HUI</div>
+      <div className="dashboard-today">Aujourd'hui</div>
 
       <div className="dashboard-content">
         {/* Orders */}
         <div className="">
-          <h2>Commandes</h2>
+          <h2 className="text-success">Commandes</h2>
           <div className="dashboard-data-1">
             {orders}
           </div>
@@ -30,7 +30,7 @@ export default function TodayStatsWidget({ data }: Props) {
         {/* Revenue */}
         {revenue !== undefined && (
           <div className="">
-            <h2>Chiffre d’affaires</h2>
+            <h2 className="text-success">Chiffre d’affaires</h2>
             <div className="dashboard-data-1">
               {formatPriceToEuros(revenue)}
             </div>

@@ -7,7 +7,7 @@ type Props = {
   extraClasses?: string;
 }
 
-export default function TopProductButton({ product, onClick, extraClasses }: Props) {
+export default function TopProductPanelButton({ product, onClick, extraClasses }: Props) {
 
   return (
     <button

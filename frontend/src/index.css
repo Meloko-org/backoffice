@@ -746,6 +746,13 @@
     color: var(--first-text);
   }
 
+  .dashboard-today {
+    @apply rounded-t-lg pl-3 py-1 font-semibold;
+    background-color: var(--color-success);
+    color: var(--first-text);
+  }
+
+
   .dashboard-title-link {
     @apply flex flex-row justify-between rounded-t-lg px-3 py-1 font-semibold;
     background-color: var(--table-head-bg);
@@ -764,6 +771,10 @@
 
   .dashboard-content {
     @apply p-6 space-y-4 text-center;
+  }
+
+  .panel-bloc-content {
+    @apply p-3 space-y-3 text-center;
   }
 
   .dashboard-data-1 {

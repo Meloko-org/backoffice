@@ -3,7 +3,7 @@ import { useAdminInfo, type WithType } from "../../../../layouts/admin/contexts/
 import Loader from "../../../../components/admin/Loader";
 import { getTopProductsList } from "../api/dashboard.api";
 import type { TopProduct } from "../types";
-import TopProductButton from "../../../../components/admin/panelButtons/TopProductButton";
+import TopProductPanelButton from "../../../../components/admin/panelButtons/TopProductPanelButton";
 
 type Props = {
   context: WithType<"topProducts">
@@ -32,7 +32,7 @@ export default function TopProductsListPanel({ context }: Props) {
     <div className="p-4 space-y-3">
 
       {products?.map((p) => (
-        <TopProductButton 
+        <TopProductPanelButton 
           key={p._id}
           product={p} 
           onClick={() =>
