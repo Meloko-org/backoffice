@@ -39,6 +39,9 @@ export default function OrderProductDetails({ context }: Props) {
 
       <div className="details-cols-2">
         <div className="">
+          <div className="text-primary font-semibold uppercase text-center text-xs">
+            produit
+          </div>
           <div>
             <p className="details-label">
               Produit
@@ -84,38 +87,41 @@ export default function OrderProductDetails({ context }: Props) {
         </div>
 
         <div className="details-col-right">
+          <div className="text-success font-semibold uppercase text-center text-xs">
+            commande
+          </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               Prix Unitaire HT
             </p>
             <p className="details-info">{formatPriceToEuros(line.unitPriceHT)}</p>
           </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               taux tva
             </p>
-            <p className="details-info">{formatPriceToEuros(line.vatRate)}</p>
+            <p className="details-info">{line.vatRate}</p>
           </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               montant tva
             </p>
             <p className="details-info">{formatPriceToEuros(line.vatAmount)}</p>
           </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               Prix Unitaire ttc
             </p>
             <p className="details-info">{formatPriceToEuros(line.unitPriceTTC)}</p>
           </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               quantité
             </p>
             <p className="details-info">{`${line.quantity} ${line.unit}`}</p>
           </div>
           <div>
-            <p className="details-label">
+            <p className="details-label-success">
               Prix total ttc
             </p>
             <p className="details-info">{formatPriceToEuros(line.totalPriceTTC)}</p>

@@ -20,8 +20,20 @@ export type AdminDashboardData = {
     cancelledOrders: number;
     refunds: number;
   };
-  recentOrders: any[];
-  recentUsers: any[];
+  recentOrders: {
+    id: string;
+    orderNumber: string;
+    total: number;
+    createdAt: string;
+    isPaid: boolean;
+  }[];
+  recentUsers: {
+    id: string;
+    email: string;
+    name: string;
+    createdAt: string;
+    isProducer: boolean;
+  }[];
   timeseries: {
     date: string;
     orders: number;
@@ -30,19 +42,10 @@ export type AdminDashboardData = {
   revenue7Days: number;
   avgCart: number;
 
-  revenueByMarket: {
-    name: string;
-    revenue: number;
-    count: number;
-  }[];
-  
+  topMarkets: TopMarket[];
   topProducts: TopProduct[],
-  topShops: {
-    _id: string;
-    revenue: number;
-    orders: number;
-    name: string;
-  }[],
+  topShops: TopShop[],
+
   topMarketsByUsage: {
     name: string;
     count: number;
@@ -57,6 +60,21 @@ export interface TopProduct {
   name: string;
   quantityFormatted: string;
 }
+
+export interface TopShop {
+  _id: string;
+  revenue: number;
+  orders: number;
+  name: string;
+}
+
+export interface TopMarket {
+  name: string;
+  revenue: number;
+  count: number;
+}
+
+
 
 
 export interface TopProductDetails {
@@ -91,7 +109,6 @@ export interface TopProductDetails {
     revenue: number;
   }[];
 }
-
 
 export interface ProductAnalytics {
   product: {
@@ -135,3 +152,76 @@ export interface ProductAnalytics {
   };
 }
 
+
+
+export interface TopShopDetails {
+  _id: string;
+  name: string;
+  isPremium: boolean;
+
+  stats: {
+    totalRevenue: number;
+    ordersCount: number;
+    avgOrderValue: number;
+  };
+
+  timeline: {
+    date: string;
+    revenue: number;
+    orders: number;
+  }[];
+
+  topProducts: {
+    _id: string;
+    name: string;
+    quantity: number;
+    revenue: number;
+  }[];
+}
+
+export interface ShopAnalytics {
+  shop: {
+    _id: string;
+    name: string;
+    isPremium: boolean;
+  };
+
+  stats: {
+    totalRevenue: number;
+    ordersCount: number;
+    avgOrderValue: number;
+  };
+
+  timeline: {
+    date: string;
+    revenue: number;
+    orders: number;
+  }[];
+
+  topProducts: {
+    name: string;
+    quantity: number;
+    revenue: number;
+  }[];
+
+  revenueByMarket: {
+    name: string;
+    revenue: number;
+  }[];
+
+  insights: {
+    bestDay: string;
+    bestProduct: string;
+    bestMarket: string;
+  };
+}
+
+
+
+export interface TopMarketDetails {
+
+}
+
+export interface MarketAnalytics {
+
+}

@@ -24,8 +24,6 @@ export default function TopProductsListPanel({ context }: Props) {
 
   }, []);
 
-  console.log("products :", products)
-
   if (loading) return <Loader />
 
   return (

@@ -1,4 +1,5 @@
-import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
+import { useNavigate } from "react-router-dom";
+import RecentOrderswidgetButton from "../../../../components/admin/widgetButtons/RecentOrdersWidgetButton";
 import type { AdminDashboardData } from "../types";
 
 type Props = {
@@ -6,47 +7,25 @@ type Props = {
 };
 
 export default function RecentOrdersWidget({ data }: Props) {
+  const navigate = useNavigate();
   const orders = data.recentOrders;
 
   return (
     <div className="dashboard-bloc">
       
-      <div className="dashboard-title">
+      <div className="dashboard-title-warning">
         Dernières commandes
       </div>
 
-      <div className="dashboard-content">
+      <div className="dashboard-content py-2">
         <div className="space-y-3">
           {orders.map((order) => (
-            <div
+            <RecentOrderswidgetButton
               key={order.id}
-              className="flex justify-between items-center text-sm"
-            >
-              <div className="flex flex-col">
-                <span className="font-medium">
-                  #{order.orderNumber}
-                </span>
-                <span className="text-gray-400 text-xs">
-                  {new Date(order.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-
-              <div className="text-right">
-                <div className="font-medium">
-                  {formatPriceToEuros(order.total)}
-                </div>
-
-                <div
-                  className={`text-xs ${
-                    order.isPaid
-                      ? "text-primary"
-                      : "text-danger"
-                  }`}
-                >
-                  {order.isPaid ? "Payée" : "Non payée"}
-                </div>
-              </div>
-            </div>
+              order={order}
+              onClick={() => navigate(`/admin/orders/${order.id}`)}
+              extraClasses="w-full mb-1"
+            />
           ))}
         </div>
 

@@ -11,8 +11,8 @@ export function AvgCartWidget({ data }: Props) {
 
   return (
     <div className="dashboard-bloc">
-      <div className="dashboard-title">Panier moyen</div>
-      <div className="dashboard-content">
+      <div className="dashboard-title-warning">Panier moyen</div>
+      <div className="dashboard-content py-3">
         <div className="dashboard-data-1">
           {formatPriceToEuros(value)}
         </div>

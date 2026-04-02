@@ -41,9 +41,18 @@ export type ModelInfoContext =
   | WithId<"userPage">
   | WithId<"order">
   | WithData<"orderProduct", ProductLine>
+
   | WithType<"topProducts">
   | WithId<"topProduct">
   | WithId<"productAnalytics">
+
+  | WithType<"topShops">
+  | WithId<"topShop">
+  | WithId<"shopAnalytics">
+  
+  | WithType<"topMarkets">
+  | WithId<"topMarket">
+  | WithId<"marketAnalytics">
   | null;
 
 type AdminInfoContextType = {

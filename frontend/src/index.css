@@ -508,6 +508,7 @@
     border: 1px solid var(--color-primary);
   } */
 
+
   
 }
 
@@ -518,6 +519,12 @@
 
 
 @layer components {
+
+  /* RECHARTS ----------------------------------------- */
+  .custom-tooltip {
+    @apply rounded-md border border-primary p-2 shadow-sm;
+    background-color: var(--sidebar-bg);
+  }
 
   /* BLOC DETAILS ------------------------------------- */
   .bloc-details {
@@ -565,6 +572,11 @@
 
   .details-label {
     @apply text-xs uppercase tracking-wide bg-primary/20 px-2;
+    color: var(--p-label-color);
+  }
+
+  .details-label-success {
+    @apply text-xs uppercase tracking-wide bg-success/20 px-2;
     color: var(--p-label-color);
   }
 
@@ -740,15 +752,19 @@
     @apply m-0;
   }
 
-  .dashboard-title {
+  .dashboard-title-primary {
     @apply rounded-t-lg pl-3 py-1 font-semibold;
     background-color: var(--table-head-bg);
     color: var(--first-text);
   }
 
-  .dashboard-today {
-    @apply rounded-t-lg pl-3 py-1 font-semibold;
-    background-color: var(--color-success);
+  .dashboard-title-success {
+    @apply rounded-t-lg pl-3 py-1 font-semibold bg-success/50;
+    color: var(--first-text);
+  }
+
+  .dashboard-title-warning {
+    @apply rounded-t-lg pl-3 py-1 font-semibold bg-warning/30;
     color: var(--first-text);
   }
 

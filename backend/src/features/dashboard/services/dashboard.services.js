@@ -2,10 +2,11 @@ const Order = require("../../../models/Order");
 const User = require("../../../models/User");
 const Shop = require("../../../models/Shop");
 const Stock = require("../../../models/Stock");
+const Producer = require("../../../models/Producer");
 const mongoose = require("mongoose");
 const getCollection = require("../../../utils/collectionName");
 
-
+// widget Today
 async function getTodayStats() {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
@@ -38,7 +39,7 @@ async function getTodayStats() {
   };
 }
 
-
+// widget Users
 async function getUserStats() {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
@@ -57,8 +58,8 @@ async function getUserStats() {
   };
 }
 
-
-async function getShopStats() {
+// widget Shops
+async function getShopsStats() {
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
 
@@ -165,7 +166,7 @@ async function getAlerts() {
   };
 }
     
-
+// widget RecentOrders
 async function getRecentOrders() {
   const orders = await Order.find()
     .sort({ createdAt: -1 })
@@ -181,20 +182,32 @@ async function getRecentOrders() {
   }));
 }
     
-
+// widget RecentUsers
 async function getRecentUsers() {
   const users = await User.find({ isDeleted: false })
     .sort({ createdAt: -1 })
     .limit(5)
     .select("email createdAt firstname lastname");
 
+  const userIds = users.map(u => u._id);
+
+  const producers = await Producer.find({
+    owner: { $in: userIds }
+  }).select("owner");
+
+  const producerSet = new Set(
+    producers.map(p => p.owner.toString())
+  );
+
   return users.map((u) => ({
     id: u._id,
     email: u.email,
     name: `${u.firstname || ""} ${u.lastname || ""}`.trim(),
     createdAt: u.createdAt,
+    isProducer: producerSet.has(u._id.toString()),
   }));
 }
+
 
 
 async function getOrdersTimeseries(days = 7) {
@@ -230,7 +243,7 @@ async function getOrdersTimeseries(days = 7) {
   }));
 }
 
-
+// widget Revenue7Days
 async function getRevenue7Days() {
   const from = new Date();
   from.setHours(0, 0, 0, 0);
@@ -254,7 +267,7 @@ async function getRevenue7Days() {
   return result[0]?.revenue || 0;
 }
 
-
+// widget AvgCart
 async function getAverageCart() {
   const result = await Order.aggregate([
     {
@@ -271,8 +284,8 @@ async function getAverageCart() {
   return Math.round(result[0]?.avgCart || 0);
 }
 
-
-async function getRevenueByMarket() {
+// widget topMarkets
+async function getTopMarkets(limit = 5) {
   return Order.aggregate([
     {
       $match: { isPaid: true },
@@ -311,12 +324,12 @@ async function getRevenueByMarket() {
     },
 
     {
-      $limit: 5,
+      $limit: limit,
     },
   ]);
 }
 
-
+// pour le widget TopProducts et le panel TopProductsListPanel
 async function getTopProducts(limit = 5) {
 
   return Order.aggregate([
@@ -427,8 +440,8 @@ async function getTopProducts(limit = 5) {
   ]);
 }
 
-
-async function getTopShops() {
+// pour le widget TopShops et le panel TopShopsListPanel
+async function getTopShops(limit = 5) {
   return Order.aggregate([
     { $match: { isPaid: true } },
     { $unwind: "$details" },
@@ -461,11 +474,11 @@ async function getTopShops() {
     },
 
     { $sort: { revenue: -1 } },
-    { $limit: 5 },
+    { $limit: limit },
   ]);
 }
 
-
+// widget TopMarkets
 async function getTopMarketsByUsage() {
   return Order.aggregate([
     {
@@ -508,7 +521,7 @@ async function getTopMarketsByUsage() {
   ]);
 }
 
-
+// pour le panel TopProductPanel
 async function getTopProductDetails(stockId) {
   const objectId = new mongoose.Types.ObjectId(stockId);
 
@@ -644,6 +657,7 @@ async function getTopProductDetails(stockId) {
 }
 
 
+/* pour le controller productAnalytics ----------------- */
 async function getProductGlobalStats(stockIds) {
   const result = await Order.aggregate([
     { $match: { isPaid: true } },
@@ -689,7 +703,6 @@ async function getProductGlobalStats(stockIds) {
   };
 }
 
-
 async function getProductTimeline(stockIds) {
   return Order.aggregate([
     { $match: { isPaid: true } },
@@ -729,7 +742,6 @@ async function getProductTimeline(stockIds) {
     { $sort: { date: 1 } },
   ]);
 }
-
 
 async function getProductTopShops(stockIds) {
   return Order.aggregate([
@@ -797,7 +809,7 @@ async function getProductPricing(productId) {
   return result[0] || { avg: 0, min: 0, max: 0 };
 }
 
-async function getProductInsights({ timeline, topShops, pricing }) {
+function buildProductInsights({ timeline, topShops, pricing }) {
   if (!timeline.length) {
     return {
       bestDay: null,
@@ -814,18 +826,249 @@ async function getProductInsights({ timeline, topShops, pricing }) {
     avgPrice: pricing.avg,
   };
 }
+/* ------------------------------------------------------ */
+
+
+
+/* pour le panel TopShopPanel ---------------------------- */
+async function getShopStats(shopId) {
+  const objectId = new mongoose.Types.ObjectId(shopId);
+
+  const result = await Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+
+    {
+      $match: {
+        "details.shop": objectId,
+      },
+    },
+
+    {
+      $group: {
+        _id: null,
+        totalRevenue: { $sum: "$details.shopTotalTTC" },
+        orders: { $addToSet: "$_id" },
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        totalRevenue: 1,
+        ordersCount: { $size: "$orders" },
+      },
+    },
+  ]);
+
+  const stats = result[0] || {
+    totalRevenue: 0,
+    ordersCount: 0,
+  };
+
+  return {
+    ...stats,
+    avgOrderValue: stats.ordersCount
+      ? stats.totalRevenue / stats.ordersCount
+      : 0,
+  };
+}
+
+async function getShopTimeline(shopId) {
+  const objectId = new mongoose.Types.ObjectId(shopId);
+
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+
+    {
+      $match: {
+        "details.shop": objectId,
+      },
+    },
+
+    {
+      $group: {
+        _id: {
+          date: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$createdAt",
+            },
+          },
+        },
+        revenue: { $sum: "$details.shopTotalTTC" },
+        orders: { $addToSet: "$_id" },
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        date: "$_id.date",
+        revenue: 1,
+        orders: { $size: "$orders" },
+      },
+    },
+
+    { $sort: { date: 1 } },
+  ]);
+}
+
+async function getShopTopProducts(shopId) {
+  const objectId = new mongoose.Types.ObjectId(shopId);
+
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+    { $unwind: "$details.products" },
+
+    {
+      $match: {
+        "details.shop": objectId,
+      },
+    },
+
+    {
+      $group: {
+        _id: "$details.products.product",
+        quantity: { $sum: "$details.products.quantity" },
+        revenue: { $sum: "$details.products.totalPriceTTC" },
+      },
+    },
+
+    {
+      $lookup: {
+        from: "stocks",
+        localField: "_id",
+        foreignField: "_id",
+        as: "stock",
+      },
+    },
+
+    { $unwind: "$stock" },
+
+    {
+      $lookup: {
+        from: "products",
+        localField: "stock.product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+
+    { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+    {
+      $lookup: {
+        from: "productfamilies",
+        localField: "product.family",
+        foreignField: "_id",
+        as: "family",
+      },
+    },
+
+    { $unwind: { path: "$family", preserveNullAndEmptyArrays: true } },
+
+    {
+      $project: {
+        name: {
+          $ifNull: [
+            "$stock.productCustomName",
+            { $concat: ["$family.name", " ", "$product.name"] },
+          ],
+        },
+        quantity: 1,
+        revenue: 1,
+      },
+    },
+
+    { $sort: { revenue: -1 } },
+    { $limit: 5 },
+  ]);
+}
+
+async function getTopShopDetails(shopId) {
+  const [stats, timeline, topProducts, shop] = await Promise.all([
+    getShopStats(shopId),
+    getShopTimeline(shopId),
+    getShopTopProducts(shopId),
+    mongoose.model("Shop").findById(shopId).lean(),
+  ]);
+
+  return {
+    _id: shop._id,
+    name: shop.name,
+    isPremium: shop.isPremium,
+
+    stats,
+    timeline,
+    topProducts,
+  };
+}
+/* ------------------------------------------------------ */
+
+
+async function getShopRevenueByMarket(shopId) {
+  const objectId = new mongoose.Types.ObjectId(shopId);
+
+  return Order.aggregate([
+    { $match: { isPaid: true } },
+    { $unwind: "$details" },
+
+    {
+      $match: {
+        "details.shop": objectId,
+        "details.withdrawMode": "market",
+      },
+    },
+
+    {
+      $group: {
+        _id: "$details.withdrawMarket",
+        revenue: { $sum: "$details.shopTotalTTC" },
+      },
+    },
+
+    {
+      $project: {
+        _id: 0,
+        name: "$_id",
+        revenue: 1,
+      },
+    },
+
+    { $sort: { revenue: -1 } },
+  ]);
+}
+
+function buildShopInsights({ timeline, topProducts, revenueByMarket }) {
+  const bestDay = timeline.length
+    ? [...timeline].sort((a, b) => b.revenue - a.revenue)[0].date
+    : null;
+
+  const bestProduct = topProducts[0]?.name || null;
+  const bestMarket = revenueByMarket[0]?.name || null;
+
+  return {
+    bestDay,
+    bestProduct,
+    bestMarket,
+  };
+}
+
 
 module.exports = {
   getTodayStats,
   getUserStats,
-  getShopStats,
+  getShopsStats,
   getAlerts,
   getRecentOrders,
   getRecentUsers,
   getOrdersTimeseries,
   getRevenue7Days,
   getAverageCart,
-  getRevenueByMarket,
+  getTopMarkets,
   getTopProducts,
   getTopShops,
   getTopMarketsByUsage,
@@ -834,5 +1077,11 @@ module.exports = {
   getProductTimeline,
   getProductTopShops,
   getProductPricing,
-  getProductInsights,
+  buildProductInsights,
+  getShopStats,
+  getShopTimeline,
+  getShopTopProducts,
+  getTopShopDetails,
+  getShopRevenueByMarket,
+  buildShopInsights,
 }

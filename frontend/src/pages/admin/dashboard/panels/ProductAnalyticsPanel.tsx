@@ -20,6 +20,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
   const [ data, setData ] = useState<ProductAnalytics>();
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<"revenue" | "quantity">("revenue");
+  const [ color, setColor ] = useState<"#98B66E" | "#0081A7">("#98B66E");
 
   console.log("context analytics:", context)
 
@@ -58,7 +59,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
 
 
       <div className="dashboard-bloc">
-        <div className="dashboard-title">
+        <div className="dashboard-title-primary">
           Performance
         </div>
 
@@ -72,16 +73,22 @@ export default function ProductAnalyticsPanel({ context }: Props) {
               <Line 
                 type="monotone"
                 dataKey={mode}
-                stroke="#98B66E"  
+                stroke={color}  
               />
             </LineChart>
             <div className="flex flex-col justify-center items-center gap-2">
               <button 
-                onClick={() => setMode("revenue")}
+                onClick={() => {
+                  setMode("revenue")
+                  setColor("#98B66E")
+                }}
                 className="btn-primary"
               >€</button>
               <button 
-                onClick={() => setMode("quantity")}
+                onClick={() => {
+                  setMode("quantity")
+                  setColor("#0081A7")
+                }}
                 className="btn-success"
               >Qté</button>
             </div>
@@ -95,7 +102,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
 
 
       <div className="dashboard-bloc">
-        <div className="dashboard-title">Insights</div>
+        <div className="dashboard-title-primary">Insights</div>
 
         <ul className="panel-bloc-content text-sm">
           <li>
@@ -120,7 +127,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
       <div className="grid grid-cols-2 gap-3">
 
         <div className="dashboard-bloc">
-          <div className="dashboard-title">Top producteurs</div>
+          <div className="dashboard-title-primary">Top producteurs</div>
 
           <div className="panel-bloc-content space-y-1">
             {data.topShops.map((shop) => (
@@ -135,7 +142,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
 
 
         <div className="dashboard-bloc">
-          <div className="dashboard-title">Analyse des prix</div>
+          <div className="dashboard-title-primary">Analyse des prix</div>
 
           <div className="panel-bloc-content space-y-1">
             <div className="flex justify-between">

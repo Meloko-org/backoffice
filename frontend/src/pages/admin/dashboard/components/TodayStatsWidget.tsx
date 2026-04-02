@@ -16,7 +16,7 @@ export default function TodayStatsWidget({ data }: Props) {
   return (
     <div className="dashboard-bloc">
 
-      <div className="dashboard-today">Aujourd'hui</div>
+      <div className="dashboard-title-success">Aujourd'hui</div>
 
       <div className="dashboard-content">
         {/* Orders */}

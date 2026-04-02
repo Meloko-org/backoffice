@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const { 
   getTodayStats, 
   getUserStats, 
-  getShopStats,
+  getShopsStats,
   getAlerts, 
   getRecentOrders, 
   getRecentUsers, 
   getOrdersTimeseries,
   getRevenue7Days,
   getAverageCart,
-  getRevenueByMarket, 
+  getTopMarkets, 
   getTopProducts,
   getTopShops,
   getTopMarketsByUsage,
@@ -18,7 +18,13 @@ const {
   getProductTimeline,
   getProductTopShops,
   getProductPricing,
-  getProductInsights,
+  getTopShopDetails,
+  buildProductInsights,
+  getShopStats,
+  getShopTimeline,
+  getShopTopProducts,
+  getShopRevenueByMarket,
+  buildShopInsights,
 } = require("../services/dashboard.services");
 const getStockIdsFromProduct = require("../../../helpers/productHelper");
 
@@ -31,46 +37,50 @@ const dashboard = async (req, res) => {
   const [
     todayStats,
     userStats,
-    shopStats,
+    shopsStats,
     alerts,
     recentOrders,
     recentUsers,
     timeseries,
     revenue7Days,
     avgCart,
-    revenueByMarket,
+    topMarkets,
     topProducts,
     topShops,
     topMarketsByUsage
   ] = await Promise.all([
     getTodayStats(),
     getUserStats(),
-    getShopStats(),
-    getAlerts(),
+    getShopsStats(),
+    getAlerts(), //
     getRecentOrders(),
-    getRecentUsers(),
+    getRecentUsers(), //
     getOrdersTimeseries(100),
     getRevenue7Days(),
     getAverageCart(),
-    getRevenueByMarket(),
+
+    getTopMarkets(),
     getTopProducts(),
     getTopShops(),
+
     getTopMarketsByUsage(),
   ]);
 
   const data = {
     today: todayStats,
     users: userStats,
-    shops: shopStats,
+    shops: shopsStats,
     alerts,
     recentOrders,
     recentUsers,
     timeseries,
     revenue7Days,
     avgCart,
-    revenueByMarket,
+
+    topMarkets,
     topProducts,
     topShops,
+
     topMarketsByUsage
   };
 
@@ -79,10 +89,14 @@ const dashboard = async (req, res) => {
     delete data.today.revenue;
   }
 
+  // console.log("dashboard data :", data)
+
   res.json(data);
 }
 
 
+
+// pour le widget TopProducts et le panel TopProductsListPanel
 const topProducts = async (req, res) => {
 
   let { limit } = req.query;
@@ -97,19 +111,16 @@ const topProducts = async (req, res) => {
   res.json(data)
 }
 
-
+// pour le panel TopProductPanel
 const topProductDetails = async (req, res) => {
   const { id } = req.params;
 
   const data = await getTopProductDetails(id);
 
-  // console.log("product detail :", data)
-
   res.json(data);
 };
 
-
-
+// pour le panel ProductAnalyticsPanel
 const productAnalytics = async (req, res) => {
   const { productId } = req.params;
 
@@ -140,7 +151,7 @@ const productAnalytics = async (req, res) => {
     .lean();
 
   // 4️⃣ insights
-  const insights = await getProductInsights({ timeline, topShops, pricing });
+  const insights = buildProductInsights({ timeline, topShops, pricing });
 
   const data = {
     product: {
@@ -157,14 +168,122 @@ const productAnalytics = async (req, res) => {
     insights,
   }
 
-  console.log(data)
+  res.json(data);
+}
+
+
+
+// pour le widget TopShops et le panel TopShopsListPanel
+const topShops = async (req, res) => {
+
+  let { limit } = req.query;
+
+  // sécurisation du param limit
+  const parsedLimit = Math.min(
+    Math.max(parseInt(limit, 10) || 5, 1), 
+    100 
+  );
+  const data = await getTopShops(parsedLimit);
+
+  res.json(data)
+}
+
+// pour le panel TopShopPanel
+const topShopDetails = async (req, res) => {
+  const { id } = req.params;
+
+  const data = await getTopShopDetails(id);
+
+  res.json(data);
+};
+
+// pour le panel ShopAnalyticsPanel
+const shopAnalytics = async (req, res) => {
+  console.log("shopAnalytics called")
+  const { shopId } = req.params;
+
+  const [
+    stats,
+    timeline,
+    topProducts,
+    revenueByMarket,
+    shop,
+  ] = await Promise.all([
+    getShopStats(shopId),
+    getShopTimeline(shopId),
+    getShopTopProducts(shopId),
+    getShopRevenueByMarket(shopId),
+    mongoose.model("Shop").findById(shopId).lean(),
+  ]);
+
+  const insights = buildShopInsights({
+    timeline,
+    topProducts,
+    revenueByMarket,
+  });
+
+  const data = {
+    shop: {
+      _id: shop._id,
+      name: shop.name,
+      isPremium: shop.isPremium,
+    },
+    stats,
+    timeline,
+    topProducts,
+    revenueByMarket,
+    insights,
+  }
+
+  console.log("shop analytics :", data)
 
   res.json(data);
 }
+
+
+
+
+const topMarkets = async (req, res) => {
+
+  let { limit } = req.query;
+
+  // sécurisation du param limit
+  const parsedLimit = Math.min(
+    Math.max(parseInt(limit, 10) || 5, 1), 
+    100 
+  );
+  const data = await getTopMarkets(parsedLimit);
+
+  console.log(data)
+
+  res.json(data)
+}
+
+
+const topMarketDetails = async (req, res) => {
+  const { id } = req.params;
+
+  const data = await getTopMarketDetails(id);
+
+  res.json(data);
+};
+
+
+const marketAnalytics = async (req, res) => {
+
+}
+
+
 
 module.exports = {
   dashboard,
   topProducts,
   topProductDetails,
   productAnalytics,
+  topShops,
+  topShopDetails,
+  shopAnalytics,
+  topMarkets,
+  topMarketDetails,
+  marketAnalytics,
 }

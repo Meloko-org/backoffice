@@ -1,58 +1,55 @@
 import { useEffect, useState } from "react";
 import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
-import type { TopProductDetails } from "../types";
-import { getTopProductDetails } from "../api/dashboard.api";
-import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
+import { type TopShopDetails } from "../types";
+import { getTopShopDetails } from "../api/dashboard.api";
+import Loader from "../../../../components/admin/Loader";
 import { StatCard } from "../../../../components/admin/cards/StatCard";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
-import Loader from "../../../../components/admin/Loader";
-import { EyeButton } from "../../../../components/admin/buttons/EyeButton";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
 
 type Props = {
-  context: WithId<"topProduct">
+  context: WithId<"topShop">
 }
 
-export default function TopProductPanel({ context }: Props) {
-
-  console.log("context product:", context)
+export default function TopShopPanel({ context }: Props) {
 
   const { id } = context;
   const { setInfoContext } = useAdminInfo();
 
-  const [data, setData] = useState<TopProductDetails | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [ data, setData ] = useState<TopShopDetails | null>(null);
+  const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
-    getTopProductDetails(id)
+    getTopShopDetails(id)
       .then(setData)
-      .finally(() => setLoading(false));
-  }, [id]);
+      .finally(() => setLoading(false))
+  }, [id])
 
   const handleBack = () => {
     setInfoContext({
-      type: "topProducts",
-      title: "Top Produits",
+      type: "topShops",
+      title: "Top Shops",
       level:0,
       direction: "back"
     });
   };
 
- 
-  console.log("data :", data)
-
   if (loading) return <Loader />;
   if (!data) return <div className="p-6">Erreur</div>;
 
+  console.log("top panel data :", data)
+  console.log("context :", context)
+
   const handleAnalytics = () => {
     setInfoContext({
-      type: "productAnalytics",
-      id: data.product._id,
-      title: "Analyse du produit",
+      type: "shopAnalytics",
+      id: data._id,
+      title: "Analyse du shop",
       level: 1,
       meta: {
-        from: "topProduct",
-        stockId: context.id,
-        stockName: context.title
+        from: "topShop",
+        shopId: context.id,
+        shopName: context.title
       },
       direction: "forward"
     })
@@ -63,43 +60,55 @@ export default function TopProductPanel({ context }: Props) {
 
       <div className="p-4 space-y-6 overflow-auto">
 
-        <div className="flex flex-row justify-center items-center w-full bg-primary/20 py-1">
-          <span className="text-(--second-text)">vendu par :</span>
-          <div className="flex flex-row items-center pl-5">
-            <span className="font-semibold text-xl">{data.shop.name}</span>
-            <EyeButton
-              onClick={() => {}}
-              extraClasses="h-8 w-9 py-0 px-1 ml-5"
-            />
-          </div>
-          
-        </div>
-
         {/* STATS */}
         <div className="grid grid-cols-3 gap-4">
           <StatCard
-            label="Quantité vendue"
-            value={data.stats.totalQuantity}
-          />
-          <StatCard
-            label="Chiffre d’affaires"
+            label="Chiffre d'affaire"
             value={formatPriceToEuros(data.stats.totalRevenue)!}
           />
           <StatCard
             label="Commandes"
             value={data.stats.ordersCount}
           />
+          <StatCard
+            label="Panier moyen"
+            value={formatPriceToEuros(data.stats.avgOrderValue)!}
+          />
         </div>
+
+        <div className="dashboard-bloc">
+          <div className="dashboard-title-primary">
+            Meilleures ventes
+          </div>
+
+          <div className="dashboard-content">
+            {data.topProducts.map((p) => (
+              <div key={p._id} className="text-left">
+                <span className="uppercase font-mono font-semibold">{p.name}</span>
+                <div className="grid grid-cols-2 gap-3 rounded-md bg-(--first-plan-bg) py-0 px-2 self-center">
+                  <div>
+                    <span className="text-xs text-(--second-text) mr-5">Quantité :</span>
+                    <span className="font-semibold text-sm">{p.quantity}</span>
+                  </div>
+                  <div>
+                    <span className="text-xs text-(--second-text) mr-5">Chiffre d'affaire :</span>
+                    <span className="font-semibold text-sm">{formatPriceToEuros(p.revenue)}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
 
         {/* CHART */}
         <div className="dashboard-bloc">
           <div className="dashboard-title-primary">
             Activité
           </div>
-
           <div className="dashboard-content">
             <div className="flex flex-row justify-center">
-              <LineChart width={350} height={250} data={data.timeline}>
+              <LineChart width={350} height={200} data={data.timeline}>
                 <XAxis dataKey="date" />
                 <Tooltip />
                 <CartesianGrid stroke="#eee" />
@@ -117,13 +126,9 @@ export default function TopProductPanel({ context }: Props) {
               </LineChart>
             </div>
           </div>
-          
         </div>
 
-        
-
       </div>
-
 
       <div className="flex items-center justify-between p-4">
         <button
@@ -137,9 +142,11 @@ export default function TopProductPanel({ context }: Props) {
           onClick={handleAnalytics}
           className="btn-primary"
         >
-          Product Analytics
+          Shop Analytics
         </button>
       </div>
+
     </div>
-  );
+  )
+
 }

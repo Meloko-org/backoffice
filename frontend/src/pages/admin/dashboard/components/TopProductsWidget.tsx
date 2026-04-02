@@ -13,12 +13,7 @@ export function TopProductsWidget({ data }: Props) {
   const { isRightOpen, openRight } = useAdminLayout();
   const { setInfoContext } = useAdminInfo();
 
-
   const products = data.topProducts;
-
-  console.log("data :", data)
-  console.log("products :", products)
-
 
   const handlePanel = () => {
     setInfoContext({
@@ -32,7 +27,6 @@ export function TopProductsWidget({ data }: Props) {
   }
 
   const handleProductPanel = (p: TopProduct) => {
-    console.log("youpi")
     setInfoContext({
       id: p._id, 
       type: "topProduct",

@@ -10,7 +10,7 @@ export default function UsersWidget({ data }: Props) {
   return (
     <div className="dashboard-bloc">
 
-      <div className="dashboard-title">UTILISATEURS</div>
+      <div className="dashboard-title-primary">Utilisateurs</div>
 
       <div className="dashboard-content">
         <h2>Total</h2>

@@ -4,10 +4,11 @@ import { dashboardWidgets } from "../../../layouts/admin/registries/widgets/dash
 import { AvgCartWidget } from "./components/AvgCartWidget";
 import OrdersChartWidget from "./components/OrdersChartWidget";
 import RecentOrdersWidget from "./components/RecentOrdersWidget";
+import RecentUsersWidget from "./components/RecentUsersWidget";
 import { Revenue7DaysWidget } from "./components/Revenue7DaysWidget";
-import { RevenueByMarketWidget } from "./components/RevenueByMarketWidget";
 import ShopsWidget from "./components/ShopsWidget";
 import TodayStatsWidget from "./components/TodayStatsWidget";
+import { TopMarketsByUsageWidget } from "./components/TopMarketsByUsageWidget";
 import { TopMarketsWidget } from "./components/TopMarketsWidget";
 import { TopProductsWidget } from "./components/TopProductsWidget";
 import { TopShopsWidget } from "./components/TopShopsWidget";
@@ -20,9 +21,6 @@ export default function AdminDashboard() {
 
   const { data, loading } = useAdminDashboard();
 
-  console.log("dash data :", data)
-  console.log("FULL DATA:", data);
-  console.log("TODAY:", data?.today);
 
   if (loading) return <div><Loader /></div>;
   if (!data) return <div>Erreur</div>;
@@ -58,16 +56,16 @@ export default function AdminDashboard() {
               <TopShopsWidget data={data} />
             </div>
             <div>
-              <RevenueByMarketWidget data={data} />
+              <TopMarketsWidget data={data} />
             </div>
             <div>
-              <TopMarketsWidget data={data} />
+              <TopMarketsByUsageWidget data={data} />
             </div>
           </div>
             
         </div>
 
-        <div className="col-span-2 space-y-6">
+        <div className="col-span-2 space-y-3">
           <div className="grid grid-cols-2 gap-6">
             <div>
               <Revenue7DaysWidget data={data} />
@@ -76,8 +74,9 @@ export default function AdminDashboard() {
               <AvgCartWidget data={data} />
             </div>
           </div>
-          <RecentOrdersWidget data={data} />
           <OrdersChartWidget data={data} />
+          <RecentOrdersWidget data={data} />
+          <RecentUsersWidget data={data} />
         </div>
 
 

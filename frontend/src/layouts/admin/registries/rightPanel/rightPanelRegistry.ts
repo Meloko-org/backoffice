@@ -27,9 +27,18 @@ export type RightPanelContextMap = {
   userPage: WithId<"userPage">;
   order: WithId<"order">;
   orderProduct: WithData<"orderProduct", ProductLine>;
+
   topProducts: WithType<"topProducts">;
   topProduct: WithId<"topProduct">;
-  productAnalytics: WithId<"productAnalytics">
+  productAnalytics: WithId<"productAnalytics">;
+
+  topShops: WithType<"topShops">;
+  topShop: WithId<"topShop">;
+  shopAnalytics: WithId<"shopAnalytics">;
+  
+  topMarkets: WithType<"topMarkets">;
+  topMarket: WithId<"topMarket">;
+  marketAnalytics: WithId<"marketAnalytics">
 };
 
 export type RightPanelType = keyof RightPanelContextMap;

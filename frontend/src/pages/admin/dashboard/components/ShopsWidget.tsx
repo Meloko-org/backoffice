@@ -10,7 +10,7 @@ export default function ShopsWidget({ data }: Props) {
   return (
     <div className="dashboard-bloc">
 
-      <div className="dashboard-title">Shops</div>
+      <div className="dashboard-title-primary">Shops</div>
 
       <div className="dashboard-content">
         <h2>Total / <span className="text-warning">Premium</span></h2>

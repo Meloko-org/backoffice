@@ -2,9 +2,9 @@ import { AvgCartWidget } from "../../../../pages/admin/dashboard/components/AvgC
 import OrdersChartWidget from "../../../../pages/admin/dashboard/components/OrdersChartWidget";
 import RecentOrdersWidget from "../../../../pages/admin/dashboard/components/RecentOrdersWidget";
 import { Revenue7DaysWidget } from "../../../../pages/admin/dashboard/components/Revenue7DaysWidget";
-import { RevenueByMarketWidget } from "../../../../pages/admin/dashboard/components/RevenueByMarketWidget";
-import TodayStatsWidget from "../../../../pages/admin/dashboard/components/TodayStatsWidget";
 import { TopMarketsWidget } from "../../../../pages/admin/dashboard/components/TopMarketsWidget";
+import TodayStatsWidget from "../../../../pages/admin/dashboard/components/TodayStatsWidget";
+import { TopMarketsByUsageWidget } from "../../../../pages/admin/dashboard/components/TopMarketsByUsageWidget";
 import { TopProductsWidget } from "../../../../pages/admin/dashboard/components/TopProductsWidget";
 import { TopShopsWidget } from "../../../../pages/admin/dashboard/components/TopShopsWidget";
 import UsersWidget from "../../../../pages/admin/dashboard/components/UsersWidget";
@@ -42,11 +42,11 @@ export const dashboardWidgets: WidgetConfig[] = [
   },
   {
     id: "market-revenue",
-    Component: RevenueByMarketWidget,
+    Component: TopMarketsWidget,
   },
   {
     id: "top-markets",
-    Component: TopMarketsWidget,
+    Component: TopMarketsByUsageWidget,
   },
   {
     id: "top-products",
