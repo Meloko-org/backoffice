@@ -49,10 +49,12 @@ export type ModelInfoContext =
   | WithType<"topShops">
   | WithId<"topShop">
   | WithId<"shopAnalytics">
-  
+
   | WithType<"topMarkets">
   | WithId<"topMarket">
   | WithId<"marketAnalytics">
+
+  | WithType<"topMarketsByUsage">
   | null;
 
 type AdminInfoContextType = {

@@ -46,10 +46,7 @@ export type AdminDashboardData = {
   topProducts: TopProduct[],
   topShops: TopShop[],
 
-  topMarketsByUsage: {
-    name: string;
-    count: number;
-  }[];
+  topMarketsByUsage: TopMarketByUsage[];
 };
 
 /* représente un stock */
@@ -69,12 +66,17 @@ export interface TopShop {
 }
 
 export interface TopMarket {
+  _id: string;
   name: string;
   revenue: number;
   count: number;
 }
 
-
+export interface TopMarketByUsage {
+  _id: string;
+  name: string;
+  count: number;
+}
 
 
 export interface TopProductDetails {
@@ -219,9 +221,63 @@ export interface ShopAnalytics {
 
 
 export interface TopMarketDetails {
+  _id: string;
+  name: string;
 
+  stats: {
+    totalRevenue: number;
+    ordersCount: number;
+    avgOrderValue: number;
+  };
+
+  timeline: {
+    date: string;
+    revenue: number;
+    orders: number;
+  }[];
+
+  topShops: {
+    _id: string;
+    name: string;
+    revenue: number;
+  }[];
 }
 
 export interface MarketAnalytics {
+  market: {
+    _id: string;
+    name: string;
+  };
 
+  stats: {
+    totalRevenue: number;
+    ordersCount: number;
+    avgOrderValue: number;
+  };
+
+  timeline: {
+    date: string;
+    revenue: number;
+    orders: number;
+  }[];
+
+  topShops: {
+    _id: string;
+    name: string;
+    revenue: number;
+    orders: number;
+  }[];
+
+  topProducts: {
+    _id: string;
+    name: string;
+    quantity: number;
+    revenue: number;
+  }[];
+
+  insights: {
+    bestDay: string | null;
+    topShop: string | null;
+    topProduct: string | null;
+  };
 }

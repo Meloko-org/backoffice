@@ -1,8 +1,8 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
+import TopMarketWidgetButton from "../../../../components/admin/widgetButtons/TopMarketWidgetButton";
 import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
 import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
-import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
-import type { AdminDashboardData } from "../types";
+import type { AdminDashboardData, TopMarket } from "../types";
 
 type Props = {
   data: AdminDashboardData;
@@ -30,6 +30,22 @@ export function TopMarketsWidget({
     }
   }
 
+  const handleMarketPanel = (m: TopMarket) => {
+    setInfoContext({
+      id: m._id,
+      type: "topMarket",
+      title: m.name,
+      level: 1,
+      meta: {
+        name: m.name
+      },
+      direction: "forward"
+    })
+    if (!isRightOpen) {
+      openRight()
+    }
+  }
+
   return (
     <div className="dashboard-bloc">
       <div className="dashboard-title-link">
@@ -41,11 +57,13 @@ export function TopMarketsWidget({
       </div>
 
       <div className="dashboard-content">
-        {markets.map((m, index) => (
-          <div key={index} className="flex justify-between">
-            <span>{m.name}</span>
-            <span>{formatPriceToEuros(m.revenue)}</span> 
-          </div>
+        {markets.map((m) => (
+          <TopMarketWidgetButton
+            name={m.name}
+            revenue={m.revenue}
+            onClick={() => handleMarketPanel(m)}
+            extraClasses="w-full"
+          />
         ))} 
       </div>
     </div>

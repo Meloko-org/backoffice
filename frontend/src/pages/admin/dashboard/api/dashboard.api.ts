@@ -1,5 +1,5 @@
 import { apiFetch } from "../../../../lib/apiFetch";
-import { type AdminDashboardData, type MarketAnalytics, type ProductAnalytics, type ShopAnalytics, type TopMarket, type TopMarketDetails, type TopProduct, type TopProductDetails, type TopShop, type TopShopDetails } from "../types";
+import { type AdminDashboardData, type MarketAnalytics, type ProductAnalytics, type ShopAnalytics, type TopMarket, type TopMarketByUsage, type TopMarketDetails, type TopProduct, type TopProductDetails, type TopShop, type TopShopDetails } from "../types";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/dashboard`;
@@ -15,6 +15,8 @@ export const getAdminDashboard = async (): Promise<AdminDashboardData> => {
   )
 }
 
+
+/* product widget and panels -------------------------------- */
 export const getTopProductsList = async (limit = 20): Promise<TopProduct[]> => {
 
   return apiFetch<TopProduct[]>(
@@ -35,7 +37,6 @@ export const getTopProductDetails = async (id: string): Promise<TopProductDetail
   )
 }
 
-
 export const getProductAnalytics = async (productId: string): Promise<ProductAnalytics> => {
 
   return apiFetch<ProductAnalytics>(
@@ -47,6 +48,7 @@ export const getProductAnalytics = async (productId: string): Promise<ProductAna
 }
 
 
+/* shop widget and panels ----------------------------------- */
 export const getTopShopsList = async (limit = 20): Promise<TopShop[]> => {
 
   return apiFetch<TopShop[]>(
@@ -57,7 +59,6 @@ export const getTopShopsList = async (limit = 20): Promise<TopShop[]> => {
   )
 }
 
-
 export const getTopShopDetails = async (id: string): Promise<TopShopDetails> => {
 
   return apiFetch<TopShopDetails>(
@@ -67,7 +68,6 @@ export const getTopShopDetails = async (id: string): Promise<TopShopDetails> => 
     }
   )
 }
-
 
 export const getShopAnalytics = async (shopId: string): Promise<ShopAnalytics> => {
 
@@ -81,6 +81,7 @@ export const getShopAnalytics = async (shopId: string): Promise<ShopAnalytics> =
 }
 
 
+/* market widget and panels -------------------------------- */
 export const getTopMarketsList = async (limit = 20): Promise<TopMarket[]> => {
 
   return apiFetch<TopMarket[]>(
@@ -90,7 +91,6 @@ export const getTopMarketsList = async (limit = 20): Promise<TopMarket[]> => {
     }
   )
 }
-
 
 export const getTopMarketDetails = async (id: string): Promise<TopMarketDetails> => {
 
@@ -102,11 +102,22 @@ export const getTopMarketDetails = async (id: string): Promise<TopMarketDetails>
   )
 }
 
-
 export const getMarketAnalytics = async (marketId: string): Promise<MarketAnalytics> => {
 
   return apiFetch<MarketAnalytics>(
     `${BASE_URL}/topMarkets/${marketId}/analytics`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+
+
+export const getTopMarketsByUsageList = async (limit = 20): Promise<TopMarketByUsage[]> => {
+
+  return apiFetch<TopMarketByUsage[]>(
+    `${BASE_URL}/topMarketsByUsage?limit=${limit}`, 
     {
       method: 'GET'
     }

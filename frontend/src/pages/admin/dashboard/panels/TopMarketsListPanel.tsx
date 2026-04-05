@@ -33,7 +33,20 @@ export default function TopMarketsListPanel({ context }: Props) {
         <TopMarketPanelButton
           key={index}
           market={m}
-          onClick={() => {}}
+          onClick={() => 
+            setInfoContext({
+              id: m._id,
+              type: "topMarket",
+              title: m.name,
+              level: 1,
+              meta: {
+                name: m.name,
+                type: "topMarkets",
+                title: "top markets",
+              },
+              direction: "forward"
+            })
+          }
           extraClasses="w-full"
         />
       ))}

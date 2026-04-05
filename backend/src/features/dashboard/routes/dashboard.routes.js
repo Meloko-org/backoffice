@@ -2,7 +2,19 @@ const express = require("express");
 const router = express.Router();
 const requireAuth = require("../../../middlewares/requireAuth");
 const requireRole = require("../../../middlewares/requireRole");
-const { dashboard, topProducts, topProductDetails, productAnalytics, topMarkets, topMarketDetails, shopAnalytics, topShops, topShopDetails, marketAnalytics } = require("../controllers/dashboard.controller");
+const { 
+  dashboard, 
+  topProducts, 
+  topProductDetails, 
+  productAnalytics, 
+  topMarkets, 
+  topMarketDetails, 
+  shopAnalytics, 
+  topShops, 
+  topShopDetails, 
+  marketAnalytics, 
+  topMarketsByUsage 
+} = require("../controllers/dashboard.controller");
 
 
 /* products */
@@ -66,11 +78,21 @@ router.get(
 )
 
 router.get(
+  "/topMarketsByUsage",
+  requireAuth,
+  requireRole("super-admin", "admin"),
+  topMarketsByUsage
+)
+
+router.get(
   "/topMarkets/:id",
   requireAuth,
   requireRole("super-admin", "admin"),
   topMarketDetails
 )
+
+
+
 
 /* dashboard */
 router.get(

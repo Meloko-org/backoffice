@@ -25,6 +25,9 @@ const {
   getShopTopProducts,
   getShopRevenueByMarket,
   buildShopInsights,
+  getTopMarketDetails,
+  getMarketTopProducts,
+  buildMarketInsights,
 } = require("../services/dashboard.services");
 const getStockIdsFromProduct = require("../../../helpers/productHelper");
 
@@ -89,7 +92,7 @@ const dashboard = async (req, res) => {
     delete data.today.revenue;
   }
 
-  // console.log("dashboard data :", data)
+  console.log("dashboard data :", data)
 
   res.json(data);
 }
@@ -242,7 +245,7 @@ const shopAnalytics = async (req, res) => {
 
 
 
-
+// pourle widget TopMarkets et le panel TopMarketsListPanel
 const topMarkets = async (req, res) => {
 
   let { limit } = req.query;
@@ -254,23 +257,65 @@ const topMarkets = async (req, res) => {
   );
   const data = await getTopMarkets(parsedLimit);
 
-  console.log(data)
-
   res.json(data)
 }
 
-
+// pour le panel TopMarketPanel
 const topMarketDetails = async (req, res) => {
+
+  console.log(req.params)
   const { id } = req.params;
 
   const data = await getTopMarketDetails(id);
+
+  console.log(data)
 
   res.json(data);
 };
 
 
 const marketAnalytics = async (req, res) => {
+  const { marketId } = req.params;
+  console.log("id :", marketId)
+  const objectId = new mongoose.Types.ObjectId(marketId);
 
+  const [details, topProducts] = await Promise.all([
+    getTopMarketDetails(objectId),
+    getMarketTopProducts(objectId),
+  ]);
+
+  const insights = buildMarketInsights({
+    timeline: details.timeline,
+    topShops: details.topShops,
+    topProducts,
+  });
+
+  res.json({
+    market: {
+      _id: details._id,
+      name: details.name,
+    },
+    stats: details.stats,
+    timeline: details.timeline,
+    topShops: details.topShops,
+    topProducts,
+    insights,
+  });
+}
+
+
+const topMarketsByUsage = async (req, res) => {
+  
+  let { limit } = req.query;
+
+  // sécurisation du param limit
+  const parsedLimit = Math.min(
+    Math.max(parseInt(limit, 10) || 5, 1), 
+    100 
+  );
+  const data = await getTopMarketsByUsage(parsedLimit);
+
+  res.json(data)
 }
 
 
@@ -286,4 +331,5 @@ module.exports = {
   topMarkets,
   topMarketDetails,
   marketAnalytics,
+  topMarketsByUsage,
 }

@@ -3,6 +3,7 @@ import marketAnalytics from "../panels/MarketAnalyticsPanel";
 import ProductAnalyticsPanel from "../panels/ProductAnalyticsPanel";
 import ShopAnalyticsPanel from "../panels/ShopAnalyticsPanel";
 import TopMarketPanel from "../panels/TopMarketPanel";
+import TopMarketsByUsageListPanel from "../panels/TopMarketsByUsageListPanel";
 import TopMarketsListPanel from "../panels/TopMarketsListPanel";
 import TopProductPanel from "../panels/TopProductPanel";
 import TopProductsListPanel from "../panels/TopProductsListPanel";
@@ -46,6 +47,10 @@ const rightPanel: RightPanelMap = {
     component: marketAnalytics,
     fullPanel: true,
   },
+  topMarketsByUsage: {
+    component: TopMarketsByUsageListPanel,
+    fullPanel: true,
+  }
 }
 
 export default rightPanel;

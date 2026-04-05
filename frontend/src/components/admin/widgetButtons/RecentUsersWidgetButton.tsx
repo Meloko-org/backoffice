@@ -26,7 +26,7 @@ export default function RecentUserswidgetButton({
       `}
     >
       <div className="flex justify-between items-center w-full">
-        <span className={`${user.isProducer ? "text-success" :""} font-medium`}>
+        <span className={`${user.isProducer ? "text-warning" :""} font-medium`}>
           #{user.name}
         </span>
         <span className="text-gray-400 text-xs">

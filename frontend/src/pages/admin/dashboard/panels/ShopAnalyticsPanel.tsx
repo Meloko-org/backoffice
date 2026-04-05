@@ -17,11 +17,8 @@ export default function ShopAnalyticsPanel({ context }: Props) {
   
   const [ data, setData ] = useState<ShopAnalytics>();
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState<"revenue" | "quantity">("revenue");
-  const [ color, setColor ] = useState<"#98B66E" | "#0081A7">("#98B66E")
 
   useEffect(() => {
-    setLoading(true)
     getShopAnalytics(context.id)
       .then(setData)
       .finally(() => setLoading(false))
@@ -46,7 +43,7 @@ export default function ShopAnalyticsPanel({ context }: Props) {
     <div className="h-full flex flex-col justify-center p-4 gap-4">
 
       <div className="text-xl font-semibold bg-primary/20 text-center">
-        {data.shop.name}
+        {shop.name}
       </div>
 
       {/* KPI */}
@@ -68,7 +65,7 @@ export default function ShopAnalyticsPanel({ context }: Props) {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <Tooltip />
-                  <Line type="monotone" dataKey="revenue" stroke="#6366f1" />
+                  <Line type="monotone" dataKey="revenue" stroke="#98B66E" />
                 </LineChart>
               </ResponsiveContainer>
             </div>

@@ -17,7 +17,7 @@ export default function TopShopPanel({ context }: Props) {
   const { setInfoContext } = useAdminInfo();
 
   const [ data, setData ] = useState<TopShopDetails | null>(null);
-  const [ loading, setLoading ] = useState(false);
+  const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
     getTopShopDetails(id)
@@ -76,6 +76,34 @@ export default function TopShopPanel({ context }: Props) {
           />
         </div>
 
+        {/* CHART */}
+        <div className="dashboard-bloc">
+          <div className="dashboard-title-primary">
+            Activité
+          </div>
+          <div className="dashboard-content">
+            <div className="flex flex-row justify-center">
+              <LineChart width={350} height={200} data={data.timeline}>
+                <XAxis dataKey="date" />
+                <Tooltip />
+                <CartesianGrid stroke="#eee" />
+
+                <Line
+                  type="monotone"
+                  dataKey="quantity"
+                  stroke="#0081A7"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#98B66E"
+                />
+              </LineChart>
+            </div>
+          </div>
+        </div>
+
+        {/* TOP VENTES */}
         <div className="dashboard-bloc">
           <div className="dashboard-title-primary">
             Meilleures ventes
@@ -101,32 +129,7 @@ export default function TopShopPanel({ context }: Props) {
         </div>
 
 
-        {/* CHART */}
-        <div className="dashboard-bloc">
-          <div className="dashboard-title-primary">
-            Activité
-          </div>
-          <div className="dashboard-content">
-            <div className="flex flex-row justify-center">
-              <LineChart width={350} height={200} data={data.timeline}>
-                <XAxis dataKey="date" />
-                <Tooltip />
-                <CartesianGrid stroke="#eee" />
-
-                <Line
-                  type="monotone"
-                  dataKey="quantity"
-                  stroke="#8884d8"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="revenue"
-                  stroke="#82ca9d"
-                />
-              </LineChart>
-            </div>
-          </div>
-        </div>
+        
 
       </div>
 

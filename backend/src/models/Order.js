@@ -68,6 +68,9 @@ const orderDetailSchema = mongoose.Schema({
   withdrawMarket: {
     type: String,
   },
+  withdrawMarketId: {
+    type: String,
+  },
   withdrawDay: {
     type: String,
   },
