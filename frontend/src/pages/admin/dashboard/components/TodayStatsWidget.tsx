@@ -10,8 +10,8 @@ export default function TodayStatsWidget({ data }: Props) {
   const orders = data.today.ordersCount;
   const revenue = data.today.revenue;
 
-  console.log("orders :", orders)
-  console.log("revenue :", revenue)
+  // console.log("orders :", orders)
+  // console.log("revenue :", revenue)
 
   return (
     <div className="dashboard-bloc">

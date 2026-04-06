@@ -24,7 +24,7 @@ export default function TopMarketsByUsageListPanel({ context }: Props) {
 
   if (loading) return <Loader />
 
-  console.log("markets :", markets)
+  console.log("marketsbyusagelist context :", context)
 
   return (
     <div className="p-4 space-y-3">
@@ -41,8 +41,8 @@ export default function TopMarketsByUsageListPanel({ context }: Props) {
               level: 1,
               meta: {
                 name: m.name,
-                type: "topMarketsByUsage",
-                title: "top markets by usage",
+                originalPanelType: "topMarketsByUsage",
+                originalPanelTitle: "top markets by usage",
               },
               direction: "forward"
             })

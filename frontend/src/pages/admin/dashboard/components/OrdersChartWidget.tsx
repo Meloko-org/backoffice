@@ -17,7 +17,7 @@ export default function OrdersChartWidget({ data }: Props) {
 
   const line = data.timeseries;
 
-  console.log("line :", line)
+  // console.log("line :", line)
 
   return (
     <div className="dashboard-bloc">

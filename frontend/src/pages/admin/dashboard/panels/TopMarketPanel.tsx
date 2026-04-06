@@ -29,8 +29,8 @@ export default function TopMarketPanel({ context }: Props) {
 
   const handleBack = () => {
     setInfoContext({
-      type: context.meta.type,
-      title: context.meta.title,
+      type: context.meta.originalPanelType,
+      title: context.meta.originalPanelTitle,
       level: 0,
       direction: "back"
     });
@@ -50,7 +50,9 @@ export default function TopMarketPanel({ context }: Props) {
       meta: {
         from: "topMarket",
         marketId: context.id,
-        marketName: context.title
+        marketName: context.title,
+        originalPanelType: context.meta.originalPanelType,
+        originalPanelTitle: context.meta.originalPanelTitle,
       },
       direction: "forward"
     })

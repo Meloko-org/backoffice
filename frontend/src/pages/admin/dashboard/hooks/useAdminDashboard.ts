@@ -12,7 +12,7 @@ export function useAdminDashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log("admin data :", data)
+  // console.log("admin data :", data)
 
   return { data, loading };
 }

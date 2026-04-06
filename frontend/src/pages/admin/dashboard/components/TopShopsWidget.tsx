@@ -56,6 +56,7 @@ export function TopShopsWidget({ data }: Props) {
       <div className="dashboard-content">
         {shops.map((s) => (
           <TopShopWidgetButton
+            key={s._id}
             label={s.name}
             orders={s.orders}
             revenue={s.revenue}

@@ -31,7 +31,11 @@ export default function marketAnalytics({ context }: Props) {
       type: "topMarket",
       title: context.meta.marketName,
       level: 1,
-      direction: "back"
+      direction: "back",
+      meta: {
+        originalPanelType: context.meta.originalPanelType,
+        originalPanelTitle: context.meta.originalPanelTitle,
+      }
     });
   }
 

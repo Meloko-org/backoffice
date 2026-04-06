@@ -43,7 +43,7 @@ export function TopMarketsByUsageWidget({ data }: Props) {
     }
   }
 
-  console.log("markets :", markets)
+  // console.log("markets :", markets)
 
   return (
     <div className="dashboard-bloc">
