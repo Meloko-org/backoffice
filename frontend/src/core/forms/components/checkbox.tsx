@@ -31,7 +31,7 @@ export default function Checkbox({
       </label>
 
       {error && (
-        <p className="text-xs text-red-600">
+        <p className="text-xs text-danger">
           {error}
         </p>
       )}

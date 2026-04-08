@@ -1,6 +1,7 @@
+import type { OwnerFromProducer } from "../../producers/types/producer";
 import type { User } from "../types/user";
 
-export function renderUserStatus(user: User) {
+export function renderUserStatus(user: User | OwnerFromProducer) {
 
   let stickerClass = "sticker-success";
 
@@ -8,8 +9,6 @@ export function renderUserStatus(user: User) {
   else if (user.isSuspended) stickerClass = "sticker-warning";
 
   return (
-    <div className="table-status">
-      <div className={`sticker ${stickerClass}`}></div>
-    </div>
+    <div className={`sticker ${stickerClass}`}></div>
   );
 }

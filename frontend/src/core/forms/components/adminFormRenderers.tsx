@@ -26,11 +26,25 @@ export const adminFormRenderers = {
 
     if (field.type !== "input") return;
 
+    // ✅ FORMAT (affichage)
+    const displayValue = field.format
+      ? field.format(value)
+      : value;
+
+    // ✅ PARSE (stockage)
+    const handleChange = (v: any) => {
+      const rawValue = field.parse
+        ? field.parse(v)
+        : v;
+
+      setValue(name, rawValue);
+    };
+
     return field.floating ? (
       <FloatingInput
         key={String(name)}
         label={field.label}
-        value={value}
+        value={displayValue}
         type={field.inputType ?? "text"}
         min={field.min}
         max={field.max}
@@ -38,13 +52,13 @@ export const adminFormRenderers = {
         required={field.required}
         disabled={disabled}
         error={error}
-        onChange={(v) => setValue(name, v)}
+        onChange={handleChange}
       />
     ) : (
       <Input
         key={String(name)}
         label={field.label}
-        value={value}
+        value={displayValue}
         type={field.inputType ?? "text"}
         min={field.min}
         max={field.max}
@@ -52,7 +66,7 @@ export const adminFormRenderers = {
         required={field.required}
         disabled={disabled}
         error={error}
-        onChange={(v) => setValue(name, v)}
+        onChange={handleChange}
         onBlur={() => setFieldTouched(name)}
       />
     )

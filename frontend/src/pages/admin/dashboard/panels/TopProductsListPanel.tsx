@@ -11,8 +11,6 @@ type Props = {
 
 export default function TopProductsListPanel({ context }: Props) {
 
-  console.log("context list:", context)
-
   const [products, setProducts] = useState<TopProduct[]>([]);
   const [loading, setLoading] = useState(true);
 

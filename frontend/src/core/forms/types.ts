@@ -71,6 +71,8 @@ export type BaseFieldSchema<TValues> = {
    */
   dependsOn?: (keyof TValues)[];
 
+  format?: (value: any) => any;
+  parse?: (value: any) => any;
 
 };
 
@@ -160,6 +162,7 @@ export type FormFieldSchema<TValues> =
   | RadioGroupFieldSchema<TValues>
   | FileFieldSchema<TValues>
   | DateFieldSchema<TValues>;
+  
 
 
 

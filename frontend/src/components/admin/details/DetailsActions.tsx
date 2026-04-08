@@ -33,7 +33,9 @@ export default function DetailsActions({
                   ? "btn-warning"
                   : action.variant === "primary"
                     ? "btn-primary"
-                    : "btn-success"
+                    : action.variant === "greener" 
+                      ? "btn-greener"
+                      : "btn-success"
             }`}
           />
         )

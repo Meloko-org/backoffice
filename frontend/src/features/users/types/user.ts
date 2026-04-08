@@ -126,19 +126,19 @@ export interface UserFormValues {
 
 /* types communs utilisés dans d'autres types */
 export interface Address {
-    _id: string;
-    name: string;
-    isDefault: boolean;
-    address: {
-      address1: string;
-      address2: string;
-      postalCode: string;
-      city: string;
-      country: string;
-    },
-    createdAt: string;
-    updatedAt: string;
-  };
+  _id: string;
+  name: string;
+  isDefault: boolean;
+  address: {
+    address1: string;
+    address2: string;
+    postalCode: string;
+    city: string;
+    country: string;
+  },
+  createdAt: string;
+  updatedAt: string;
+};
 
 export interface Bookmark {
   _id: string;

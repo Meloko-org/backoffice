@@ -9,7 +9,7 @@ export type ActionPlacement =
 export type ActionDefinition<T, Ctx> = {
   label: string | ((item: T) => string)
   icon?: LucideIcon
-  variant?: "success" | "primary" | "warning" | "danger"
+  variant?: "success" | "primary" | "warning" | "danger" | "greener"
 
   placement?: ActionPlacement[]
 
@@ -22,7 +22,7 @@ export type ActionDefinition<T, Ctx> = {
 export type ResolvedAction = {
   label: string
   icon?: LucideIcon
-  variant?: "success" | "primary" | "warning" | "danger"
+  variant?: "success" | "primary" | "warning" | "danger" | "greener"
   disabled?: boolean
   run: () => void
 }

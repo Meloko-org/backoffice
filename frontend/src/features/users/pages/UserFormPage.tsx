@@ -56,18 +56,16 @@ export default function UserFormPage({ userId }: UserFormPageProps) {
   }, [userId])
 
 
-    const handleSubmit = async (
-      values: UserFormValues
-    ): Promise<ApiResponse<any>> => {
+  const handleSubmit = async (
+    values: UserFormValues
+  ): Promise<ApiResponse<any>> => {
 
-      // const token = await getToken();
-      // console.log("le token :", token)
 
-      const payload =
-        mapFormValuesToPayload(values);
-  
-      return updateUser(userId!, payload);
-    };
+    const payload =
+      mapFormValuesToPayload(values);
+
+    return updateUser(userId!, payload);
+  };
 
 
   if (loading) {

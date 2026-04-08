@@ -20,9 +20,9 @@ export const getUsers = async (params: {
 }): Promise<UserListResponse> => {
 
   const queryObject: Record<string, string> = {
-        page: String(params.page ?? 1),
-        limit: String(params.limit ?? 10),
-      };
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 10),
+  };
     
   if (params.search) queryObject.search = params.search;
   if (params.sortKey) queryObject.sortKey = params.sortKey;
@@ -134,9 +134,6 @@ export const updateUser = async (
     `${BASE_URL}/${id}`, 
     {
       method: 'PUT',
-      // headers: token
-      // ? { Authorization: `Bearer ${token}` }
-      // : undefined,
       body: JSON.stringify(payload)
     }
   )

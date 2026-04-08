@@ -24,8 +24,6 @@ export default function TopMarketsListPanel({ context }: Props) {
 
   if (loading) return <Loader />
 
-  console.log("marketsList panel context:", context)
-
   return (
     <div className="p-4 space-y-3">
 

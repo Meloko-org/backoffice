@@ -15,8 +15,6 @@ export function TopMarketsWidget({
   const { setInfoContext } = useAdminInfo();
   const { isRightOpen, openRight } = useAdminLayout();
 
-  // console.log("revenue by market :", data)
-
   const markets = data.topMarkets
 
   const handlePanel = () => {

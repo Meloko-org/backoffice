@@ -1,7 +1,5 @@
 export function CustomTooltip({ payload, label, active }: any) {
 
-  // console.log("tooltip payload :", payload)
-  // console.log("tooltip label :", label)
   if (active && payload && payload.length) {
     return (
       <div

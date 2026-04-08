@@ -19,8 +19,6 @@ export default function TopMarketPanel({ context }: Props) {
   const [ data, setData ] = useState<TopMarketDetails | null>(null);
   const [ loading, setLoading ] = useState(true);
 
-  console.log("market context :", context)
-
   useEffect(() => {
     getTopMarketDetails(id)
       .then(setData)
@@ -35,8 +33,6 @@ export default function TopMarketPanel({ context }: Props) {
       direction: "back"
     });
   }
-
-  console.log("les data", data)
 
   if (loading) return <Loader />;
   if (!data) return <div className="p-6">Erreur</div>;

@@ -24,8 +24,6 @@ export default function TopMarketsByUsageListPanel({ context }: Props) {
 
   if (loading) return <Loader />
 
-  console.log("marketsbyusagelist context :", context)
-
   return (
     <div className="p-4 space-y-3">
 

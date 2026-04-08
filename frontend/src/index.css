@@ -31,6 +31,8 @@
   --color-danger: #942911;      /* rgb(148, 41, 17) */
   --color-warning: #D16014;     /* rgb(209, 96, 20) */
   --color-success: #0081A7;     /* rgb(0, 129, 167) */
+  --color-night: #0A090B;
+  --color-greener: #006045;
 
   --container-8xl: 88rem;
   --container-9xl: 96rem;
@@ -580,6 +582,11 @@
     color: var(--p-label-color);
   }
 
+  .details-label-greener {
+    @apply text-xs uppercase tracking-wide bg-greener/20 px-2;
+    color: var(--p-label-color);
+  }
+
   .details-label-danger {
     @apply text-xs uppercase tracking-wide bg-danger/20 px-2;
     color: var(--p-label-color);
@@ -614,6 +621,13 @@
     color: var(--p-info-color);
   }
 
+  .details-badge-success {
+    @apply bg-primary rounded-lg px-2 font-bold text-xs lowercase font-mono text-white;
+  }
+
+  .details-badge-danger {
+    @apply bg-danger rounded-lg px-2 font-bold text-xs lowercase font-mono text-white;
+  }
 
   
 
@@ -724,6 +738,12 @@
     @apply rounded-full text-sm font-medium;
     background-color: var(--badge-warning-bg);
     color: var(--badge-warning-text);
+  }
+
+  .badge-success {
+    @apply rounded-full text-sm font-medium;
+    background-color: var(--badge-danger-bg);
+    color: var(--badge-danger-text);
   }
 
   .alert {
@@ -1215,6 +1235,15 @@
            hover:opacity-90
            disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: var(--color-success);
+    color: var(--btn-primary-text);
+  }
+
+  .btn-greener {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium
+           transition
+           hover:opacity-90
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--color-greener);
     color: var(--btn-primary-text);
   }
 

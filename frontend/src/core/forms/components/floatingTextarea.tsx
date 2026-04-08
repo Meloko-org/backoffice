@@ -31,7 +31,7 @@ export default function FloatingTextarea({
         className={`
           peer w-full pr-3 pt-5 pb-2 text-sm pl-4 resize-none
           focus:outline-none focus:ring-0
-          ${error && "border-red-500 focus:ring-red-500"}
+          ${error && "border-danger focus:ring-danger"}
           ${disabled ? "cursor-not-allowed" : ""}
         `}
       />
@@ -49,12 +49,12 @@ export default function FloatingTextarea({
       >
         {label}
         {required && (
-          <span className="text-red-500 ml-1">*</span>
+          <span className="text-danger ml-1">*</span>
         )}
       </label>
 
       {error && (
-        <p className="mt-1 text-xs text-red-600">
+        <p className="mt-1 text-xs text-danger">
           {error}
         </p>
       )}

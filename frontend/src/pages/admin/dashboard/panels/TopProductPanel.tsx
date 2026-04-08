@@ -14,8 +14,6 @@ type Props = {
 
 export default function TopProductPanel({ context }: Props) {
 
-  console.log("context product:", context)
-
   const { id } = context;
   const { setInfoContext } = useAdminInfo();
 
@@ -36,9 +34,6 @@ export default function TopProductPanel({ context }: Props) {
       direction: "back"
     });
   };
-
- 
-  console.log("data :", data)
 
   if (loading) return <Loader />;
   if (!data) return <div className="p-6">Erreur</div>;

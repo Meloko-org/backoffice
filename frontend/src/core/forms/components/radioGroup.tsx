@@ -28,7 +28,7 @@ export default function RadioGroup({
     <div className="space-y-2">
       <div className="text-sm font-medium text-neutral-500">
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="text-danger ml-1">*</span>}
       </div>
 
       <div className="flex gap-4">
@@ -54,7 +54,7 @@ export default function RadioGroup({
       </div>
 
       {error && (
-        <p className="text-xs text-red-600">
+        <p className="text-xs text-danger">
           {error}
         </p>
       )}

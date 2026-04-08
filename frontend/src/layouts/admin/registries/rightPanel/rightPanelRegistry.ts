@@ -25,6 +25,7 @@ export type RightPanelContextMap = {
   market: WithId<"market">;
   user: WithId<"user">;
   userPage: WithId<"userPage">;
+  producer: WithId<"producer">;
   order: WithId<"order">;
   orderProduct: WithData<"orderProduct", ProductLine>;
 

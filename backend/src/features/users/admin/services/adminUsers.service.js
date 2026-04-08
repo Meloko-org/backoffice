@@ -127,54 +127,6 @@ async function getUserById(userId) {
     throw new NotFoundError("User introuvable.");
   }
 
-  /*
-  // Stats globales
-  const statsAggregation = await Order.aggregate([
-    { $match: { user: new mongoose.Types.ObjectId(userId) } },
-    {
-      $group: {
-        _id: null,
-        totalOrders: { $sum: 1 },
-        totalSpent: { $sum: "$totalTTC" },
-        refundedAmount: {
-          $sum: {
-            $cond: [{ $eq: ["$isPaid", true] }, 0, 0], // placeholder si logique remboursement globale plus tard
-          },
-        },
-      },
-    },
-  ]);
-
-  const stats = statsAggregation[0] || {
-    totalOrders: 0,
-    totalSpent: 0,
-    refundedAmount: 0,
-  };
-
-  // ❌ commandes annulées
-  const cancelledOrders = await Order.countDocuments({
-    user: userId,
-    "details.status": "cancelled",
-  });
-
-  // 🕒 dernières commandes (5)
-  const recentOrders = await Order.find({ user: userId })
-    .sort({ createdAt: -1 })
-    .limit(5)
-    .select("orderNumber totalTTC status isPaid createdAt")
-    .lean();
-
-  return {
-    user,
-    stats: {
-      totalOrders: stats.totalOrders || 0,
-      totalSpent: stats.totalSpent || 0,
-      refundedAmount: stats.refundedAmount || 0,
-      cancelledOrders,
-    },
-    recentOrders,
-  };*/
-
   return user;
 }
 

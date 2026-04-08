@@ -22,8 +22,6 @@ export default function ProductAnalyticsPanel({ context }: Props) {
   const [mode, setMode] = useState<"revenue" | "quantity">("revenue");
   const [ color, setColor ] = useState<"#98B66E" | "#0081A7">("#98B66E");
 
-  console.log("context analytics:", context)
-
   useEffect(() => {
     setLoading(true)
     getProductAnalytics(context.id).then(setData).finally(() => setLoading(false))

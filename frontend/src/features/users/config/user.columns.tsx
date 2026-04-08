@@ -41,7 +41,11 @@ export function createUserColumns(
       key: "status",
       label: "Status",
       sortable: true,
-      render: (user) => renderUserStatus(user)
+      render: (user) => (
+        <div className="table-status">
+          {renderUserStatus(user)}
+        </div>
+      )
     },
     {
       key: "actions",

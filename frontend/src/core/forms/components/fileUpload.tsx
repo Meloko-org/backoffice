@@ -37,7 +37,7 @@ export default function FileUpload({
     <div className="space-y-2">
       <label className="block text-sm pl-3 text-neutral-500">
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="text-danger ml-1">*</span>}
       </label>
 
       {/* Preview */}
@@ -79,7 +79,7 @@ export default function FileUpload({
       </button>
 
       {error && (
-        <p className="text-xs text-red-600">
+        <p className="text-xs text-danger">
           {error}
         </p>
       )}

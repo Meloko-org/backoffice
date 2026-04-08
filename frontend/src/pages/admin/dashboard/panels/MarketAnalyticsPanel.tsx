@@ -12,7 +12,6 @@ type Props = {
 }
 
 export default function marketAnalytics({ context }: Props) {
-  console.log("le context :", context)
 
   const { setInfoContext } = useAdminInfo();
     

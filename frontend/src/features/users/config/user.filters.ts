@@ -20,7 +20,7 @@ export function createUserFilters(
     {
       type: "select",
       key: "status",
-      label: "Statut",
+      label: "Status",
       options: [
         { label: "Actif", value: "active" },
         { label: "Suspendu", value: "suspended" },
