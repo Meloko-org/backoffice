@@ -10,6 +10,7 @@ import {
 	Citrus,
 	Panda,
 	TableProperties,
+  BadgeEuro,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Permission } from "../../../config/adminPermissions";
@@ -94,7 +95,7 @@ export const adminMenu: AdminMenuItem[] = [
 		type: "group",
     key: "markets",
     label: "Markets",
-    icon: Store,
+    icon: ShoppingBasket,
     children: [
       { 
         type: "sublink", 
@@ -132,9 +133,17 @@ export const adminMenu: AdminMenuItem[] = [
   },
   {
 		type: "link",
+    key: "shops",
+    label: "Shops",
+    icon: Store,
+    path: "/admin/shops",
+    permission: "shops:manage",
+  },
+  {
+		type: "link",
     key: "orders",
     label: "Commandes",
-    icon: ShoppingBasket,
+    icon: BadgeEuro,
     path: "/admin/orders",
     permission: "orders:manage",
   },

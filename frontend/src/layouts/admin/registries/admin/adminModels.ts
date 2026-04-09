@@ -9,6 +9,7 @@ import type { ordersAdmin } from "../../../../features/orders/config/order.admin
 import type { producersAdmin } from "../../../../features/producers/config/producer.admin";
 import type { productsAdmin } from "../../../../features/products/config/product.admin";
 import type { usersAdmin } from "../../../../features/users/config/user.admin";
+import type { shopsAdmin } from "../../../../features/shops/config/shop.admin";
 
 
 export type AdminModels = {
@@ -19,5 +20,6 @@ export type AdminModels = {
   markets: typeof marketsAdmin,
   orders: typeof ordersAdmin,
   producers: typeof producersAdmin,
+  shops: typeof shopsAdmin,
 };
 

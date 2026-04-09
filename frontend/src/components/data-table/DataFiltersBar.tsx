@@ -67,7 +67,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
   return (
     <div className="data-filters-bar">
 
-      <p className="filter-bar-title">FILTRES</p>
+      <p className="filter-bar-title text-primary/50 font-semibold">FILTRES</p>
 
       <div className="data-filter-container">
       {showReset && hasActiveFilters && (
@@ -150,7 +150,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
                   }
                   className="filter-bar-elt"
                 />
-                <span>→</span>
+                {/* <span>→</span> */}
                 <input
                   type="date"
                   value={filters[filter.toKey] || ""}

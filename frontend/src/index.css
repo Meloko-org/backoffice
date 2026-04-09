@@ -622,7 +622,7 @@
   }
 
   .details-badge-success {
-    @apply bg-primary rounded-lg px-2 font-bold text-xs lowercase font-mono text-white;
+    @apply bg-primary rounded-lg px-2 font-bold text-xs lowercase font-mono text-white flex items-center justify-center;
   }
 
   .details-badge-danger {
@@ -1123,7 +1123,7 @@
   }
 
   .filter-bar-elt {
-    @apply p-1;
+    @apply p-1 w-28;
   }
 
   .filter-bar-title {

@@ -35,3 +35,17 @@ export interface PaginationMeta {
   totalItems: number;
   totalPages: number;
 }
+
+
+export interface Address {
+  _id: string;
+  address1: string;
+  address2: string;
+  postalCode: string;
+  city: string;
+  country: string;
+  latitude?: number;
+  longitude?: number;
+  createdAt: string;
+  updatedAt: string;
+}

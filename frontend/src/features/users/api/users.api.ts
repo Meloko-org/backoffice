@@ -126,7 +126,6 @@ export const getUserById = async (userId: string): Promise<User> => {
 export const updateUser = async (
   id: string,
   payload: UserPayload,
-  // token?: string,
 ): Promise<ApiResponse<User>> => {
 
 

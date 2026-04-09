@@ -29,6 +29,7 @@ import CategoriesListPage from "./features/categories/pages/CategoriesListPage";
 import FamiliesListPage from "./features/families/pages/FamiliesListPage";
 import ProducersListPage from "./features/producers/pages/ProducersListPage";
 import EditProducerPage from "./features/producers/pages/EditProducerPage";
+import ShopsListPage from "./features/shops/pages/ShopsListPage";
 
 
 
@@ -195,6 +196,14 @@ export const router = createBrowserRouter([
           <AdminRouteGuard permission="producers:manage">
             <EditProducerPage />
           </AdminRouteGuard>)
+      },
+      { 
+        path: "shops", 
+        element: (
+          <AdminRouteGuard permission="shops:manage">
+            <ShopsListPage />
+          </AdminRouteGuard>
+        )
       },
       { 
         path: "orders", 

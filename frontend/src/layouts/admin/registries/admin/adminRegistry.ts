@@ -9,6 +9,7 @@ import { ordersAdmin } from "../../../../features/orders/config/order.admin";
 import { producersAdmin } from "../../../../features/producers/config/producer.admin";
 import { productsAdmin } from "../../../../features/products/config/product.admin";
 import { usersAdmin } from "../../../../features/users/config/user.admin";
+import { shopsAdmin } from "../../../../features/shops/config/shop.admin";
 import type { AdminModels } from "./adminModels"
 
 
@@ -37,5 +38,6 @@ export const adminRegistry = new AdminRegistry({
   markets: marketsAdmin,
   orders: ordersAdmin,
   producers: producersAdmin,
+  shops: shopsAdmin,
 });
 

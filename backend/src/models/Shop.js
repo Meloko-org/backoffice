@@ -62,6 +62,10 @@ const shopSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    isValidated: {
+      type: Boolean,
+      default: false,
+    },
     address: addressSchema,
     logo: {
       type: String,

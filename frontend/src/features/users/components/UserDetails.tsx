@@ -51,22 +51,48 @@ export default function UserDetails({
   return (
     <div className="bloc-details">
 
-      <div>
-        <p className="details-label">
-          Nom / Prénom
-        </p>
-        <p className="details-info m-0">{user.firstname}</p>
-        <p className="details-info">{user.lastname}</p>
-      </div>
+      <div className="flex flex-row gap-x-3">
+        <div className="w-[65%]">
+          <div>
+            <p className="details-label">
+              Nom / Prénom
+            </p>
+            <p className="details-info m-0">{user.firstname}</p>
+            <p className="details-info">{user.lastname}</p>
+            <p className="ml-4 details-info slug">
+              {user.role.name}
+            </p>
+          </div>
 
-      <div>
-        <p className="details-label">
-          Rôle
-        </p>
-        <p key={user.role._id} className="details-info slug">
-          {user.role.name}
-        </p>
+          {/* <div>
+            <p className="details-label">
+              Rôle
+            </p>
+            <p key={user.role._id} className="details-info slug">
+              {user.role.name}
+            </p>
+          </div> */}
+
+        </div>
+        <div className="flex items-center justify-center w-[35%]">
+          <div className="no-pict w-full aspect-square rounded-full overflow-hidden flex items-center justify-center">
+            {hasImage ? (
+              <img
+                src={imageUrl!}
+                alt={user.firstname}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="flex flex-col items-center gap-2 text-neutral-400">
+                <ImageOff className="w-8 h-8" />
+                <span>Aucune image</span>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
+      
+      
       
       {/* Suspension / Suppression */}
       <div className="details-cols-2">
@@ -270,22 +296,23 @@ export default function UserDetails({
 
 
       {/* IMAGE */}
-      <div className="fixed top-17 right-13 w-30">
-          <div className="no-pict w-full aspect-square rounded-full overflow-hidden flex items-center justify-center">
-            {hasImage ? (
-              <img
-                src={imageUrl!}
-                alt={user.firstname}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="flex flex-col items-center gap-2 text-neutral-400">
-                <ImageOff className="w-8 h-8" />
-                <span>Aucune image</span>
-              </div>
-            )}
-          </div>
+      {/* <div className="fixed top-17 right-13 w-30">
+        <div className="no-pict w-full aspect-square rounded-full overflow-hidden flex items-center justify-center">
+          {hasImage ? (
+            <img
+              src={imageUrl!}
+              alt={user.firstname}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-2 text-neutral-400">
+              <ImageOff className="w-8 h-8" />
+              <span>Aucune image</span>
+            </div>
+          )}
         </div>
+      </div> */}
+
     </div>
 
   );
