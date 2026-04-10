@@ -1,9 +1,16 @@
 const express = require("express");
 const requireAuth = require("../../../../middlewares/requireAuth");
 const requireRole = require("../../../../middlewares/requireRole");
-const { listShops, getShop } = require("../controllers/adminShops.controller");
+const { listShops, getShop, formShop } = require("../controllers/adminShops.controller");
 const router = express.Router();
 
+
+router.get(
+  "/form/:id",
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  formShop
+)
 
 router.get(
   "/:id",

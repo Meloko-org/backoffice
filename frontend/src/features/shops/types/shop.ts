@@ -63,11 +63,99 @@ export interface ShopDetail {
   };
 }
 
+/* type dédié à la réponse du backend poru la route shops/form/:id */
+export interface ShopForm {
+  _id: string;
 
-export interface ShopFormValues {
+  name: string;
+  siret: string;
 
+  address: {
+    address1: string;
+    address2?: string;
+    postalCode: string;
+    city: string;
+    country: string;
+  };
+
+  logo?: string;
+
+  shortDesc: string;
+  longDesc?: string;
+
+  photos: string[];
+  video: string[];
+
+  types: {
+    _id: string;
+    label: string;
+  }[];
+
+  isOpen: boolean;
+  reopenDate: string | null;
+  isPremium: boolean;
+  PremiumDate: string | null;
+
+  features: {
+    _id: string;
+    label: string;
+  }[];
 }
 
+export interface ShopFormValues {
+  name: string;
+  siret: string;
+
+  address1: string;
+  address2: string;
+  postalCode: string;
+  city: string;
+
+  logo?: string;
+
+  shortDesc: string;
+  longDesc?: string;
+
+  photos: string[];
+  video: string[];
+
+  types: string[];
+
+  isPremium: string;
+  PremiumDate: string | null;
+  isOpen: string;
+  reopenDate: string | null;
+
+  features: string[];
+}
+
+
 export interface ShopPayload {
+  name: string;
+  siret: string;
+  address: {
+    address1: string;
+    address2: string;
+    postalCode: string;
+    city: string;
+  }
+
+  logo?: string;
+
+  shortDesc: string;
+  longDesc?: string;
+
+  photos: string[];
+  video: string[];
+
+  types: string[];
+
+  isPremium: boolean;
+  PremiumDate: Date | null;
+
+  isOpen: boolean;
+  reopenDate: Date | null;
+
+  features: string[];
 
 }

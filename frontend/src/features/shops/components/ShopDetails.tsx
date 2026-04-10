@@ -72,17 +72,17 @@ export default function ShopDetails({
             <div className="w-full shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
               {shop.isOpen 
                 ? (
-                  <div className="details-badge-success ml-3">Ouvert</div>
+                  <div className="details-badge-success">Ouvert</div>
                 )
                 : (
-                  <div className="details-badge-danger ml-3">Fermé</div>
+                  <div className="details-badge-danger">Fermé</div>
                 )
               }
             </div>
             <div className="w-full rounded-r-xl shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
               {shop.isPremium 
-                ? ( <Crown className="text-warning ml-3" />)
-                : ( <Crown className="text-black ml-3" />)
+                ? ( <Crown className="text-warning" />)
+                : ( <Crown className="text-black" />)
               }
             </div>
           </div>

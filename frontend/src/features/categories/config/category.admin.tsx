@@ -1,10 +1,11 @@
 import { createModelAdmin } from "../../../layouts/admin/registries/admin/createModelAdmin";
+import { fetchTypes } from "../../../utils/form/formFetchers";
 import { getTypeNames } from "../../types/api/types.api";
 import { createCategory, getCategoriesList, getCategoryById, updateCategory } from "../api/categories.api";
 import CategoryDetails from "../components/CategoryDetails";
 import { useCategoryActionsContext } from "../hooks/useCategoryActionsContext";
 import { mapCategoryToFormValues, mapFormValuesToPayload } from "../mappers/category.mapper";
-import { categoryFormSchema, fetchTypes, type CategoryFormCtx } from "../schema/category.schema";
+import { categoryFormSchema, type CategoryFormCtx } from "../schema/category.schema";
 import type { CategoryFormValues, ProductCategory } from "../types/category";
 import type { CategoryActionContext } from "./category.actions";
 import { createCategoriesColumns } from "./category.columns";

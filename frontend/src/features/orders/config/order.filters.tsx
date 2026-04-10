@@ -8,18 +8,21 @@ export function createOrderFilters(
     {
       type: "boolean",
       key: "isPaid",
-      label: "Payée"
+      label: "Payée",
+      extraLabel: "Payée"
     },
     {
       type: "boolean",
       key: "isWithdrawn",
-      label: "Retirée"
+      label: "Retirée",
+      extraLabel: "Retirée"
     },
     {
       type: "dateRange",
       fromKey: "paidAtFrom",
       toKey: "paidAtTo",
-      label: "Payée"
+      label: "Payée",
+      extraLabel: "Payée"
     }
   ]
 }

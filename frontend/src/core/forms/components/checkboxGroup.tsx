@@ -14,6 +14,7 @@ type CheckboxGroupProps = {
   error?: string;
   required?: boolean;
   disabled?: boolean;
+  style: "list" | "flat";
 };
 
 export default function CheckboxGroup({
@@ -24,6 +25,7 @@ export default function CheckboxGroup({
   error,
   required,
   disabled,
+  style,
 }: CheckboxGroupProps) {
 
   const handleToggle = (optionValue: string) => {
@@ -41,9 +43,18 @@ export default function CheckboxGroup({
         {required && <span className="text-danger ml-1">*</span>}
       </div>
 
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className={
+        style === "flat" 
+          ? "flex flex-wrap gap-4 justify-center" 
+          : "flex flex-col gap-y-2"
+        }
+      >
         {options.map((option) => (
-          <label key={option.value} style={{ display: "flex", gap: 8 }} className="flex items-center gap-2 text-black font-medium">
+          <label 
+            key={option.value} 
+            style={{ display: "flex", gap: 8 }} 
+            className="flex items-center gap-2 text-(--first-text) font-medium"
+          >
             <input
               type="checkbox"
               checked={value.includes(option.value)}

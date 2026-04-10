@@ -263,7 +263,106 @@ async function getShopById(shopId) {
   return shop;
 }
 
+
+async function updateShop(shopId, payload) {
+  if (!mongoose.Types.ObjectId.isValid(shopId)) {
+    throw new ApiError("Invalid shopId", 400);
+  }
+
+  const update = {
+    name: payload.name,
+    siret: payload.siret,
+    address: payload.address,
+
+    logo: payload.logo,
+
+    shortDesc: payload.shortDesc,
+    longDesc: payload.longDesc,
+
+    photos: payload.photos || [],
+    video: payload.video || [],
+
+    types: payload.types || [],
+
+    isOpen: payload.isOpen,
+    reopenDate: payload.reopenDate ?? null,
+
+    features: payload.features || [],
+  };
+
+  // admin only
+  if (payload.isPremium !== undefined) {
+    update.isPremium = payload.isPremium;
+    update.PremiumDate = payload.isPremium ? new Date() : null;
+  }
+
+  const shop = await Shop.findByIdAndUpdate(shopId, update, {
+    new: true,
+  });
+
+  if (!shop) {
+    throw new NotFoundError("Shop introuvable");
+  }
+
+  return shop;
+}
+
+async function getFormShop(shopId) {
+
+    if (!mongoose.Types.ObjectId.isValid(shopId)) {
+    throw new ApiError("Invalid shopId", 400);
+  }
+
+  const shop = await Shop.findById(shopId)
+    .populate({
+      path: "types",
+      ref: "Type", 
+      select: "_id label"
+    })
+    .populate({
+      path: "features",
+      ref: "ShopFeatures",
+      select: "_id, label"
+    })
+    .lean();
+
+  if (!shop) {
+    throw new NotFoundError("Shop introuvable");
+  }
+
+  return {
+    _id: shop._id,
+
+    name: shop.name,
+    siret: shop.siret,
+
+    address: shop.address,
+
+    logo: shop.logo,
+
+    shortDesc: shop.shortDesc,
+    longDesc: shop.longDesc,
+
+    photos: shop.photos || [],
+    video: shop.video || [],
+
+    types: shop.types || [],
+
+    isOpen: shop.isOpen,
+    reopenDate: shop.reopenDate,
+    isPremium: shop.isPremium,
+    PremiumDate: shop.PremiumDate,
+
+    features: shop.features || [],
+  };
+}
+
+
+
+
 module.exports = {
   getShops,
   getShopById,
+  updateShop,
+  getFormShop,
 }

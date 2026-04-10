@@ -7,6 +7,7 @@ import type {
   FileFieldSchema,
   RadioGroupFieldSchema,
   CheckboxGroupFieldSchema,
+  DateFieldSchema,
 } from "./types";
 
 export const field = {
@@ -43,6 +44,13 @@ export const field = {
   ): FileFieldSchema<TValues> => ({
     ...config,
     type: "file"
+  }),
+
+  date: <TValues>(
+    config: Omit<DateFieldSchema<TValues>, "type">
+  ): DateFieldSchema<TValues> => ({
+    ...config,
+    type: "date"
   }),
 
   radioGroup: <TValues>(

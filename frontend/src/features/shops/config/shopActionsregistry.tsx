@@ -29,6 +29,7 @@ export const shopActions = createActionsRegistry<ShopActionTarget, ShopActionCon
     // visible: (user) => !user.isDeleted,
 
     run: (shop, ctx) => {
+      console.log("id :", shop._id)
       ctx.navigate(`/admin/shops/${shop._id}/edit`)
     },
   },

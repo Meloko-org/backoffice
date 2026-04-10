@@ -1,11 +1,13 @@
-type RadioOption = {
-  label: string;
-  value: string;
-};
+import type { FieldOption } from "../types";
+
+// type RadioOption = {
+//   label: string;
+//   value: string;
+// };
 
 type RadioGroupProps = {
   label: string;
-  options: RadioOption[];
+  options: FieldOption[];
   value: string;
   onChange: (value: string) => void;
   error?: string;
@@ -24,6 +26,8 @@ export default function RadioGroup({
   disabled,
   name,
 }: RadioGroupProps) {
+
+  console.log("value :", label, value)
   return (
     <div className="space-y-2">
       <div className="text-sm font-medium text-neutral-500">

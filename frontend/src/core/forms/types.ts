@@ -148,6 +148,7 @@ export type CheckboxGroupFieldSchema<TValues> =
       | FieldOption[]
       | AsyncOptionsLoader<TValues>;
     optionsDeps?: (keyof TValues)[];
+    style?: "flat" | "list";
   };
 
 

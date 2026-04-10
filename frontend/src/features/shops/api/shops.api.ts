@@ -1,7 +1,7 @@
 import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Shop, ShopDetail, ShopListResponse, ShopPayload } from "../types/shop";
+import type { Shop, ShopDetail, ShopForm, ShopListResponse, ShopPayload } from "../types/shop";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/shops`;
@@ -64,14 +64,23 @@ export const getShopsList = async (
 
 export const getShopById = async (shopId: string): Promise<ShopDetail> => {
 
-  console.log("youpi")
-
   return apiFetch<ShopDetail>(
-      `${BASE_URL}/${shopId}`, 
-      {
-        method: 'GET'
-      }
-    )
+    `${BASE_URL}/${shopId}`, 
+    {
+      method: 'GET'
+    }
+  )
+}
+
+
+export const getShopForm = async (shopId: string): Promise<ShopForm> => {
+
+  return apiFetch<ShopForm>(
+    `${BASE_URL}/form/${shopId}`, 
+    {
+      method: 'GET'
+    }
+  )
 }
 
 export const updateShop = async (

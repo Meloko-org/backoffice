@@ -104,7 +104,7 @@ const getFamily = async (req, res, next) => {
 
     const family = await getFamilyById(familyId);
 
-    // console.log("FAMILLE :", family)
+    console.log("FAMILLE :", family)
 
     res.json({
       success: true,

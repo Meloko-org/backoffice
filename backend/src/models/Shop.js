@@ -153,7 +153,7 @@ const shopSchema = mongoose.Schema(
     },
     features: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "ShopFeature",
+      ref: "ShopFeatures",
     },
   },
   { timestamps: true },

@@ -291,6 +291,7 @@ export const adminFormRenderers = {
         disabled={disabled || isLoading}
         error={error}
         options={options}
+        style={field.style ?? "flat"}
         onChange={(v) => setValue(name, v)}
       />
     );

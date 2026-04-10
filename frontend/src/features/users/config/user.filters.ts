@@ -12,6 +12,7 @@ export function createUserFilters(
       type: "select",
       key: "role",
       label: "Rôle",
+      extraLabel: "Rôle",
       options: roles.map((r) => ({
         label: r.name,
         value: r._id,
@@ -21,6 +22,7 @@ export function createUserFilters(
       type: "select",
       key: "status",
       label: "Status",
+      extraLabel: "status",
       options: [
         { label: "Actif", value: "active" },
         { label: "Suspendu", value: "suspended" },

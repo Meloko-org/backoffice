@@ -1,6 +1,8 @@
 const { 
   getShops,
-  getShopById
+  getShopById,
+  updateShop,
+  getFormShop,
 } = require("../services/adminShops.service");
 
 const listShops = async (req, res, next) => {
@@ -58,8 +60,46 @@ const getShop = async (req, res, next) => {
   }
 }
 
+const formShop = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await getFormShop(id);
+
+    console.log(result)
+
+    res.json({
+      success: true,
+      data: result,
+    })
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log("body :", req.body)
+
+    const user = await updateShop(id, req.body, req.user);
+
+    res.json({
+      success: true,
+      data: user,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = {
   listShops,
   getShop,
+  update,
+  formShop,
 }

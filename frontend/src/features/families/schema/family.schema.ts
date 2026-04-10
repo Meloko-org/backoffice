@@ -1,29 +1,9 @@
 import { defineFormSchema, field } from "../../../core/forms/schema";
 import type { FieldOption } from "../../../core/forms/types";
-import { getCategoryNames } from "../../categories/api/categories.api";
-import { getTagCategoryNames } from "../../tagCategories/api/tagCategory.api";
 import type { FamilyFormValues } from "../types/family";
 
 
-export async function fetchTagCategories(): Promise<FieldOption[]> {
-  const data = await getTagCategoryNames();
 
-  return data.map((t: any) => ({
-    value: t._id,
-    label: t.name,
-    description: t.description,
-    color: t.color,
-  }))
-}
-
-export async function fetchCategories(): Promise<FieldOption[]> {
-  const data = await getCategoryNames();
-
-  return data.map((t: any) => ({
-    value: t._id,
-    label: t.name,
-  }))
-}
 
 
 export type FamilyFormCtx = {
@@ -62,16 +42,16 @@ export const familyFormSchema = (
             floating: true,
           }),
 
-          image: field.input({
+          image: field.file({
             label: "Image",
             required: false,
-            floating: true,
           }),
 
           tagCategories: field.checkboxGroup({
             label: "Catégories de tags",
             required: false,
             options: ctx.tagCategories ?? [],
+            style: "flat"
           }),
 
           productsTypes: field.radioGroup({

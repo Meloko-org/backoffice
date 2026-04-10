@@ -1,18 +1,8 @@
 import { defineFormSchema, field } from "../../../core/forms/schema";
 import type { FieldOption } from "../../../core/forms/types";
-import { getTypeNames } from "../../types/api/types.api";
 import type { CategoryFormValues } from "../types/category";
 
 
-export async function fetchTypes(): Promise<FieldOption[]> {
-
-  const data = await getTypeNames()
-
-  return data.map((t: any) => ({
-    value: t._id,
-    label: t.name,
-  }));
-}
 
 export type CategoryFormCtx = {
   types?: FieldOption<string>[];
