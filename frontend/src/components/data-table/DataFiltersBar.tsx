@@ -1,10 +1,13 @@
 import React from "react";
 import { Power } from "lucide-react";
 
+type FilterLabel = string | React.ReactElement;
+
 export type SelectFilterConfig = {
   type: "select";
   key: string;
   label: string;
+  extraLabel: FilterLabel;
   options: { label: string; value: string }[];
 };
 
@@ -12,6 +15,7 @@ export type MultiSelectFilterConfig = {
   type: "multiSelect";
   key: string;
   label: string;
+  extraLabel: FilterLabel;
   options: { label: string; value: string }[];
 };
 
@@ -21,12 +25,14 @@ export type DateRangeFilterConfig = {
   fromKey: string;
   toKey: string;
   label: string;
+  extraLabel: FilterLabel;
 };
 
 export type BooleanFilter = {
   type: "boolean";
   key: string;
   label: string;
+  extraLabel: FilterLabel;
 };
 
 
@@ -85,7 +91,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         if (filter.type === "select") {
           return (
             <div key={index} className="filter-item">
-              <label className="filter-item-label">{filter.label}</label>
+              <label className="filter-item-label">{filter.extraLabel}</label>
               <select
                 value={filters[filter.key] || ""}
                 onChange={(e) =>
@@ -111,6 +117,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
 
           return (
             <div key={index} className="filter-item">
+              <label className="filter-item-label">{filter.extraLabel}</label>
               <select
                 multiple
                 value={selectedValues}
@@ -140,7 +147,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         if (filter.type === "dateRange") {
           return (
             <div key={index} className="filter-item">
-              <label className="filter-item-label">{filter.label}</label>
+              <label className="filter-item-label">{filter.extraLabel}</label>
               <div className="date-range">
                 <input
                   type="date"
@@ -168,7 +175,7 @@ export function DataFiltersBar({ filters, onChange, config, showReset }: Props) 
         if (filter.type === "boolean") {
           return (
             <div key={index} className="filter-item">
-              <label className="filter-item-label">{filter.label}</label>
+              <label className="filter-item-label">{filter.extraLabel}</label>
               <select
                 value={filters[filter.key] || ""}
                 onChange={(e) =>

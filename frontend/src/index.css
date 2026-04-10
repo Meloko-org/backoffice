@@ -1141,7 +1141,7 @@
   }
 
   .filter-item-label {
-    @apply font-mono leading-1 my-1 mr-1;
+    @apply font-mono leading-1 my-1 mr-0.5;
     color: var(--second-text);
     font-size: 0.7rem;
   }

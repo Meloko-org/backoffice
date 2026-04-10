@@ -64,21 +64,29 @@ export default function ShopDetails({
             </p>
             <p className="details-info m-0">{shop.siret}</p>
           </div>
-          
-          <div className="flex flex-row pl-4 justify-center">
-            {renderValidateState(shop.isValidated)}
-            {shop.isOpen 
-              ? (
-                <div className="details-badge-success ml-3">Ouvert</div>
-              )
-              : (
-                <div className="details-badge-danger ml-3">Fermé</div>
-              )
-            }
-            {shop.isPremium && (
-              <Crown className="text-warning ml-3" />
-            )}
+
+          <div className="flex flex-row w-full gap-x-1">
+            <div className="w-full rounded-l-xl shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
+              {renderValidateState(shop.isValidated)}
+            </div>
+            <div className="w-full shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
+              {shop.isOpen 
+                ? (
+                  <div className="details-badge-success ml-3">Ouvert</div>
+                )
+                : (
+                  <div className="details-badge-danger ml-3">Fermé</div>
+                )
+              }
+            </div>
+            <div className="w-full rounded-r-xl shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
+              {shop.isPremium 
+                ? ( <Crown className="text-warning ml-3" />)
+                : ( <Crown className="text-black ml-3" />)
+              }
+            </div>
           </div>
+          
 
         </div>
         <div className="flex items-center justify-center w-[35%]">
