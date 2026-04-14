@@ -17,5 +17,9 @@ const shopFeaturesSchema = mongoose.Schema({
   },
 });
 
-const ShopFeatures = mongoose.model("ShopFeatures", shopFeaturesSchema, "shopfeatures");
+const collectionName = process.env.USE_FAKE_DB === "true"
+  ? "fakeshopfeatures"
+  : "shopfeatures"
+
+const ShopFeatures = mongoose.model("ShopFeatures", shopFeaturesSchema, collectionName);
 module.exports = ShopFeatures;

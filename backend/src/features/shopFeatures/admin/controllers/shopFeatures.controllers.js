@@ -4,8 +4,6 @@ const shopFeaturesNames = async (req, res, next) => {
   try {
     const shopFeatures = await getShopFeaturesNames();
 
-    console.log("features :", shopFeatures)
-
     res.json({
       success: true,
       data: shopFeatures,

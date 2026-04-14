@@ -49,3 +49,17 @@ export interface Address {
   createdAt: string;
   updatedAt: string;
 }
+
+
+export interface OpeningHour {
+  day: number;
+  periods: Period[];
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Period {
+  openingTime: string;
+  closingTime: string;
+}

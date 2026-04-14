@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { DataTable, type Column } from "../../../components/data-table/DataTable";
 import { DataTablePagination } from "../../../components/data-table/DataTablePagination";
-import { useUserDashboard } from "../../../hooks/useUserDashboard";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { Pencil } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useUserDashboard } from "../hooks/useUserDashboard";
 
 interface Props {
   userId: string;

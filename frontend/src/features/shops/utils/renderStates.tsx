@@ -1,4 +1,4 @@
-import { Check, Cross } from "lucide-react";
+import { Check, Cross, Eye, ShoppingBasket } from "lucide-react";
 
 export function renderOpenState(isOpen: boolean) {
   let stickerClass = "sticker-success";
@@ -16,6 +16,14 @@ export function renderValidateState(isValidated: boolean) {
   if (isValidated) {
     icon = <Check className="text-primary" />
   }
+
+  return icon;
+}
+
+export function renderSourceNote(source: "purchase" | "touristVisit") {
+  let icon = (source === "purchase")
+    ? <ShoppingBasket className="text-primary" />
+    : <Eye className="text-success" />
 
   return icon;
 }

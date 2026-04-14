@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useUserDashboard } from "../../../hooks/useUserDashboard";
 import UserHeaderSection from "../components/UserHeaderSection";
 import UserBusinessSection from "../components/UserBusinessSection";
 import UserOrdersSection from "../components/UserOrderSection";
@@ -9,6 +8,7 @@ import { useAdminPage } from "../../../hooks/useAdminPage";
 import UserAddressSection from "../components/UserAddressSection";
 import UserBookmarksSection from "../components/UserBookmarksSection";
 import Loader from "../../../components/admin/Loader";
+import { useUserDashboard } from "../hooks/useUserDashboard";
 
 
 export default function UserPage() {

@@ -3,6 +3,9 @@ const {
   getShopById,
   updateShop,
   getFormShop,
+  getShopDashboard,
+  getShopOrders,
+  getShopNotes,
 } = require("../services/adminShops.service");
 
 const listShops = async (req, res, next) => {
@@ -96,10 +99,91 @@ const update = async (req, res, next) => {
   }
 };
 
+/* fonction du dashboard */
+const shopDashboard = async (req, res , next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await getShopDashboard(id);
+
+    console.log("SHOPDASHBOARD data :", JSON.stringify(data, null, 2))
+
+    res.json({
+      success: true,
+      data,
+    })
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+const shopOrders = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      sortKey,
+      sortDirection,
+      ...filters
+    } = req.query;
+
+    const data = await getShopOrders(
+      id,
+      Number(page),
+      Number(limit),
+      search,
+      sortKey,
+      sortDirection,
+      filters
+    );
+
+    console.log("SHOPORDER data :", JSON.stringify(data, null, 2))
+
+    res.json({ success: true, data });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const shopNotes = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      sortKey,
+      sortDirection,
+      ...filters
+    } = req.query;
+
+    const data = await getShopNotes(
+      id,
+      Number(page),
+      Number(limit),
+      search,
+      sortKey,
+      sortDirection,
+      filters
+    );
+
+    console.log("SHOPNOTE data :", JSON.stringify(data, null, 2))
+
+    res.json({ success: true, data });
+  } catch (e) {
+    next(e);
+  }
+};
 
 module.exports = {
   listShops,
   getShop,
   update,
   formShop,
+  shopDashboard,
+  shopNotes,
+  shopOrders,
 }

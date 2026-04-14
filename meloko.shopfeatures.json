@@ -1,0 +1,81 @@
+[{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78de"
+  },
+  "key": "peda",
+  "label": "Ferme pédagogique",
+  "description": "Une ferme pédagogique est une ferme où sont élevés des animaux et/ou sont cultivés des végétaux à vocation vivrière et accueillant, dans le cadre scolaire ou extra-scolaire, des visiteurs dans un but pédagogique.",
+  "icon": "child"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e0"
+  },
+  "key": "direct",
+  "label": "Vente directe à la ferme",
+  "description": "Ce producteur vend ses produits à la ferme.",
+  "icon": "shopping-cart"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e1"
+  },
+  "key": "visite",
+  "label": "Visites guidées",
+  "description": "Ce producteur organise des visites guidées de son exploitation.",
+  "icon": "leaf"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78dd"
+  },
+  "key": "bio",
+  "label": "Agriculture biologique",
+  "description": "Produits certifiés bio.",
+  "icon": "leaf"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78df"
+  },
+  "key": "degustation",
+  "label": "Dégustation",
+  "description": "Ce producteur propose des dégustations de ses produits.",
+  "icon": "wine-glass-alt"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e4"
+  },
+  "key": "label",
+  "label": "Production locale labellisée",
+  "description": "Les produits de ce producteur sont labellisés. (AOP, AOC, IGP...)",
+  "icon": "certificate"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e2"
+  },
+  "key": "atelier",
+  "label": "Ateliers participatifs",
+  "description": "Ce producteur organise des ateliers participatifs.",
+  "icon": "hammer"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e5"
+  },
+  "key": "hebergement",
+  "label": "Hébergement à la ferme",
+  "description": "Ce producteur propose une solution d'hébergement. (gîte, camping...)",
+  "icon": "bed"
+},
+{
+  "_id": {
+    "$oid": "689f593a2bf0ed66babf78e3"
+  },
+  "key": "pmr",
+  "label": "Accessible PMR",
+  "description": "Cette exploitation peut accueillir les personnes à mobilité réduite.",
+  "icon": "wheelchair"
+}]

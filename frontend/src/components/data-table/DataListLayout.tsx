@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { DataTable, type Column, type SortDirection } from "./DataTable";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { DataTablePagination, type Align } from "./DataTablePagination";
-import type { PaginationMeta } from "../../types/list.types";
 import type { FilterConfig } from "./DataFiltersBar";
+import type { PaginationMeta } from "../../types/global.types";
 
 interface DataListLayoutProps<T> {
   data: T[];
@@ -99,7 +99,7 @@ export function DataListLayout<T>({
       {showPagination && pagination && onPageChange && (
         <DataTablePagination
           page={pagination.page}
-          totalPages={pagination.pages}
+          totalPages={pagination.totalPages}
           onChange={onPageChange}
           align={paginationAlign}
         />

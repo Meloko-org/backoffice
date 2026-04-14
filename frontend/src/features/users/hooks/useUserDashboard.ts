@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUserDashboard } from "../features/users/api/users.api";
-import { queryKeys } from "../features/queryKeys/queryKey";
-import type { UserDashboard } from "../features/users/types/user";
+import type { UserDashboard } from "../types/user";
+import { queryKeys } from "../../queryKeys/queryKey";
+import { getUserDashboard } from "../api/users.api";
 
 export function useUserDashboard(
   id: string,

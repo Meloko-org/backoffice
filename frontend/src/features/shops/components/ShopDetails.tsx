@@ -8,6 +8,7 @@ import Loader from "../../../components/admin/Loader";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { Crown, ImageOff } from "lucide-react";
 import { renderValidateState } from "../utils/renderStates";
+import ShopStatusesBar from "./ShopStatusesBar";
 
 type Props = {
   context: WithId<"shop">
@@ -65,27 +66,14 @@ export default function ShopDetails({
             <p className="details-info m-0">{shop.siret}</p>
           </div>
 
-          <div className="flex flex-row w-full gap-x-1">
-            <div className="w-full rounded-l-xl shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
-              {renderValidateState(shop.isValidated)}
-            </div>
-            <div className="w-full shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
-              {shop.isOpen 
-                ? (
-                  <div className="details-badge-success">Ouvert</div>
-                )
-                : (
-                  <div className="details-badge-danger">Fermé</div>
-                )
-              }
-            </div>
-            <div className="w-full rounded-r-xl shadow flex items-center justify-center bg-(--first-plan-bg) p-2">
-              {shop.isPremium 
-                ? ( <Crown className="text-warning" />)
-                : ( <Crown className="text-black" />)
-              }
-            </div>
-          </div>
+          <ShopStatusesBar
+            isOpen={shop.isOpen}
+            isPremium={shop.isPremium}
+            isValidated={shop.isValidated}
+            extraClasses="w-full"
+          />
+
+
           
 
         </div>

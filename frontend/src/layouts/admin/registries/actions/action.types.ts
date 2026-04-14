@@ -4,6 +4,7 @@ export type ActionPlacement =
   | "rowMenu"
   | "details"
   | "user-header"
+  | "shop-header"
   | "inline";
 
 export type ActionDefinition<T, Ctx> = {

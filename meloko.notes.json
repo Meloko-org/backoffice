@@ -1,0 +1,270 @@
+[{
+  "_id": {
+    "$oid": "68555b658d341d6abcaca222"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "note": {
+    "$numberDecimal": "3.5"
+  },
+  "comment": "Je recommande!!!",
+  "createdAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "purchase"
+},
+{
+  "_id": {
+    "$oid": "68555b998d341d6abcaca223"
+  },
+  "user": {
+    "$oid": "674ed0b7dff4df94302254b6"
+  },
+  "note": {
+    "$numberDecimal": "4"
+  },
+  "comment": "Super contact, super vendeur",
+  "createdAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "purchase"
+},
+{
+  "_id": {
+    "$oid": "68555be08d341d6abcaca224"
+  },
+  "user": {
+    "$oid": "6747619b353bf7adcbca5b75"
+  },
+  "note": {
+    "$numberDecimal": "4.5"
+  },
+  "comment": "Très satisfait des produits achetés",
+  "createdAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "purchase"
+},
+{
+  "_id": {
+    "$oid": "68555c138d341d6abcaca225"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "note": {
+    "$numberDecimal": "4.5"
+  },
+  "comment": "Deuxième commande chez ce producteur et je suis toujours autant satisfait.",
+  "createdAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "purchase"
+},
+{
+  "_id": {
+    "$oid": "6889dad003c9fd371ba661fc"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "note": {
+    "$numberDecimal": "3.5"
+  },
+  "comment": "Super moment passé chez machin",
+  "createdAt": {
+    "$date": "2024-08-07T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-07T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "touristVisit"
+},
+{
+  "_id": {
+    "$oid": "6889db0b03c9fd371ba661fd"
+  },
+  "user": {
+    "$oid": "674ed0b7dff4df94302254b6"
+  },
+  "note": {
+    "$numberDecimal": "4"
+  },
+  "comment": "Quel domain impressionnant !!",
+  "createdAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "touristVisit"
+},
+{
+  "_id": {
+    "$oid": "6889db3703c9fd371ba661fe"
+  },
+  "user": {
+    "$oid": "6747619b353bf7adcbca5b75"
+  },
+  "note": {
+    "$numberDecimal": "4.5"
+  },
+  "comment": "Il faut absolument rencontrer ce producteur.",
+  "createdAt": {
+    "$date": "2024-08-08T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-08T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "touristVisit"
+},
+{
+  "_id": {
+    "$oid": "688a1c6a03c9fd371ba66205"
+  },
+  "user": {
+    "$oid": "674ed0b7dff4df94302254b6"
+  },
+  "note": {
+    "$numberDecimal": "4"
+  },
+  "comment": "deuxième visite : que du bonheur.",
+  "createdAt": {
+    "$date": "2024-09-06T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-06T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "touristVisit"
+},
+{
+  "_id": {
+    "$oid": "688a1ca703c9fd371ba66206"
+  },
+  "user": {
+    "$oid": "6747619b353bf7adcbca5b75"
+  },
+  "note": {
+    "$numberDecimal": "4.5"
+  },
+  "comment": "Merveilleux moment passé dans ce domaine.",
+  "createdAt": {
+    "$date": "2024-10-08T12:47:42.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-08T12:47:42.691Z"
+  },
+  "shop": {
+    "$oid": "66faa01d838122c17b80bee8"
+  },
+  "source": "touristVisit"
+},
+{
+  "_id": {
+    "$oid": "68aeb3afaea65c43f64e7cde"
+  },
+  "note": {
+    "$numberDecimal": "4"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "shop": {
+    "$oid": "66bca4f4a8a97a2f43e737cf"
+  },
+  "comment": "Cool... ma première note touristVisit !!",
+  "source": "touristVisit",
+  "photo": "file:///data/user/0/com.crawazaky.frontend/cache/ImagePicker/7ad841e2-d44e-4e2d-843a-5df4db4ec397.jpeg",
+  "createdAt": {
+    "$date": "2025-08-27T07:28:47.106Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T07:28:47.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68aed7d763149ae95c1eacce"
+  },
+  "note": {
+    "$numberDecimal": "4"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "shop": {
+    "$oid": "66bdfee8da92d57bdba1bcb0"
+  },
+  "comment": "Super moment",
+  "source": "touristVisit",
+  "photo": "file:///data/user/0/com.crawazaky.frontend/cache/ImagePicker/b83ffa14-0b4b-45ed-8bda-22fdd144c324.jpeg",
+  "createdAt": {
+    "$date": "2025-08-27T10:03:03.042Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:03:03.042Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68aefdc063149ae95c1ead45"
+  },
+  "note": {
+    "$numberDecimal": "3"
+  },
+  "user": {
+    "$oid": "673b3596c9fb3996cb58ebf3"
+  },
+  "shop": {
+    "$oid": "66bca4f4a8a97a2f43e737cf"
+  },
+  "comment": "Très bonne expérience. Je recommande !",
+  "source": "touristVisit",
+  "photo": "file:///data/user/0/com.crawazaky.frontend/cache/ImagePicker/ccaabd5c-4e06-4e9e-969f-dd453e6c3d61.jpeg",
+  "createdAt": {
+    "$date": "2025-08-27T12:44:48.813Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T12:44:48.813Z"
+  },
+  "__v": 0
+}]

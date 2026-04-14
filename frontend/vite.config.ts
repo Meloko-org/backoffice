@@ -7,4 +7,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    include: ["@fortawesome/react-fontawesome"],
+  },
 });

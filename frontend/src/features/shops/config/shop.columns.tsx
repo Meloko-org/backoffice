@@ -1,10 +1,10 @@
 import { Crown } from "lucide-react";
-import { DataInlineRowActions } from "../../../components/data-table/DataInlineRowActions";
 import type { Column } from "../../../components/data-table/DataTable";
 import type { Shop } from "../types/shop";
 import type { ShopActionContext } from "./shop.actions";
 import { shopActions } from "./shopActionsregistry";
 import { renderOpenState, renderValidateState } from "../utils/renderStates";
+import { DataRowMenu } from "../../../components/data-table/DataRowMenu";
 
 export function createShopColumns(
   ctx: ShopActionContext
@@ -50,8 +50,8 @@ export function createShopColumns(
       label: "",
       render: (shop) => (
         <div className="table-actions">
-          <DataInlineRowActions
-            actions={shopActions.getActions(shop, ctx, "inline")}
+          <DataRowMenu
+            actions={shopActions.getActions(shop, ctx, "rowMenu")}
           />
         </div>
       )

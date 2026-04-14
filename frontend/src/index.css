@@ -834,6 +834,11 @@
     background-color: var(--first-plan-bg);
   }
 
+  .stat-card-flat {
+    @apply flex flex-row items-center px-2 space-x-3 rounded-lg shadow border border-primary;
+    background-color: var(--first-plan-bg);
+  }
+
   .stat-card-title {
     @apply text-xs;
     color: var(--second-text);
@@ -856,9 +861,30 @@
     color: rgba(152, 182, 110, 0.5);
   }*/
 
+  .bloc-label {
+    @apply text-(--second-text) text-sm;
+  }
+
   .bloc-sub-text {
     color: var(--bloc-sub-text);
   }
+
+  /* bloc shop dashboard */
+  .shop-dashboard-bloc {
+    @apply rounded-xl border py-4 px-5 shadow-sm;
+    background-color: var(--bloc-bg);
+    border-color: var(--bloc-border);
+    color: var(--bloc-text);
+  }
+
+  /* dashboard */
+  .social-bloc {
+    @apply rounded-xl border border-primary shadow-sm;
+    background-color: var(--bloc-bg);
+    color: var(--bloc-text);
+  }
+
+  
 
 
   /* bloc order */

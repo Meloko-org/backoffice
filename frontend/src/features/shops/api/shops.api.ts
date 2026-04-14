@@ -1,7 +1,7 @@
 import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Shop, ShopDetail, ShopForm, ShopListResponse, ShopPayload } from "../types/shop";
+import type { Shop, ShopDashboard, ShopDetail, ShopForm, ShopListResponse, ShopNote, ShopNoteListResponse, ShopOrder, ShopOrderListResponse, ShopPayload } from "../types/shop";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/shops`;
@@ -95,4 +95,102 @@ export const updateShop = async (
         body: JSON.stringify(payload)
       }
     )
+}
+
+
+export const getShopDashboard = async (
+  id: string,
+): Promise<ShopDashboard> => {
+
+  return apiFetch<ShopDashboard>(
+    `${BASE_URL}/${id}/dashboard`,
+    {
+      method: "GET",
+    }
+  )
+
+}
+
+export const getShopOrders = async (
+  id: string,
+  params: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortKey?: string;
+    sortDirection?: "asc" | "desc";
+    filters?: Record<string, any>;
+  }
+): Promise<ShopOrderListResponse> => {
+
+
+  const queryObject: Record<string, string> = {
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 10),
+  };
+
+  if (params.search) queryObject.search = params.search;
+  if (params.sortKey) queryObject.sortKey = params.sortKey;
+  if (params.sortDirection) queryObject.sortDirection = params.sortDirection;
+
+  // 🔥 Ici on injecte les filtres dynamiques
+  if (params.filters) {
+    Object.entries(params.filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryObject[key] = String(value);
+      }
+    });
+  }
+
+  const query = new URLSearchParams(queryObject);
+
+  return apiFetch<ShopOrderListResponse>(
+    `${BASE_URL}/${id}/orders?${query.toString()}`,
+    {
+      method: "GET",
+    }
+  )
+
+}
+
+
+export const getShopNotes = async (
+  id: string,
+  params: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortKey?: string;
+    sortDirection?: "asc" | "desc";
+    filters?: Record<string, any>;
+  }
+): Promise<ShopNoteListResponse> => {
+
+  const queryObject: Record<string, string> = {
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 10),
+  };
+
+  if (params.search) queryObject.search = params.search;
+  if (params.sortKey) queryObject.sortKey = params.sortKey;
+  if (params.sortDirection) queryObject.sortDirection = params.sortDirection;
+
+  // 🔥 Ici on injecte les filtres dynamiques
+  if (params.filters) {
+    Object.entries(params.filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryObject[key] = String(value);
+      }
+    });
+  }
+
+  const query = new URLSearchParams(queryObject);
+
+  return apiFetch<ShopNoteListResponse>(
+    `${BASE_URL}/${id}/notes?${query.toString()}`,
+    {
+      method: "GET",
+    }
+  )
+
 }

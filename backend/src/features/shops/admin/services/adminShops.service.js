@@ -360,9 +360,348 @@ async function getFormShop(shopId) {
 
 
 
+async function getShopDashboard(shopId) {
+  const shopCollection = getCollectionInstance("shops");
+
+  const _id = new mongoose.Types.ObjectId(shopId);
+
+  const [shopData] = await shopCollection.aggregate([
+    { $match: { _id } },
+
+    // TYPES
+    {
+      $lookup: {
+        from: "types",
+        localField: "types",
+        foreignField: "_id",
+        as: "types",
+      },
+    },
+
+    // FEATURES
+    {
+      $lookup: {
+        from: getCollection("shopfeatures"),
+        localField: "features",
+        foreignField: "_id",
+        as: "features",
+      },
+    },
+
+    // PRODUCER
+    {
+      $lookup: {
+        from: getCollection("producers"),
+        localField: "producer",
+        foreignField: "_id",
+        as: "producer",
+      },
+    },
+    { $unwind: { path: "$producer", preserveNullAndEmptyArrays: true } },
+
+    // USER
+    {
+      $lookup: {
+        from: getCollection("users"),
+        localField: "producer.owner",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+
+    {
+      $project: {
+        name: 1,
+        siret: 1,
+        isValidated: 1,
+        isOpen: 1,
+        isPremium: 1,
+        createdAt: 1,
+
+        address: {
+          address1: 1,
+          address2: 1,
+          postalCode: 1,
+          city: 1,
+          country: 1,
+          latitude: { $toDouble: "$address.latitude" },
+          longitude: { $toDouble: "$address.longitude" },
+        },
+
+        logo: 1,
+        shortDesc: 1,
+        longDesc: 1,
+        photos: 1,
+        video: 1,
+
+        socials: 1,
+        socialPostSettings: 1,
+        clickCollect: 1,
+        markets: 1,
+
+        types: {
+          $map: {
+            input: "$types",
+            as: "t",
+            in: { _id: "$$t._id", label: "$$t.label" },
+          },
+        },
+
+        features: {
+          $map: {
+            input: "$features",
+            as: "f",
+            in: { _id: "$$f._id", label: "$$f.label" },
+          },
+        },
+
+        producer: {
+          _id: "$producer._id",
+          socialReason: "$producer.socialReason",
+          onboardingStep: "$producer.onboardingStep",
+          siren: "$producer.siren",
+        },
+
+        user: {
+          _id: "$user._id",
+          firstname: "$user.firstname",
+          lastname: "$user.lastname",
+          email: "$user.email",
+        },
+      },
+    },
+  ]).toArray();
+
+  if (!shopData) throw new Error("Shop not found");
+
+
+  return {
+    shop: {
+      ...shopData,
+      producer: undefined,
+      user: undefined,
+    },
+    producer: shopData.producer,
+    user: shopData.user,
+  };
+}
+
+async function getShopOrders(
+  shopId,
+  page = 1,
+  limit = 10,
+  search,
+  sortKey = "createdAt",
+  sortDirection = "desc",
+  filters = {}
+) {
+  const orderCollection = getCollectionInstance("orders");
+
+  const _id = new mongoose.Types.ObjectId(shopId);
+  const skip = (page - 1) * limit;
+
+  const sort = {
+    [sortKey]: sortDirection === "asc" ? 1 : -1,
+  };
+
+  const basePipeline = [
+    { $match: { "details.shop": _id } },
+    { $unwind: "$details" },
+    { $match: { "details.shop": _id } },
+
+    {
+      $lookup: {
+        from: getCollection("users"),
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+
+    ...(search
+      ? [
+          {
+            $match: {
+              $or: [
+                { orderNumber: { $regex: search, $options: "i" } },
+                { "user.firstname": { $regex: search, $options: "i" } },
+                { "user.lastname": { $regex: search, $options: "i" } },
+              ],
+            },
+          },
+        ]
+      : []),
+  ];
+
+  const pipeline = [
+    ...basePipeline,
+
+    {
+      $facet: {
+        items: [
+          {
+            $project: {
+              _id: 1,
+              orderNumber: 1,
+              createdAt: 1,
+              isPaid: 1,
+              isWithdrawn: 1,
+
+              user: {
+                _id: "$user._id",
+                firstname: "$user.firstname",
+                lastname: "$user.lastname",
+              },
+
+              shopDetail: {
+                status: "$details.status",
+                shopTotalTTC: "$details.shopTotalTTC",
+                withdrawMode: "$details.withdrawMode",
+                withdrawDay: "$details.withdrawDay",
+              },
+            },
+          },
+          { $sort: sort },
+          { $skip: skip },
+          { $limit: limit },
+        ],
+
+        totalCount: [{ $count: "count" }],
+
+        stats: [
+          {
+            $group: {
+              _id: null,
+              avgTTC: { $avg: "$details.shopTotalTTC" },
+              totalOrders: { $sum: 1 },
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  const [result] = await orderCollection.aggregate(pipeline).toArray();
+
+  return {
+    items: result.items,
+    stats: {
+      avgTTC: result.stats[0]?.avgTTC || 0,
+      totalOrders: result.stats[0]?.totalOrders || 0,
+    },
+    pagination: {
+      page,
+      limit,
+      totalItems: result.totalCount[0]?.count || 0,
+      totalPages: Math.ceil(
+        (result.totalCount[0]?.count || 0) / limit
+      ),
+    },
+  };
+}
+
+async function getShopNotes(
+  shopId,
+  page = 1,
+  limit = 10,
+  search,
+  sortKey = "createdAt",
+  sortDirection = "desc"
+) {
+  const collection = getCollectionInstance("notes");
+  const _id = new mongoose.Types.ObjectId(shopId);
+  const skip = (page - 1) * limit;
+
+  const matchStage = { shop: _id };
+
+  if (search) {
+    matchStage.comment = { $regex: search, $options: "i" };
+  }
+
+  const sortStage = {
+    [sortKey]: sortDirection === "asc" ? 1 : -1,
+  };
+
+  const pipeline = [
+    { $match: matchStage },
+
+    {
+      $lookup: {
+        from: getCollection("users"),
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+
+    {
+      $facet: {
+        items: [
+          {
+            $project: {
+              note: { $toDouble: "$note" },
+              createdAt: 1,
+              comment: 1,
+              source: 1,
+              user: {
+                _id: "$user._id",
+                lastname: "$user.lastname",
+              },
+            },
+          },
+          { $sort: sortStage },
+          { $skip: skip },
+          { $limit: limit },
+        ],
+
+        totalCount: [{ $count: "count" }],
+
+        stats: [
+          {
+            $group: {
+              _id: null,
+              avgRating: { $avg: "$note" },
+              totalNotes: { $sum: 1 },
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  const [result] = await collection.aggregate(pipeline).toArray();
+
+  return {
+    items: result.items,
+    stats: {
+      avgRating: result.stats[0]?.avgRating
+        ? Number(result.stats[0].avgRating.toString())
+        : 0,
+      totalNotes: result.stats[0]?.totalNotes || 0,
+    },
+    pagination: {
+      page,
+      limit,
+      totalItems: result.totalCount[0]?.count || 0,
+      totalPages: Math.ceil(
+        (result.totalCount[0]?.count || 0) / limit
+      ),
+    },
+  };
+}
+
+
+
+
 module.exports = {
   getShops,
   getShopById,
   updateShop,
   getFormShop,
-}
+  getShopDashboard,
+  getShopOrders,
+  getShopNotes,
+} 

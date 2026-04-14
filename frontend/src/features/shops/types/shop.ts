@@ -1,4 +1,4 @@
-import type { Address, PaginationMeta } from "../../../types/global.types";
+import type { Address, OpeningHour, PaginationMeta } from "../../../types/global.types";
 
 export interface ShopActionTarget {
   _id: string;
@@ -158,4 +158,140 @@ export interface ShopPayload {
 
   features: string[];
 
+}
+
+
+export interface ShopDashboard {
+  shop: {
+    _id: string;
+    producer: {
+      _id: string;
+      socialReason: string;
+      onboardingStep: number;
+    };
+    siret: string;
+    address: Address;
+    clickCollect: {
+      _id: string;
+      createdAt: string;
+      updatedAt: string;
+      openingHours: OpeningHour[];
+      instructions: string;
+      isActive: boolean;
+    };
+    createdAt: string;
+    isOpen: boolean;
+    markets: {
+      market: string;
+      isActive: boolean;
+      openingHours: OpeningHour[];
+      _id: string;
+    }[];
+    name: string;
+    photos: string[];
+    types: {
+      _id: string;
+      label: string;
+    }[];
+    video: string[];
+    isPremium: boolean;
+    logo: string;
+    longDesc: string;
+    shortDesc: string;
+    socials: {
+      connected: boolean;
+      isEnabled: boolean;
+      accesstoken: string;
+      refreshToken: string;
+      userId: string;
+      username: string;
+      pageId: string;
+      pageName: string;
+      expiresAt: string;
+    }[];
+    socialPostSettings: {
+      customHastags: string[];
+      customMentions: string[];
+      frequency: {
+        mode: string;
+        timePerWeek: number;
+        preferredDays: string[];
+      }
+    };
+    features: {
+      _id: string;
+      label: string;
+    }[];
+    isValidated: boolean;
+  };
+  producer: {
+    _id: string;
+    socialReason: string;
+    onboardingStep: number;
+    siren: string;
+  };
+  user: {
+    _id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+  stats: {
+    avgRating: number;
+    totalNotes: number;
+    totalOrders: number;
+  };
+
+}
+
+export interface ShopOrder {
+  _id: string;
+  orderNumber: string;
+  createdAt: Date;
+  isPaid: boolean;
+  isWithdrawn: boolean;
+
+  user: {
+    _idUser: string;
+    firstname: string;
+    lastname: string;
+  };
+
+  shopDetail: {
+    status: string;
+    shopTotalTTC: number;
+    withdrawMode: string;
+    withdrawDay: string;
+  };
+
+}
+
+export interface ShopOrderListResponse {
+  items: ShopOrder[];
+  stats: {
+    avgTTC: number;
+    totalOrders: number;
+  };
+  pagination: PaginationMeta;
+}
+
+export interface ShopNote {
+  _id: string;
+  user: {
+    _id: string;
+    lastname: string;
+  };
+  note: number;
+  comment: string;
+  source: "purchase" | "touristVisit";
+  createdAt: string;
+}
+
+export interface ShopNoteListResponse {
+  items: ShopNote[];
+  stats: {
+    avgRating: number;
+    totalNotes: number;
+  };
+  pagination: PaginationMeta;
 }

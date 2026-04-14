@@ -1,19 +1,18 @@
 type Props = {
   label: string;
-  value: string | number;
-  align?: "start" | "center" | "end";
+  value: string | number | null;
+  extraClasses?: string;
 };
 
-export function StatCard({ 
+export function FlatStatCard({ 
   label, 
   value,
-  align = "start" 
+  extraClasses,
 }: Props) {
 
-  let alignClass = `text-${align}`;
 
   return (
-    <div className={`stat-card ${alignClass}`}>
+    <div className={`${extraClasses} stat-card-flat`}>
       <div className="stat-card-title">
         {label}
       </div>
