@@ -207,25 +207,11 @@ export interface ShopDashboard {
     longDesc: string;
     shortDesc: string;
     socials: {
-      connected: boolean;
-      isEnabled: boolean;
-      accesstoken: string;
-      refreshToken: string;
-      userId: string;
-      username: string;
-      pageId: string;
-      pageName: string;
-      expiresAt: string;
-    }[];
-    socialPostSettings: {
-      customHastags: string[];
-      customMentions: string[];
-      frequency: {
-        mode: string;
-        timePerWeek: number;
-        preferredDays: string[];
-      }
+      facebook: Social | undefined;
+      instagram: Social | undefined;
+      tiktok: Social | undefined;
     };
+    socialPostSettings: SocialPostSettings;
     features: {
       _id: string;
       label: string;
@@ -324,4 +310,53 @@ export interface ShopWithdrawModes {
 export interface ShopDescriptions {
   shortDesc?: string;
   longDesc?: string;
+}
+
+export interface ShopSocials {
+  socials: Partial<{
+    facebook: Social;
+    instagram: Social;
+    tiktok: Social;
+  }>;
+  socialPostSettings: SocialPostSettings;
+}
+
+export interface ShopCrew {
+  crew: CrewMember[];
+}
+
+interface Socials {
+  facebook: Social | undefined;
+  instagram: Social | undefined;
+  tiktok: Social | undefined;
+}
+
+interface Social {
+  connected: boolean;
+  isEnabled: boolean;
+  accesstoken: string;
+  refreshToken: string;
+  userId: string;
+  username: string;
+  pageId: string;
+  pageName: string;
+  expiresAt: string;
+}
+
+interface SocialPostSettings {
+  customHashtags: string[];
+  customMentions: string[];
+  frequency: {
+    mode: string;
+    timePerWeek: number;
+    preferredDays: number[];
+  }
+}
+
+interface CrewMember {
+  _id: string;
+  forname: string;
+  role: string;
+  description: string;
+  photo: string;
 }

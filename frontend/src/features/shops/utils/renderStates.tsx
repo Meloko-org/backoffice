@@ -42,5 +42,20 @@ export function renderActiveMarket(isActive: boolean) {
       {badgeLabel}
     </div>
   )
+}
 
+export function renderSocialConnected(isConnected: boolean) {
+  let badgeClass = "bg-primary w-20";
+  let badgeLabel = "connecté";
+
+  if (!isConnected) {
+    badgeClass = "bg-danger w-24";
+    badgeLabel = "non connecté";
+  }
+
+  return (
+    <div className={`${badgeClass} rounded-lg px-2 text-center`}>
+      {badgeLabel}
+    </div>
+  )
 }

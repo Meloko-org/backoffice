@@ -30,7 +30,7 @@ export function ShopHeaderSection({ shop }: Props) {
   useInfoContext(infoContext)
 
   useEffect(() => {
-    if (infoContext && !isRightOpen) {
+    if (infoContext) {
       openRight();
     } else {
       closeRight();

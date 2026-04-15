@@ -29,6 +29,8 @@ export default function ShopPage() {
 
   const { data, isLoading, isError } = useShopDashboard(id!);
 
+ 
+
   console.log(data)
 
   const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
@@ -36,17 +38,19 @@ export default function ShopPage() {
   useInfoContext(infoContext);
 
   useEffect(() => {
-    if (infoContext && !isRightOpen) {
+    if (infoContext) {
       openRight();
     } else {
       closeRight();
     }
   }, [infoContext])
 
+  if (isError || !data) return <div>Error loading user</div>;
+
   const handleWithdrawModes = () => {
     setInfoContext({
       type: "shopWithdrawModes",
-      title: "Détails des modes de retrait",
+      title: "Détail des modes de retrait",
       data: {
         clickCollect: data?.shop.clickCollect,
         markets: data?.shop.markets
@@ -54,7 +58,17 @@ export default function ShopPage() {
     })
   }
 
-  
+  const handleSocials = () => {
+    console.log("youpi")
+    setInfoContext({
+      type: "shopSocials",
+      title: "Détail des réseaux sociaux",
+      data: {
+        socials: data.shop.socials,
+        socialPostSettings: data.shop.socialPostSettings
+      }
+    })
+  }
 
   if (isLoading) {
     return (
@@ -62,7 +76,7 @@ export default function ShopPage() {
     );
   }
 
-  if (isError || !data) return <div>Error loading user</div>;
+
 
   const socialIcons: Record<SocialKey, IconDefinition> = {
     facebook: faFacebook,
@@ -218,7 +232,7 @@ export default function ShopPage() {
 
               <div className="flex flex-row justify-center gap-2 my-5">
                 {Object.entries(data.shop.socials)
-                  .filter(([_, value]) => value.connected)
+                  .filter(([_, value]) => value?.connected)
                   .map(([key, value]) => {
                     const icon = socialIcons[key as keyof typeof socialIcons];
 
@@ -226,7 +240,7 @@ export default function ShopPage() {
 
                     return (
                       <a
-                        href={`https://${key}.com/${value.username?.replace("@", "")}`}
+                        href={`https://${key}.com/${value?.username?.replace("@", "")}`}
                         target="_blank"
                       >
                         <FontAwesomeIcon
@@ -243,7 +257,7 @@ export default function ShopPage() {
 
               <div className="flex flex-row justify-center">
                 <button
-                  onClick={() => {}} // afficher dans le rightPanel, toutes les infos des socials et socialSettings
+                  onClick={handleSocials} // afficher dans le rightPanel, toutes les infos des socials et socialSettings
                   className="btn-outline-primary"
                 >
                   Paramètres

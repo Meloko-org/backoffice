@@ -1,5 +1,5 @@
 import type { ProductLine } from "../../../../features/orders/types/order";
-import type { ShopDescriptions, ShopWithdrawModes } from "../../../../features/shops/types/shop";
+import type { ShopCrew, ShopDescriptions, ShopSocials, ShopWithdrawModes } from "../../../../features/shops/types/shop";
 import type { ModelInfoContext, WithData, WithId, WithType } from "../../contexts/AdminInfoContext";
 
 // export type RightPanelType =
@@ -47,6 +47,8 @@ export type RightPanelContextMap = {
 
   shopWithdrawModes: WithData<"shopWithdrawModes", ShopWithdrawModes>;
   shopDescriptions: WithData<"shopDescriptions", ShopDescriptions>;
+  shopCrew: WithData<"shopCrew", ShopCrew>;
+  shopSocials: WithData<"shopSocials", ShopSocials>;
 };
 
 export type RightPanelType = keyof RightPanelContextMap;
