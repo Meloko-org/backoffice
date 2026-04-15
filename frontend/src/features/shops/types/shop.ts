@@ -183,12 +183,20 @@ export interface ShopDashboard {
     isOpen: boolean;
     markets: {
       market: string;
+      name: string;
       isActive: boolean;
       openingHours: OpeningHour[];
       _id: string;
     }[];
     name: string;
     photos: string[];
+    crew: {
+      _id: string;
+      forname: string;
+      role: string;
+      description: string;
+      photo: string;
+    }[],
     types: {
       _id: string;
       label: string;
@@ -294,4 +302,21 @@ export interface ShopNoteListResponse {
     totalNotes: number;
   };
   pagination: PaginationMeta;
+}
+
+
+
+export interface ShopWithdrawModes {
+  clickCollect?: {
+    instructions: string;
+    openingHours: OpeningHour[];
+    updatedAt: string;
+    isActive: boolean;
+  };
+  markets?: {
+    _id: string;
+    openingHours: OpeningHour[];
+    name: string;
+    isActive: boolean;
+  }[];
 }

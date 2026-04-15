@@ -27,3 +27,20 @@ export function renderSourceNote(source: "purchase" | "touristVisit") {
 
   return icon;
 }
+
+export function renderActiveMarket(isActive: boolean) {
+  let badgeClass = "bg-primary w-12";
+  let badgeLabel = "actif";
+
+  if (!isActive) {
+    badgeClass = "bg-danger w-18";
+    badgeLabel = "non actif";
+  }
+
+  return (
+    <div className={`${badgeClass} rounded-lg px-2 text-center`}>
+      {badgeLabel}
+    </div>
+  )
+
+}

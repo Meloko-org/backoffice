@@ -1,4 +1,5 @@
 import type { ProductLine } from "../../../../features/orders/types/order";
+import type { ShopWithdrawModes } from "../../../../features/shops/types/shop";
 import type { ModelInfoContext, WithData, WithId, WithType } from "../../contexts/AdminInfoContext";
 
 // export type RightPanelType =
@@ -43,6 +44,8 @@ export type RightPanelContextMap = {
   marketAnalytics: WithId<"marketAnalytics">;
 
   topMarketsByUsage: WithType<"topMarketsByUsage">;
+
+  shopWithdrawModes: WithData<"shopWithdrawModes", ShopWithdrawModes>;
 };
 
 export type RightPanelType = keyof RightPanelContextMap;

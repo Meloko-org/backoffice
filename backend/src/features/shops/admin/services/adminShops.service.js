@@ -410,6 +410,16 @@ async function getShopDashboard(shopId) {
     },
     { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
 
+    // LOOKUP markets
+    {
+      $lookup: {
+        from: "markets",
+        localField: "markets.market",
+        foreignField: "_id",
+        as: "marketsData",
+      },
+    },
+
     {
       $project: {
         name: 1,
@@ -438,7 +448,38 @@ async function getShopDashboard(shopId) {
         socials: 1,
         socialPostSettings: 1,
         clickCollect: 1,
-        markets: 1,
+        markets: {
+          $map: {
+            input: "$markets",
+            as: "m",
+            in: {
+              _id: "$$m.market",
+              isActive: "$$m.isActive",
+              openingHours: "$$m.openingHours",
+              name: {
+                $let: {
+                  vars: {
+                    matchedMarket: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: "$marketsData",
+                            as: "md",
+                            cond: { $eq: ["$$md._id", "$$m.market"] },
+                          },
+                        },
+                        0,
+                      ],
+                    },
+                  },
+                  in: "$$matchedMarket.name",
+                },
+              },
+            },
+          },
+        },
+
+        crew: 1,
 
         types: {
           $map: {

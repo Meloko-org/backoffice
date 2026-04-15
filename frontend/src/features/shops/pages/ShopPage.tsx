@@ -1,20 +1,29 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useAdminPage } from "../../../hooks/useAdminPage";
 import { useShopDashboard } from "../hooks/useShopDashboard";
-import { useState } from "react";
 import Loader from "../../../components/admin/Loader";
 import { ShopHeaderSection } from "../components/ShopHeaderSection";
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";
-import { StatCard } from "../../../components/admin/cards/StatCard";
 import { renderBoolSticker } from "../../../utils/layout/renderStickers";
 import { WithInfoButton } from "../../../components/global/buttons/withInfoButton";
 import ShopOrderSection from "../components/ShopOrderSection";
 import ShopNoteSection from "../components/ShopNoteSection";
+import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useInfoContext } from "../../../hooks/useInfoContext";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useEffect, useState } from "react";
+
+
+type SocialKey = "facebook" | "instagram" | "tiktok";
 
 export default function ShopPage() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isRightOpen, openRight, closeRight } = useAdminLayout();
 
   useAdminPage("Dashboard du shop");
 
@@ -22,12 +31,46 @@ export default function ShopPage() {
 
   console.log(data)
 
+  const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
+  
+  useInfoContext(infoContext);
+
+  useEffect(() => {
+    if (infoContext && !isRightOpen) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [infoContext])
+
+  const handleWithdrawModes = () => {
+    setInfoContext({
+      type: "shopWithdrawModes",
+      title: "Détails des modes de retrait",
+      data: {
+        clickCollect: data?.shop.clickCollect,
+        markets: data?.shop.markets
+      },
+    })
+  }
+
   if (isLoading) {
     return (
       <Loader />
     );
   }
+
   if (isError || !data) return <div>Error loading user</div>;
+
+  const socialIcons: Record<SocialKey, IconDefinition> = {
+    facebook: faFacebook,
+    instagram: faInstagram,
+    tiktok: faTiktok,
+  }
+
+
+
+   
 
   return (
     <div className="space-y-8 px-6 mx-auto max-w-7xl">
@@ -130,10 +173,13 @@ export default function ShopPage() {
                 <div>
                   {renderBoolSticker(data.shop.markets.length > 0)}
                 </div>
+                <div className="col-span-3">
+                  <p className="bloc-label">Livraison (bientôt)</p>
+                </div>
               </div>
               <div className="justify-self-center-safe">
                 <button
-                  onClick={() => {}}
+                  onClick={handleWithdrawModes} // afficher dans le rightPanel, toutes les infos de clickCollect et markets
                   className="btn-outline-primary"
                 >Voir détails</button>
               </div>
@@ -144,21 +190,21 @@ export default function ShopPage() {
               <WithInfoButton
                 label="Photos"
                 info={data.shop.photos.length.toString()}
-                onClick={() => {}}
+                onClick={() => {}}  // afficher dans le rightPanel, toutes les photos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Vidéos"
-                info={data.shop.photos.length.toString()}
-                onClick={() => {}}
+                info={data.shop.video.length.toString()}
+                onClick={() => {}}  // afficher dans le rightPanel, toutes les videos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Équipe"
-                info={data.shop.photos.length.toString()}
-                onClick={() => {}}
+                info={data.shop.crew.length.toString()}
+                onClick={() => {}}  // afficher dans le rightPanel, tous les membres du crew
                 extraClasses="btn-warning"
                 textClasses=""
               />
@@ -168,13 +214,34 @@ export default function ShopPage() {
             <div className="shop-dashboard-bloc space-y-1">
               <h2>Réseaux sociaux</h2>
 
-              <div className="flex flex-row justify-center">
+              <div className="flex flex-row justify-center gap-2 my-5">
+                {Object.entries(data.shop.socials)
+                  .filter(([_, value]) => value.connected)
+                  .map(([key, value]) => {
+                    const icon = socialIcons[key as keyof typeof socialIcons];
 
+                    if (!icon) return null;
+
+                    return (
+                      <a
+                        href={`https://${key}.com/${value.username?.replace("@", "")}`}
+                        target="_blank"
+                      >
+                        <FontAwesomeIcon
+                          key={key}
+                          icon={icon}
+                          className="text-2xl"
+                        />
+                      </a>
+                    )
+                  })
+                
+                }
               </div>
 
-              <div className="flex flex-row justify-end">
+              <div className="flex flex-row justify-center">
                 <button
-                  onClick={() => {}}
+                  onClick={() => {}} // afficher dans le rightPanel, toutes les infos des socials et socialSettings
                   className="btn-outline-primary"
                 >
                   Paramètres

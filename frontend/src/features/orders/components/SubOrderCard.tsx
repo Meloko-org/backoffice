@@ -1,7 +1,6 @@
 import { ProductsTable } from "./ProductsTable";
 import { InvoiceSection } from "./InvoiceSection";
 import type { SubOrderDetail } from "../types/order";
-import { Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CreditNoteSection } from "./CreditNoteSection";
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";

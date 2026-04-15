@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import type { RightPanelType } from "../registries/rightPanel/rightPanelRegistry";
 import type { ProductLine } from "../../../features/orders/types/order";
+import type { ShopWithdrawModes } from "../../../features/shops/types/shop";
 // import type { ModelContext } from "../../../types/admin";
 
 type Direction = "forward" | "back";
@@ -55,6 +56,12 @@ export type ModelInfoContext =
   | WithId<"marketAnalytics">
 
   | WithType<"topMarketsByUsage">
+
+  | WithData<"shopWithdrawModes", ShopWithdrawModes>
+  // | WithData<"shopPhotos", string[]>
+  // | WithData<"shopVideos", string[]>
+  // | WithData<"shopCrew", CrewMember[]>
+  // | WithData<"shopSocials", ShopSocials>
   | null;
 
 type AdminInfoContextType = {
