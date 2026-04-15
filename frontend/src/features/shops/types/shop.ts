@@ -305,7 +305,7 @@ export interface ShopNoteListResponse {
 }
 
 
-
+/* pour les composants Details */
 export interface ShopWithdrawModes {
   clickCollect?: {
     instructions: string;
@@ -319,4 +319,9 @@ export interface ShopWithdrawModes {
     name: string;
     isActive: boolean;
   }[];
+}
+
+export interface ShopDescriptions {
+  shortDesc?: string;
+  longDesc?: string;
 }

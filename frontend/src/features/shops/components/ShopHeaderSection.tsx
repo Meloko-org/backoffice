@@ -4,6 +4,10 @@ import { shopActions } from "../config/shopActionsregistry";
 import { useShopActionsContext } from "../hooks/useShopActionsContext";
 import type { ShopDashboard } from "../types/shop"
 import ShopStatusesBar from "./ShopStatusesBar";
+import { useEffect, useState } from "react";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import { useInfoContext } from "../../../hooks/useInfoContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 
 type Props = {
   shop: ShopDashboard["shop"];
@@ -11,12 +15,39 @@ type Props = {
 
 export function ShopHeaderSection({ shop }: Props) {
 
+  const { isRightOpen, openRight, closeRight } = useAdminLayout();
+
   const baseCtx = useShopActionsContext();
   const ctx: ShopActionContext = {
     ...baseCtx
   }
 
   const actions = shopActions.getActions(shop, ctx, "shop-header")
+
+
+  const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
+
+  useInfoContext(infoContext)
+
+  useEffect(() => {
+    if (infoContext && !isRightOpen) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [infoContext])
+
+
+  const handleDescriptions = () => {
+    setInfoContext({
+      type: "shopDescriptions",
+      title: "Détail des descriptions",
+      data: {
+        shortDesc: shop.shortDesc,
+        longDesc: shop.longDesc
+      }
+    })
+  }
 
   return (
     <div className="bloc ">
@@ -41,7 +72,7 @@ export function ShopHeaderSection({ shop }: Props) {
 
             <div className="justify-self-center-safe">
               <button
-                onClick={() => {}}
+                onClick={handleDescriptions}
                 className="btn-outline-primary h-8"
               >Desc</button>
             </div>

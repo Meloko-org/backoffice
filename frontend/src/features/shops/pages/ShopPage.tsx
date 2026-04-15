@@ -54,6 +54,8 @@ export default function ShopPage() {
     })
   }
 
+  
+
   if (isLoading) {
     return (
       <Loader />
