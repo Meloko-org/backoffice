@@ -23,7 +23,7 @@ export default function ShopPage() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isRightOpen, openRight, closeRight } = useAdminLayout();
+  const { openRight, closeRight } = useAdminLayout();
 
   useAdminPage("Dashboard du shop");
 
@@ -31,7 +31,7 @@ export default function ShopPage() {
 
  
 
-  console.log(data)
+  console.log("DASHBOARD data :", data)
 
   const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
   
@@ -66,6 +66,36 @@ export default function ShopPage() {
       data: {
         socials: data.shop.socials,
         socialPostSettings: data.shop.socialPostSettings
+      }
+    })
+  }
+
+  const handlePhotos = () => {
+    setInfoContext({
+      type: "shopPhotos",
+      title: "Détail des photos",
+      data: {
+        photos: data.shop.photos
+      }
+    })
+  }
+
+  const handleVideos = () => {
+    setInfoContext({
+      type: "shopVideos",
+      title: "Détail des videos",
+      data: {
+        videos: data.shop.video
+      }
+    })
+  }
+
+  const handleCrew = () => {
+    setInfoContext({
+      type: "shopCrew",
+      title: "Détail de l'équipe",
+      data: {
+        crew: data.shop.crew
       }
     })
   }
@@ -137,7 +167,7 @@ export default function ShopPage() {
             <div className="flex flex-row justify-between">
               <h2 className="mb-2">Producteur</h2>
               <EyeButton 
-                onClick={() => navigate(`/admin/producers/${data.producer._id}`)}
+                onClick={() => navigate(`/admin/producers?search=${data.producer.siren}`)}
                 extraClasses=""
               />
             </div>
@@ -206,21 +236,21 @@ export default function ShopPage() {
               <WithInfoButton
                 label="Photos"
                 info={data.shop.photos.length.toString()}
-                onClick={() => {}}  // afficher dans le rightPanel, toutes les photos
+                onClick={handlePhotos}  // afficher dans le rightPanel, toutes les photos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Vidéos"
                 info={data.shop.video.length.toString()}
-                onClick={() => {}}  // afficher dans le rightPanel, toutes les videos
+                onClick={handleVideos}  // afficher dans le rightPanel, toutes les videos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Équipe"
                 info={data.shop.crew.length.toString()}
-                onClick={() => {}}  // afficher dans le rightPanel, tous les membres du crew
+                onClick={handleCrew}  // afficher dans le rightPanel, tous les membres du crew
                 extraClasses="btn-warning"
                 textClasses=""
               />
@@ -242,9 +272,9 @@ export default function ShopPage() {
                       <a
                         href={`https://${key}.com/${value?.username?.replace("@", "")}`}
                         target="_blank"
+                        key={key}
                       >
                         <FontAwesomeIcon
-                          key={key}
                           icon={icon}
                           className="text-2xl"
                         />

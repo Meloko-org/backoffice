@@ -325,11 +325,14 @@ export interface ShopCrew {
   crew: CrewMember[];
 }
 
-interface Socials {
-  facebook: Social | undefined;
-  instagram: Social | undefined;
-  tiktok: Social | undefined;
+export interface ShopPhotos {
+  photos: string[];
 }
+
+export interface ShopVideos {
+  videos: string[];
+}
+
 
 interface Social {
   connected: boolean;

@@ -3,13 +3,15 @@
  * toutes les listes Admin utilisent ces types
  */
 
+import type { PaginationMeta } from "./global.types";
 
-export interface PaginationMeta {
-  page: number;
-  limit: number;
-  total: number;
-  pages: number;
-}
+
+// export interface PaginationMeta {
+//   page: number;
+//   limit: number;
+//   total: number;
+//   pages: number;
+// }
 
 export interface ListResult<T> {
   items: T[];

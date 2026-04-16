@@ -15,7 +15,7 @@ type Props = {
 
 export function ShopHeaderSection({ shop }: Props) {
 
-  const { isRightOpen, openRight, closeRight } = useAdminLayout();
+  const { openRight, closeRight } = useAdminLayout();
 
   const baseCtx = useShopActionsContext();
   const ctx: ShopActionContext = {
@@ -56,26 +56,26 @@ export function ShopHeaderSection({ shop }: Props) {
 
         <div className="grid gap-3 h-30 content-between">
           {/* Avatar */}
-            <div className="w-20 h-20 rounded-full overflow-hidden no-pict mb-2">
-              {shop.logo ? (
-                <img
-                  src={shop.logo}
-                  alt="avatar"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center gap-1 text-neutral-400 h-full">
-                  <ImageOff className="w-6 h-6" />
-                </div>
-              )}
-            </div>
+          <div className="w-20 h-20 rounded-full overflow-hidden no-pict mb-2">
+            {shop.logo ? (
+              <img
+                src={shop.logo}
+                alt="avatar"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-1 text-neutral-400 h-full">
+                <ImageOff className="w-6 h-6" />
+              </div>
+            )}
+          </div>
 
-            <div className="justify-self-center-safe">
-              <button
-                onClick={handleDescriptions}
-                className="btn-outline-primary h-8"
-              >Desc</button>
-            </div>
+          <div className="justify-self-center-safe">
+            <button
+              onClick={handleDescriptions}
+              className="btn-outline-primary h-8"
+            >Desc</button>
+          </div>
         </div>
 
         <div className="col-span-3 space-y-1">

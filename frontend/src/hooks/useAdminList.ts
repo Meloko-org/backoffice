@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "./useDebounce";
-import type { ListParams, ListResult, PaginationMeta } from "../types/list.types";
+import type { ListParams, ListResult } from "../types/list.types";
 import { useSearchParams } from "react-router-dom";
 import { adminEvents } from "../features/users/events/adminEvents";
+import type { PaginationMeta } from "../types/global.types";
 
 /*
 	"useAdminList est un hook générique.
@@ -126,6 +127,8 @@ export function useAdminList<T>(
         sortDirection,
         filters,
       });
+
+      console.log("fetcher result :", result)
 
       setItems(result.items);
       setPagination(result.pagination);

@@ -32,7 +32,7 @@ const listShops = async (req, res, next) => {
       filters,
     });
 
-    // console.log(JSON.stringify(result.items[0], null ,2))
+    console.log(result)
 
     res.json({
       success: true,

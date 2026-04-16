@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import type { RightPanelType } from "../registries/rightPanel/rightPanelRegistry";
 import type { ProductLine } from "../../../features/orders/types/order";
-import type { ShopCrew, ShopDescriptions, ShopSocials, ShopWithdrawModes } from "../../../features/shops/types/shop";
+import type { ShopCrew, ShopDescriptions, ShopPhotos, ShopSocials, ShopVideos, ShopWithdrawModes } from "../../../features/shops/types/shop";
 // import type { ModelContext } from "../../../types/admin";
 
 type Direction = "forward" | "back";
@@ -59,8 +59,8 @@ export type ModelInfoContext =
 
   | WithData<"shopWithdrawModes", ShopWithdrawModes>
   | WithData<"shopDescriptions", ShopDescriptions>
-  // | WithData<"shopPhotos", string[]>
-  // | WithData<"shopVideos", string[]>
+  | WithData<"shopPhotos", ShopPhotos>
+  | WithData<"shopVideos", ShopVideos>
   | WithData<"shopCrew", ShopCrew>
   | WithData<"shopSocials", ShopSocials>
   | null;

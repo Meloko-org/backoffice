@@ -55,8 +55,8 @@ export const getOrdersList = async (
     pagination: {
       page: res.pagination.page,
       limit: res.pagination.limit,
-      total: res.pagination.totalItems,
-      pages: res.pagination.totalPages,
+      totalItems: res.pagination.totalItems,
+      totalPages: res.pagination.totalPages,
     }
   }
 }
