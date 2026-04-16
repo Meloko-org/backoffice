@@ -1,7 +1,7 @@
 const express = require("express");
 const requireAuth = require("../../../../middlewares/requireAuth");
 const requireRole = require("../../../../middlewares/requireRole");
-const { listShops, getShop, formShop, shopDashboard, shopNotes, shopOrders } = require("../controllers/adminShops.controller");
+const { listShops, getShop, formShop, shopDashboard, shopNotes, shopOrders, shopOrder } = require("../controllers/adminShops.controller");
 const router = express.Router();
 
 
@@ -31,6 +31,13 @@ router.get(
   requireAuth,
   requireRole("admin", "super-admin"),
   shopNotes
+)
+
+router.get(
+  "/order/:id",
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  shopOrder
 )
 
 router.get(

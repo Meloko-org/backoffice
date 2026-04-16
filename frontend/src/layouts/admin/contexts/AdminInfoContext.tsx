@@ -63,6 +63,7 @@ export type ModelInfoContext =
   | WithData<"shopVideos", ShopVideos>
   | WithData<"shopCrew", ShopCrew>
   | WithData<"shopSocials", ShopSocials>
+  | WithId<"shopSubOrder">
   | null;
 
 type AdminInfoContextType = {

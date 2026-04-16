@@ -598,6 +598,7 @@ async function getShopOrders(
 
               shopDetail: {
                 status: "$details.status",
+                _id: "$details._id",
                 shopTotalTTC: "$details.shopTotalTTC",
                 withdrawMode: "$details.withdrawMode",
                 withdrawDay: "$details.withdrawDay",
@@ -734,6 +735,152 @@ async function getShopNotes(
   };
 }
 
+async function getShopOrderById(detailId) {
+  const orderCollection = getCollectionInstance("orders");
+
+  const _id = new mongoose.Types.ObjectId(detailId);
+
+  const [result] = await orderCollection.aggregate([
+    // 1. unwind details
+    { $unwind: "$details" },
+
+    // 2. match sur le subOrder
+    {
+      $match: {
+        "details._id": _id,
+      },
+    },
+
+    {
+      $lookup: {
+        from: getCollection("users"),
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+
+    // 3. unwind products
+    {
+      $unwind: {
+        path: "$details.products",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+
+    // 4. lookup STOCK
+    {
+      $lookup: {
+        from: getCollection("stocks"),
+        localField: "details.products.product",
+        foreignField: "_id",
+        as: "stock",
+      },
+    },
+    { $unwind: { path: "$stock", preserveNullAndEmptyArrays: true } },
+
+    // 5. lookup PRODUCT
+    {
+      $lookup: {
+        from: getCollection("products"),
+        localField: "stock.product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+    // 6. lookup FAMILY
+    {
+      $lookup: {
+        from: getCollection("productfamilies"),
+        localField: "product.family",
+        foreignField: "_id",
+        as: "family",
+      },
+    },
+    { $unwind: { path: "$family", preserveNullAndEmptyArrays: true } },
+
+    // 7. reconstruire chaque produit
+    {
+      $addFields: {
+        "details.products.name": {
+          $cond: [
+            { $ifNull: ["$stock.productCustomName", false] },
+            "$stock.productCustomName",
+            {
+              $concat: [
+                { $ifNull: ["$family.name", ""] },
+                " ",
+                { $ifNull: ["$product.name", ""] },
+              ],
+            },
+          ],
+        },
+        "details.products.image": {
+          $ifNull: ["$stock.image", "$product.image"],
+        },
+      },
+    },
+
+    // 8. regroupement des produits
+    {
+      $group: {
+        _id: "$details._id",
+
+        orderId: { $first: "$_id" },
+
+        user: {
+          $first: {
+            _id: "$user._id",
+            firstname: "$user.firstname",
+            lastname: "$user.lastname",
+          }
+        },
+
+        withdrawMode: { $first: "$details.withdrawMode" },
+        withdrawMarket: { $first: "$details.withdrawMarket" },
+        withdrawMarketId: { $first: "$details.withdrawMarketId" },
+        withdrawDay: { $first: "$details.withdrawDay" },
+
+        shopTotalTTC: { $first: "$details.shopTotalTTC" },
+        shopTotalHT: { $first: "$details.shopTotalHT" },
+        shopTotalVAT: { $first: "$details.shopTotalVAT" },
+
+        status: { $first: "$details.status" },
+        invoice: { $first: "$details.invoice" },
+        creditNotes: { $first: "$details.creditNotes" },
+        stockIssue: { $first: "$details.stockIssue" },
+
+        products: {
+          $push: {
+            _id: "$details.products._id",
+            name: "$details.products.name",
+            image: "$details.products.image",
+
+            quantity: "$details.products.quantity",
+            unit: "$details.products.unit",
+
+            unitPriceTTC: "$details.products.unitPriceTTC",
+            unitPriceHT: "$details.products.unitPriceHT",
+            vatRate: "$details.products.vatRate",
+
+            totalPrice: "$details.products.totalPriceTTC",
+
+            productStatus: "$details.products.productStatus",
+            refunded: "$details.products.refunded",
+          },
+        },
+      },
+    },
+  ]).toArray();
+
+  if (!result) throw new Error("SubOrder not found");
+
+  return result;
+}
+
 
 
 
@@ -745,4 +892,5 @@ module.exports = {
   getShopDashboard,
   getShopOrders,
   getShopNotes,
+  getShopOrderById,
 } 

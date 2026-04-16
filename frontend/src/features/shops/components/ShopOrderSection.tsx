@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useShopOrders } from "../hooks/useShopOrders";
 import type { Column } from "../../../components/data-table/DataTable";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { FlatStatCard } from "../../../components/admin/cards/FlatStatCard";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { ShopOrder, ShopSubOrder } from "../types/shop";
+import { useInfoContext } from "../../../hooks/useInfoContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 
 interface Props {
   shopId: string;
 }
 
 export default function ShopOrderSection({ shopId }: Props) {
+
+  const { openRight, closeRight } = useAdminLayout();
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -26,6 +32,29 @@ export default function ShopOrderSection({ shopId }: Props) {
     sortDirection,
     filters,
   });
+
+  const [ selectedSubOrder, setSelectedSubOrder ] = useState<ShopOrder | null>(null);
+
+  const infoContext: ModelInfoContext = selectedSubOrder
+    ? {
+      type: "shopSubOrder",
+      title: "Détail de la commande du shop",
+      id: selectedSubOrder.shopDetail._id
+    }
+    : null;
+
+  useInfoContext(infoContext)
+
+  useEffect(() => {
+    if (infoContext) {
+      openRight();
+    } else {
+      closeRight();
+    }
+  }, [infoContext])
+
+
+
 
   if (!data) return null;
 
@@ -66,6 +95,12 @@ export default function ShopOrderSection({ shopId }: Props) {
         })
     }
   ]
+
+  const handleSelectSubOrder = (shopOrder: ShopOrder) => {
+    setSelectedSubOrder(prev =>
+      prev?._id === shopOrder._id ? null : shopOrder
+    )
+  }
 
   return (
     <div className="shop-dashboard-bloc">
@@ -116,6 +151,7 @@ export default function ShopOrderSection({ shopId }: Props) {
 
         onPageChange={setPage}
         getRowId={(row) => row._id}
+        onRowClick={handleSelectSubOrder}
       />
 
     </div>

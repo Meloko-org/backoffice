@@ -1,7 +1,17 @@
 import { apiFetch, apiFetchFull } from "../../../lib/apiFetch";
 import type { ApiResponse } from "../../../types/global.types";
 import type { ListParams, ListResult } from "../../../types/list.types";
-import type { Shop, ShopDashboard, ShopDetail, ShopForm, ShopListResponse, ShopNote, ShopNoteListResponse, ShopOrder, ShopOrderListResponse, ShopPayload } from "../types/shop";
+import type { 
+  Shop, 
+  ShopDashboard, 
+  ShopDetail, 
+  ShopForm, 
+  ShopListResponse, 
+  ShopNoteListResponse, 
+  ShopOrderListResponse, 
+  ShopPayload, 
+  ShopSubOrder 
+} from "../types/shop";
 
 const API_ROOT = import.meta.env.VITE_API_ROOT;
 const BASE_URL = `${API_ROOT}/admin/shops`;
@@ -193,4 +203,15 @@ export const getShopNotes = async (
     }
   )
 
+}
+
+
+export const getShopOrderById = async (
+  id: string
+): Promise<ShopSubOrder> => {
+
+  return apiFetch<ShopSubOrder>(
+    `${BASE_URL}/order/${id}`,
+    { method: "GET" }
+  )
 }

@@ -631,10 +631,34 @@
 
   
 
+  /* CARDS */
 
+  /* shopOrder card */
+  .shopOrder-card {
+    @apply grid grid-cols-10 gap-2;
+  }
 
+  /* .shopOrder-card h4 {
+    @apply text-success/80;
+  } */
 
+  .shopOrder-img-container {
+    @apply col-span-2 place-self-center;
+  }
 
+  .shopOrder-unit-container {
+    @apply rounded-md py-1 px-2 text-center;
+    background-color: var(--first-plan-bg);
+  }
+
+  .shopOrder-unit-label {
+    @apply text-xs mr-1;
+    color: var(--second-text);
+  }
+
+  .shopOrder-unit-value {
+    @apply text-xs;
+  }
 
   /* Raw Menu */
   .row-menu-trigger {

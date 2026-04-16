@@ -2,6 +2,7 @@ import type { RightPanelMap } from "../../../layouts/admin/registries/rightPanel
 import ShopCrewDetails from "../components/ShopCrewDetails";
 import ShopDescDetails from "../components/ShopDescDetails";
 import ShopDetails from "../components/ShopDetails";
+import ShopOrderDetails from "../components/ShopOrderDetails";
 import ShopPhotoDetails from "../components/ShopPhotoDetails";
 import ShopSocialDetails from "../components/ShopSocialDetails";
 import ShopVideoDetails from "../components/ShopVideoDetails";
@@ -35,6 +36,10 @@ const rightPanel: RightPanelMap = {
   },
   shopVideos: {
     component: ShopVideoDetails,
+    fullPanel: true,
+  },
+  shopSubOrder: {
+    component: ShopOrderDetails,
     fullPanel: true,
   }
 }

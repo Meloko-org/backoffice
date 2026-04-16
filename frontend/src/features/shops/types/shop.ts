@@ -253,6 +253,7 @@ export interface ShopOrder {
 
   shopDetail: {
     status: string;
+    _id: string;
     shopTotalTTC: number;
     withdrawMode: string;
     withdrawDay: string;
@@ -331,6 +332,40 @@ export interface ShopPhotos {
 
 export interface ShopVideos {
   videos: string[];
+}
+
+export interface ShopSubOrder {
+  orderId: string;
+  _id: string;
+  withdrawMode: string;
+  withdrawMarket: string;
+  withdrawDay: number;
+  withdrawMarketId: string;
+  shopTotalTTC: number;
+  shopTotalVAT: number;
+  shopTotalHT: number;
+  status: string;
+  invoice: string;
+  creditNotes: string[];
+  stockIssue: boolean;
+  products: {
+    _id: string;
+    name: string;
+    image: string;
+    quantity: number;
+    unit: "gr" | "piece";
+    unitPriceTTC: number;
+    unitPriceHT: number;
+    vatRate: number;
+    totalPrice: number;
+    productStatus: string;
+    refunded: boolean;
+  }[];
+  user: {
+    _id: string;
+    firstname: string;
+    lastname: string;
+  }
 }
 
 
