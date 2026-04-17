@@ -368,6 +368,20 @@ export interface ShopSubOrder {
   }
 }
 
+export interface ShopNoteDetail {
+  _id: string;
+  user: {
+    _id: string;
+    firstname: string;
+    lastname: string;
+  };
+  note: number;
+  comment: string;
+  photo: string;
+  source: "purchase" | "touristVisit";
+  createdAt: string;
+}
+
 
 interface Social {
   connected: boolean;

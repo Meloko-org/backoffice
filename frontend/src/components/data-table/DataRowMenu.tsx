@@ -108,7 +108,8 @@ export function DataRowMenu({ actions }: Props) {
                 <button
                   key={index}
                   disabled={action.disabled}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     if (!action.disabled) {
                       action.run()
                       setOpen(false)

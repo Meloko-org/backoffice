@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useShopNotes } from "../hooks/useShopNotes";
 import type { Column } from "../../../components/data-table/DataTable";
 import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { renderSourceNote } from "../utils/renderStates";
 import { FlatStatCard } from "../../../components/admin/cards/FlatStatCard";
 import { RatingStars } from "../../../components/global/RatingStars";
+import type { ShopNote } from "../types/shop";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import { useInfoContext } from "../../../hooks/useInfoContext";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   shopId: string;
 }
 
 export default function ShopNoteSection({ shopId }: Props) {
+
+  const { openRight, closeRight } = useAdminLayout();
+  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -27,6 +35,26 @@ export default function ShopNoteSection({ shopId }: Props) {
     sortDirection,
     filters,
   });
+
+  const [ selectedNote, setSelectedNote ] = useState<ShopNote | null>(null);
+  
+    const infoContext: ModelInfoContext = selectedNote
+      ? {
+        type: "shopNote",
+        title: "Détail de la note",
+        id: selectedNote._id
+      }
+      : null;
+  
+    useInfoContext(infoContext)
+  
+    useEffect(() => {
+      if (infoContext) {
+        openRight();
+      } else {
+        closeRight();
+      }
+    }, [infoContext])
 
   if (!data) return null;
 
@@ -67,6 +95,14 @@ export default function ShopNoteSection({ shopId }: Props) {
         })
     }
   ]
+
+  const handleSelectNote = (shopNote: ShopNote) => {
+    setSelectedNote(prev =>
+      prev?._id === shopNote._id ? null : shopNote
+    )
+  }
+
+  console.log("note ", selectedNote)
 
   return (
     <div className="shop-dashboard-bloc">
@@ -117,6 +153,7 @@ export default function ShopNoteSection({ shopId }: Props) {
 
         onPageChange={setPage}
         getRowId={(row) => row._id}
+        onRowClick={handleSelectNote}
       />
 
     </div>

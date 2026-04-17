@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Shop = require("../../../../models/Shop");
+const Note = require("../../../../models/Note");
 const getCollection = require("../../../../utils/collectionName")
-const getCollectionInstance = require("../../../../helpers/collectionHelpers")
+const getCollectionInstance = require("../../../../helpers/collectionHelpers");
+const { NotFoundError } = require("../../../../utils/ApiError");
 
 async function getShops({
   page = 1,
@@ -309,7 +311,7 @@ async function updateShop(shopId, payload) {
 
 async function getFormShop(shopId) {
 
-    if (!mongoose.Types.ObjectId.isValid(shopId)) {
+  if (!mongoose.Types.ObjectId.isValid(shopId)) {
     throw new ApiError("Invalid shopId", 400);
   }
 
@@ -882,6 +884,30 @@ async function getShopOrderById(detailId) {
 }
 
 
+async function getShopNoteById(noteId) {
+
+  if (!mongoose.Types.ObjectId.isValid(noteId)) {
+    throw new ApiError("Invalid noteId", 400);
+  }
+
+  const note = await Note.findById(noteId)
+    .populate({
+      path: "user",
+      ref: "User",
+      select: "firstname lastname"
+    })
+    .lean();
+
+  if (!note) {
+    throw new NotFoundError("Note introuvable")
+  }
+
+  return {
+    ...note,
+    note: note.note ? Number(note.note.toString()) : null,
+  }
+}
+
 
 
 module.exports = {
@@ -893,4 +919,5 @@ module.exports = {
   getShopOrders,
   getShopNotes,
   getShopOrderById,
+  getShopNoteById,
 } 

@@ -7,6 +7,7 @@ import type {
   ShopDetail, 
   ShopForm, 
   ShopListResponse, 
+  ShopNoteDetail, 
   ShopNoteListResponse, 
   ShopOrderListResponse, 
   ShopPayload, 
@@ -212,6 +213,16 @@ export const getShopOrderById = async (
 
   return apiFetch<ShopSubOrder>(
     `${BASE_URL}/order/${id}`,
+    { method: "GET" }
+  )
+}
+
+export const getShopNoteById = async (
+  id: string
+): Promise<ShopNoteDetail> => {
+
+  return apiFetch<ShopNoteDetail>(
+    `${BASE_URL}/note/${id}`,
     { method: "GET" }
   )
 }

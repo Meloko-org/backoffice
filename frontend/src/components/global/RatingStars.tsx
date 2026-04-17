@@ -11,6 +11,11 @@ type Props = {
 }
 
 export function RatingStars({ rating, max = 5 }: Props) {
+
+  let colorClass = "text-primary";
+  if (rating > 1 && rating <4) colorClass = "text-warning"
+  if (rating <= 1) colorClass = "text-danger"
+
   return (
     <div className="flex items-center gap-1">
       {Array.from({ length: max }).map((_, i) => {
@@ -28,7 +33,7 @@ export function RatingStars({ rating, max = 5 }: Props) {
           <FontAwesomeIcon
             key={i}
             icon={icon}
-            className="text-primary"
+            className={colorClass}
           />
         );
       })}

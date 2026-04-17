@@ -52,6 +52,7 @@ export type RightPanelContextMap = {
   shopCrew: WithData<"shopCrew", ShopCrew>;
   shopSocials: WithData<"shopSocials", ShopSocials>;
   shopSubOrder: WithId<"shopSubOrder">;
+  shopNote: WithId<"shopNote">;
 };
 
 export type RightPanelType = keyof RightPanelContextMap;

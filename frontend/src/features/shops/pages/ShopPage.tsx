@@ -21,15 +21,19 @@ type SocialKey = "facebook" | "instagram" | "tiktok";
 
 export default function ShopPage() {
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { openRight, closeRight } = useAdminLayout();
-
-  useAdminPage("Dashboard du shop");
-
   const { data, isLoading, isError } = useShopDashboard(id!);
 
- 
+
+  const socialIcons: Record<SocialKey, IconDefinition> = {
+    facebook: faFacebook,
+    instagram: faInstagram,
+    tiktok: faTiktok,
+  }
+
+  useAdminPage("Dashboard du shop");
 
   console.log("DASHBOARD data :", data)
 
@@ -44,6 +48,12 @@ export default function ShopPage() {
       closeRight();
     }
   }, [infoContext])
+
+  if (isLoading) {
+    return (
+      <Loader />
+    );
+  }
 
   if (isError || !data) return <div>Error loading user</div>;
 
@@ -100,19 +110,9 @@ export default function ShopPage() {
     })
   }
 
-  if (isLoading) {
-    return (
-      <Loader />
-    );
-  }
 
 
 
-  const socialIcons: Record<SocialKey, IconDefinition> = {
-    facebook: faFacebook,
-    instagram: faInstagram,
-    tiktok: faTiktok,
-  }
 
 
 

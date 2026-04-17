@@ -8,11 +8,11 @@ const noteSchema = mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: "User",
     },
     shop: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "shops",
+      ref: "Shop",
     },
     comment: {
       type: String,

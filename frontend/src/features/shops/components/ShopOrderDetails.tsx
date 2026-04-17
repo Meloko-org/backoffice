@@ -7,6 +7,8 @@ import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { useNavigate } from "react-router-dom";
 import { Check, Euro, ImageOff } from "lucide-react";
 import { formatQty } from "../../../utils/quantity/quantityConverter";
+import { EyeButton } from "../../../components/admin/buttons/EyeButton";
+import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 
 type Props = {
   context: WithId<"shopSubOrder">
@@ -15,6 +17,7 @@ type Props = {
 export default function ShopOrderDetails({ context }: Props) {
 
   const navigate = useNavigate();
+  const { closeRight } = useAdminLayout();
 
   const { id } = context;
 
@@ -42,7 +45,16 @@ export default function ShopOrderDetails({ context }: Props) {
         <p className="details-label">
           client
         </p>
-        <p className="details-info">{subOrder.user.firstname} {subOrder.user.lastname}</p>
+        <div className=" flex flex-row justify-between">
+          <p className="details-info">{subOrder.user.firstname} {subOrder.user.lastname}</p>
+          <EyeButton
+            onClick={() => {
+              navigate(`/admin/users/${subOrder.user._id}`);
+              closeRight();
+            }}
+          />
+        </div>
+        
       </div>
 
       <div className="details-cols-2">

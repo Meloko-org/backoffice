@@ -12,8 +12,6 @@ export const shopActions = createActionsRegistry<ShopActionTarget, ShopActionCon
 
     placement: ["rowMenu", "details"],
 
-    visible: () => true,
-
     run: (shop, ctx) => {
       ctx.navigate(`/admin/shops/${shop._id}`)
     },

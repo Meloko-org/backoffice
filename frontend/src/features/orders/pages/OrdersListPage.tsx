@@ -3,7 +3,7 @@ import AdminListPage from "../../../layouts/admin/pages/AdminListPage";
 
 export default function OrdersListPage() {
 
-  useAdminPage("Liste des commandes (new)");
+  useAdminPage("Liste des commandes");
 
   return <AdminListPage model="orders" />
 }

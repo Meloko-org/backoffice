@@ -7,6 +7,7 @@ const {
   getShopOrders,
   getShopNotes,
   getShopOrderById,
+  getShopNoteById,
 } = require("../services/adminShops.service");
 
 const listShops = async (req, res, next) => {
@@ -198,6 +199,24 @@ const shopOrder = async (req, res, next) => {
   }
 };
 
+const shopNote = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await getShopNoteById(id);
+
+    console.log(result)
+
+    res.json({
+      success: true,
+      data: result,
+    })
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   listShops,
   getShop,
@@ -207,4 +226,5 @@ module.exports = {
   shopNotes,
   shopOrders,
   shopOrder,
+  shopNote,
 }
