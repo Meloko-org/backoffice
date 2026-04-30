@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
 import type { TopProductDetails } from "../types";
 import { getTopProductDetails } from "../api/dashboard.api";
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
@@ -7,6 +6,7 @@ import { StatCard } from "../../../../components/admin/cards/StatCard";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
 import Loader from "../../../../components/admin/Loader";
 import { EyeButton } from "../../../../components/admin/buttons/EyeButton";
+import { useRightPanel, type WithId } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"topProduct">
@@ -15,7 +15,7 @@ type Props = {
 export default function TopProductPanel({ context }: Props) {
 
   const { id } = context;
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   const [data, setData] = useState<TopProductDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ export default function TopProductPanel({ context }: Props) {
   }, [id]);
 
   const handleBack = () => {
-    setInfoContext({
+    setMain({
       type: "topProducts",
       title: "Top Produits",
       level:0,
@@ -39,7 +39,7 @@ export default function TopProductPanel({ context }: Props) {
   if (!data) return <div className="p-6">Erreur</div>;
 
   const handleAnalytics = () => {
-    setInfoContext({
+    setMain({
       type: "productAnalytics",
       id: data.product._id,
       title: "Analyse du produit",

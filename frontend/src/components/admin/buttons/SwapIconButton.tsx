@@ -7,16 +7,18 @@ type IconButtonProps = {
 	ariaLabel?: string;
 	className?: string;
 	isOn: boolean;
+	disabled?: boolean;
 }
 
 
-export default function SwapIconButton({ iconOff, iconOn, onClick, ariaLabel, className, isOn}: IconButtonProps) {
+export default function SwapIconButton({ iconOff, iconOn, onClick, ariaLabel, className, isOn, disabled = false}: IconButtonProps) {
 
 	return (
 		<button
 			onClick={onClick}
 			className={`flex items-center justify-center rounded-full p-2 focus:outline-none cursor-pointer ${className || ''}`}
 			aria-label={ariaLabel}
+			disabled={disabled}
 		>
 			<div className="relative flex items-center justify-center h-6 w-6">
 				<span className={`absolute transition-opacity transform duration-300 ${isOn ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`} >

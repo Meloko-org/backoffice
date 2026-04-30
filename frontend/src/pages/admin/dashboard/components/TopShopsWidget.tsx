@@ -1,7 +1,6 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
 import TopShopWidgetButton from "../../../../components/admin/widgetButtons/TopShopWidgetButton";
-import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
-import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel } from "../../../../layouts/admin/contexts/RightPanelContext";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
 import type { AdminDashboardData, TopShop } from "../types";
 
@@ -11,24 +10,24 @@ type Props = {
 
 export function TopShopsWidget({ data }: Props) {
 
-  const { isRightOpen, openRight } = useAdminLayout();
-  const { setInfoContext } = useAdminInfo();
+  const { main, setMain,  overlay} = useRightPanel();
+  const isRightOpen = !!main || !!overlay;
 
   const shops = data.topShops;
 
   const handlePanel = () => {
-    setInfoContext({
+    setMain({
       type: "topShops",
       title: "Top Shops",
       level: 0
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   const handleShopPanel = (s: TopShop) => {
-    setInfoContext({
+    setMain({
       id: s._id, 
       type: "topShop",
       title: s.name,
@@ -38,9 +37,9 @@ export function TopShopsWidget({ data }: Props) {
       },
       direction: "forward"
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
 import { type TopMarketDetails } from "../types";
 import { getTopMarketDetails } from "../api/dashboard.api";
 import Loader from "../../../../components/admin/Loader";
 import { StatCard } from "../../../../components/admin/cards/StatCard";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
+import { useRightPanel, type WithId } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"topMarket">
@@ -14,7 +14,7 @@ type Props = {
 export default function TopMarketPanel({ context }: Props) {
 
   const { id } = context;
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   const [ data, setData ] = useState<TopMarketDetails | null>(null);
   const [ loading, setLoading ] = useState(true);
@@ -26,7 +26,7 @@ export default function TopMarketPanel({ context }: Props) {
   }, [id])
 
   const handleBack = () => {
-    setInfoContext({
+    setMain({
       type: context.meta.originalPanelType,
       title: context.meta.originalPanelTitle,
       level: 0,
@@ -38,7 +38,7 @@ export default function TopMarketPanel({ context }: Props) {
   if (!data) return <div className="p-6">Erreur</div>;
 
   const handleAnalytics = () => {
-    setInfoContext({
+    setMain({
       type: "marketAnalytics",
       id: data._id,
       title: "Analyse du market",

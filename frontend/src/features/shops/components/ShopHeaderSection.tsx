@@ -5,9 +5,7 @@ import { useShopActionsContext } from "../hooks/useShopActionsContext";
 import type { ShopDashboard } from "../types/shop"
 import ShopStatusesBar from "./ShopStatusesBar";
 import { useEffect, useState } from "react";
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
-import { useInfoContext } from "../../../hooks/useInfoContext";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel, type ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   shop: ShopDashboard["shop"];
@@ -15,7 +13,7 @@ type Props = {
 
 export function ShopHeaderSection({ shop }: Props) {
 
-  const { openRight, closeRight } = useAdminLayout();
+  const { setMain } = useRightPanel();
 
   const baseCtx = useShopActionsContext();
   const ctx: ShopActionContext = {
@@ -24,22 +22,12 @@ export function ShopHeaderSection({ shop }: Props) {
 
   const actions = shopActions.getActions(shop, ctx, "shop-header")
 
+  console.log("actions :", actions)
 
-  const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
-
-  useInfoContext(infoContext)
-
-  useEffect(() => {
-    if (infoContext) {
-      openRight();
-    } else {
-      closeRight();
-    }
-  }, [infoContext])
 
 
   const handleDescriptions = () => {
-    setInfoContext({
+    setMain({
       type: "shopDescriptions",
       title: "Détail des descriptions",
       data: {

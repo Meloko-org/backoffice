@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext"
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useEffect, useState } from "react";
 import type { ShopNoteDetail } from "../types/shop";
 import { getShopNoteById } from "../api/shops.api";
 import Loader from "../../../components/admin/Loader";
 import { RatingStars } from "../../../components/global/RatingStars";
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";
+import { useRightPanel, type WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"shopNote">
@@ -14,7 +13,7 @@ type Props = {
 
 export default function ShopNoteDetails({ context }: Props) {
   const navigate = useNavigate();
-  const { closeRight } = useAdminLayout();
+  const { closeRight } = useRightPanel();
 
   const { id } = context;
 

@@ -6,7 +6,7 @@ import { getMarketById } from "../api/markets.api";
 import { useMarketActionsContext } from "../hooks/useMarketActionsContext";
 import { marketActions } from "../config/marketActionsRegistry";
 import Loader from "../../../components/admin/Loader";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
 	context: WithId<"market"> 

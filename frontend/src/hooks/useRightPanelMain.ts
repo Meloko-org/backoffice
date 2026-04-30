@@ -1,31 +1,27 @@
 import { useEffect } from "react";
-import { useAdminInfo, type ModelInfoContext } from "../layouts/admin/contexts/AdminInfoContext";
+import { useRightPanel, type ModelInfoContext } from "../layouts/admin/contexts/RightPanelContext";
 
-
-export function useInfoContext(context: ModelInfoContext | null) {
-  const { setInfoContext } = useAdminInfo();
+export function useRightPanelMain(context: ModelInfoContext | null) {
+  const { setMain } = useRightPanel();
 
   useEffect(() => {
-    setInfoContext(prev => {
+    setMain(prev => {
 
-      // 🔹 si null → simple
       if (!context) return null;
       if (!prev) return context;
 
-      // 🔹 types différents → update
       if (prev.type !== context.type) {
         return context;
       }
 
-      // 🔹 cas WithId
+      // WithId
       if ("id" in context && "id" in prev) {
         if (prev.id === context.id) return prev;
         return context;
       }
 
-      // 🔹 cas WithData
+      // WithData
       if ("data" in context && "data" in prev) {
-        // 👉 IMPORTANT : comparer une clé stable
         const prevId = (prev.data as any)?._id;
         const nextId = (context.data as any)?._id;
 
@@ -36,12 +32,8 @@ export function useInfoContext(context: ModelInfoContext | null) {
         return context;
       }
 
-      // 🔹 fallback (types incompatibles)
       return context;
-
     });
 
-
-  }, [context, setInfoContext]);
+  }, [context, setMain]);
 }
-

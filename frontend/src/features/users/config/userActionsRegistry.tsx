@@ -49,7 +49,9 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
     run: (user, ctx) => {
 
-      ctx.openRight?.();
+      // ctx.openRight?.();
+
+      console.log("ACTION CLICKED", user._id);
 
       if (user.isSuspended) {
 
@@ -107,7 +109,7 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
     run: (user, ctx) => {
 
-      ctx.openRight?.();
+      // ctx.openRight?.();
 
       if (user.isDeleted) {
 

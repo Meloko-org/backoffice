@@ -1,97 +1,176 @@
 import { ConfirmPanel } from "./components/ConfirmPanel";
 import { rightPanelRegistry } from "./registries/rightPanel/rightPanelRegistry";
-import { useAdminInfo } from "./contexts/AdminInfoContext";
-import { useConfirm } from "./contexts/ConfirmContext";
 import { renderRightPanel } from "../../helpers/rightPanelHelper";
 import { AnimatePresence, motion } from "motion/react";
+import { useRightPanel } from "./contexts/RightPanelContext";
 
 
 export default function AdminSidebarRight() {
 
+  const { main, overlay } = useRightPanel();
 
-	const { infoContext } = useAdminInfo();
-	const { options, isConfirmOpen } = useConfirm();
+  const panelConfig = main
+    ? rightPanelRegistry[main.type]
+    : null;
 
-	const panelConfig = infoContext 
-		? rightPanelRegistry[infoContext.type]
-		: null;
-	const level = infoContext?.level ?? 0;
-	const direction = infoContext?.direction ?? "forward";
+  if (!main && !overlay) return null;
 
-	const initialX = direction === "forward" ? "100%" : "-100%";
-	const exitX = direction === "forward" ? "-100%" : "100%";
+	const level = main?.level ?? 0;
+	const direction = main?.direction ?? "forward";
 
-	if (!panelConfig || !infoContext) return null;
+	const variants = {
+		enter: (direction: "forward" | "back") => ({
+			x: direction === "forward" ? 100 : -100,
+			opacity: 0,
+		}),
+		center: {
+			x: 0,
+			opacity: 1,
+		},
+		exit: (direction: "forward" | "back") => ({
+			x: direction === "forward" ? -100 : 100,
+			opacity: 0,
+		}),
+	};
 
-
-	const PanelComponent = panelConfig?.component ?? null;
-	const isFullPanel = panelConfig?.fullPanel;
-
-	const isConfirmOnly = !panelConfig && options;
-		
   return (
-    <aside
-      className={`
-        fixed inset-y-0 right-0 w-120 
-				${isConfirmOpen ? "z-50" : "z-10"}
-				${isConfirmOnly ? "flex items-center" : ""}
-      `}
-      style={{ background: "var(--app-sidebar-bg)" }}
-      >
+    <aside 
+			className={`
+        fixed inset-y-0 right-0 w-120 flex flex-col
+				${overlay ? "z-50" : "z-10"}
+      `} 
+			style={{ background: "var(--app-sidebar-bg)" }}
+		>
 
-				{/* Si un content est défini, on l'affiche */}
-				{PanelComponent && infoContext && (
-					<div className={`${!isFullPanel ? "h-[78%] overflow-y-auto" : "h-full"} `}>
-						<div className={isConfirmOpen ? "pointer-events-none opacity-50" : "" }>
-							<div className="text-center uppercase tracking-wide pt-2 font-semibold">
-								{infoContext && infoContext.title}
-							</div>
-							<div>
-
-								<AnimatePresence mode="wait">
-									<motion.div
-										key={infoContext.type + (("id" in infoContext && infoContext.id) || "")}
-    
-										initial={
-											level > 0
-												? { x: direction === "forward" ? 100 : -100, opacity: 0 }
-												: false // ❌ pas d'animation si level 0
-										}
-
-										animate={{ x: 0, opacity: 1 }}
-
-										exit={
-											level > 0
-												? { x: direction === "forward" ? -100 : 100, opacity: 0 }
-												: undefined
-										}
-
-										transition={{ duration: 0.2 }}
-									>
-										{panelConfig && infoContext &&
-											renderRightPanel(
-												panelConfig as any,
-												infoContext as any
-											)
-										}
-									</motion.div>
-								</AnimatePresence>
-								
-							</div>
+      {/* MAIN */}
+      {main && panelConfig && (
+        <div className="flex-1 overflow-y-auto">
+          <div className={overlay ? "pointer-events-none opacity-50" : ""}>
+						<div className="text-center uppercase tracking-wide pt-2 font-semibold">
+							{main.title}
 						</div>
-					</div>
-				)}
-			
+            <AnimatePresence mode="wait" custom={direction}>
+							<motion.div
+								key={
+									main.type +
+									(("id" in main && main.id) ||
+										("data" in main && (main.data as any)?._id) ||
+										"")
+								}
 
-			<div className={`${PanelComponent ? "h-[22%]" : "h-auto w-full"}`}>
-				{/* si les options du confirmPanel sont définies, on affiche confirmPanel */}
-				<div className="p-2">
-					{options && (
-						<ConfirmPanel />
-					)}
-				</div>
-			</div>
+								custom={direction}
+
+								variants={variants}
+
+								initial={level > 0 ? "enter" : false}
+								animate="center"
+								exit={level > 0 ? "exit" : undefined}
+
+								transition={{ duration: 0.25 }}
+							>
+								{renderRightPanel(panelConfig as any, main as any)}
+							</motion.div>
+						</AnimatePresence>
+          </div>
+        </div>
+      )}
+
+      {/* CONFIRM */}
+      {overlay?.type === "confirm" && (
+        <div
+          className={
+            main
+              ? "p-2"
+              : "flex items-center justify-center h-full p-4"
+          }
+        >
+          <ConfirmPanel context={overlay} />
+        </div>
+      )}
 
     </aside>
   );
 }
+
+// export default function AdminSidebarRight() {
+
+
+// 	const { main, overlay } = useAdminInfo();
+
+// 	const panelConfig = main
+// 		? rightPanelRegistry[main.type]
+// 		: null;
+
+// 		const level = main?.level ?? 0;
+// 		const direction = main?.direction ?? "forward"
+
+// 	const initialX = direction === "forward" ? "100%" : "-100%";
+// 	const exitX = direction === "forward" ? "-100%" : "100%";
+
+
+// 	if (!overlay || !main) return null;
+
+
+// 	const PanelComponent = panelConfig?.component ?? null;
+// 	const isFullPanel = panelConfig?.fullPanel;
+
+// 	const confirmOptions = 
+// 		overlay?.type === "confirm" ? overlay.data : null;
+
+// 	const isConfirmOnly = overlay?.type === "confirm" && !main;
+
+// 	console.log("overlay:", overlay);
+		
+//   return (
+//     <aside
+      // className={`
+      //   fixed inset-y-0 right-0 w-120 flex flex-col
+			// 	${overlay ? "z-50" : "z-10"}
+      // `} 
+//       style={{ background: "var(--app-sidebar-bg)" }}
+//       >
+
+
+// 				{PanelComponent && main && (
+// 					<div className="flex-1 overflow-y-auto">
+// 						<div className={overlay ? "pointer-events-none opacity-50" : ""}>
+							// <div className="text-center uppercase tracking-wide pt-2 font-semibold">
+							// 	{main.title}
+							// </div>
+
+// 							<AnimatePresence mode="wait">
+// 								<motion.div
+// 									key={main.type + (("id" in main && main.id) || "")}
+// 									initial={
+// 										level > 0
+// 											? { x: direction === "forward" ? 100 : -100, opacity: 0 }
+// 											: false
+// 									}
+// 									animate={{ x: 0, opacity: 1 }}
+// 									exit={
+// 										level > 0
+// 											? { x: direction === "forward" ? -100 : 100, opacity: 0 }
+// 											: undefined
+// 									}
+// 									transition={{ duration: 0.2 }}
+// 								>
+// 									{renderRightPanel(panelConfig as any, main as any)}
+// 								</motion.div>
+// 							</AnimatePresence>
+// 						</div>
+// 					</div>
+// 				)}
+			
+
+
+// 				{overlay?.type === "confirm" && (
+// 					<div className={`
+// 						${main ? "p-2 border-t" : "flex-1 flex items-center justify-center p-4"}
+// 					`}>
+// 						<ConfirmPanel context={overlay}/>
+// 					</div>
+// 				)}
+
+//     </aside>
+//   );
+// }

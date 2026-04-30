@@ -4,7 +4,7 @@ import { adminRegistry } from "../registries/admin/adminRegistry"
 import { Loader } from "lucide-react"
 import { DataListLayout } from "../../../components/data-table/DataListLayout"
 import type { AdminModels } from "../registries/admin/adminModels"
-import type { ModelInfoContext } from "../contexts/AdminInfoContext"
+import type { ModelInfoContext } from "../contexts/RightPanelContext"
 
 
 
@@ -30,7 +30,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
   /* DATA */
   /* ========================= */
 
-  const getInfoContext = useCallback(
+  const getRightPanelMain = useCallback(
     (item: any): ModelInfoContext => {
       if (!admin.details) return null;
 
@@ -61,7 +61,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
   } = useAdminListController(admin.getList, {
       model: admin.model,
       enableRightPanel: !!admin.details,
-      getInfoContext: admin.details ? getInfoContext : undefined,
+      getRightPanelMain: admin.details ? getRightPanelMain : undefined,
     })
 
 

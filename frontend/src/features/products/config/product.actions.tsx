@@ -1,4 +1,4 @@
-import type { ConfirmOptions } from "../../../layouts/admin/providers/ConfirmProvider";
+import type { ConfirmOptions } from "../../../layouts/admin/components/ConfirmPanel";
 
 export type ProductActionContext = {
   navigate: (path: string) => void;

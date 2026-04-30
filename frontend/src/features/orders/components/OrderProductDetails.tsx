@@ -2,7 +2,7 @@ import { ImageOff } from "lucide-react";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { OrderProductStatusBadge } from "../../../components/admin/badges/OrderProductStatus";
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: Extract<ModelInfoContext, { type: "orderProduct" }>

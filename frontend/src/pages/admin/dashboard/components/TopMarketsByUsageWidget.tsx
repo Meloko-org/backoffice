@@ -1,7 +1,6 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
 import TopMarketByUsageWidgetButton from "../../../../components/admin/widgetButtons/TopMarketByUsageWidgetButton";
-import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
-import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel } from "../../../../layouts/admin/contexts/RightPanelContext";
 import type { AdminDashboardData } from "../types";
 
 type Props = {
@@ -10,25 +9,24 @@ type Props = {
 
 export function TopMarketsByUsageWidget({ data }: Props) {
 
-  const { setInfoContext } = useAdminInfo();
-  const { isRightOpen, openRight } = useAdminLayout();
+  const { setMain } = useRightPanel();
   
 
   const markets = data.topMarketsByUsage;
 
   const handlePanel = () => {
-    setInfoContext({
+    setMain({
       type: "topMarketsByUsage",
       title: "Top Markets By Usage",
       level: 0
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   const handleMarketPanel = (m: {_id: string; name: string; count: number}) => {
-    setInfoContext({
+    setMain({
       id: m._id,
       type: "topMarket",
       title: m.name,
@@ -38,9 +36,9 @@ export function TopMarketsByUsageWidget({ data }: Props) {
       },
       direction: "forward"
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   // console.log("markets :", markets)

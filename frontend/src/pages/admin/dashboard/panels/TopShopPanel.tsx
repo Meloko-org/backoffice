@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
 import { type TopShopDetails } from "../types";
 import { getTopShopDetails } from "../api/dashboard.api";
 import Loader from "../../../../components/admin/Loader";
 import { StatCard } from "../../../../components/admin/cards/StatCard";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
+import { useRightPanel, type WithId } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"topShop">
@@ -14,7 +14,7 @@ type Props = {
 export default function TopShopPanel({ context }: Props) {
 
   const { id } = context;
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   const [ data, setData ] = useState<TopShopDetails | null>(null);
   const [ loading, setLoading ] = useState(true);
@@ -26,7 +26,7 @@ export default function TopShopPanel({ context }: Props) {
   }, [id])
 
   const handleBack = () => {
-    setInfoContext({
+    setMain({
       type: "topShops",
       title: "Top Shops",
       level:0,
@@ -41,7 +41,7 @@ export default function TopShopPanel({ context }: Props) {
   console.log("context :", context)
 
   const handleAnalytics = () => {
-    setInfoContext({
+    setMain({
       type: "shopAnalytics",
       id: data._id,
       title: "Analyse du shop",

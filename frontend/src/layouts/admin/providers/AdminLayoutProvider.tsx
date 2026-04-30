@@ -7,33 +7,22 @@ type Props = {
 
 export default function AdminLayoutProvider({ children }: Props) {
 
-  /* AdminLayoutcontext */
   const [isLeftOpen, setIsLeftOpen] = useState(false);
-  const [isRightOpen, setIsRightOpen] = useState(false);
   const [pageTitle, setPageTitle ] = useState<string | null>(null);
-  // const [ sidebarRightContext, setSidebarRightContext ] = useState<SidebarRightContext>(null);
 
   const toggleLeft = () => setIsLeftOpen((prev) => !prev);
-  const toggleRight = () => setIsRightOpen((prev) => !prev);
-  const openRight = () => setIsRightOpen(true);
-  const closeRight = () => setIsRightOpen(false);
 
 
   const value = useMemo(
     () => ({
       isLeftOpen,
-      isRightOpen,
       toggleLeft,
-      toggleRight,
-      openRight,
-      closeRight,
       pageTitle,
       setPageTitle,
     }),
-    [isLeftOpen, isRightOpen, pageTitle ]
+    [isLeftOpen, pageTitle ] 
   );
 
-  // console.log("PROVIDER :", value)
 
   return (
     <AdminLayoutContext.Provider value={value} >

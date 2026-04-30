@@ -11,10 +11,8 @@ import ShopNoteSection from "../components/ShopNoteSection";
 import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useInfoContext } from "../../../hooks/useInfoContext";
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useEffect, useState } from "react";
+import { useRightPanel, type ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 
 
 type SocialKey = "facebook" | "instagram" | "tiktok";
@@ -23,7 +21,7 @@ export default function ShopPage() {
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { openRight, closeRight } = useAdminLayout();
+  const { setMain, closeRight } = useRightPanel();
   const { data, isLoading, isError } = useShopDashboard(id!);
 
 
@@ -37,17 +35,8 @@ export default function ShopPage() {
 
   console.log("DASHBOARD data :", data)
 
-  const [ infoContext, setInfoContext ] = useState<ModelInfoContext | null>(null)
   
-  useInfoContext(infoContext);
-
-  useEffect(() => {
-    if (infoContext) {
-      openRight();
-    } else {
-      closeRight();
-    }
-  }, [infoContext])
+  
 
   if (isLoading) {
     return (
@@ -58,7 +47,7 @@ export default function ShopPage() {
   if (isError || !data) return <div>Error loading user</div>;
 
   const handleWithdrawModes = () => {
-    setInfoContext({
+    setMain({
       type: "shopWithdrawModes",
       title: "Détail des modes de retrait",
       data: {
@@ -70,7 +59,7 @@ export default function ShopPage() {
 
   const handleSocials = () => {
     console.log("youpi")
-    setInfoContext({
+    setMain({
       type: "shopSocials",
       title: "Détail des réseaux sociaux",
       data: {
@@ -81,7 +70,7 @@ export default function ShopPage() {
   }
 
   const handlePhotos = () => {
-    setInfoContext({
+    setMain({
       type: "shopPhotos",
       title: "Détail des photos",
       data: {
@@ -91,7 +80,7 @@ export default function ShopPage() {
   }
 
   const handleVideos = () => {
-    setInfoContext({
+    setMain({
       type: "shopVideos",
       title: "Détail des videos",
       data: {
@@ -101,7 +90,7 @@ export default function ShopPage() {
   }
 
   const handleCrew = () => {
-    setInfoContext({
+    setMain({
       type: "shopCrew",
       title: "Détail de l'équipe",
       data: {

@@ -1,39 +1,63 @@
-import { useEffect, useState } from "react";
-import { useConfirm } from "../contexts/ConfirmContext";
+import { useState } from "react";
 import { AnimatedButton } from "../../../components/global/buttons/AnimatedButton";
-import { useAdminInfo } from "../contexts/AdminInfoContext";
-import { useAdminLayout } from "../contexts/AdminLayoutContext";
+import { useRightPanel, type ModelInfoContext } from "../contexts/RightPanelContext";
 
-export function ConfirmPanel() {
+type Props = {
+  context: Extract<ModelInfoContext, { type: "confirm" }>
+}
 
-  const { options, close } = useConfirm();
-  const { setInfoContext } = useAdminInfo();
-  const { closeRight } = useAdminLayout();
+export type ConfirmOptions<T = any> = {
+  title: string;
+
+  description?: string;
+
+  confirmLabel?: string;
+  cancelLabel?: string;
+
+  /**
+   * Permet d’injecter un contenu custom (input, select, etc.)
+   */
+  content?: (
+    value: T,
+    setValue: (value: T) => void
+  ) => React.ReactNode;
+
+  /**
+   * Action exécutée au confirm
+   */
+  onConfirm: (value: T) => Promise<void> | void;
+};
+
+export function ConfirmPanel({ context }: Props) {
+
+  const { overlay, setOverlay, closeRight } = useRightPanel();
+
+
+
+  const options = 
+    overlay?.type === "confirm"
+      ? (overlay.data as ConfirmOptions<any>)
+      : null;
 
   const [value, setValue] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    console.log("ConfirmPanel mounted");
-  }, []);
-
   if (!options) return null;
-
 
   const handleConfirm = async () => {
     try {
       setLoading(true);
 
-      await options.onConfirm(value); // logique métier exécutée ici
+      await options.onConfirm(value);
 
-      setLoading(false)
+      setLoading(false);
       setSuccess(true);
 
       setTimeout(() => {
-        close();        // vide ConfirmContext
-        closeRight();   // ferme sidebar
-        setInfoContext(null); // si besoin
+        closeRight();
+        // setInfoContext(null); // 🔥 source unique
+        setOverlay(null);
         setSuccess(false);
         setValue(null);
       }, 1200);
@@ -44,15 +68,14 @@ export function ConfirmPanel() {
   };
 
   const handleCancel = () => {
-    close();
     closeRight();
+    // setInfoContext(null);
+    setOverlay(null);
     setValue(null);
   };
 
-
-
   return (
-    <div className="p-5 confirm-panel shadow-xl rounded-xl">
+    <div className="p-5 confirm-panel shadow-xl rounded-xl w-full">
       <h3 className="text-lg font-semibold">{options.title}</h3>
 
       {options.description && (
@@ -63,11 +86,9 @@ export function ConfirmPanel() {
         <div className="mt-4">
           {options.content(value, setValue)}
         </div>
-      )} 
-
+      )}
 
       <div className="mt-6 flex justify-end gap-3">
-
         <button
           onClick={handleCancel}
           disabled={loading}
@@ -82,9 +103,8 @@ export function ConfirmPanel() {
           onClick={handleConfirm} 
           success={success}
         >
-          {options.confirmLabel ?? "Supprimer"}
+          {options.confirmLabel ?? "Confirmer"}
         </AnimatedButton>
-
       </div>
     </div>
   );

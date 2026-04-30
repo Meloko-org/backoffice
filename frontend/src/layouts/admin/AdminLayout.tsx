@@ -1,16 +1,23 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import AdminHeader from "../../components/admin/AdminHeader";
 import { useAdminLayout } from "./contexts/AdminLayoutContext";
 import AdminSidebarRight from "./AdminSidebarRight";
 import AdminSidebar from "./AdminSidebar";
-import { ConfirmProvider } from "./providers/ConfirmProvider";
-import { useConfirm } from "./contexts/ConfirmContext";
+import { useEffect } from "react";
+import { RightPanelProvider } from "./providers/RightPanelProvider";
+import { useRightPanel } from "./contexts/RightPanelContext";
 
 
 function AdminLayoutContent() {
 
-  const { isLeftOpen, isRightOpen } = useAdminLayout();
-  const { isConfirmOpen } = useConfirm();
+  const location = useLocation();
+  const { isLeftOpen } = useAdminLayout();
+  const { main, overlay, closeRight } = useRightPanel();
+  const isRightOpen = !!main || !!overlay;
+
+  useEffect(() => {
+    closeRight();
+  }, [location.pathname]);
 
   // console.log("ADMIN_LAYOUT")
 
@@ -48,7 +55,7 @@ function AdminLayoutContent() {
       </div>
 
       {/* on rajoute un overlay sur tout l'écran pour empécher d'interagir quand confirmPanel est ouvert */}
-      {isConfirmOpen && (
+      {overlay && (
         <div className="fixed inset-0 z-40 bg-black/50" />
       )}
 
@@ -58,8 +65,8 @@ function AdminLayoutContent() {
 
 export default function AdminLayout() {
   return (
-    <ConfirmProvider>
+    <RightPanelProvider>
       <AdminLayoutContent />
-    </ConfirmProvider>
+    </RightPanelProvider>
   );
 }

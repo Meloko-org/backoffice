@@ -1,7 +1,6 @@
-import type { ConfirmOptions } from "../../../layouts/admin/providers/ConfirmProvider";
 
 export type OrderActionContext = {
   navigate: (path: string) => void;
   openRight?: () => void;
-  defineConfirm: <T>(opts: ConfirmOptions<T>) => void;
+  // defineConfirm: <T>(opts: ConfirmOptions<T>) => void;
 }

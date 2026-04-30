@@ -6,19 +6,21 @@ import { SidebarRightCollapseIco } from "./icons/sideBarRightCollapse";
 import DarkModeToggle from "../global/DarkModeToggle";
 
 import { useAdminLayout } from "../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel } from "../../layouts/admin/contexts/RightPanelContext";
+
 
 
 export default function AdminHeader() {
 
   const { 
     isLeftOpen,
-    isRightOpen,
     toggleLeft,
-    toggleRight,
     pageTitle,
   } = useAdminLayout();
 
-// console.log("HEADER");
+  const { main, overlay, closeRight } = useRightPanel();
+
+  const isRightOpen = !!main || !!overlay;
 
   return (
     <header className="w-full flex justify-center items-center p-3">
@@ -40,9 +42,9 @@ export default function AdminHeader() {
           iconOff={<SidebarRightCollapseIco className="w-6 h-6" />}
           isOn={isRightOpen}
           onClick={() => {
-            console.log("SIDEBAR RIGHT BUTTON :", isRightOpen)
-            toggleRight();
+            closeRight();
           }}
+          disabled={!isRightOpen}
           ariaLabel="Toggle tools Panel"
           className="btn-sidebar ml-2"
         />

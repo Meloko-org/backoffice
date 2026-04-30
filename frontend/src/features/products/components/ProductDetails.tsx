@@ -6,7 +6,7 @@ import { getProductById } from "../api/products.api";
 import { useProductActionsContext } from "../hooks/useProductActionsContext";
 import { productActions } from "../config/productActionsRegistry";
 import Loader from "../../../components/admin/Loader";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
 	context: WithId<"product"> 

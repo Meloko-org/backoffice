@@ -1,0 +1,114 @@
+/src
+  /auth
+    clerkTokenProvider.ts
+  /components
+    /admin
+    /data-table
+    /global
+  /config
+    adminPermissions.ts
+  /core
+    /forms
+      /components
+      /layout
+      FormRenderer.tsx
+      schema.ts
+      types.ts
+      useformEngine.ts
+  /features
+    /categories
+    /families
+    /markets
+    /orders
+    /producers
+    /products
+    /queryKeys
+    /roles
+    /shopFeatures
+    /shops
+    /tagCategories
+    /types
+    /users
+      /api
+        - users.api.ts
+      /components
+        - UserAddressSection.tsx
+        - UserBookmarksSection.tsx
+        - UserBusinessSection.tsx
+        - Userdetails.tsx
+        - UserHeaderSection.tsx
+        - UserOrderSection.tsx
+        - UserProducerSection.tsx
+      /config
+        - rightPanel.ts
+        - user.actions.tsx
+        - user.admin.ts
+        - user.columns.tsx
+        - user.filters.ts
+        - userActionsregistry.tsx
+      /event
+        - adminEvents.ts
+      /hooks
+        - useDeleteUsers.ts
+        - useUserActionsContext.ts
+        - useUserDashboard.ts
+      /mappers
+        - user.mappers.ts
+      /pages
+        - EditUserPage.tsx
+        - UserFormPage.tsx
+        - UserPage.tsx
+        - UserListPage.tsx
+      /schema
+        - user.schema.ts
+      /types
+        - user.ts
+      /utils
+        - renderUserStatus.tsx
+  /guards
+  /helpers
+  /layouts
+    /admin
+      /components
+        - confirmPanel.tsx
+        - sidebarIconButton.tsx
+      /config
+        - adminMenu.ts
+        - adminTypes.ts
+      /contexts
+        - AdminInfoContext.tsx
+        - AdminLayoutContext.tsx
+        - ConfirmContext.tsx
+      /controllers
+        - useAdminListControllers.ts
+      /pages
+        - AdminFormPage.tsx
+        - AdminListPage.tsx
+      /providers
+        - AdminInfoProvider.tsx
+        - AdminLayoutProvider.tsx
+        - ConfirmProvider.tsx
+      /registries
+        /actions
+	  - action.types.ts
+	  - actionRegistry.ts
+	/admin
+	  - adminModels.ts
+	  - AdminRegistry.ts
+	  - createModelAdmin.ts
+	/rightPanel
+	  - rightPanelRegistry.ts
+	/widget
+	  - dashboardWidgetsregidtry.tsx
+      AdminLayout.tsx
+      AdminSidebar.tsx
+      AdminSidebarright.tsx
+  /lib
+  /pages
+  /types
+  /utils
+  App.css
+  App.tsx
+  index.css
+  main.tsx
+  router.tsx

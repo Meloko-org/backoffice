@@ -226,3 +226,16 @@ export const getShopNoteById = async (
     { method: "GET" }
   )
 }
+
+
+export const validateShop = async (shopId: string) => {
+  return apiFetch(`${BASE_URL}/${shopId}/validate`, {
+    method: "PATCH"
+  })
+}
+
+export const unvalidateShop = async (shopId: string) => {
+  return apiFetch(`${BASE_URL}/${shopId}/unvalidate`, {
+    method: "PATCH"
+  })
+}

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
-import type { Order, OrderDetail } from "../types/order"
+import type { OrderDetail } from "../types/order"
 import { getOrderById } from "../api/orders.api";
 import { useOrderActionsContext } from "../hooks/useOrderActionsContext";
 import { orderActions } from "../config/orderActionRegistry";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
 import Loader from "../../../components/admin/Loader";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"order"> 

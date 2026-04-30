@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getUserById } from "../api/users.api";
 import Loader from "../../../components/admin/Loader";
 import { useUserActionsContext } from "../hooks/useUserActionsContext";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
 	context: WithId<"user"> 

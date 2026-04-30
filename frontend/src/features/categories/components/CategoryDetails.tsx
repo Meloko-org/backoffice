@@ -6,7 +6,7 @@ import { getCategoryById } from "../api/categories.api";
 import { useCategoryActionsContext } from "../hooks/useCategoryActionsContext";
 import Loader from "../../../components/admin/Loader";
 import { categoryActions } from "../config/categoryActionsRegistry";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 
 type Props = {

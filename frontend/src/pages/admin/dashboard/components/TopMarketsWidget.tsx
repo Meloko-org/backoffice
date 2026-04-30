@@ -1,7 +1,6 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
 import TopMarketWidgetButton from "../../../../components/admin/widgetButtons/TopMarketWidgetButton";
-import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
-import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel } from "../../../../layouts/admin/contexts/RightPanelContext";
 import type { AdminDashboardData, TopMarket } from "../types";
 
 type Props = {
@@ -12,24 +11,23 @@ export function TopMarketsWidget({
   data,
 }: Props) {
 
-  const { setInfoContext } = useAdminInfo();
-  const { isRightOpen, openRight } = useAdminLayout();
+  const { setMain } = useRightPanel();
 
   const markets = data.topMarkets
 
   const handlePanel = () => {
-    setInfoContext({
+    setMain({
       type: "topMarkets",
       title: "Top Markets",
       level: 0
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   const handleMarketPanel = (m: TopMarket) => {
-    setInfoContext({
+    setMain({
       id: m._id,
       type: "topMarket",
       title: m.name,
@@ -39,9 +37,9 @@ export function TopMarketsWidget({
       },
       direction: "forward"
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   return (

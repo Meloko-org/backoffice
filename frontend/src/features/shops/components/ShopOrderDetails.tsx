@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext"
 import { type ShopSubOrder } from "../types/shop";
 import Loader from "../../../components/admin/Loader";
 import { getShopOrderById } from "../api/shops.api";
@@ -8,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Check, Euro, ImageOff } from "lucide-react";
 import { formatQty } from "../../../utils/quantity/quantityConverter";
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel, type WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"shopSubOrder">
@@ -17,7 +16,7 @@ type Props = {
 export default function ShopOrderDetails({ context }: Props) {
 
   const navigate = useNavigate();
-  const { closeRight } = useAdminLayout();
+  const { closeRight } = useRightPanel();
 
   const { id } = context;
 

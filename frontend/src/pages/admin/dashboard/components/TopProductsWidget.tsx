@@ -1,7 +1,6 @@
 import { WidgetButton } from "../../../../components/admin/buttons/WidgetButton";
 import TopProductWidgetButton from "../../../../components/admin/widgetButtons/TopProductWidgetButton";
-import { useAdminInfo } from "../../../../layouts/admin/contexts/AdminInfoContext";
-import { useAdminLayout } from "../../../../layouts/admin/contexts/AdminLayoutContext";
+import { useRightPanel } from "../../../../layouts/admin/contexts/RightPanelContext";
 import type { AdminDashboardData, TopProduct } from "../types";
 
 type Props = {
@@ -10,24 +9,23 @@ type Props = {
 
 export function TopProductsWidget({ data }: Props) {
 
-  const { isRightOpen, openRight } = useAdminLayout();
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   const products = data.topProducts;
 
   const handlePanel = () => {
-    setInfoContext({
+    setMain({
       type: "topProducts",
       title: "Top Produits",
       level: 0
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
   }
 
   const handleProductPanel = (p: TopProduct) => {
-    setInfoContext({
+    setMain({
       id: p._id, 
       type: "topProduct",
       title: p.name,
@@ -37,9 +35,9 @@ export function TopProductsWidget({ data }: Props) {
       },
       direction: "forward"
     })
-    if (!isRightOpen) {
-      openRight()
-    }
+    // if (!isRightOpen) {
+    //   openRight()
+    // }
     
   }
 

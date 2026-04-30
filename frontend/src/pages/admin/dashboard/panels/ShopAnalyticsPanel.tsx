@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
 import type { ShopAnalytics } from "../types";
 import { getShopAnalytics } from "../api/dashboard.api";
 import Loader from "../../../../components/admin/Loader";
 import KPI from "../../../../components/admin/cards/KPI";
 import { formatPriceToEuros } from "../../../../utils/price/priceConverter";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { useRightPanel, type WithId } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"shopAnalytics">
@@ -13,7 +13,7 @@ type Props = {
 
 export default function ShopAnalyticsPanel({ context }: Props) {
 
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
   
   const [ data, setData ] = useState<ShopAnalytics>();
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ export default function ShopAnalyticsPanel({ context }: Props) {
   }, [context.id])
 
   const handleBack = () => {
-    setInfoContext({
+    setMain({
       id: context.meta.shopId,
       type: "topShop",
       title: context.meta.shopName,

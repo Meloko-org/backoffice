@@ -2,11 +2,7 @@ import { createContext, useContext } from "react";
 
 type AdminLayoutContextType = {
   isLeftOpen: boolean;
-  isRightOpen: boolean;
   toggleLeft: () => void;
-  toggleRight: () => void;
-  openRight: () => void;
-  closeRight: () => void;
 
   pageTitle: string | null;
   setPageTitle: (title: string | null) => void;

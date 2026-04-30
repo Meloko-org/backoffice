@@ -1,23 +1,9 @@
 import type { ProductLine } from "../../../../features/orders/types/order";
 import type { ShopCrew, ShopDescriptions, ShopPhotos, ShopSocials, ShopVideos, ShopWithdrawModes } from "../../../../features/shops/types/shop";
-import type { ModelInfoContext, WithData, WithId, WithType } from "../../contexts/AdminInfoContext";
-
-// export type RightPanelType =
-//   | "category"
-//   | "family"
-//   | "product"
-//   | "market"
-//   | "user"
-//   | "userPage"
-//   | "order"
-//   | "orderProduct"
+import type { ConfirmOptions } from "../../components/ConfirmPanel";
+import type { WithData, WithId, WithType } from "../../contexts/RightPanelContext";
 
 
-// export interface RightPanelConfig {
-//   component: React.ComponentType<{ context: ModelInfoContext}>;
-//   fullPanel?: boolean;
-//   actions?: string[];
-// }
 
 export type RightPanelContextMap = {
   category: WithId<"category">;
@@ -30,6 +16,8 @@ export type RightPanelContextMap = {
   order: WithId<"order">;
   orderProduct: WithData<"orderProduct", ProductLine>;
   shop: WithId<"shop">;
+
+  confirm: WithData<"confirm", ConfirmOptions>;
 
   topProducts: WithType<"topProducts">;
   topProduct: WithId<"topProduct">;
@@ -57,13 +45,20 @@ export type RightPanelContextMap = {
 
 export type RightPanelType = keyof RightPanelContextMap;
 
+export type RightPanelAction = {
+  label: string;
+  icon?: React.ComponentType<any>;
+  variant?: "primary" | "danger" | "warning" | "success";
+  action: string; // clé du registry
+};
+
 
 export type RightPanelConfig<T extends keyof RightPanelContextMap> = {
   component: React.ComponentType<{
     context: RightPanelContextMap[T];
   }>;
   fullPanel?: boolean;
-  actions?: string[];
+  actions?: RightPanelAction[];
 };
 
 /**

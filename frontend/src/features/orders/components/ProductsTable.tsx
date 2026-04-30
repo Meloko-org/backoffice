@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { DataTable } from "../../../components/data-table/DataTable";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import type { Column } from "../../../components/data-table/DataTable";
 import { formatPriceToEuros } from "../../../utils/price/priceConverter";
 import type { ProductLine } from "../types/order";
-import { useInfoContext } from "../../../hooks/useInfoContext";
 import { getNameFromProductLine } from "../../../utils/product/nameGetter";
 import { OrderProductStatusBadge } from "../../../components/admin/badges/OrderProductStatus";
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext";
+import { useRightPanelMain } from "../../../hooks/useRightPanelMain";
+import { useRightPanel, type ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 
 interface Props {
   products: ProductLine[];
@@ -15,7 +14,7 @@ interface Props {
 
 export function ProductsTable({ products }: Props) {
 
-  const { openRight, closeRight } = useAdminLayout();
+  const { closeRight } = useRightPanel();
   
   /* affichage dans la sidebar droite */  
   const [ selectedProduct, setSelectedProduct ] = useState<ProductLine | null>(null);
@@ -29,15 +28,15 @@ export function ProductsTable({ products }: Props) {
     }
     : null;
 
-  useInfoContext(infoContext)
+  useRightPanelMain(infoContext)
 
-  useEffect(() => {
-    if (selectedProduct) {
-      openRight();
-    } else {
-      closeRight();
-    }
-  }, [selectedProduct])
+  // useEffect(() => {
+  //   if (selectedProduct) {
+  //     openRight();
+  //   } else {
+  //     closeRight();
+  //   }
+  // }, [selectedProduct])
 
   const handleSelectProduct = (line: ProductLine) => {
     setSelectedProduct(prev =>

@@ -1,25 +1,33 @@
 import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import type { UserActionContext } from "../config/user.actions";
-import { useConfirm } from "../../../layouts/admin/contexts/ConfirmContext";
-import { useAdminLayout } from "../../../layouts/admin/contexts/AdminLayoutContext";
 import { useSuspendUser } from "../../../hooks/useSuspendUser";
 import { useDeleteUser } from "./useDeleteUser";
+import { useRightPanel } from "../../../layouts/admin/contexts/RightPanelContext";
+import type { ConfirmOptions } from "../../../layouts/admin/components/ConfirmPanel";
+
 
 export function useUserActionsContext(): UserActionContext {
 
   const navigate = useNavigate();
-  const { defineConfirm } = useConfirm();
-  const { openRight } = useAdminLayout();
+  const { setOverlay } = useRightPanel();
 
   const { suspend, unsuspend } = useSuspendUser();
   const { del, restore } = useDeleteUser();
+
+  const defineConfirm = useCallback(<T,>(opts: ConfirmOptions<T>) => {
+    console.log("DEFINE CONFIRM CALLED");
+    setOverlay({
+      type: "confirm",
+      data: opts
+    });
+
+  }, [setOverlay]);
 
 
   return useMemo(() => (
     {
       navigate,
-      openRight,
       defineConfirm,
       suspend,
       unsuspend,
@@ -27,7 +35,6 @@ export function useUserActionsContext(): UserActionContext {
       restore,
     }
   ), [navigate,
-      openRight,
       defineConfirm,
       suspend,
       unsuspend,

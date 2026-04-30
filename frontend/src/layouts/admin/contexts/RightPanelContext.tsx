@@ -1,8 +1,8 @@
-import { createContext, useContext } from "react";
-import type { RightPanelType } from "../registries/rightPanel/rightPanelRegistry";
+import { createContext, useContext} from "react";
 import type { ProductLine } from "../../../features/orders/types/order";
+import type { RightPanelType } from "../registries/rightPanel/rightPanelRegistry";
 import type { ShopCrew, ShopDescriptions, ShopPhotos, ShopSocials, ShopVideos, ShopWithdrawModes } from "../../../features/shops/types/shop";
-// import type { ModelContext } from "../../../types/admin";
+import type { ConfirmOptions } from "../components/ConfirmPanel";
 
 type Direction = "forward" | "back";
 
@@ -35,13 +35,15 @@ export type WithType<T extends RightPanelType> = {
 
 export type ModelInfoContext =
   | WithId<"category">
-	| WithId<"family">
+  | WithId<"family">
   | WithId<"product">
-	| WithId<"market">
+  | WithId<"market">
   | WithId<"user">
   | WithId<"userPage">
   | WithId<"order">
   | WithData<"orderProduct", ProductLine>
+
+  | WithData<"confirm", ConfirmOptions<any>>
 
   | WithType<"topProducts">
   | WithId<"topProduct">
@@ -67,19 +69,26 @@ export type ModelInfoContext =
   | WithId<"shopNote">
   | null;
 
-type AdminInfoContextType = {
-	infoContext: ModelInfoContext;
-	setInfoContext: React.Dispatch<React.SetStateAction<ModelInfoContext>>;
-}
 
-export const AdminInfoContext = createContext<AdminInfoContextType | null>(null)
 
-export function useAdminInfo() {
-	const ctx = useContext(AdminInfoContext);
+type RightPanelContextType = {
+  main: ModelInfoContext;
+  setMain: React.Dispatch<React.SetStateAction<ModelInfoContext>>;
 
-	if (!ctx) {
-		throw new Error("useAdminInfo must be used inside AdminLayoutProvider");
-	}
-	
-	return ctx;
+  overlay: ModelInfoContext;
+  setOverlay: React.Dispatch<React.SetStateAction<ModelInfoContext>>;
+
+  closeRight: () => void;
+};
+
+export const RightPanelContext = createContext<RightPanelContextType | null>(null)
+
+export function useRightPanel() {
+  const ctx = useContext(RightPanelContext);
+
+  if (!ctx) {
+    throw new Error("useRightPanel must be used inside RightPanelProvider");
+  }
+
+  return ctx;
 }

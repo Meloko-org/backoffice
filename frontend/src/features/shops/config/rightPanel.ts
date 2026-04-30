@@ -1,3 +1,4 @@
+import { ConfirmPanel } from "../../../layouts/admin/components/ConfirmPanel";
 import type { RightPanelMap } from "../../../layouts/admin/registries/rightPanel/rightPanelRegistry";
 import ShopCrewDetails from "../components/ShopCrewDetails";
 import ShopDescDetails from "../components/ShopDescDetails";
@@ -45,6 +46,10 @@ const rightPanel: RightPanelMap = {
   },
   shopNote: {
     component: ShopNoteDetails,
+    fullPanel: true,
+  },
+  confirm: {
+    component: ConfirmPanel,
     fullPanel: true,
   }
 }

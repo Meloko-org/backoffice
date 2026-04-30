@@ -6,7 +6,7 @@ import { getFamilyById } from "../api/families.api";
 import { useFamilyActionsContext } from "../hooks/useFamilyActionsContext";
 import { familyActions } from "../config/familyActionsRegistry";
 import Loader from "../../../components/admin/Loader";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 
 type Props = {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithId } from "../../../../layouts/admin/contexts/AdminInfoContext"
 import { type ProductAnalytics } from "../types";
 import Loader from "../../../../components/admin/Loader";
 import KPI from "../../../../components/admin/cards/KPI";
@@ -8,6 +7,7 @@ import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
 import { getProductAnalytics } from "../api/dashboard.api";
 import { formatQty } from "../../../../utils/quantity/quantityConverter";
 import { getNameFromAnalytics } from "../../../../utils/product/nameGetter";
+import { useRightPanel, type WithId } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"productAnalytics">
@@ -15,7 +15,7 @@ type Props = {
 
 export default function ProductAnalyticsPanel({ context }: Props) {
 
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   const [ data, setData ] = useState<ProductAnalytics>();
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function ProductAnalyticsPanel({ context }: Props) {
   }, [context.id])
 
   const handleBack = () => {
-    setInfoContext({
+    setMain({
       id: context.meta.stockId,
       type: "topProduct",
       title: context.meta.stockName,

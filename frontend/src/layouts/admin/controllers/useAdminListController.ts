@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react"
 import { useAdminList } from "../../../hooks/useAdminList"
-import { useAdminLayout } from "../contexts/AdminLayoutContext"
-import { useInfoContext } from "../../../hooks/useInfoContext"
-import type { ModelInfoContext } from "../contexts/AdminInfoContext"
+import { useRightPanelMain } from "../../../hooks/useRightPanelMain"
+import { useRightPanel, type ModelInfoContext } from "../contexts/RightPanelContext"
 
 
 type Options<T> = {
   syncWithUrl?: boolean
   enableRightPanel?: boolean
-  getInfoContext?: (item: T) => ModelInfoContext,
+  getRightPanelMain?: (item: T) => ModelInfoContext,
   model: string
 }
 
@@ -27,7 +26,7 @@ export function useAdminListController<
 
   const {
     enableRightPanel = false,
-    getInfoContext,
+    getRightPanelMain,
     ...restOptions
   } = options || {}
 
@@ -58,17 +57,17 @@ export function useAdminListController<
   /*   RIGHT PANEL MANAGEMENT   */
   /* ========================== */
 
-  const { openRight, closeRight } = useAdminLayout()
+  const { closeRight } = useRightPanel()
 
   const [selectedItem, setSelectedItem] = useState<T | null>(null)
 
   const infoContext = useMemo(() => {
-    if (!selectedItem || !getInfoContext) return null;
+    if (!selectedItem || !getRightPanelMain) return null;
 
-    return getInfoContext(selectedItem);
-  }, [selectedItem?._id,getInfoContext]);
+    return getRightPanelMain(selectedItem);
+  }, [selectedItem?._id,getRightPanelMain]);
 
-  useInfoContext(infoContext)
+  useRightPanelMain(infoContext)
 
 
   const onRowClick = (item: T) => {
@@ -82,8 +81,8 @@ export function useAdminListController<
   useEffect(() => {
     if (!enableRightPanel) return
 
-    if (selectedItem) openRight()
-    else closeRight()
+    // if (selectedItem) openRight()
+    // else closeRight()
   }, [selectedItem])
 
 

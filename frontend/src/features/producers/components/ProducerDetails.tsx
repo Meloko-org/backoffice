@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext"
-import { type Producer, type ProducerDetails } from "../types/producer";
+import { type ProducerDetails } from "../types/producer";
 import { getProducerById } from "../api/producer.api";
 import { useProducerActionsContext } from "../hooks/useProducerActionsContext";
 import { producerActions } from "../config/producerActionsRegistry";
@@ -9,6 +8,7 @@ import DetailsActions from "../../../components/admin/details/DetailsActions";
 import { renderUserStatus } from "../../users/utils/renderUserStatus";
 import { Crown } from "lucide-react";
 import { formatIBAN } from "../../../utils/data/dataFormatter";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"producer">
@@ -45,8 +45,6 @@ export default function ProducerDetails({
 
   return (
     <div className="bloc-details">
-
-      
 
       <div>
         <p className="details-label">

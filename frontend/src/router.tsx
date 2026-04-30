@@ -13,7 +13,6 @@ import CreateCategoryPage from "./features/categories/pages/CreateCategoryPage";
 import EditCategoryPage from "./features/categories/pages/EditCategoryPage";
 import AdminLayoutProvider from "./layouts/admin/providers/AdminLayoutProvider";
 import AdminRouteGuard from "./guards/AdminRouteGuard";
-import AdminInfoProvider from "./layouts/admin/providers/AdminInfoProvider";
 import CreateFamilyPage from "./features/families/pages/CreateFamilyPage";
 import EditFamilyPage from "./features/families/pages/EditFamilyPage";
 import CreateProductPage from "./features/products/pages/CreateProductPage";
@@ -32,6 +31,7 @@ import EditProducerPage from "./features/producers/pages/EditProducerPage";
 import ShopsListPage from "./features/shops/pages/ShopsListPage";
 import EditShopPage from "./features/shops/pages/EditShopPage";
 import ShopPage from "./features/shops/pages/ShopPage";
+import { RightPanelProvider } from "./layouts/admin/providers/RightPanelProvider";
 
 
 
@@ -45,9 +45,9 @@ export const router = createBrowserRouter([
     element: (
       <AdminGuard>
         <AdminLayoutProvider>
-          <AdminInfoProvider>
+          <RightPanelProvider>
             <AdminLayout />
-          </AdminInfoProvider>
+          </RightPanelProvider>
         </AdminLayoutProvider>
       </AdminGuard>
     ),

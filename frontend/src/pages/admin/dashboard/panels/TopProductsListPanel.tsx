@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAdminInfo, type WithType } from "../../../../layouts/admin/contexts/AdminInfoContext";
 import Loader from "../../../../components/admin/Loader";
 import { getTopProductsList } from "../api/dashboard.api";
 import type { TopProduct } from "../types";
 import TopProductPanelButton from "../../../../components/admin/panelButtons/TopProductPanelButton";
+import { useRightPanel, type WithType } from "../../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithType<"topProducts">
@@ -14,7 +14,7 @@ export default function TopProductsListPanel({ context }: Props) {
   const [products, setProducts] = useState<TopProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { setInfoContext } = useAdminInfo();
+  const { setMain } = useRightPanel();
 
   useEffect(() => {
     setLoading(true);
@@ -32,7 +32,7 @@ export default function TopProductsListPanel({ context }: Props) {
           key={p._id}
           product={p} 
           onClick={() =>
-            setInfoContext({
+            setMain({
               id: p._id, 
               type: "topProduct",
               title: p.name,
