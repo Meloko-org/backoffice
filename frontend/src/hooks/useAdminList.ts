@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "./useDebounce";
 import type { ListParams, ListResult } from "../types/list.types";
 import { useSearchParams } from "react-router-dom";
-import { adminEvents } from "../features/users/events/adminEvents";
+import { adminEvents } from "../features/events/adminEvents";
 import type { PaginationMeta } from "../types/global.types";
 
 /*

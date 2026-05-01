@@ -1,8 +1,23 @@
 const express = require("express");
 const requireAuth = require("../../../../middlewares/requireAuth");
 const requireRole = require("../../../../middlewares/requireRole");
-const { listShops, getShop, formShop, shopDashboard, shopNotes, shopOrders, shopOrder, shopNote } = require("../controllers/adminShops.controller");
+const { listShops, getShop, validate, unvalidate, formShop, shopDashboard, shopNotes, shopOrders, shopOrder, shopNote } = require("../controllers/adminShops.controller");
 const router = express.Router();
+
+
+router.patch(
+  "/:id/validate",
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  validate
+)
+
+router.patch(
+  "/:id/unvalidate",
+  requireAuth,
+  requireRole("admin", "super-admin"),
+  unvalidate
+)
 
 
 router.get(

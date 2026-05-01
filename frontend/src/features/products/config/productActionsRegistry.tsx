@@ -2,7 +2,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
 import type { ProductActionTarget } from "../types/product";
 import type { ProductActionContext } from "./product.actions";
-import { adminEvents } from "../../users/events/adminEvents";
+import { adminEvents } from "../../events/adminEvents";
 
 export const productActions = createActionsRegistry<
   ProductActionTarget, 

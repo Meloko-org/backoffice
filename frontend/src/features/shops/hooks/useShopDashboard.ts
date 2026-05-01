@@ -11,6 +11,6 @@ export function useShopDashboard(
     queryKey: queryKeys.shopDashboard(id),
     queryFn: () => getShopDashboard(id),
     enabled: !!id,
-    // placeholderData: (previousData) => previousData,
+    placeholderData: (previousData) => previousData,
   });
 }

@@ -11,8 +11,7 @@ import ShopNoteSection from "../components/ShopNoteSection";
 import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { useRightPanel, type ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
+import { useRightPanel } from "../../../layouts/admin/contexts/RightPanelContext";
 
 
 type SocialKey = "facebook" | "instagram" | "tiktok";
@@ -21,7 +20,7 @@ export default function ShopPage() {
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { setMain, closeRight } = useRightPanel();
+  const { setMain } = useRightPanel();
   const { data, isLoading, isError } = useShopDashboard(id!);
 
 

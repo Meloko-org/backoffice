@@ -3,7 +3,7 @@ import type { UserActionTarget } from "../types/user"
 import type { UserActionContext } from "./user.actions"
 import FloatingSelect from "../../../core/forms/components/floatingSelect";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
-import { adminEvents } from "../events/adminEvents";
+import { adminEvents } from "../../events/adminEvents";
 
 
 
@@ -49,7 +49,6 @@ export const userActions = createActionsRegistry<UserActionTarget, UserActionCon
 
     run: (user, ctx) => {
 
-      // ctx.openRight?.();
 
       console.log("ACTION CLICKED", user._id);
 

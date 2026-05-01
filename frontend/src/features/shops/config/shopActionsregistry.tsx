@@ -2,7 +2,7 @@ import { Eye, LockKeyhole, Pencil } from "lucide-react";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";
 import { type ShopActionTarget } from "../types/shop";
 import type { ShopActionContext } from "./shop.actions";
-import { adminEvents } from "../../users/events/adminEvents";
+import { adminEvents } from "../../events/adminEvents";
 
 export const shopActions = createActionsRegistry<ShopActionTarget, ShopActionContext>({
 
@@ -43,7 +43,6 @@ export const shopActions = createActionsRegistry<ShopActionTarget, ShopActionCon
     visible: () => true,
 
     run: (shop, ctx) => {
-      ctx.openRight?.();
 
       if (shop.isValidated) {
         ctx.defineConfirm({
@@ -58,10 +57,10 @@ export const shopActions = createActionsRegistry<ShopActionTarget, ShopActionCon
       } else {
         ctx.defineConfirm({
           title: "Valider le shop",
-          confirmLabel: "Valider",
+          confirmLabel: "Autoriser",
 
           onConfirm: async () => {
-            await ctx.validate(shop._id)
+            await ctx.validate({id: shop._id})
             adminEvents.emit("shops:refresh")
           }
         })

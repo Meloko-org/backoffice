@@ -1,5 +1,5 @@
 import { Pencil, Trash2 } from "lucide-react";
-import { adminEvents } from "../../users/events/adminEvents";
+import { adminEvents } from "../../events/adminEvents";
 import type { FamilyActionTarget } from "../types/family";
 import type { FamilyActionContext } from "./family.actions";
 import { createActionsRegistry } from "../../../layouts/admin/registries/actions/actionRegistry";

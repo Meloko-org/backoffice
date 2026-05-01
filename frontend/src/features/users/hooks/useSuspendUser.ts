@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { suspendUser, unsuspendUser } from "../features/users/api/users.api";
+import { suspendUser, unsuspendUser } from "../api/users.api";
 
 export const useSuspendUser = () => {
   

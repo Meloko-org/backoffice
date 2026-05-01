@@ -8,6 +8,8 @@ const {
   getShopNotes,
   getShopOrderById,
   getShopNoteById,
+  validateShop,
+  unvalidateShop,
 } = require("../services/adminShops.service");
 
 const listShops = async (req, res, next) => {
@@ -100,6 +102,40 @@ const update = async (req, res, next) => {
     next(error);
   }
 };
+
+const validate = async (req, res, next) => {
+  console.log("shop validation")
+  try {
+    const { id } = req.params;
+
+    const shop = await validateShop(id)
+
+    res.json({
+      success: true,
+      message: "Shop validated",
+      data: shop
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const unvalidate = async (req, res, next) => {
+  console.log("shop unvalidation")
+  try {
+    const { id } = req.params;
+
+    const shop = await unvalidateShop(id)
+
+    res.json({
+      success: true,
+      message: "Shop unvalidated",
+      data: shop
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 /* fonction du dashboard */
 const shopDashboard = async (req, res , next) => {
@@ -221,6 +257,8 @@ module.exports = {
   listShops,
   getShop,
   update,
+  validate,
+  unvalidate,
   formShop,
   shopDashboard,
   shopNotes,

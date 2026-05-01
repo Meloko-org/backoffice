@@ -1,17 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { unvalidateShop, validateShop } from "../api/shops.api";
 
 export const useValidateShop = () => {
+
   const queryClient = useQueryClient();
 
   const validateMutation = useMutation({
-    mutationFn: (id: string) => validateShop(id),
-    onSuccess: (_, id) => {
+    mutationFn: ({id}:{id: string}) => validateShop(id),
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["user-dashboard", id],
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: ["adminUsers"],
+        queryKey: ["shop-dashboard", variables.id],
       });
     },
   })
@@ -20,11 +18,7 @@ export const useValidateShop = () => {
     mutationFn: (id: string) => unvalidateShop(id),
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({
-        queryKey: ["user-dashboard", id],
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: ["adminUsers"],
+        queryKey: ["shop-dashboard", id],
       });
     },
   })

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import type { UserActionContext } from "../config/user.actions";
-import { useSuspendUser } from "../../../hooks/useSuspendUser";
+import { useSuspendUser } from "./useSuspendUser";
 import { useDeleteUser } from "./useDeleteUser";
 import { useRightPanel } from "../../../layouts/admin/contexts/RightPanelContext";
 import type { ConfirmOptions } from "../../../layouts/admin/components/ConfirmPanel";

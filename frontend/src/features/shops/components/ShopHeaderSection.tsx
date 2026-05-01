@@ -4,8 +4,7 @@ import { shopActions } from "../config/shopActionsregistry";
 import { useShopActionsContext } from "../hooks/useShopActionsContext";
 import type { ShopDashboard } from "../types/shop"
 import ShopStatusesBar from "./ShopStatusesBar";
-import { useEffect, useState } from "react";
-import { useRightPanel, type ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
+import { useRightPanel } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   shop: ShopDashboard["shop"];
@@ -21,9 +20,6 @@ export function ShopHeaderSection({ shop }: Props) {
   }
 
   const actions = shopActions.getActions(shop, ctx, "shop-header")
-
-  console.log("actions :", actions)
-
 
 
   const handleDescriptions = () => {

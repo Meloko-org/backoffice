@@ -908,12 +908,48 @@ async function getShopNoteById(noteId) {
   }
 }
 
+async function validateShop(shopId, adminId = null) {
+
+  const shop = await Shop.findById(shopId)
+
+  if (!shop) {
+    throw new NotFoundError("Shop introuvable.")
+  }
+
+  if (shop.isValidated) {
+    return shop;
+  }
+
+  shop.isValidated = true;
+
+  await shop.save();
+
+  return shop;
+}
+
+async function unvalidateShop(shopId, adminId = null) {
+
+  const shop = await Shop.findById(shopId)
+
+  if (!shop) {
+    throw new NotFoundError("Shop introuvable.")
+  }
+
+  shop.isValidated = false;
+
+  await shop.save();
+
+  return shop;
+}
+
 
 
 module.exports = {
   getShops,
   getShopById,
   updateShop,
+  validateShop,
+  unvalidateShop,
   getFormShop,
   getShopDashboard,
   getShopOrders,
