@@ -8,6 +8,7 @@ const {
   updateUser,
   restoreUser,
   getUserDashboard,
+  getUserLogged,
 } = require("../services/adminUsers.service");
 
 const listUsers = async (req, res, next) => {
@@ -64,6 +65,24 @@ const getUser = async (req, res, next) => {
     next(error);
   }
 };
+
+
+const userLogged = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await getUserLogged(id)
+
+    console.log("user logged :", result)
+
+    res.json({
+      success: true,
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 
 const suspend = async (req, res, next) => {
@@ -208,4 +227,5 @@ module.exports = {
   update,
   restore,
   userDashboard,
+  userLogged,
 };

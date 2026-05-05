@@ -7,6 +7,7 @@ import { adminMenu } from "./config/adminMenu";
 import SignoutButton from "../../components/admin/buttons/SignoutButton";
 import { useUserRole } from "../../hooks/useUserRole";
 import { useCurrentPermissions } from "../../hooks/useCurrentPermissions";
+import { useUserLogged } from "../../hooks/useUserLogged";
 
 
 /* détermine les éléments autorisés du menu en fonction des permissions par rôle */
@@ -61,8 +62,10 @@ export default function AdminSidebar() {
 
 	const { user } = useUser();
 	const { role } = useUserRole();
+	const { userLogged } = useUserLogged();
 
 	const menu = useFilteredAdminMenu();
+
 
 
   return (
@@ -246,7 +249,7 @@ export default function AdminSidebar() {
 									/>
 								</div>
 								<div className="ml-4 ">
-									<div>username</div>
+									<div>{userLogged.lastname}</div>
 									<div className="text-xs text-neutral-400 capitalize">{role}</div>
 								</div>
 							</div>

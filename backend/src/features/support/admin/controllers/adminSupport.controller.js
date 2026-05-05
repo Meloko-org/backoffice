@@ -21,7 +21,7 @@ async function listTickets(req, res, next) {
       filters,
     })
 
-    console.log(JSON.stringify(result, null, 2))
+    // console.log(JSON.stringify(result, null, 2))
 
     res.json(result)
   } catch (error) {
@@ -36,7 +36,7 @@ async function ticketDetails(req, res, next) {
 
     const result = await getTicketDetails(id)
 
-    console.log("ticket detail :", result)
+    // console.log("ticket detail :", result)
 
     res.json(result)
   } catch (error) {
@@ -93,7 +93,7 @@ async function admins(req, res, next) {
   try {
     const admins = await getAdmins()
 
-    console.log("admins :", admins)
+    // console.log("admins :", admins)
 
     res.json(admins)
   } catch (error) {

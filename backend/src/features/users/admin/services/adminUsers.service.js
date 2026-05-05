@@ -131,6 +131,21 @@ async function getUserById(userId) {
 }
 
 
+async function getUserLogged(clerkId) {
+  if (!clerkId) {
+    throw new ApiError("clerkId missing", 400)
+  }
+
+  const users = await User.find({ clerkUUID: clerkId})
+
+  if (!users) {
+    throw new NotFoundError("user not found.")
+  }
+
+  return users[0];
+}
+
+
 async function suspendUser(userId, reason, adminId = null) {
 
   const user = await User.findById(userId);
@@ -505,4 +520,5 @@ module.exports = {
   updateUser,
   restoreUser,
   getUserDashboard,
+  getUserLogged,
 };

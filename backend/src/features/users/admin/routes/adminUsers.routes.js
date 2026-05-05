@@ -9,6 +9,7 @@ const {
   update,
   restore,
   userDashboard,
+  userLogged,
 } = require("../controllers/adminUsers.controller");
 const requireAuth = require("../../../../middlewares/requireAuth");
 const requireRole = require("../../../../middlewares/requireRole");
@@ -38,9 +39,16 @@ router.get(
 );
 
 router.get(
+  "/logged/:id",
+  requireAuth,
+  requireRole("admin", "super-admin", "dev", "support"),
+  userLogged
+)
+
+router.get(
   "/:id",  
   requireAuth,
-  requireRole("admin", "super-admin", "dev"),
+  requireRole("admin", "super-admin", "dev", "support"),
   getUser
 );
 

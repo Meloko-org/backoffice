@@ -137,3 +137,13 @@ export const updateUser = async (
     }
   )
 }
+
+
+export const getUserLogged = async (clerkId: string): Promise<User> => {
+  return apiFetch<User>(
+    `${BASE_URL}/logged/${clerkId}`, 
+    {
+      method: 'GET'
+    }
+  )
+}
