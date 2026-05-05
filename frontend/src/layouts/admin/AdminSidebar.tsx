@@ -134,23 +134,16 @@ export default function AdminSidebar() {
 					<div className="h-37">
 						<div className=" mb-5">
 							<div className="h-11 w-11 user" onClick={toggleLeft}>
-								{user?.hasImage ? (
-									<div className="h-11 w-11">
-										<img
-											src={user?.imageUrl}
-											alt="Meloko"
-											className="h-full w-full object-fill rounded-md"
-										/>
-									</div>
-								) : (
-									<div className="h-11 w-11">
-										<img
-											src="images/avatar.svg"
-											alt="Meloko"
-											className="h-full w-full object-fill rounded-md"
-										/>
-									</div>
-								)}
+								<div className="h-11 w-11">
+									<img
+										src={user?.imageUrl || "/images/avatar.svg"}
+										onError={(e) => {
+											e.currentTarget.src = "/images/avatar.svg"
+										}}
+										alt="Meloko"
+										className="h-full w-full object-fill rounded-md"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -241,24 +234,17 @@ export default function AdminSidebar() {
 
 						<div className="">
 							<div className="flex justify-center items-center p-1 user">
-								{user?.hasImage ? (
-									<div className="h-11 w-11">
-										<img
-											src={user?.imageUrl}
-											alt="Meloko"
-											className="h-full w-full object-fill rounded-md"
-										/>
-									</div>
-								) : (
-									<div className="h-11 w-11">
-										<img
-											src="images/avatar.svg"
-											alt="Meloko"
-											className="h-full w-full object-fill rounded-md"
-										/>
-									</div>
-								)}
-								
+
+								<div className="h-11 w-11">
+									<img
+										src={user?.imageUrl || "/images/avatar.svg"}
+										onError={(e) => {
+											e.currentTarget.src = "/images/avatar.svg"
+										}}
+										alt="Meloko"
+										className="h-full w-full object-fill rounded-md"
+									/>
+								</div>
 								<div className="ml-4 ">
 									<div>username</div>
 									<div className="text-xs text-neutral-400 capitalize">{role}</div>

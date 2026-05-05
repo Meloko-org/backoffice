@@ -10,6 +10,7 @@ import type { producersAdmin } from "../../../../features/producers/config/produ
 import type { productsAdmin } from "../../../../features/products/config/product.admin";
 import type { usersAdmin } from "../../../../features/users/config/user.admin";
 import type { shopsAdmin } from "../../../../features/shops/config/shop.admin";
+import type { supportAdmin } from "../../../../features/support/config/support.admin";
 
 
 export type AdminModels = {
@@ -21,5 +22,6 @@ export type AdminModels = {
   orders: typeof ordersAdmin,
   producers: typeof producersAdmin,
   shops: typeof shopsAdmin,
+  support: typeof supportAdmin,
 };
 

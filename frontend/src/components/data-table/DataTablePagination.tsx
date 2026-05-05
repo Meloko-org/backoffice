@@ -1,4 +1,3 @@
-import { useAdminLayout } from "../../layouts/admin/contexts/AdminLayoutContext";
 
 export type Align = "start" | "center" | "end";
 
@@ -16,11 +15,7 @@ export const DataTablePagination = ({
 	align,
 }: DataPaginationProps) => {
 
-	const { isRightOpen, closeRight } = useAdminLayout();
 
-	const checkRightPanel = () => {
-		isRightOpen && closeRight();
-	}
 
   if (totalPages <= 1) return null;
 
@@ -37,7 +32,6 @@ export const DataTablePagination = ({
 					className="table-pagination-btn"
 					disabled={page === 1}
 					onClick={() => {
-						checkRightPanel();
 						onChange(page - 1)
 					}}
 				>
@@ -52,7 +46,6 @@ export const DataTablePagination = ({
 					className="table-pagination-btn"
 					disabled={page === totalPages}
 					onClick={() => {
-						checkRightPanel();
 						onChange(page + 1)
 					}}
 				>

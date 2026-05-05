@@ -32,6 +32,8 @@ import ShopsListPage from "./features/shops/pages/ShopsListPage";
 import EditShopPage from "./features/shops/pages/EditShopPage";
 import ShopPage from "./features/shops/pages/ShopPage";
 import { RightPanelProvider } from "./layouts/admin/providers/RightPanelProvider";
+import SupportListPage from "./features/support/pages/SupportListPage";
+import SupportDetailsPage from "./features/support/pages/SupportDetailsPage";
 
 
 
@@ -240,7 +242,19 @@ export const router = createBrowserRouter([
       },
       { 
         path: "support", 
-        element: <div>Support</div> 
+        element: (
+          <AdminRouteGuard permission="support:manage">
+            <SupportListPage />
+          </AdminRouteGuard>
+        ) 
+      },
+      { 
+        path: "support/:id", 
+        element: (
+          <AdminRouteGuard permission="support:manage">
+            <SupportDetailsPage />
+          </AdminRouteGuard>
+        ) 
       },
     ],
   }

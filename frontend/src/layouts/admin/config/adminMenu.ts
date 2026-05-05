@@ -153,6 +153,6 @@ export const adminMenu: AdminMenuItem[] = [
     label: "Support",
     icon: LifeBuoy,
     path: "/admin/support",
-    permission: "support:read",
+    permission: "support:manage",
   },
 ];

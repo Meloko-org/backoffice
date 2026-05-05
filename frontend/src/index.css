@@ -522,6 +522,33 @@
 
 @layer components {
 
+  /* SUPPORT ----------------------------------------- */
+  .ticket-sidebar {
+    @apply rounded-lg space-y-4 p-4;
+    background-color: var(--sidebar-bg); 
+  }
+
+  .ticket-sidebar-label {
+    @apply text-sm font-bold;
+    color: var(--second-text);
+  }
+
+  .message {
+    @apply px-3 py-2 rounded-lg max-w-[60%] text-sm;
+  }
+
+  .admin-message {
+    @apply bg-primary/50;
+  }
+
+  .user-message {
+    @apply bg-success/50;
+  }
+
+  .internal-message {
+    @apply bg-secondary;
+  }
+
   /* RECHARTS ----------------------------------------- */
   .custom-tooltip {
     @apply rounded-md border border-primary p-2 shadow-sm;

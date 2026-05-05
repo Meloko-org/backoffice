@@ -24,6 +24,7 @@ const { adminProducersRoutes } = require("./src/routes");
 const { adminDashboardRoutes } = require("./src/routes");
 const { adminShopsRoutes } = require("./src/routes");
 const { adminShopFeaturesRoutes } = require("./src/routes");
+const { adminSupportRoutes } = require("./src/routes");
 
 
 
@@ -54,6 +55,7 @@ app.use("/admin/roles", adminRolesRoutes);
 app.use("/admin/producers", adminProducersRoutes);
 app.use("/admin/shops", adminShopsRoutes);
 app.use("/admin/shopFeatures", adminShopFeaturesRoutes)
+app.use("/admin/support", adminSupportRoutes);
 
 
 app.use("/admin/dashboard", adminDashboardRoutes);

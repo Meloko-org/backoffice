@@ -41,7 +41,7 @@ export type ModelAdminConfig<
 
   /* RIGHT PANEL */
   details?: React.ComponentType<any>;
-  entityName: keyof RightPanelContextMap;
+  entityName: keyof RightPanelContextMap | "support";
 
   /* FORM */
   form?: AdminFormConfig<TFormValues, TFormCtx>;

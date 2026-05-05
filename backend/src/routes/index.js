@@ -12,6 +12,7 @@ const adminProducersRoutes = require("../features/producers/admin/routes/adminPr
 const adminDashboardRoutes = require("../features/dashboard/routes/dashboard.routes.js");
 const adminShopsRoutes = require("../features/shops/admin/routes/adminShops.route.js");
 const adminShopFeaturesRoutes = require("../features/shopFeatures/admin/routes/shopFeatures.routes.js");
+const adminSupportRoutes = require("../features/support/admin/routes/adminSupport.route.js");
 
 
 module.exports = {
@@ -29,4 +30,5 @@ module.exports = {
   adminDashboardRoutes,
   adminShopsRoutes,
   adminShopFeaturesRoutes,
+  adminSupportRoutes,
 };

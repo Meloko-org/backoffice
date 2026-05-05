@@ -24,8 +24,14 @@ class ValidationError extends ApiError {
 }
 
 class ForbiddenError extends ApiError {
-  constructor(fieldErrors) {
-    super("Unauthorized", 400, fieldErrors);
+  constructor(message = "Forbidden") {
+    super(message, 403);
+  }
+}
+
+class UnauthorizedError extends ApiError {
+  constructor(message = "Unauthorized") {
+    super(message, 401);
   }
 }
 

@@ -2,6 +2,7 @@
  * Stockage runtime
  */
 
+import type { AdminModels } from "./adminModels"
 import { categoriesAdmin } from "../../../../features/categories/config/category.admin";
 import { familiesAdmin } from "../../../../features/families/config/family.admin";
 import { marketsAdmin } from "../../../../features/markets/config/market.admin";
@@ -10,7 +11,7 @@ import { producersAdmin } from "../../../../features/producers/config/producer.a
 import { productsAdmin } from "../../../../features/products/config/product.admin";
 import { usersAdmin } from "../../../../features/users/config/user.admin";
 import { shopsAdmin } from "../../../../features/shops/config/shop.admin";
-import type { AdminModels } from "./adminModels"
+import { supportAdmin } from "../../../../features/support/config/support.admin";
 
 
 class AdminRegistry {
@@ -39,5 +40,6 @@ export const adminRegistry = new AdminRegistry({
   orders: ordersAdmin,
   producers: producersAdmin,
   shops: shopsAdmin,
+  support: supportAdmin,
 });
 

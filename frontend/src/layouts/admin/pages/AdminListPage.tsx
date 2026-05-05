@@ -11,15 +11,19 @@ import type { ModelInfoContext } from "../contexts/RightPanelContext"
 
 type Props<K extends keyof AdminModels> = {
   model: K
+  overrideOnRowClick?: (item: any) => void
 }
 
 export default function AdminListPage<K extends keyof AdminModels>({ 
-  model 
+  model,
+  overrideOnRowClick, 
 }: Props<K>) {
 
   const admin = adminRegistry.get(model)
 
   // console.log("admin :", admin)
+
+  
 
 
   if (!admin.getList) {
@@ -64,6 +68,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
       getRightPanelMain: admin.details ? getRightPanelMain : undefined,
     })
 
+  const finalOnRowClick = overrideOnRowClick ?? onRowClick
 
 
   /* ========================= */
@@ -140,7 +145,7 @@ export default function AdminListPage<K extends keyof AdminModels>({
           onLimitChange={setLimit}
 
           getRowId={(item: any) => item._id}
-          onRowClick={onRowClick}
+          onRowClick={finalOnRowClick}
           onPageChange={setPage}
 
           columns={columns as any}

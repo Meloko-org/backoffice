@@ -1,0 +1,161 @@
+MESSAGERIE DU BACKOFFICE
+
+1. Ce que tu es en train de construire (en réalité)
+
+Ce que tu décris n’est pas juste “un formulaire de contact”.
+
+👉 Tu es en train de créer un système de tickets de support (helpdesk).
+
+Même en version simple, il doit gérer :
+
+des conversations
+des statuts
+des contextes (order, product…)
+des réponses
+un historique
+🧱 2. Modèle mental recommandé
+
+Au lieu de penser en “messages”, pense en :
+
+🎫 Ticket (conversation)
+
+C’est l’entité principale.
+
+Un ticket = un problème / une demande utilisateur.
+
+Exemples :
+
+“Je n’ai pas reçu ma commande”
+“Comment modifier mon produit ?”
+“Bug dans l’app”
+💬 Messages (dans le ticket)
+
+Chaque ticket contient une suite de messages :
+
+message utilisateur initial
+réponses admin
+éventuellement réponses utilisateur (plus tard)
+🔗 Contexte
+
+Un ticket peut être lié à :
+
+orderId
+productId
+shopId
+ou rien
+
+👉 Très important : le contexte est optionnel et polymorphe
+
+🧩 3. Ce que ton backoffice doit gérer (version production)
+
+Je te liste les blocs essentiels — pas forcément tous à faire maintenant, mais à prévoir dans le design.
+
+🧾 A. Gestion des tickets
+Champs importants
+id
+userId (ou producerId)
+type: "user" | "producer"
+subject (optionnel mais utile)
+status:
+open
+pending
+closed
+priority (low / medium / high) → optionnel au début
+context:
+entityType: "order" | "product" | "other"
+entityId
+createdAt / updatedAt
+💬 B. Messages
+id
+ticketId
+senderType: "user" | "admin"
+senderId (nullable côté admin)
+content
+attachments (optionnel)
+createdAt
+📬 C. Réponse par email (ton choix actuel)
+
+Bonne idée pour commencer 👍
+
+Mais attention :
+
+tu dois garder une trace en DB de la réponse envoyée
+l’email est juste un canal, pas la source de vérité
+
+👉 Ton système = source de vérité
+👉 L’email = transport
+
+🧑‍💼 D. Interface backoffice
+
+Minimum viable mais propre :
+
+1. Liste des tickets
+filtres :
+status
+type (user / producer)
+date
+tri : récents / non lus
+2. Détail d’un ticket
+messages (timeline)
+infos user
+contexte (order/product cliquable)
+champ réponse
+3. Actions
+répondre
+changer statut
+assigner (optionnel)
+marquer comme traité
+🔔 E. Notifications (très important)
+
+Sinon tu vas rater des messages.
+
+Options :
+
+badge dans le backoffice
+email admin (simple au début)
+webhook/slack (plus tard)
+🧠 F. UX côté admin (souvent oublié)
+
+Tu dois pouvoir :
+
+comprendre rapidement le problème
+voir le contexte (order/product)
+répondre vite
+
+👉 donc prévoir :
+
+preview du message
+lien vers l’entité (order page)
+historique clair
+⚠️ 4. Pièges classiques à éviter
+❌ 1. Ne stocker que des messages
+
+→ tu perds la notion de conversation
+
+❌ 2. Ne pas gérer les statuts
+
+→ impossible de suivre ce qui est traité
+
+❌ 3. Coupler trop tôt avec l’email
+
+→ bloque l’évolution vers une messagerie interne
+
+❌ 4. Pas de contexte structuré
+
+→ impossible de filtrer / analyser
+
+🚀 5. Roadmap intelligente (ce que je te conseille)
+Phase 1 (simple mais propre)
+tickets
+messages
+statut (open / closed)
+réponse email
+contexte (orderId etc.)
+Phase 2
+multi-messages (vraie conversation)
+status pending
+filtres backoffice
+Phase 3
+messagerie in-app
+réponses utilisateur
+notifications push

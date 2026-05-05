@@ -19,13 +19,15 @@ export type Permission =
   | "producers:manage"
   | "shops:manage"
   | "orders:manage"
-  | "roles:manage";
+  | "roles:manage"
+  | "support:manage";
 
 export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
   "support": [
     "dashboard:read",
     "support:read",
     "support:reply",
+    "support:manage",
     "orders:read",
   ],
 
@@ -54,6 +56,9 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "producers:manage",
     "shops:manage",
     "orders:manage",
+    "support:read",
+    "support:reply",
+    "support:manage",
   ],
 
   "super-admin": [
@@ -76,5 +81,9 @@ export const ROLE_PERMISSIONS: Record<AdminRole, Permission[]> = {
     "shops:manage",
     "orders:manage",
     "roles:manage",
+    "support:read",
+    "support:reply",
+    "support:manage",
   ],
+  "user": [],
 };
