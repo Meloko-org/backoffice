@@ -1,4 +1,4 @@
-import { Check, Circle, Crown } from "lucide-react";
+import { Check, Crown } from "lucide-react";
 import type { FilterConfig } from "../../../components/data-table/DataFiltersBar";
 
 <Check className="text-primary" />

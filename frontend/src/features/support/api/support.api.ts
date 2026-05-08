@@ -89,6 +89,7 @@ export const updateTicket = async ({
   updates: {
     status?: string
     assignedTo?: string | null
+    unreadByAdmin?: boolean
   }
 }) => {
   return apiFetch(`${BASE_URL}/${ticketId}`, {

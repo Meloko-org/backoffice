@@ -2,6 +2,8 @@ const { getTickets, getTicketDetails, postMessage, patchTicket, getAdmins } = re
 const { simulateUserTicket, simulateUserReply } = require("../services/adminSupportSimulation.services")
 
 async function listTickets(req, res, next) {
+
+  console.log("query :", req.query)
   try {
     const {
       page,
@@ -71,6 +73,7 @@ async function sendMessage(req, res, next) {
 
 
 async function updateTicket(req, res, next) {
+  console.log("body :", req.body)
   try {
     const { id } = req.params
 

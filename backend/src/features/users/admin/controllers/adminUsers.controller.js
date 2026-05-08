@@ -73,8 +73,6 @@ const userLogged = async (req, res, next) => {
 
     const result = await getUserLogged(id)
 
-    console.log("user logged :", result)
-
     res.json({
       success: true,
       data: result,

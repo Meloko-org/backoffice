@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useAdminList } from "../../../hooks/useAdminList"
 import { useRightPanelMain } from "../../../hooks/useRightPanelMain"
 import { useRightPanel, type ModelInfoContext } from "../contexts/RightPanelContext"
+import { socket } from "../../../lib/socket"
 
 
 type Options<T> = {
@@ -91,6 +92,30 @@ export function useAdminListController<
       if (enableRightPanel) closeRight()
     }
   }, [])
+
+
+  useEffect(() => {
+    if (!options?.model) return
+
+    // 🔥 uniquement pour le support
+    if (options.model !== "support") return
+
+    const handleMessageCreated = () => {
+      refetch()
+    }
+
+    const handleTicketCreated = () => {
+      refetch()
+    }
+
+    socket.on("message:created", handleMessageCreated)
+    socket.on("ticket:created", handleTicketCreated)
+
+    return () => {
+      socket.off("message:created", handleMessageCreated)
+      socket.off("ticket:created", handleTicketCreated)
+    }
+  }, [options?.model, refetch])
 
   // console.log("selectedItem :", selectedItem)
 

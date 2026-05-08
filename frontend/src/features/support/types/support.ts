@@ -1,14 +1,10 @@
+import type { UserCard } from "../../../types/admin";
 import type { PaginationMeta } from "../../../types/global.types";
 
 export interface Ticket {
   _id: string;
 
-  createdBy: {
-    type: "user" | "producer";
-    id: string;
-    firstname?: string;
-    lastname?: string;
-  }
+  createdBy: UserCard;
 
   category: string;
   status: "open" | "pending" | "resolved" | "closed";

@@ -7,8 +7,9 @@ export function createSupportColumns(): Column<any>[] {
       label: "Utilisateur",
       render: (row) => 
         {
+          const colorClass = row.createdBy.type === "user" ? "text-success" : "text-warning";
           return row.createdBy.firstname
-          ? `${row.createdBy.firstname} ${row.createdBy.lastname}`
+          ? <span className={`${colorClass}`}>{row.createdBy.firstname} {row.createdBy.lastname}</span>
           : "Utilisateur inconnu";
         },
     },
@@ -42,7 +43,7 @@ export function createSupportColumns(): Column<any>[] {
     },
     {
       key: "lastMessageAt",
-      label: "Date",
+      label: "Dernier message",
       sortable: true,
       render: (row) =>
         new Date(row.lastMessageAt).toLocaleDateString("fr-FR", {
@@ -55,11 +56,11 @@ export function createSupportColumns(): Column<any>[] {
     },
     {
       key: "unread",
-      label: "Lu",
+      label: "",
       render: (row) =>
         row.unreadByAdmin 
           ? <div className={`sticker sticker-alert`}></div>
-          : <div className={`sticker sticker-success`}></div>,
+          : null,
     },
   ]
 }

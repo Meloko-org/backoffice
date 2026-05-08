@@ -6,6 +6,8 @@ export default function SupportListPage() {
   const navigate = useNavigate()
   useAdminPage("Support");
 
+
+
   return (
     <AdminListPage
       model="support"

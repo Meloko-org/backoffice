@@ -1,13 +1,18 @@
-require("dotenv").config();
+require("dotenv").config()
 
-const app = require("./app");
-const connectDB = require("./src/config/db");
+const http = require("http")
+const app = require("./app")
+const connectDB = require("./src/config/db")
+const { initSocket } = require("./src/lib/socket")
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000
 
-// Connexion DB
-connectDB();
+connectDB()
 
-app.listen(PORT, () => {
-  console.log(`🚀 Backend Meloko Web lancé sur le port ${PORT}`);
-});
+const server = http.createServer(app)
+
+initSocket(server)
+
+server.listen(PORT, () => {
+  console.log(`🚀 Backend Meloko Web lancé sur le port ${PORT}`)
+})

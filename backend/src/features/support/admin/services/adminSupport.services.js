@@ -5,8 +5,11 @@ const User = require("../../../../models/User")
 const { ValidationError, ForbiddenError, NotFoundError } = require("../../../../utils/ApiError")
 const getCollectionInstance = require("../../../../helpers/collectionHelpers")
 const getCollection = require("../../../../utils/collectionName")
+const { getIO } = require("../../../../lib/socket")
 
 async function postMessage({ ticketId, sender, content, isInternal = false }) {
+
+  
   if (!ticketId) throw new ValidationError({ ticketId: "Required" })
 
   if (!sender?.id || sender?.type !== "admin") {
@@ -49,7 +52,7 @@ async function postMessage({ ticketId, sender, content, isInternal = false }) {
     }
 
     // 3. Créer le message
-    await Message.create(
+    const [ createdMessage ] = await Message.create(
       [
         {
           ticketId: ticket._id,
@@ -85,6 +88,13 @@ async function postMessage({ ticketId, sender, content, isInternal = false }) {
 
     await session.commitTransaction()
     session.endSession()
+
+    const io = getIO()
+
+    io.emit("message:created", {
+      ticketId: ticket._id.toString(),
+      message: createdMessage,
+    })
 
     return ticket
   } catch (error) {
@@ -127,9 +137,10 @@ async function getTickets({
     match.unreadByAdmin = filters.unreadByAdmin === "true"
   }
 
-  const sort = {
-    [sortKey]: sortDirection === "asc" ? 1 : -1,
-  }
+  // sortkey dynamique : on ne l'utilise pas dans le cas du support
+  // const sort = {
+  //   [sortKey]: sortDirection === "asc" ? 1 : -1,
+  // }
 
   // 🔥 aggregation
   const items = await Ticket.aggregate([
@@ -222,7 +233,12 @@ async function getTickets({
       },
     },
 
-    { $sort: sort },
+    { 
+      $sort: {
+        unreadByAdmin: -1,
+        lastMessageAt: -1,
+      } 
+    },
     { $skip: skip },
     { $limit: limit },
   ])
@@ -257,12 +273,14 @@ async function getTicketDetails(ticketId) {
   // enrichissement user
   if (ticket.createdBy?.id) {
     const user = await User.findById(ticket.createdBy.id)
-      .select("firstname lastname")
+      .select("firstname lastname avatar email")
       .lean()
     
     if (user) {
       ticket.createdBy.lastname = user.lastname;
       ticket.createdBy.firstname = user.firstname;
+      ticket.createdBy.email = user.email;
+      ticket.createdBy.avatar = user.avatar;
     }
   }
 
@@ -321,6 +339,10 @@ async function patchTicket({ ticketId, updates, adminId }) {
   if (updates.assignedTo !== undefined) {
     // null autorisé (désassignation)
     ticket.assignedTo = updates.assignedTo || null
+  }
+
+  if (updates.unreadByAdmin !== undefined) {
+    ticket.unreadByAdmin = updates.unreadByAdmin;
   }
 
   // (optionnel mais très utile)

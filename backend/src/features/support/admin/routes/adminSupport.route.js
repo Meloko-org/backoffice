@@ -53,8 +53,8 @@ router.post(
 
 router.post(
   "/:id/simulate-reply",
-  requireAuth,
-  requireRole("admin", "super-admin", "support"),
+  // requireAuth,
+  // requireRole("admin", "super-admin", "support"),
   simulateUserReplyController
 )
 

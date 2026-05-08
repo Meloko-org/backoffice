@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Ticket = require("../../../../models/Ticket")
 const Message = require("../../../../models/Message")
+const { getIO } = require("../../../../lib/socket")
 const { ValidationError, NotFoundError } = require("../../../../utils/ApiError")
 
 async function simulateUserTicket({ userId, content, category, context }) {
-  console.log("service simulate")
   const now = new Date()
 
   const ticket = await Ticket.create({
@@ -46,6 +46,10 @@ async function simulateUserTicket({ userId, content, category, context }) {
 
     content,
   })
+
+  // const io = getIO()
+
+  // io.emit("ticket:created", ticket)
 
   return ticket
 }
@@ -92,7 +96,7 @@ async function simulateUserReply({ ticketId, userId, content }) {
     }
 
     // 2. Créer le message
-    await Message.create(
+    const [ createdMessage ] = await Message.create(
       [
         {
           ticketId: ticket._id,
@@ -123,6 +127,17 @@ async function simulateUserReply({ ticketId, userId, content }) {
 
     await session.commitTransaction()
     session.endSession()
+
+    const io = getIO()
+
+    io.emit("message:created", {
+      ticketId: ticket._id.toString(),
+      message: createdMessage,
+    })
+
+    io.emit("ticket:created", {
+      ticketId: ticket._id.toString(),
+    })
 
     return ticket
   } catch (error) {

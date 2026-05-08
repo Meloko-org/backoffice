@@ -66,7 +66,7 @@ export default function AdminSidebar() {
 
 	const menu = useFilteredAdminMenu();
 
-
+	console.log("userLogged :", userLogged)
 
   return (
     <aside
@@ -93,9 +93,9 @@ export default function AdminSidebar() {
             px-2 pt-4
             transition-opacity duration-200
             ${isLeftOpen ? "opacity-0 pointer-events-none" : "opacity-100"}
-						border border-r-neutral-100/20 border-neutral-100/0
+						border border-(--border)
 						overflow-visible
-          `}
+          `}//border-r-neutral-100/20 border-neutral-100/0
         >
 					<div className="h-20 flex items-center justify-start mb-5">
 						<div className="h-16 w-16 -m-2.5">
@@ -249,7 +249,7 @@ export default function AdminSidebar() {
 									/>
 								</div>
 								<div className="ml-4 ">
-									<div>{userLogged.lastname}</div>
+									{/* <div>{userLogged.lastname}</div> */}
 									<div className="text-xs text-neutral-400 capitalize">{role}</div>
 								</div>
 							</div>

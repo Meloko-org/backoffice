@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { type Admin, type Ticket } from "../types/support"
 import { getAdmins, updateTicket } from "../api/support.api";
 import { useUser } from "@clerk/clerk-react";
+import Usercard from "../../../components/admin/cards/UserCard";
 
 type Props = {
   ticket: Ticket;
@@ -50,13 +51,15 @@ export default function TicketSidebar({ticket, onUpdated}: Props) {
   console.log("current user :", currentUser)
 
   return (
-    <div className="ticket-sidebar">
+    <div className="">
       <div>
         <p className="ticket-sidebar-label">Utilisateur</p>
-        <p className="ml-2">{ticket.createdBy?.lastname} {ticket.createdBy?.firstname}</p>
+        <Usercard user={ticket.createdBy} />
+        {/* <p className="ml-2">{ticket.createdBy?.lastname} {ticket.createdBy?.firstname}</p>
+        <p>{ticket.createdBy.email}</p> */}
       </div>
 
-      <div>
+      <div className="mb-5">
         <p className="ticket-sidebar-label">Statut</p>
         <select
           value={status}
@@ -70,32 +73,35 @@ export default function TicketSidebar({ticket, onUpdated}: Props) {
         </select>
       </div>
 
-      <div>
+      <div className="mb-5">
         <p className="ticket-sidebar-label">Catégorie</p>
         <p className="ml-2">{ticket.category}</p>
       </div>
 
-      <div>
+      <div className="mb-5">
         <p className="ticket-sidebar-label">Assigné à</p>
-        <select
-          value={assignedTo}
-          onChange={(e) => handleAssignChange(e.target.value)}
-          className="border p-1 rounded w-auto ml-2"
-        >
-          <option value="">Non assigné</option>
+        <div className="flex flex-row items-center justify-between">
+          <select
+            value={assignedTo}
+            onChange={(e) => handleAssignChange(e.target.value)}
+            className="border p-1 rounded w-auto ml-2"
+          >
+            <option value="">Non assigné</option>
 
-          {admins.map((admin: any) => (
-            <option key={admin._id} value={admin._id}>
-               {admin.lastname} ({admin.firstname.slice(0, 1)}.)
-            </option>
-          ))}
-        </select>
-        <button 
-          onClick={() => handleAssignChange(currentUser!._id)}
-          className="btn-outline-primary"
-        >
-          M’assigner
-        </button>
+            {admins.map((admin: any) => (
+              <option key={admin._id} value={admin._id}>
+                {admin.lastname} ({admin.firstname.slice(0, 1)}.)
+              </option>
+            ))}
+          </select>
+          <button 
+            onClick={() => handleAssignChange(currentUser!._id)}
+            className="btn-outline-primary"
+          >
+            M’assigner
+          </button>
+        </div>
+        
       </div>
 
       {ticket.context?.entityId && (

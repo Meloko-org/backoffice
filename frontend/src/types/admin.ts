@@ -14,4 +14,11 @@ export type SuspensionReason =
   | "spam";
 
 
-
+export type UserCard = {
+  id: string;
+  lastname?: string;
+  firstname?: string;
+  email?: string;
+  avatar?: string;
+  type: "user" | "producer";
+}

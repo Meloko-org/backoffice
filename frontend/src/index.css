@@ -59,6 +59,8 @@
     --layout-borders: rgba(0, 0, 0, 0.2);
     --layout-borders-hover: rgba(0, 0, 0, 0.5);
 
+    --border: var(--color-neutral-300);
+
     /* bloc */
     --bloc-bg: var(--second-plan-bg);
     --bloc-border: rgba(0, 0, 0, 0.08);
@@ -191,6 +193,31 @@
     --app-sub-surface-bg: rgb(41,41,41);
     --app-sidebar-bg: var(--color-sidebar-bg-dark);
     --app-second-text: var(--color-text-dark);
+
+    --border: var(--color-neutral-700);
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    ::-webkit-scrollbar-button {
+      display: none;
+    }
+
 
         /* bloc */
     --bloc-bg: var(--second-plan-bg);
@@ -522,7 +549,13 @@
 
 @layer components {
 
+  
+
   /* SUPPORT ----------------------------------------- */
+  .support-container {
+    @apply rounded-lg;
+    background-color: var(--sidebar-bg);
+  }
   .ticket-sidebar {
     @apply rounded-lg space-y-4 p-4;
     background-color: var(--sidebar-bg); 
@@ -546,7 +579,32 @@
   }
 
   .internal-message {
-    @apply bg-secondary;
+    @apply bg-warning/50;
+  }
+
+  .support-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .support-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .support-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.10);
+    border-radius: 999px;
+  }
+
+  .support-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 100, 0.45);
+  }
+
+  .support-scrollbar::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .btn-card:hover {
+    background-color: var-(--first-plan-bg)
   }
 
   /* RECHARTS ----------------------------------------- */
