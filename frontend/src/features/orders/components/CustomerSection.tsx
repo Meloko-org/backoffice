@@ -1,36 +1,42 @@
 import type { OrderDetail } from "../types/order";
-import { useNavigate } from "react-router-dom";
-import { EyeButton } from "../../../components/admin/buttons/EyeButton";
+import { type UserCard } from "../../../types/admin";
+import Usercard from "../../../components/admin/cards/UserCard";
+import Loader from "../../../components/admin/Loader";
 
 interface Props {
   order: OrderDetail;
 }
 
 export function CustomerSection({ order }: Props) {
-  const navigate = useNavigate();
   const { user, billingAddress } = order;
 
+  if (!order.user) {
+    return <Loader />
+  }  
+
+  const userCard: UserCard = {
+    id: user._id,
+    firstname: user.firstname || "",
+    lastname: user.lastname || "",
+    email: user.email || "",
+    avatar: user.avatar || "",
+    type: "user",
+  }
+
+
   return (
-    <div className="bloc space-y-3">
+    <div className="bloc">
+
       <h1 className="">Client</h1>
 
-      <div className="flex flex-row justify-between items-center">
-        <p><strong>{user.firstname} {user.lastname}</strong></p>
-        <EyeButton 
-          onClick={() => navigate(`/admin/users/${order.user._id}`)}
-          extraClasses=""
-        />
-        
-      </div>
-
+      <Usercard user={userCard} />
       
-      <p>{user.email}</p>
-
-      <div className="mt-5 text-sm space-y-1">
+      <div className="text-sm space-y-1">
         <p>{billingAddress.address1}</p>
         <p>{billingAddress.postalCode} {billingAddress.city}</p>
         <p>{billingAddress.country}</p>
       </div>
+
     </div>
   );
 }

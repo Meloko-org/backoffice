@@ -118,7 +118,7 @@ async function getOrderById(orderId) {
       createdAt
     `)
 
-    .populate("user", "email firstname lastname")
+    .populate("user", "email firstname lastname avatar")
 
     .populate({
       path: "details.shop",

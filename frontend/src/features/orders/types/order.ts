@@ -101,6 +101,7 @@ export interface OrderDetail {
     email: string;
     firstname: string | null;
     lastname: string | null;
+    avatar: string | null;
   };
 
   billingAddress: Address;

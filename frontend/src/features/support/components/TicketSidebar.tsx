@@ -55,8 +55,7 @@ export default function TicketSidebar({ticket, onUpdated}: Props) {
       <div>
         <p className="ticket-sidebar-label">Utilisateur</p>
         <Usercard user={ticket.createdBy} />
-        {/* <p className="ml-2">{ticket.createdBy?.lastname} {ticket.createdBy?.firstname}</p>
-        <p>{ticket.createdBy.email}</p> */}
+
       </div>
 
       <div className="mb-5">
