@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { EyeButton } from "../../../components/admin/buttons/EyeButton";
 import type { Bookmark } from "../types/user"
+import type { ShopCardData } from "../../../types/admin";
+import ShopCard from "../../../components/admin/cards/ShopCard";
 
 type Props = {
   bookmarks: Bookmark[];
@@ -8,25 +8,26 @@ type Props = {
 
 export default function UserBookmarksSection({ bookmarks }:  Props) {
 
-  const navigate = useNavigate();
+  let shops: ShopCardData[] = [];
+
+  if (bookmarks.length > 0) {
+    bookmarks.map((bmk) => {
+      shops.push({
+        id: bmk._id,
+        name: bmk.name,
+        logo: bmk.logo,
+        city: bmk.city,
+      })
+  })}
 
   return (
     <>
       <h2>Favoris</h2>
-      <div className="bloc">
-        {bookmarks.length > 0 && bookmarks.map((bmk) => (
-          <div key={bmk._id} className="bookmark-raw">
-            <div className="flex flex-row items-center rounded-md bg-(--first-plan-bg) pl-3 h-6">
-              <p className="text-md font-medium m-0">{bmk.name}</p>
-              <EyeButton
-                onClick={() => {}}
-                extraClasses="ml-5 px-2 py-1"
-              />
-            </div>
-            <div className="grow"></div>
-          </div>
-        ))}
-
+      <div className="bloc space-y-1">
+        { shops.length > 0 && shops.map((shop) => (
+            <ShopCard key={shop.id} shop={shop} extraClasses="w-full" />
+          ))
+        }
       </div>
     </>
   )

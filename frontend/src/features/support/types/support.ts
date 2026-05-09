@@ -1,10 +1,10 @@
-import type { UserCard } from "../../../types/admin";
+import type { UserCardData } from "../../../types/admin";
 import type { PaginationMeta } from "../../../types/global.types";
 
 export interface Ticket {
   _id: string;
 
-  createdBy: UserCard;
+  createdBy: UserCardData;
 
   category: string;
   status: "open" | "pending" | "resolved" | "closed";

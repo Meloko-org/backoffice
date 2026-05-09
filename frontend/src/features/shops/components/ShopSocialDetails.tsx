@@ -1,4 +1,4 @@
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext"
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 import { renderSocialConnected, renderValidateState } from "../utils/renderStates";
 
 type Props = {

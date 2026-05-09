@@ -5,7 +5,6 @@ import { DataListLayout } from "../../../components/data-table/DataListLayout";
 import { renderSourceNote } from "../utils/renderStates";
 import { FlatStatCard } from "../../../components/admin/cards/FlatStatCard";
 import type { ShopNote } from "../types/shop";
-import { useNavigate } from "react-router-dom";
 import { useRightPanel } from "../../../layouts/admin/contexts/RightPanelContext";
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 export default function ShopNoteSection({ shopId }: Props) {
 
   const { setMain } = useRightPanel();
-  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);

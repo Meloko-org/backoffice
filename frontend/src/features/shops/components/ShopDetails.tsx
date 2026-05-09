@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import type { WithId } from "../../../layouts/admin/contexts/AdminInfoContext"
 import { getShopById } from "../api/shops.api";
 import type { ShopDetail } from "../types/shop";
 import { useShopActionsContext } from "../hooks/useShopActionsContext";
 import { shopActions } from "../config/shopActionsregistry";
 import Loader from "../../../components/admin/Loader";
 import DetailsActions from "../../../components/admin/details/DetailsActions";
-import { Crown, ImageOff } from "lucide-react";
-import { renderValidateState } from "../utils/renderStates";
+import { ImageOff } from "lucide-react";
 import ShopStatusesBar from "./ShopStatusesBar";
+import type { WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"shop">

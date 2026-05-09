@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import type { UserCard } from "../../../types/admin"
+import type { UserCardData } from "../../../types/admin"
 
 type Props = {
-  user: UserCard;
+  user: UserCardData;
   extraClasses?: string;
 }
 

@@ -32,11 +32,6 @@ export default function ShopPage() {
 
   useAdminPage("Dashboard du shop");
 
-  console.log("DASHBOARD data :", data)
-
-  
-  
-
   if (isLoading) {
     return (
       <Loader />
@@ -57,7 +52,6 @@ export default function ShopPage() {
   }
 
   const handleSocials = () => {
-    console.log("youpi")
     setMain({
       type: "shopSocials",
       title: "Détail des réseaux sociaux",
@@ -97,13 +91,6 @@ export default function ShopPage() {
       }
     })
   }
-
-
-
-
-
-
-
    
 
   return (
@@ -205,7 +192,7 @@ export default function ShopPage() {
                   <p className="bloc-label">Points de vente</p>
                 </div>
                 <div>
-                  {renderBoolSticker(data.shop.markets.length > 0)}
+                  {renderBoolSticker((data.shop.markets?.length ?? 0) > 0)}
                 </div>
                 <div className="col-span-3">
                   <p className="bloc-label">Livraison (bientôt)</p>
@@ -223,21 +210,21 @@ export default function ShopPage() {
             <div className="flex flex-col space-y-3">
               <WithInfoButton
                 label="Photos"
-                info={data.shop.photos.length.toString()}
+                info={data.shop.photos?.length.toString() ?? 0}
                 onClick={handlePhotos}  // afficher dans le rightPanel, toutes les photos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Vidéos"
-                info={data.shop.video.length.toString()}
+                info={data.shop.video?.length.toString() ?? 0}
                 onClick={handleVideos}  // afficher dans le rightPanel, toutes les videos
                 extraClasses="btn-success"
                 textClasses=""
               />
               <WithInfoButton
                 label="Équipe"
-                info={data.shop.crew.length.toString()}
+                info={data.shop.crew?.length.toString() ?? 0}
                 onClick={handleCrew}  // afficher dans le rightPanel, tous les membres du crew
                 extraClasses="btn-warning"
                 textClasses=""
@@ -249,7 +236,7 @@ export default function ShopPage() {
               <h2>Réseaux sociaux</h2>
 
               <div className="flex flex-row justify-center gap-2 my-5">
-                {Object.entries(data.shop.socials)
+                {data.shop.socials && Object.entries(data.shop.socials)
                   .filter(([_, value]) => value?.connected)
                   .map(([key, value]) => {
                     const icon = socialIcons[key as keyof typeof socialIcons];

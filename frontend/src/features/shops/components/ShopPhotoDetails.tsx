@@ -1,5 +1,6 @@
 import { ImageOff } from "lucide-react";
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext"
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
+
 
 type Props = {
   context: Extract<ModelInfoContext, { type: "shopPhotos"}>
@@ -14,7 +15,7 @@ export default function ShopPhotoDetails({ context }: Props) {
     <div className="bloc-details">
 
       {photos.length === 0 && (
-        <p>Aucune photo disponible</p>
+        <p className="w-full text-center mt-5">Aucune photo disponible</p>
       )}
       
       <div className="flex flex-wrap">

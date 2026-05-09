@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Checkbox from "../../../core/forms/components/checkbox"
 
 export default function ReplyBox({ onSend }: any) {
   const [content, setContent] = useState("")
@@ -32,12 +31,7 @@ export default function ReplyBox({ onSend }: any) {
           />
           Note interne
         </label>
-        {/* <Checkbox
-          label="Note interne"
-          checked={isInternal}
-          value={isInternal.toString()}
-          onChange={() => setIsInternal(!isInternal)}
-        /> */}
+
 
         <button
           onClick={handleSend}

@@ -1,4 +1,4 @@
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext"
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 import { renderActiveMarket } from "../utils/renderStates";
 
 type Props = {

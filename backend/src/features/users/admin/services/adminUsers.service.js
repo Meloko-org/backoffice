@@ -329,7 +329,7 @@ async function getUserDashboard(
 
   const user = await User.findById(userId)
     .populate("role", "name")
-    .populate("bookmarks", "name")
+    .populate("bookmarks", "name logo address")
     .populate({
       path: "deletedByAdmin",
       model: "User",
@@ -341,7 +341,7 @@ async function getUserDashboard(
     throw new Error("User not found");
   }
   
-  console.log("user dashbord :", user)
+  console.log("user dashboard :", user)
 
   /* =========================
      2️⃣ PRODUCER
@@ -461,7 +461,9 @@ async function getUserDashboard(
       addresses: user.addresses,
       bookmarks: user.bookmarks.map((b) => ({
         _id: b._id,
-        name: b.name
+        name: b.name,
+        logo: b.logo,
+        city: b.address.city
       })),
       role: {
         _id: user.role._id,

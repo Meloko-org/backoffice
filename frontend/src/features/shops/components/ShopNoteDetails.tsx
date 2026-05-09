@@ -5,7 +5,7 @@ import { getShopNoteById } from "../api/shops.api";
 import Loader from "../../../components/admin/Loader";
 import { RatingStars } from "../../../components/global/RatingStars";
 import { EyeButton } from "../../../components/admin/buttons/EyeButton";
-import { useRightPanel, type WithId } from "../../../layouts/admin/contexts/RightPanelContext";
+import {  type WithId } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: WithId<"shopNote">
@@ -13,7 +13,6 @@ type Props = {
 
 export default function ShopNoteDetails({ context }: Props) {
   const navigate = useNavigate();
-  const { closeRight } = useRightPanel();
 
   const { id } = context;
 

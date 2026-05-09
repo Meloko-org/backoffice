@@ -6,6 +6,7 @@ import ReplyBox from "../components/Replybox"
 import { getTicketDetails, sendMessage, simulateUserReply, updateTicket } from "../api/support.api"
 import type { Message, Ticket } from "../types/support"
 import { socket } from "../../../lib/socket"
+import Loader from "../../../components/admin/Loader"
 
 
 export default function SupportDetailsPage() {
@@ -61,7 +62,7 @@ export default function SupportDetailsPage() {
   }, [ticket?._id])
 
 
-  if (loading) return <p>Chargement...</p>
+  if (loading) return <Loader />
   if (!ticket) return <p>Ticket introuvable</p>
 
   const handleSend = async (content: string, isInternal: boolean) => {

@@ -143,4 +143,6 @@ export interface Address {
 export interface Bookmark {
   _id: string;
   name: string;
+  logo: string;
+  city: string;
 }

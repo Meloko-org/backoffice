@@ -1,5 +1,5 @@
 import type { OrderDetail } from "../types/order";
-import { type UserCard } from "../../../types/admin";
+import { type UserCardData } from "../../../types/admin";
 import Usercard from "../../../components/admin/cards/UserCard";
 import Loader from "../../../components/admin/Loader";
 
@@ -14,7 +14,7 @@ export function CustomerSection({ order }: Props) {
     return <Loader />
   }  
 
-  const userCard: UserCard = {
+  const userCard: UserCardData = {
     id: user._id,
     firstname: user.firstname || "",
     lastname: user.lastname || "",

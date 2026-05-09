@@ -1,4 +1,4 @@
-import type { ModelInfoContext } from "../../../layouts/admin/contexts/AdminInfoContext"
+import type { ModelInfoContext } from "../../../layouts/admin/contexts/RightPanelContext";
 
 type Props = {
   context: Extract<ModelInfoContext, { type: "shopVideos"}>
@@ -12,7 +12,7 @@ export default function ShopVideoDetails({ context }: Props) {
   return (
     <div className="bloc-details">
       {videos.length === 0 && (
-        <p>Aucune vidéo disponible</p>
+        <p className="w-full text-center mt-5">Aucune vidéo disponible</p>
       )}
 
       <div className="space-y-4">
