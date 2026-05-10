@@ -4,10 +4,10 @@ export function mapShopToFormValues(shop: any): ShopFormValues {
   return {
     name: shop.name,
     siret: shop.siret,
-    address1: shop.address.address1 || "",
-    address2: shop.address.address2 || "",
-    postalCode: shop.address.postalCode || "",
-    city: shop.address.city || "",
+    address1: shop.address?.address1 || "",
+    address2: shop.address?.address2 || "",
+    postalCode: shop.address?.postalCode || "",
+    city: shop.address?.city || "",
 
     logo: shop.logo,
 
