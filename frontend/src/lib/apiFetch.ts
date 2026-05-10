@@ -6,8 +6,10 @@ async function buildHeaders(init?: RequestInit) {
 
   const token = await getAuthToken();
 
+  const isFormData = init?.body instanceof FormData;
+
   return {
-    "Content-Type": "application/json",
+    ...(isFormData ? {} : { "Content-Type": "application/json" }),
     ...(token ? { Authorization: `Bearer ${token}`} : {}),
     ...(init?.headers ?? {}),
   };

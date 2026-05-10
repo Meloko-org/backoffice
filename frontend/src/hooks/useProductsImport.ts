@@ -59,11 +59,11 @@ export function useProductsImport() {
         status: "preview",
         report,
       }));
-    } catch (err) {
+    } catch (err: any) {
       setState((prev) => ({
         ...prev,
         status: "error",
-        error: "Erreur lors de l’analyse du fichier",
+        error: err.message || "Erreur lors de l’analyse du fichier",
       }));
     }
   }
@@ -86,11 +86,11 @@ export function useProductsImport() {
         status: "success",
         report,
       }));
-    } catch {
+    } catch (err: any) {
       setState((prev) => ({
         ...prev,
         status: "error",
-        error: "Erreur lors de l’import",
+        error: err.message || "Erreur lors de l’import",
       }));
     }
   }

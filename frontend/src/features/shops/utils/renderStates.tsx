@@ -11,7 +11,7 @@ export function renderOpenState(isOpen: boolean) {
 }
 
 export function renderValidateState(isValidated: boolean) {
-  let icon = <Cross className="text-danger" />
+  let icon = <Cross className="text-danger rotate-45" />
 
   if (isValidated) {
     icon = <Check className="text-primary" />

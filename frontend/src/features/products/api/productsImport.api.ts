@@ -1,3 +1,4 @@
+import { apiFetch } from "../../../lib/apiFetch";
 import type { ImportMode, ProductsImportReport } from "../types/productsImport.types";
 
 const BASE_URL = "http://localhost:4000/admin/products/import-csv";
@@ -10,26 +11,13 @@ async function uploadFile(
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch(`${BASE_URL}?dryRun=${dryRun}&mode=${mode}`, {
-    method: "POST",
-    body: formData,
-  });
-
-  console.log("🌐 API status :", res.status);
-
-  if (!res.ok) {
-    throw new Error(
-      dryRun
-        ? "Erreur lors de l’analyse du fichier"
-        : "Erreur lors de l’import"
-    );
-  }
-
-  const data = res.json();
-
-  console.log(data)
-
-  return data;
+  return await apiFetch<ProductsImportReport>(
+    `${BASE_URL}?dryRun=${dryRun}&mode=${mode}`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  )
 }
 
 export function dryRunImport(file: File, mode: ImportMode) {
